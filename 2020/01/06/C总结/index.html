@@ -112,7 +112,7 @@
 <meta property="og:image" content="https://1411482317.github.io/2020/01/06/C总结/str2.png">
 <meta property="og:image" content="https://1411482317.github.io/2020/01/06/C总结/pf.png">
 <meta property="og:image" content="https://1411482317.github.io/2020/01/06/C总结/sf.png">
-<meta property="og:updated_time" content="2020-01-15T07:15:54.578Z">
+<meta property="og:updated_time" content="2020-01-15T07:36:15.433Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C总结">
 <meta name="twitter:description" content="基于操作系统CentOS8与GCC8.2 粗略总结C语言">
@@ -413,7 +413,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  5.4k
+                  5.5k
                 </span>
               
 
@@ -429,7 +429,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  21
+                  22
                 </span>
               
             </div>
@@ -1286,7 +1286,13 @@
 <details>
 <summary>获取数组长度</summary>
 
-
+<ol>
+<li><p>sizof(arr)获取arr所占用的bit数</p>
+</li>
+<li><p>sizeof(arr[0])获取int类型所占用的bit数</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">int arr[] = &#123;1,2,3&#125;;</span><br><span class="line">size_t size = sizeof(arr) / sizeof(arr[0]);</span><br></pre></td></tr></table></figure>
 
 </details>
 
@@ -2005,7 +2011,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-count">23</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2027,7 +2033,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -2138,7 +2144,7 @@ document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " 
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">45.2k</span>
+    <span title="Site words total count">45.3k</span>
   
 </div>
 

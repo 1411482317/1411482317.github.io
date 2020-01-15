@@ -1,6 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>hexo错误</title>
+    <url>/2020/01/15/hexo%E9%94%99%E8%AF%AF/</url>
+    <content><![CDATA[<p>记录我出现过的错误</p>
+<img src="/2020/01/15/hexo错误/fm.jpg">
+
+<a id="more"></a>
+
+<h1 id="Template-render-error"><a href="#Template-render-error" class="headerlink" title="Template render error"></a>Template render error</h1><p><img src="e1.png" alt></p>
+<div class="tabs" id="template_render_error"><ul class="nav-tabs"><li class="tab active"><a href="#template_render_error-1">问题原因</a></li><li class="tab"><a href="#template_render_error-2">解决方法</a></li></ul><div class="tab-content"><div class="tab-pane active" id="template_render_error-1"><p>问题出现在文章里，当文章中有{}时,且这两个括号里的语法错误，解析会出问题</p>
+</div><div class="tab-pane" id="template_render_error-2"><p>修改{}里的内容</p>
+</div></div></div>
+
+<hr>
+]]></content>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>vmware桥接无法连接网络</title>
     <url>/2020/01/13/vmware%E6%A1%A5%E6%8E%A5%E6%97%A0%E6%B3%95%E8%BF%9E%E6%8E%A5%E7%BD%91%E7%BB%9C/</url>
     <content><![CDATA[<img src="/2020/01/13/vmware桥接无法连接网络/fm.gif">
@@ -1218,7 +1237,13 @@ function player(src) {
 <details>
 <summary>获取数组长度</summary>
 
-
+<ol>
+<li><p>sizof(arr)获取arr所占用的bit数</p>
+</li>
+<li><p>sizeof(arr[0])获取int类型所占用的bit数</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">int arr[] = &#123;1,2,3&#125;;</span><br><span class="line">size_t size = sizeof(arr) / sizeof(arr[0]);</span><br></pre></td></tr></table></figure>
 
 </details>
 
