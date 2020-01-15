@@ -1,0 +1,2268 @@
+<!DOCTYPE html>
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+
+
+  
+
+
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#FFE4E1">
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-center-atom.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/p/hz.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#FFE4E1">
+
+
+
+
+
+  <meta name="keywords" content="CentOS,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="基于Cent8与书籍鸟哥的LINUX私房菜基础篇第四版">
+<meta name="keywords" content="CentOS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux基础笔记">
+<meta property="og:url" content="https://1411482317.github.io/2019/10/08/linux笔记/index.html">
+<meta property="og:site_name" content="大石砸死蟹">
+<meta property="og:description" content="基于Cent8与书籍鸟哥的LINUX私房菜基础篇第四版">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://1411482317.github.io/2019/10/08/linux笔记/封面.gif">
+<meta property="og:image" content="https://1411482317.github.io/2019/10/08/linux笔记/inode.jpg">
+<meta property="og:image" content="https://1411482317.github.io/2019/10/08/linux笔记/gdisk.png">
+<meta property="og:image" content="https://1411482317.github.io/2019/10/08/linux笔记/gdisk2.png">
+<meta property="og:image" content="https://1411482317.github.io/2019/10/08/linux笔记/regx.png">
+<meta property="og:image" content="https://1411482317.github.io/2019/10/08/linux笔记/source.jpg">
+<meta property="og:image" content="https://1411482317.github.io/2019/10/08/linux笔记/shell%E5%8F%82%E6%95%B0.png">
+<meta property="og:image" content="https://1411482317.github.io/2019/10/08/linux笔记/%E5%81%8F%E7%A7%BB.png">
+<meta property="og:image" content="https://1411482317.github.io/2019/10/08/linux笔记/netstat.png">
+<meta property="og:image" content="https://1411482317.github.io/2019/10/08/linux笔记/function.png">
+<meta property="og:image" content="https://1411482317.github.io/2019/10/08/linux笔记/%E8%BF%9B%E7%A8%8B.jpg">
+<meta property="og:image" content="https://1411482317.github.io/2019/10/08/linux笔记/%E7%88%B6%E5%AD%90%E8%BF%9B%E7%A8%8B.png">
+<meta property="og:image" content="https://1411482317.github.io/2019/10/08/linux笔记/%E7%88%B6%E5%AD%90%E8%BF%9B%E7%A8%8B2.png">
+<meta property="og:image" content="https://1411482317.github.io/2019/10/08/linux笔记/selinux%E6%B5%81%E7%A8%8B.png">
+<meta property="og:updated_time" content="2020-01-03T05:45:11.392Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="linux基础笔记">
+<meta name="twitter:description" content="基于Cent8与书籍鸟哥的LINUX私房菜基础篇第四版">
+<meta name="twitter:image" content="https://1411482317.github.io/2019/10/08/linux笔记/封面.gif">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":true},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+
+
+
+  <link rel="canonical" href="https://1411482317.github.io/2019/10/08/linux笔记/">
+
+
+
+
+
+
+
+  <title>linux基础笔记 | 大石砸死蟹</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner">
+
+<div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+
+
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">大石砸死蟹</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+	  
+
+	
+	  
+  </div>
+
+
+
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css">
+
+
+<script src="https://cdn.jsdelivr.net/gh/1411482317/live2d-widget/autoload.js"></script>
+
+
+ </div>
+	  
+	  
+	  
+	  
+	  
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://1411482317.github.io/2019/10/08/linux笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="二打禄">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/p/wb.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="大石砸死蟹">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">linux基础笔记</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-08T12:25:26+08:00">
+                2019-10-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/10/08/linux笔记/" class="leancloud_visitors" data-flag-title="linux基础笔记">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  8.5k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  34
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <img src="/2019/10/08/linux笔记/封面.gif">
+
+<p>基于<code>Cent8</code>与书籍<code>鸟哥的LINUX私房菜基础篇第四版</code></p>
+<a id="more"></a>
+
+<h1 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h1><p><code>tab按键</code>名称补全</p>
+<p><code>ctrl按键+c</code>中断目前程序</p>
+<p><code>ctrl按键+d</code>exit</p>
+<p><code>shift按键+page up</code>上一页</p>
+<p><code>shift按键+page down</code>下一页</p>
+<p><code>date</code>时间</p>
+<p><code>cal</code>日历</p>
+<p><code>clear</code>清屏</p>
+<p><code>su [用户名]</code>切换用户，不输入用户名则切换到root</p>
+<p><code>ls [-aid]</code>查看当前目录所有文件的名称，<code>a</code>显示隐藏目录和文件<code>i</code>查看节点编号<code>d</code>区块存储大小</p>
+<p><code>ll [-aid]</code>查看当前目录所有文件的名称和权限</p>
+<p><code>man [命令]</code>获取该命令的使用说明</p>
+<p><code>cp 文件 指定目录</code>拷贝文件</p>
+<p><code>mv 文件 指定目录</code>移动文件</p>
+<p><code>rm [-rf] 文件</code>删除文件/目录<code>r</code>递归<code>f</code>强制删除</p>
+<p><code>cd 目录</code>.表示当前目录，..表示父目录</p>
+<p><code>pwd</code>查看当前目录</p>
+<p><code>mkdir 名称</code>创建目录</p>
+<p><code>touch 名称</code>创建文件</p>
+<p><code>chmod 权限 文件</code>修改文件的权限</p>
+<p><code>file 文件</code>查看文件类型</p>
+<table>
+<thead>
+<tr>
+<th align="left">r</th>
+<th align="left">w</th>
+<th align="left">x</th>
+<th align="left">0</th>
+<th align="left">5</th>
+<th align="left">7</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">读</td>
+<td align="left">写</td>
+<td align="left">可执行</td>
+<td align="left">权限清空</td>
+<td align="left">读与可执行</td>
+<td align="left">全部权限</td>
+</tr>
+</tbody></table>
+<p><strong>注意：数字最多只能有三个，分别表示：用户，组，其他用户</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">写法</th>
+<th align="left">功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">u-rwx</td>
+<td align="left">取消用户的读取，写入，执行</td>
+</tr>
+<tr>
+<td align="left">g-rwx</td>
+<td align="left">取消组的读取，写入，执行</td>
+</tr>
+<tr>
+<td align="left">o-rwx</td>
+<td align="left">取消其他用户的读取，写入，执行</td>
+</tr>
+<tr>
+<td align="left">u+rwx</td>
+<td align="left">添加用户的读取，写入，执行</td>
+</tr>
+<tr>
+<td align="left">g+rwx</td>
+<td align="left">添加组的读取，写入，执行</td>
+</tr>
+<tr>
+<td align="left">o+rwx</td>
+<td align="left">添加其他用户的读取，写入，执行</td>
+</tr>
+</tbody></table>
+<p><strong>注意：rwx是可选择的，不一定要全写，写入你希望的权限就行了</strong></p>
+<p><code>yum list</code>查看可以使用yum能下载的软件，通过<code>yum install 软件名</code>进行下载，install换成remove则是删除</p>
+<p><code>find 查找目录 [-name] &quot;查找名称&quot;</code>查找文件，find的使用条件所查找的路径必须具有读权限</p>
+<p><code>grep [-iv] 需要查找的字符串 文件</code>过滤，往指定文件查找字符串，<code>i</code>忽略大小写<code>v</code>查出不包含字符串的结果</p>
+<p><code>管道符|</code>将一个进程的输出作为另一个进程的输入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 显示所有在/my_test目录找到的有关键字main.cpp的文件，并输出详细信息</span><br><span class="line">ll /my_test | grep -i main.cpp</span><br></pre></td></tr></table></figure>
+
+<p><code>reboot</code>重启</p>
+<p><code>shutdown [-h] [时间]</code>设置关机时间，时间处设置<code>now</code>则立刻关机</p>
+<p><code>ping [-c&lt;n&gt;] 网页</code>测试这个网页的ping，<code>c</code>测试测试次数</p>
+<p><code>ifconfig</code>查看和配置当前机器的网络参数信息</p>
+<p><code>chattr [+-=] [ai] 文件或目录</code>设置隐藏属性<code>a</code>只能增加数据，不能删和改<code>i</code>不能删改写只有root才能设置</p>
+<p><strong><code>+</code>添加特设参数，<code>-</code>删除特殊参数，<code>=</code>直接设置特殊参数</strong></p>
+<hr>
+<h1 id="vim编辑器"><a href="#vim编辑器" class="headerlink" title="vim编辑器"></a>vim编辑器</h1><p><code>vim 文件名</code>如果没有该文件就会创建一个空文本</p>
+<p>按<code>:</code>输入使用命令</p>
+<table>
+<thead>
+<tr>
+<th align="left">命令</th>
+<th align="left">功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">wq</td>
+<td align="left">保存</td>
+</tr>
+<tr>
+<td align="left">q!</td>
+<td align="left">不保存，并退出vim</td>
+</tr>
+<tr>
+<td align="left">i</td>
+<td align="left">往文件输入内容</td>
+</tr>
+<tr>
+<td align="left">esc按钮</td>
+<td align="left">取消当前命令，进入重新输入命令界面</td>
+</tr>
+</tbody></table>
+<hr>
+<h1 id="环境变量"><a href="#环境变量" class="headerlink" title="环境变量"></a>环境变量</h1><p><code>echo 环境变量名</code>查看该环境变量里所有的路径</p>
+<p><code>export 环境变量名=路径:$环境变量名</code>设置临时环境变量`设置临时环境变量</p>
+<p><strong>注意：多个路径用<code>:</code>进行分隔</strong></p>
+<p><strong>设置永久环境变量</strong></p>
+<blockquote>
+<p>打开<code>vim /etc/profile</code>文件<br>在文件末尾处输入临时环境变量<br>保存<br>命令行输入<code>source /etc/profile</code>立即使用该配置文件</p>
+</blockquote>
+<h1 id="linux的ext2文件系统"><a href="#linux的ext2文件系统" class="headerlink" title="linux的ext2文件系统"></a>linux的ext2文件系统</h1><p>这是linux最传统的磁盘文件</p>
+<p><code>数据区块</code>是用来存放文件数据的地方</p>
+<p><strong>ext2支持的区块</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">限制</th>
+<th align="left">1K区块</th>
+<th align="left">2K区块</th>
+<th align="left">4K区块</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">最大单一文件</td>
+<td align="left">16G</td>
+<td align="left">256G</td>
+<td align="left">2TB</td>
+</tr>
+<tr>
+<td align="left">最大文件系统总容量</td>
+<td align="left">2TB</td>
+<td align="left">8TB</td>
+<td align="left">16TB</td>
+</tr>
+</tbody></table>
+<ul>
+<li><p>如果需要修改区块大小与数量，必须格式化</p>
+</li>
+<li><p>每个区块只能存放一个文件的数据，如果一个文件的数量大于区块的大小，则这个文件会占用多个区块，<br>如果这个文件小于区块的大小，这个区块的剩余容量将不能被使用，造成了空间浪费</p>
+</li>
+<li><p>文件系统最前面有个可以安装引导的启动扇区</p>
+</li>
+</ul>
+<h2 id="inode-节点-表"><a href="#inode-节点-表" class="headerlink" title="inode(节点)表"></a>inode(节点)表</h2><p>记录文件属性以及文件实际数据存放的区块</p>
+<ul>
+<li><p>文件的读写属性</p>
+</li>
+<li><p>文件拥有者与组</p>
+</li>
+<li><p>文件大小</p>
+</li>
+<li><p>文件建立与修改时间</p>
+</li>
+<li><p>最后一次读取时间</p>
+</li>
+<li><p>最近修改时间</p>
+</li>
+<li><p>文件的特性标识</p>
+</li>
+<li><p>文件真正内容的指向</p>
+</li>
+<li><p>每个文件只会占用一个inode，能建立的文件数量与节点数量有关</p>
+</li>
+<li><p>系统读取文件先找inode并分析所记录的权限与用户是否符合，符合则读取区块的内容</p>
+</li>
+<li><p>inode固定大小为128，256B，记录一个数据需要4B，假如超出inode大小则会出现间接记录区</p>
+</li>
+</ul>
+<p><code>间接分区</code>就是再拿一块分区来当作记录区块号码的记录区，文件太大就会使用间接的分区来记录编号</p>
+<p><img src="inode.jpg" alt></p>
+<p>节点 -&gt; [间接区块] -&gt; 区块</p>
+<h2 id="superblock超级区块"><a href="#superblock超级区块" class="headerlink" title="superblock超级区块"></a>superblock超级区块</h2><p>记录整个文件系统相关信息，没有超级区块就没有文件系统</p>
+<ul>
+<li><p>区块与inode的总量</p>
+</li>
+<li><p>未使用的inode与区块数量</p>
+</li>
+<li><p>区块与inode的大小（区块为1k,2k,4k,inode为128b,256b）</p>
+</li>
+<li><p>文件系统的挂载时间，系统信息</p>
+</li>
+<li><p>有效位数值，被挂载为0，未挂载为1</p>
+</li>
+</ul>
+<hr>
+<h1 id="VFS"><a href="#VFS" class="headerlink" title="VFS"></a>VFS</h1><p>用来管理所有的文件系统，了解即可</p>
+<hr>
+<h1 id="xfs文件系统"><a href="#xfs文件系统" class="headerlink" title="xfs文件系统"></a>xfs文件系统</h1><p>日志文件系统，文件系统恢复速度，创建速度快</p>
+<p><strong>主要规划为：</strong></p>
+<p><code>数据区</code>有节点，数据区块，超级区块数据，区块可在512b-64k调整，节点可在256b-2m调整</p>
+<p><code>文件系统活动登陆区</code>文件的变化会被记录，直到变化完整写入到数据区，该记录才会结束。假如发生意外<br>（例如停电）导致文件系统损坏，系统会拿这个登录区进行校验，查看在系统出意外前，文件系统在做什么操作，<br>借此快速修复文件系统 </p>
+<p><code>实时运行区</code>当文件要被建立时，会在这个区段里找数个extent区块，将文件存放到这个区块，等分配完后，<br>在写入到数据段和节点与区块中，这个extent的大小在格式化时先指定，4K-1G，extent的调整可能会影响到<br>物理硬盘的性能</p>
+<hr>
+<h1 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h1><p>用于文件的共享</p>
+<h2 id="硬链接"><a href="#硬链接" class="headerlink" title="硬链接"></a>硬链接</h2><p>通过系统的节点链接产生新文件名</p>
+<p><strong>硬链接只是在某个目录下新增一条文件名，链接到某个节点编号的关联记录</strong></p>
+<p><code>ln 源文件 目标文件</code>建立硬链接</p>
+<p>硬链接的限制为：不能跨文件系统于链接目录</p>
+<h2 id="符号链接（软链接）"><a href="#符号链接（软链接）" class="headerlink" title="符号链接（软链接）"></a>符号链接（软链接）</h2><p>类似于快捷键</p>
+<p>软连接就是建立一个独立文件，这个文件会让数据的读取指向它链接的那个文件的文件名，由于只是利用文件<br>来做为指向的操作，当源文件被删除，软链接的文件就会打不开</p>
+<p><code>ln -sf 源文件 目标文件</code>添加了<code>s</code>选项就变成了软链接，<code>f</code>为强制执行</p>
+<hr>
+<h1 id="观察磁盘分区状态"><a href="#观察磁盘分区状态" class="headerlink" title="观察磁盘分区状态"></a>观察磁盘分区状态</h1><p><code>lsblk [-] 设备</code>列出所有磁盘列表</p>
+<table>
+<thead>
+<tr>
+<th align="left">选项</th>
+<th align="left">功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">-i</td>
+<td align="left">ASCII字符输出</td>
+</tr>
+<tr>
+<td align="left">-p</td>
+<td align="left">列出设置的完整名称</td>
+</tr>
+</tbody></table>
+<ul>
+<li><p><code>NAME</code>设备名</p>
+</li>
+<li><p><code>MAJ:MIN</code>内核识别设备</p>
+</li>
+<li><p><code>RM</code>设备是否可卸载（比如移动硬盘之类的）</p>
+</li>
+<li><p><code>SIZE</code>容量</p>
+</li>
+<li><p><code>RO</code>是否为只读</p>
+</li>
+<li><p><code>TYPE</code>类型，disk为磁盘，partition为分区，rom只读存储器</p>
+</li>
+<li><p><code>MOUNTPOINT</code>挂载点</p>
+</li>
+</ul>
+<h2 id="列出设备的UUID（全局唯一标识符）"><a href="#列出设备的UUID（全局唯一标识符）" class="headerlink" title="列出设备的UUID（全局唯一标识符）"></a>列出设备的UUID（全局唯一标识符）</h2><p>该标识符是独一无二的，可以拿来挂载或使用这个设备的文件系统</p>
+<p><code>blkid</code>列出设备的UUID</p>
+<h2 id="列出分区类型与信息"><a href="#列出分区类型与信息" class="headerlink" title="列出分区类型与信息"></a>列出分区类型与信息</h2><p><code>parted 磁盘名称 print</code></p>
+<ul>
+<li><p><code>Model</code>磁盘模块名称</p>
+</li>
+<li><p><code>Disk</code>磁盘总容量</p>
+</li>
+<li><p><code>Sector size</code>磁盘的每个逻辑、物理扇区容量</p>
+</li>
+<li><p><code>partition Table</code>分区表格式</p>
+</li>
+</ul>
+<hr>
+<h1 id="磁盘分区"><a href="#磁盘分区" class="headerlink" title="磁盘分区"></a>磁盘分区</h1><h2 id="fdisk"><a href="#fdisk" class="headerlink" title="fdisk"></a>fdisk</h2><p>MBR用该分区</p>
+<p><code>fdisk 磁盘名</code>打开fdisk</p>
+<h2 id="gdisk"><a href="#gdisk" class="headerlink" title="gdisk"></a>gdisk</h2><p>GPT用该分区</p>
+<p><code>gdisk 磁盘名</code>打开fdisk</p>
+<ul>
+<li><p><code>d</code>删除一个分区</p>
+</li>
+<li><p><code>n</code>增加一个分区</p>
+</li>
+<li><p><code>p</code>打印出分区表</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="left">名称</th>
+<th align="left">功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Number</td>
+<td align="left">分区编号，/dev/xx1这样计算</td>
+</tr>
+<tr>
+<td align="left">Start</td>
+<td align="left">每个分区的开始扇区位置</td>
+</tr>
+<tr>
+<td align="left">End</td>
+<td align="left">每个分区的结束扇区位置，End-Start可获取分区总容量</td>
+</tr>
+<tr>
+<td align="left">Size</td>
+<td align="left">分区容量</td>
+</tr>
+<tr>
+<td align="left">Code</td>
+<td align="left">分区文件类型，Linux为8300，swap为8200，这只是一个提示</td>
+</tr>
+</tbody></table>
+<ul>
+<li><p><code>q</code>不保存分区直接离开</p>
+</li>
+<li><p><code>w</code>保存操作后离开</p>
+</li>
+</ul>
+<h3 id="新增分区"><a href="#新增分区" class="headerlink" title="新增分区"></a>新增分区</h3><p>打开<code>gisk</code>输入<code>p</code>查看磁盘信息，以此信息为主来进行新分区的设置</p>
+<p>输入<code>n</code>新增分区</p>
+<p><img src="gdisk.png" alt></p>
+<p>最后按<code>w</code>保存</p>
+<h2 id="删除分区"><a href="#删除分区" class="headerlink" title="删除分区"></a>删除分区</h2><p>输入<code>d</code>删除分区</p>
+<p><img src="gdisk2.png" alt></p>
+<p>最后按<code>w</code>保存</p>
+<hr>
+<h1 id="磁盘格式化"><a href="#磁盘格式化" class="headerlink" title="磁盘格式化"></a>磁盘格式化</h1><h2 id="XFS文件系统mkfs-xfs"><a href="#XFS文件系统mkfs-xfs" class="headerlink" title="XFS文件系统mkfs.xfs"></a>XFS文件系统mkfs.xfs</h2><p><code>mkfs.xfs 分区编号</code>对该分区进行格式化</p>
+<p><strong>为格式化添加cpu参数，可增加速度</strong></p>
+<p><code>grep &#39;processor&#39; /proc/cpionfo</code>查看cpu数量</p>
+<p><code>mkfs.xfs -f -d agcount=cpu数量 分区编号</code>为分区设置cpu参数<code>d</code>重要的相关参数<code>f</code>强制格式化</p>
+<table>
+<thead>
+<tr>
+<th align="left">-d可以设置的常用参数</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">agcount=数值，设置存储群组，与cpu有关</td>
+</tr>
+<tr>
+<td align="left">su=数值，有RAID时，分区区块stripe数值的意思，与sw配合使用</td>
+</tr>
+<tr>
+<td align="left">sw=数值</td>
+</tr>
+<tr>
+<td align="left">swidth=数值，就是su*sw的数值，以几个sector（512b大小）来设置</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th align="left">-r指定realtime section相关设置</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">extsize=数值，一般不设置，有RAID时最好设置与swidth的数值相同，最小4k最大1G</td>
+</tr>
+</tbody></table>
+<p><strong>XFS for RAID性能优化</strong></p>
+<p>文件 -&gt; 分成许多小型的分区区块 -&gt; 存储到磁盘阵列的所有硬盘里</p>
+<p><code>RAID</code>磁盘阵列，多块硬盘组成一大块硬盘，利用同步写入技术，可以加快写入速度，并且出现坏盘时整个<br>文件系统还可以继续运行，提高容错率与速度</p>
+<p>磁盘阵列就是将文件细分为多个小型的<code>分区区块stripe</code>然后将众多的分区区块放到磁盘阵列里面的所有磁盘，所以<br>一个文件会同时写入到多个磁盘里，为了安全，会保留数个与磁盘阵列的规划有关的校验磁盘，以及一个或以上<br>的备用磁盘</p>
+<p><code>数据宽度swidth</code> = <code>分区区块stripe</code> * <code>磁盘数量（需要扣除备份与备用盘）</code></p>
+<p><code>extent大小</code> = <code>数据宽度swidth</code></p>
+<p><code>sunit</code> = <code>分区区块</code> / 512b * 1024b/k = <code>sector扇区</code></p>
+<p><code>swidth数据宽度</code> = <code>磁盘数量（需要扣除备份与备用盘）</code> * <code>sunit</code> = <code>sector扇区</code></p>
+<h2 id="ext4文件系统mkfs-ext4"><a href="#ext4文件系统mkfs-ext4" class="headerlink" title="ext4文件系统mkfs.ext4"></a>ext4文件系统mkfs.ext4</h2><p><code>mkfs.ext4 [-bL] 设备名称</code>使用mkfs.ext4<code>b</code>设置区块大小1k，2k，4k<code>L</code>格式化为ext4文件系统</p>
+<h2 id="其他文件系统"><a href="#其他文件系统" class="headerlink" title="其他文件系统"></a>其他文件系统</h2><p><code>mkfs 按两下tab</code>查看其他文件系统</p>
+<p><code>mkfs [-t] 文件系统格式 分区</code>格式化分区为指定格式</p>
+<hr>
+<h1 id="文件系统校验"><a href="#文件系统校验" class="headerlink" title="文件系统校验"></a>文件系统校验</h1><p>系统死机导致文件错乱时使用，可以检查和修复系统，修复时该文件系统不能挂载，必须要处于卸载的状态</p>
+<h2 id="xfs-repair处理XFS系统"><a href="#xfs-repair处理XFS系统" class="headerlink" title="xfs_repair处理XFS系统"></a>xfs_repair处理XFS系统</h2><p><code>xfs_repair [-fnd] 设备名</code>校验/修复设备<code>f</code>是文件不是设备<code>n</code>检查<code>d</code>单人维护模式下，强制校验，针对<br>根目录进行检查与修复，不要随意用</p>
+<h2 id="fsck-ext4处理ext4文件系统"><a href="#fsck-ext4处理ext4文件系统" class="headerlink" title="fsck.ext4处理ext4文件系统"></a>fsck.ext4处理ext4文件系统</h2><p><code>fsck.ext4 [-pf] [-b 超级区块] 设备名</code>检查/修复设置<code>p</code>自动回复y<code>f</code>强制检查</p>
+<hr>
+<h1 id="文件系统挂载与卸载"><a href="#文件系统挂载与卸载" class="headerlink" title="文件系统挂载与卸载"></a>文件系统挂载与卸载</h1><ul>
+<li><p>单一文件系统不应该被重复挂载在不同的挂载点（目录）中</p>
+</li>
+<li><p>单一目录不应该重复挂载多个系统</p>
+</li>
+<li><p>作为挂载点的目录，需要为空目录</p>
+</li>
+</ul>
+<h2 id="挂载"><a href="#挂载" class="headerlink" title="挂载"></a>挂载</h2><p><code>mount [-alo] [-t 文件系统 &lt;UUID=&#39;&#39; 挂载点&gt;]</code> <code>a</code>依照配置文件将/etc/fstab的所有未挂载的磁盘都挂载<br><code>l</code>显示目前挂载的信息<code>o</code>额外参数</p>
+<p><strong>-o的额外参数</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">写法</th>
+<th align="left">功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">async</td>
+<td align="left">文件系统非同步写入（默认）</td>
+</tr>
+<tr>
+<td align="left">sync</td>
+<td align="left">文件系统同步写入</td>
+</tr>
+<tr>
+<td align="left">atime</td>
+<td align="left">修改文件读取时间</td>
+</tr>
+<tr>
+<td align="left">noatime</td>
+<td align="left">不修改文件读取时间</td>
+</tr>
+<tr>
+<td align="left">ro</td>
+<td align="left">挂载系统只读</td>
+</tr>
+<tr>
+<td align="left">rw</td>
+<td align="left">挂载系统可读写</td>
+</tr>
+<tr>
+<td align="left">auto</td>
+<td align="left">允许系统以mount -a自动挂载</td>
+</tr>
+<tr>
+<td align="left">noauto</td>
+<td align="left">不允许系统以mount -a自动挂载</td>
+</tr>
+<tr>
+<td align="left">dev</td>
+<td align="left">文件系统可建立设备文件</td>
+</tr>
+<tr>
+<td align="left">nodev</td>
+<td align="left">文件系统不可建立设备文件</td>
+</tr>
+<tr>
+<td align="left">remount</td>
+<td align="left">重新挂载</td>
+</tr>
+</tbody></table>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">#挂载文件系统</span><br><span class="line">mount UUID=&quot;&quot; 空目录</span><br><span class="line"></span><br><span class="line">#挂载CD或DVD</span><br><span class="line">mount 需要挂载的DVD/CD 空目录</span><br><span class="line"></span><br><span class="line">#挂载vfat中文U盘</span><br><span class="line">#codepage=950：codepage用来处理vfat，950为中文语系代码</span><br><span class="line">#iocharset指定文件Unicode</span><br><span class="line">mount -o codepage=950 iocharset=utf8 UUID=&quot;&quot; 空目录</span><br><span class="line"></span><br><span class="line">#重新挂载根目录</span><br><span class="line">mount -o remount,rw,auto /</span><br><span class="line"></span><br><span class="line">#将某个目录挂载到另一个目录，额外挂载</span><br><span class="line">mount --bind 源目录 目录</span><br></pre></td></tr></table></figure>
+
+<h2 id="卸载"><a href="#卸载" class="headerlink" title="卸载"></a>卸载</h2><p><code>umount -[fn] 设备文件或挂载点</code>卸载<code>f</code>强制卸载<code>n</code>不更新/etc/mtab情况下卸载</p>
+<p><a href="https://www.runoob.com/linux/linux-comm-mount.html" target="_blank" rel="noopener"><strong>详细</strong></a></p>
+<hr>
+<h1 id="磁盘-文件系统参数自定义"><a href="#磁盘-文件系统参数自定义" class="headerlink" title="磁盘/文件系统参数自定义"></a>磁盘/文件系统参数自定义</h1><p>通过修改文件的<code>major</code>与<code>minor</code>数值，实现文件代表设备</p>
+<p><code>mknod 磁盘/文件 [-b&lt;设备代码,次要设备代码&gt;]</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#建立一个FIFO文件</span><br><span class="line">#这个文件的文件类型是p，也就是prw-rw----注意最前面这个p</span><br><span class="line">mknod 文件 p</span><br></pre></td></tr></table></figure>
+
+<h2 id="修改XFS文件系统的UUID与Lable-name"><a href="#修改XFS文件系统的UUID与Lable-name" class="headerlink" title="修改XFS文件系统的UUID与Lable name"></a>修改XFS文件系统的UUID与Lable name</h2><p><code>xfs_admin [-lu] [-L lbale] [-U uuid] 设备名</code>  <code>l</code>列出lable name<code>u</code>这个设备的uuid<code>L</code>设置新的lable<br><code>U</code>设置新的uuid</p>
+<h2 id="修改ext4的lable与uuid"><a href="#修改ext4的lable与uuid" class="headerlink" title="修改ext4的lable与uuid"></a>修改ext4的lable与uuid</h2><p><code>tune2fs [-l] [-L lable] [-U uuid]</code> <code>l</code>将超级区块内的数据读出来</p>
+<hr>
+<h1 id="生成uuid"><a href="#生成uuid" class="headerlink" title="生成uuid"></a>生成uuid</h1><p><code>uuidgen</code></p>
+<hr>
+<h1 id="设置启动挂载"><a href="#设置启动挂载" class="headerlink" title="设置启动挂载"></a>设置启动挂载</h1><p>系统挂载的限制：</p>
+<ul>
+<li><p>根目录必须挂载，优先级最高</p>
+</li>
+<li><p>其他挂载点必须为已建立的目录</p>
+</li>
+<li><p>所有挂载点在同一时间内只能挂载一次</p>
+</li>
+<li><p>所有磁盘在同一时间内，只能被挂载一次</p>
+</li>
+<li><p>如果需要卸载，必须将工作目录移动到挂载点的子目录之外</p>
+</li>
+</ul>
+<p>直接到<code>/etc/fstab</code>进行设置，可以添加启动挂载，文件内容的6个字段非常重要</p>
+<p><code>设备/UUID</code> <code>挂载点</code> <code>文件系统</code> <code>文件系统参数</code> <code>dump备份命令</code> <code>fsck校验扇区</code></p>
+<h2 id="特殊设备loop挂载"><a href="#特殊设备loop挂载" class="headerlink" title="特殊设备loop挂载"></a>特殊设备loop挂载</h2><p>比如镜像文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mount -o loop 源目录 挂载点目录</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="使用物理分区创建内存交换分区（swap）"><a href="#使用物理分区创建内存交换分区（swap）" class="headerlink" title="使用物理分区创建内存交换分区（swap）"></a>使用物理分区创建内存交换分区（swap）</h1><p>创建分区 -&gt; 格式化为swap格式 -&gt; 启动挂载 -&gt; 创建内存交换文件 -&gt; 格式化为内存交换文件格式 -&gt; 启动</p>
+<ul>
+<li><p>使用gdisk或其他划分出给系统的内存交换分区</p>
+</li>
+<li><p>创建swap格式</p>
+<p>  <code>mkswap 分区名</code></p>
+</li>
+<li><p>观察与加载</p>
+<p>  <code>free</code></p>
+<p>  <code>swapon 分区名</code>然后在<code>free</code></p>
+</li>
+<li><p>创建内存交换文件</p>
+<p>  //创建大文件<br>  <code>dd if=分区名 of=交换分区名 bs=1M count=需要创建的大小</code></p>
+</li>
+<li><p>格式化为交换文件的文件格式</p>
+<p>  <code>mkswap 目录 Setting up swapspace version 1, size = 数值 no lable, UUID=你的uuid</code></p>
+</li>
+<li><p>启动</p>
+<p>  <code>swapon 目录</code><br>  <code>swapon -s</code></p>
+</li>
+</ul>
+<ul>
+<li><p>关闭</p>
+<p>  <code>swapoff 目录 分区</code></p>
+</li>
+</ul>
+<hr>
+<h1 id="GNU的parted分区"><a href="#GNU的parted分区" class="headerlink" title="GNU的parted分区"></a>GNU的parted分区</h1><p><code>parted 设备 [命令 [参数] ]</code></p>
+<p>详细：<code>man parted</code></p>
+<hr>
+<h1 id="压缩"><a href="#压缩" class="headerlink" title="压缩"></a>压缩</h1><p><code>tar -jcv 文件/目录 [-C 文件存放目录]</code>添加压缩文件</p>
+<hr>
+<h1 id="命令行模式的shell"><a href="#命令行模式的shell" class="headerlink" title="命令行模式的shell"></a>命令行模式的shell</h1><p>shell是所有Linux通用的</p>
+<p>由于内核是受保护区域，需要通过shell与内核沟通</p>
+<h2 id="编码"><a href="#编码" class="headerlink" title="编码"></a>编码</h2><p><code>locale -a</code>查看支持的编码</p>
+<p>打开<code>/etc/locale.conf</code>可以设置编码格式</p>
+<h2 id="限制"><a href="#限制" class="headerlink" title="限制"></a>限制</h2><p><code>ulimit [选项] [配额]</code></p>
+<h2 id="命令别名"><a href="#命令别名" class="headerlink" title="命令别名"></a>命令别名</h2><p><code>alias 别名=‘命令’</code>设置命令别名</p>
+<p><code>alias</code>查看所有被取别名的命令</p>
+<p><code>unalias 别名</code>删除命令别名</p>
+<h2 id="历史命令"><a href="#历史命令" class="headerlink" title="历史命令"></a>历史命令</h2><p><code>history [显示数量] [选项]</code></p>
+<p><code>! [第几条命令]</code></p>
+<p><code>!!</code>执行上一条命令</p>
+<p><code>!str</code>执行以str开头的命令</p>
+<p>命令记录文件存放在<code>~/.bash_history</code></p>
+<h2 id="bash登陆欢迎界面"><a href="#bash登陆欢迎界面" class="headerlink" title="bash登陆欢迎界面"></a>bash登陆欢迎界面</h2><p>在<code>/etc/issue</code></p>
+<h2 id="锁定与解锁"><a href="#锁定与解锁" class="headerlink" title="锁定与解锁"></a>锁定与解锁</h2><blockquote>
+<p>ctrl+s锁定<br>ctrl+q解锁</p>
+</blockquote>
+<h1 id="数据流重定向"><a href="#数据流重定向" class="headerlink" title="数据流重定向"></a>数据流重定向</h1><p>标准输入流：<code>0</code>或<code>&lt;</code>或<code>&lt;&lt;</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#追加输入</span><br><span class="line">cat &gt;&gt; file &lt;&lt; 文件/&quot;&quot;</span><br><span class="line">#输入追加内容，按ctrl+d结束输入</span><br></pre></td></tr></table></figure>
+
+<p>标准输出流：<code>1</code>或<code>&gt;</code>或<code>&gt;&gt;</code><br>多个文件同时输出：<code>&amp;&gt;</code>或<code>&amp;&gt;&gt;</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">#将ll输出的内容，输出到file里</span><br><span class="line">ll / &gt;&gt; file</span><br><span class="line"></span><br><span class="line">#多个ll同时输入到file里</span><br><span class="line">ll / /home &gt;&gt; file</span><br><span class="line"></span><br><span class="line">#创建一个文件</span><br><span class="line">cat &gt;&gt; 文件名</span><br><span class="line">#输入内容，按ctrl+d结束输入</span><br></pre></td></tr></table></figure>
+
+<p>标准错误输出流：<code>2</code>或<code>2&gt;</code>或<code>2&gt;&gt;</code></p>
+<h2 id="命令执行的判断根据"><a href="#命令执行的判断根据" class="headerlink" title="命令执行的判断根据"></a>命令执行的判断根据</h2><p><code>;</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#;为语句结束符，执行完ll /后执行ll /home</span><br><span class="line">ll /; ll /home</span><br></pre></td></tr></table></figure>
+
+<p><code>&amp;&amp;</code>与<code>||</code>或，判断符</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#两个为true则执行ll /usr</span><br><span class="line">ll / &amp;&amp; ll /home ll /usr</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#其中一个ture就执行ll /usr</span><br><span class="line">ll / || ll /home ll /usr</span><br></pre></td></tr></table></figure>
+
+<h2 id="选取命令"><a href="#选取命令" class="headerlink" title="选取命令"></a>选取命令</h2><p><code>cut [选项]</code></p>
+<p><code>grep [选项] 查找字符</code></p>
+<h2 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h2><p><code>sort [选项] [file or stdin]</code>排序</p>
+<p><code>uniq [选项]</code>排序完后，将重复的数据仅列出一个显示</p>
+<p><code>wc [选项]</code>查看文件有多少字，多少行，多少字符</p>
+<h2 id="双向重定向"><a href="#双向重定向" class="headerlink" title="双向重定向"></a>双向重定向</h2><p>同时将数据流分送到文件与屏幕（在屏幕输出一次，并写入到文件）</p>
+<p><code>tee -a file</code> <code>a</code>追加到file</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#将ll /追加到file，并在屏幕输出追加内容</span><br><span class="line">ll / | tee -a file | more</span><br></pre></td></tr></table></figure>
+
+<h2 id="字符串转换"><a href="#字符串转换" class="headerlink" title="字符串转换"></a>字符串转换</h2><h3 id="tr删除或替换一段文字"><a href="#tr删除或替换一段文字" class="headerlink" title="tr删除或替换一段文字"></a>tr删除或替换一段文字</h3><p><code>tr [ds] SET1 ...</code>将SET1替换成…</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#将ll /输出的内容，小写全部替换成大写</span><br><span class="line">ll / | tr &apos;[a-z]&apos; &apos;[A-Z]&apos;</span><br><span class="line"></span><br><span class="line">#将a.txt文件输出的信息中，将root给删除</span><br><span class="line">cat a.txt | tr -d &apos;root&apos;</span><br></pre></td></tr></table></figure>
+
+<h3 id="col将其他按键替换成空格"><a href="#col将其他按键替换成空格" class="headerlink" title="col将其他按键替换成空格"></a>col将其他按键替换成空格</h3><p><code>col [-xb]</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#将文件里的[tab]键，也就是^I的符号，替换成空格</span><br><span class="line">cat /etc/man_db.conf | col -x | cat -A | more</span><br></pre></td></tr></table></figure>
+
+<h3 id="join处理多个文件中，相同的数据"><a href="#join处理多个文件中，相同的数据" class="headerlink" title="join处理多个文件中，相同的数据"></a>join处理多个文件中，相同的数据</h3><p>使用前需要排序</p>
+<p><code>join [选项] file file2</code></p>
+<h3 id="paste将数据相同的行粘在一起，并以-tab-键隔开"><a href="#paste将数据相同的行粘在一起，并以-tab-键隔开" class="headerlink" title="paste将数据相同的行粘在一起，并以[tab]键隔开"></a>paste将数据相同的行粘在一起，并以[tab]键隔开</h3><p><code>paste [-d] file file2</code></p>
+<h3 id="expand自动将tab转成空格"><a href="#expand自动将tab转成空格" class="headerlink" title="expand自动将tab转成空格"></a>expand自动将tab转成空格</h3><p><code>expand [-t] file</code></p>
+<h2 id="划分split"><a href="#划分split" class="headerlink" title="划分split"></a>划分split</h2><p>将一个大文件，分成多个小文件</p>
+<p><code>split [-bl] file PREFIX</code> <code>b</code>划分成的文件大小，可加单位例如b,k,m等<code>l</code>以行数进行划分</p>
+<h2 id="参数代换"><a href="#参数代换" class="headerlink" title="参数代换"></a>参数代换</h2><p>为命令提供标准输入</p>
+<p>参数某个命令的参数</p>
+<p><code>xargs [参数] command</code></p>
+<hr>
+<h1 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h1><p>条件正确则表达的式子</p>
+<p><img src="regx.png" alt></p>
+<p><a href="https://www.runoob.com/regexp/regexp-syntax.html" target="_blank" rel="noopener"><strong>详细</strong></a></p>
+<h2 id="配合grep使用正则表达式"><a href="#配合grep使用正则表达式" class="headerlink" title="配合grep使用正则表达式"></a>配合grep使用正则表达式</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 查找所有a为开头的文件</span><br><span class="line">ll / | grep -n &apos;^a.*&apos;</span><br></pre></td></tr></table></figure>
+
+<h2 id="sed将数据增删，替换，选取特点行等功能"><a href="#sed将数据增删，替换，选取特点行等功能" class="headerlink" title="sed将数据增删，替换，选取特点行等功能"></a>sed将数据增删，替换，选取特点行等功能</h2><p><code>seq [选项] [操作]</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#列出行号，并删除2-5行</span><br><span class="line">nl /etc/passwd | sed &apos;2,5d&apos;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="文件格式化与相关处理"><a href="#文件格式化与相关处理" class="headerlink" title="文件格式化与相关处理"></a>文件格式化与相关处理</h1><h2 id="格式化打印printf"><a href="#格式化打印printf" class="headerlink" title="格式化打印printf"></a>格式化打印printf</h2><p><code>printf &#39;打印格式&#39; 实际内容</code></p>
+<p><a href="https://www.runoob.com/linux/linux-shell-printf.html" target="_blank" rel="noopener"><strong>详细</strong></a></p>
+<h2 id="awk数据处理工具"><a href="#awk数据处理工具" class="headerlink" title="awk数据处理工具"></a>awk数据处理工具</h2><p><code>awk &#39;条件类型1{操作1} 条件类型2{操作2}&#39; file</code></p>
+<p><a href="https://www.runoob.com/linux/linux-comm-awk.html" target="_blank" rel="noopener"><strong>详细</strong></a></p>
+<h2 id="文件比对工具"><a href="#文件比对工具" class="headerlink" title="文件比对工具"></a>文件比对工具</h2><p>用于比较两个不同版本的软件包，比较配置文件与原始文件的差异</p>
+<p><code>diff [-bBi] 原始文件 目标文件</code>用于同一文件/目录的新旧版本差异</p>
+<p><code>cmp [-l] file1 file2</code>用字节单位或二进制进行对比</p>
+<hr>
+<h1 id="shell脚本"><a href="#shell脚本" class="headerlink" title="shell脚本"></a>shell脚本</h1><ul>
+<li><p>自动化管理</p>
+</li>
+<li><p>跟踪与管理系统</p>
+</li>
+<li><p>入侵检测</p>
+</li>
+<li><p>连续命令单一化</p>
+</li>
+<li><p>数据处理</p>
+</li>
+<li><p>跨平台支持</p>
+</li>
+</ul>
+<h2 id="编写格式"><a href="#编写格式" class="headerlink" title="编写格式"></a>编写格式</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">#创建一个shell脚本</span><br><span class="line">vim xx.sh</span><br><span class="line"></span><br><span class="line">符号#是注释</span><br><span class="line"></span><br><span class="line">#第一行需要备注，使用哪一种shell脚本</span><br><span class="line"></span><br><span class="line">#脚本的内容与功能介绍，版本信息，建立日期，历史记录，作者信息</span><br><span class="line"></span><br><span class="line">#注意环境变量的声明</span><br><span class="line"></span><br><span class="line">#设置重要的环境变量</span><br><span class="line"></span><br><span class="line">#内容</span><br></pre></td></tr></table></figure>
+
+<p><strong>hellow word shell脚本</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash #使用到的shell脚本</span><br><span class="line">#Program: #功能介绍</span><br><span class="line">#	this is &quot;hellow word&quot;</span><br><span class="line">#History: #时间</span><br><span class="line">#2019/10/12</span><br><span class="line">PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin </span><br><span class="line">export PATH #主要环境变量声明</span><br><span class="line">echo -e &quot;hellow word \a\n&quot; #向终端输出字符串</span><br><span class="line">read -p &quot;请输入内容： &quot; 变量名 #键盘输入，内容输入到变量</span><br><span class="line">echo -e &quot;\n$&#123;变量名&#125;&quot;	#将键盘输入，将变量里的内容输出到屏幕</span><br><span class="line">exit 0 #结束程序，并返回0</span><br></pre></td></tr></table></figure>
+
+<h2 id="算术运算"><a href="#算术运算" class="headerlink" title="算术运算"></a>算术运算</h2><p><code>sh hellow.sh</code>执行脚本</p>
+<p><code>echo $(( 1 + 1 ))</code>进行整数算术运算</p>
+<p><code>echo &quot;1.1*2.2&quot; | bc</code>进行小数算术运算</p>
+<h2 id="子进程与父进程"><a href="#子进程与父进程" class="headerlink" title="子进程与父进程"></a>子进程与父进程</h2><p>未使用<code>source</code>写入父进程的话，自己写的写的脚本则会是子进程，直接调用<code>echo</code>是无法执行的</p>
+<p><code>source xx.sh</code>将自己写的脚本写进父进程</p>
+<p><img src="source.jpg" alt></p>
+<h2 id="test测试功能"><a href="#test测试功能" class="headerlink" title="test测试功能"></a>test测试功能</h2><p><code>test [选项]</code></p>
+<p><strong>判断文件是否存在，如果存在则输出</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">#Program:</span><br><span class="line">#       this is test</span><br><span class="line">#History:</span><br><span class="line">#2019/10/12</span><br><span class="line">PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin</span><br><span class="line">export PATH</span><br><span class="line"></span><br><span class="line">判断是否真的有输入字符</span><br><span class="line">read -p &quot;输入文件名: &quot; filename</span><br><span class="line">test -z $&#123;filename&#125; &amp;&amp; echo &quot;请输入文件名&quot; &amp;&amp; exit 0</span><br><span class="line"></span><br><span class="line">#判断文件是否存在</span><br><span class="line">test ! -e $&#123;filename&#125; &amp;&amp; echo &quot;文件 `$&#123;filename&#125;` 不存在&quot; &amp;&amp; exit 0</span><br><span class="line"></span><br><span class="line">#判断文件类型与属性</span><br><span class="line">test -f $&#123;filename&#125; &amp;&amp; filetype=&quot;regulare file&quot; #是否为文件，是否存在</span><br><span class="line">test -d $&#123;filename&#125; &amp;&amp; filetype=&quot;directory&quot; #是否为目录，是否存在</span><br><span class="line">test -r $&#123;filename&#125; &amp;&amp; perm=&quot;readble&quot; #读权限</span><br><span class="line">test -w $&#123;filename&#125; &amp;&amp; perm=&quot;$&#123;perm&#125; writable&quot; #写权限</span><br><span class="line">test -x $&#123;filename&#125; &amp;&amp; perm=&quot;$&#123;perm&#125; executable&quot; #可执行权限</span><br><span class="line"></span><br><span class="line">#输出信息</span><br><span class="line">echo &quot;文件名: $&#123;filename&#125; 的类型是 $&#123;filetype&#125;&quot;</span><br><span class="line">echo &quot;可执行的权限: $&#123;perm&#125;&quot;</span><br></pre></td></tr></table></figure>
+
+<h2 id="使用-进行数据判断"><a href="#使用-进行数据判断" class="headerlink" title="使用 [] 进行数据判断"></a>使用 [] 进行数据判断</h2><p><strong>让用户输入y/n的程序，输入其他则输出一个其他的提示信息</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">#Program:</span><br><span class="line">#       this is test</span><br><span class="line">#History:</span><br><span class="line">#2019/10/13</span><br><span class="line"></span><br><span class="line">PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin</span><br><span class="line">export PATH</span><br><span class="line"></span><br><span class="line">#提示输入</span><br><span class="line">read -p &quot;please input y/n: &quot; yn</span><br><span class="line"></span><br><span class="line">#判断输入</span><br><span class="line">#-o是或者的意思，用来连接两个判断</span><br><span class="line">#y/n不区分大小写</span><br><span class="line">[ &quot;$&#123;yn&#125;&quot; == &quot;Y&quot; -o &quot;$&#123;yn&#125;&quot; == &quot;y&quot; ] &amp;&amp; echo &quot;ok!&quot; &amp;&amp; exit 0</span><br><span class="line">[ &quot;$&#123;yn&#125;&quot; == &quot;N&quot; -o &quot;$&#123;yn&#125;&quot; == &quot;n&quot; ] &amp;&amp; echo &quot;no!&quot; &amp;&amp; exit 0</span><br><span class="line"></span><br><span class="line">#y/n以外的其他字符</span><br><span class="line">echo &quot;???&quot; &amp;&amp; exit 0</span><br></pre></td></tr></table></figure>
+
+<h2 id="shell的默认变量"><a href="#shell的默认变量" class="headerlink" title="shell的默认变量"></a>shell的默认变量</h2><ul>
+<li><p><code>$0</code>执行的脚本文件名</p>
+</li>
+<li><p><code>$#</code>参数个数</p>
+</li>
+<li><p><code>$@</code>每个变量都是独立的，用””括起来</p>
+</li>
+<li><p><code>$*</code>每个变量用分隔符分隔，默认是空格</p>
+</li>
+</ul>
+<p><img src="shell%E5%8F%82%E6%95%B0.png" alt></p>
+<p><strong>输出程序的文件名，参数数量，参数小于2则输出提示信息，输出全部参数，输出第一个和第二个参数</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">#Program:</span><br><span class="line">#       this is test</span><br><span class="line">#History:</span><br><span class="line">#2019/10/13</span><br><span class="line"></span><br><span class="line">PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin</span><br><span class="line">export PATH</span><br><span class="line"></span><br><span class="line">#输出文件名</span><br><span class="line">echo &quot;The script name is        ==&gt; $&#123;0&#125;&quot;</span><br><span class="line"></span><br><span class="line">#输出参数数量</span><br><span class="line">echo &quot;Total parameter number is ==&gt; $#&quot;</span><br><span class="line"></span><br><span class="line">#判断参数数量，-lt 2表示，$#参数个数小于2</span><br><span class="line">[ &quot;$#&quot; -lt 2 ] &amp;&amp; echo &quot;THe number of parameter is lee than 2. Stop here.&quot; &amp;&amp; exit 0</span><br><span class="line"></span><br><span class="line">#输出每个参数</span><br><span class="line">echo &quot;Your whole parameter is   ==&gt; &apos;$@&apos;&quot; </span><br><span class="line"></span><br><span class="line">#输出第一个参数</span><br><span class="line">echo &quot;The 1st parameter         ==&gt; $&#123;1&#125;&quot;</span><br><span class="line"></span><br><span class="line">#输出第二个参数</span><br><span class="line">echo &quot;The 2st parameter         ==&gt; $&#123;2&#125;&quot;</span><br><span class="line"></span><br><span class="line">#如果传入了更多的参数，也只会输出前两个参数，因为这里只输出两个参数</span><br></pre></td></tr></table></figure>
+
+<h2 id="参数号码偏移"><a href="#参数号码偏移" class="headerlink" title="参数号码偏移"></a>参数号码偏移</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">#Program:</span><br><span class="line">#       this is test</span><br><span class="line">#History:</span><br><span class="line">#2019/10/13</span><br><span class="line"></span><br><span class="line">PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin</span><br><span class="line">export PATH</span><br><span class="line"></span><br><span class="line">echo &quot;number    ==&gt; $#&quot;</span><br><span class="line">echo &quot;parameter ==&gt; &apos;$@&apos;&quot;</span><br><span class="line"></span><br><span class="line">#偏移2个参数</span><br><span class="line">shift 2</span><br><span class="line"></span><br><span class="line">echo &quot;number    ==&gt; $#&quot;</span><br><span class="line">echo &quot;parameter ==&gt; &apos;$@&apos;&quot;</span><br></pre></td></tr></table></figure>
+
+<p><img src="%E5%81%8F%E7%A7%BB.png" alt></p>
+<h2 id="if-than判断式"><a href="#if-than判断式" class="headerlink" title="if than判断式"></a>if than判断式</h2><p>感觉和判断预处理宏差不多</p>
+<p>有成立结果的都要加上then</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">if [ 判断 ]; then</span><br><span class="line"></span><br><span class="line">elif [ 判断 ]; then</span><br><span class="line"></span><br><span class="line">else</span><br><span class="line"></span><br><span class="line">fi #结束if</span><br></pre></td></tr></table></figure>
+
+<p><strong>提示输入hellow</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">#Program:</span><br><span class="line">#       this is test</span><br><span class="line">#History:</span><br><span class="line">#       2019/10/14</span><br><span class="line"></span><br><span class="line">PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin</span><br><span class="line">export PATH</span><br><span class="line"></span><br><span class="line">#第一个参数输入hellow则true</span><br><span class="line">if [ &quot;$&#123;1&#125;&quot; == &quot;hellow&quot; ]; then</span><br><span class="line">        echo &quot;hellow, how are you?&quot;</span><br><span class="line">		</span><br><span class="line">#输入空字符返回错误信息</span><br><span class="line">elif [ &quot;$&#123;1&#125;&quot; == &quot;&quot; ]; then</span><br><span class="line">        echo &quot;$&#123;0&#125; someword&quot;</span><br><span class="line">		</span><br><span class="line">#输入了其他字符，显示错误信息</span><br><span class="line">else</span><br><span class="line">        echo &quot;please input \&quot;hellow \&quot;&quot;</span><br><span class="line">		</span><br><span class="line">#结束if</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+
+<h2 id="查询主机的网络端口"><a href="#查询主机的网络端口" class="headerlink" title="查询主机的网络端口"></a>查询主机的网络端口</h2><p><code>netstat -tuln</code>获取主机启动的服务，并获取信息</p>
+<p><img src="netstat.png" alt></p>
+<ul>
+<li><p>Proto封包格式</p>
+</li>
+<li><p>Local Address本地IP:端口</p>
+</li>
+<li><p>Foreign Address远程IP:端口</p>
+</li>
+<li><p>State是否监听</p>
+</li>
+</ul>
+<p><strong>常见的端口与相关网络服务</strong></p>
+<ul>
+<li><p>80: WWW</p>
+</li>
+<li><p>22: ssh</p>
+</li>
+<li><p>21： ftp</p>
+</li>
+<li><p>25： mail</p>
+</li>
+<li><p>111: RPC(远程过程调用)</p>
+</li>
+<li><p>631: CUPS(打印服务功能)</p>
+</li>
+</ul>
+<p><strong>通过netstat检测网络服务</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">#Program:</span><br><span class="line">#       this is test</span><br><span class="line">#History:</span><br><span class="line">#       2019/10/14</span><br><span class="line"></span><br><span class="line">PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin</span><br><span class="line">export PATH</span><br><span class="line"></span><br><span class="line">#测试结果存放到文件net.txt（当文件不存在则自动创建），testfile是一个变量名，</span><br><span class="line">testfile=/my_test/shell_script/net.txt</span><br><span class="line"></span><br><span class="line">#将netstat -tuln的结果输入到变量testfile</span><br><span class="line">netstat -tuln &gt;&gt; $&#123;testfile&#125;</span><br><span class="line"></span><br><span class="line">#testing是一个变量名，存储在变量testfile，grep &quot;:80 &quot;的结果</span><br><span class="line">testing=$(grep &quot;:80 &quot; $&#123;testfile&#125;)</span><br><span class="line"></span><br><span class="line">#变量testing不是空字符串</span><br><span class="line">if [ &quot;$&#123;testing&#125;&quot; != &quot;&quot; ];</span><br><span class="line">		#终端输出字符串</span><br><span class="line">        echo &quot;www&quot;</span><br><span class="line">#结束if</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">testing=$(grep &quot;:22 &quot; $&#123;testfile&#125;)</span><br><span class="line">if [ &quot;$&#123;testing&#125;&quot; != &quot;&quot; ]; then</span><br><span class="line">        echo &quot;ssh&quot;</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">testing=$(grep &quot;:21 &quot; $&#123;testfile&#125;)</span><br><span class="line">if [ &quot;$&#123;testing&#125;&quot; != &quot;&quot; ]; then</span><br><span class="line">        echo &quot;ftp&quot;</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">testing=$(grep &quot;:25 &quot; $&#123;testfile&#125;)</span><br><span class="line">if [ &quot;$&#123;testing&#125;&quot; != &quot;&quot; ]; then</span><br><span class="line">        echo &quot;mail&quot;</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+
+<h2 id="求剩余时间的练习"><a href="#求剩余时间的练习" class="headerlink" title="求剩余时间的练习"></a>求剩余时间的练习</h2><p><code>declare</code>用于声明shell变量</p>
+<p><a href="https://www.runoob.com/linux/linux-comm-declare.html" target="_blank" rel="noopener"><strong>详细</strong></a></p>
+<p>双小括号 <code>(( ))</code></p>
+<blockquote>
+<p>1.整数扩展。这种扩展计算是整数型的计算，不支持浮点型。((exp))结构扩展并计算一个算术表达式的值，<br>如果表达式的结果为0，那么返回的退出状态码为1，或者 是”假”，而一个非零值的表达式所返回的退出<br>状态码将为0，或者是”true”。若是逻辑判断，表达式exp为真则为1,假则为0。</p>
+<p>2.只要括号中的运算符、表达式符合C语言运算规则，都可用在$((exp))中，甚至是三目运算符。作不同进<br>位(如二进制、八进制、十六进制)运算时，输出结果全都自动转化成了十进制。如：echo $((16#5f)) 结果<br>为95 (16进位转十进制)</p>
+<p>3.单纯用 (( )) 也可重定义变量值，比如 a=5; ((a++)) 可将 $a 重定义为6</p>
+<p>4.常用于算术运算比较，双括号中的变量可以不使用$符号前缀。括号内支持多个表达式用逗号分开。 只要<br>括号中的表达式符合C语言运算规则,比如可以直接使用for((i=0;i&lt;5;i++)), 如果不使用双括号, 则<br>为for i in `seq 0 4`或者for i in {0..4}。再如可以直接使用if (($i&lt;5)), 如果不使用双括<br>号, 则为if [ $i -lt 5 </p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">#Program:</span><br><span class="line">#       this is test</span><br><span class="line">#History:</span><br><span class="line">#2019/10/15</span><br><span class="line"></span><br><span class="line">PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin</span><br><span class="line">export PATH</span><br><span class="line"></span><br><span class="line">PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin</span><br><span class="line">export PATH</span><br><span class="line"></span><br><span class="line">read -p &quot;YYYMMDD ex&gt;20191015 &quot; date2</span><br><span class="line"></span><br><span class="line">#测试输入内容是否正确，grep &apos;[0-9]\&#123;8\&#125;查看是否有8个数字</span><br><span class="line">date_d=$(echo $&#123;date2&#125; | grep &apos;[0-9]\&#123;8\&#125;&apos;)</span><br><span class="line"></span><br><span class="line">if [ &quot;$&#123;date_d&#125;&quot; == &quot;&quot; ]; then</span><br><span class="line">        echo &quot;input error&quot;</span><br><span class="line">        exit 1</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">#计算日期</span><br><span class="line">declare -i date_dem=$(date --date=&quot;$&#123;date2&#125;&quot; +%s) #输入未来时间，获取秒数</span><br><span class="line">declare -i date_now=$(date +%s) #现在日期秒数</span><br><span class="line">declare -i date_total_s=$(($&#123;date_dem&#125;-$&#123;date_now&#125;)) #剩余秒数统计</span><br><span class="line">#一天的总秒数（24h*60m*60s）</span><br><span class="line">declare -i date_d=$(($&#123;date_total_s&#125;/60/60/24)) #转为日数</span><br><span class="line"></span><br><span class="line">#判断是否到达时间（已经没有剩余的时间）</span><br><span class="line">if [ &quot;$&#123;date_total_s&#125;&quot; -lt &quot;0&quot; ]; then</span><br><span class="line">        echo &quot;: &quot;$((-1*$&#123;date_d&#125;))&quot; ago &quot;</span><br><span class="line">else	#60/60/24为一天的总秒数（24h*60m*60s）</span><br><span class="line">        declare -i date_h=$(($(($&#123;date_total_s&#125;-$&#123;date_d&#125;*60*60*24))/60/60))</span><br><span class="line">        echo &quot;$&#123;date_d&#125; days and $&#123;date_h&#125; hours&quot;</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+
+<h2 id="case判断"><a href="#case判断" class="headerlink" title="case判断"></a>case判断</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">case $变量名 in</span><br><span class="line">	&quot;变量内容&quot;)</span><br><span class="line">	#内容</span><br><span class="line">	;;</span><br><span class="line">	</span><br><span class="line">	&quot;变量内容&quot;)</span><br><span class="line">	#内容</span><br><span class="line">	;;</span><br><span class="line">	</span><br><span class="line">	*) #c++的switch里的default</span><br><span class="line">	#内容</span><br><span class="line">	;;</span><br><span class="line">#结束case</span><br><span class="line">esac</span><br></pre></td></tr></table></figure>
+
+<p><strong>例子</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">#Program:</span><br><span class="line">#       this is test</span><br><span class="line">#History:</span><br><span class="line">#2019/10/15</span><br><span class="line"></span><br><span class="line">PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin</span><br><span class="line">export PATH</span><br><span class="line"></span><br><span class="line">#判断参数2</span><br><span class="line">case $&#123;1&#125; in</span><br><span class="line">        &quot;h&quot;)</span><br><span class="line">                echo &quot;hellow&quot;</span><br><span class="line">                ;;</span><br><span class="line">        &quot;&quot;)</span><br><span class="line">                echo &quot;please input&quot;</span><br><span class="line">                ;;</span><br><span class="line">        *)#通配符</span><br><span class="line">                echo &quot;???&quot;</span><br><span class="line">                ;;</span><br><span class="line">esac</span><br></pre></td></tr></table></figure>
+
+<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">function 函数名()&#123;</span><br><span class="line">	#功能</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#使用函数</span><br><span class="line">函数名;</span><br></pre></td></tr></table></figure>
+
+<p><strong>例子</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">#Program:</span><br><span class="line">#       this is test</span><br><span class="line">#History:</span><br><span class="line">#2019/10/15</span><br><span class="line"></span><br><span class="line">PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin</span><br><span class="line">export PATH</span><br><span class="line"></span><br><span class="line">function print()&#123;</span><br><span class="line">        echo &quot;hellow word.&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#内置变量版</span><br><span class="line">function print2()&#123;</span><br><span class="line">        echo &quot;$&#123;1&#125;&quot; #输出函数参数，也就是输出1</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">case $&#123;1&#125; in</span><br><span class="line">        &quot;h&quot;)</span><br><span class="line">				#使用函数</span><br><span class="line">                print;</span><br><span class="line">                ;;</span><br><span class="line">		</span><br><span class="line">		&quot;one&quot;)</span><br><span class="line">				#使用内置变量版函数</span><br><span class="line">				print2 1; #1是这个函数的参数</span><br><span class="line">				;;</span><br><span class="line"></span><br><span class="line">        *)</span><br><span class="line">                echo &quot;no function.&quot;</span><br><span class="line">                ;;</span><br><span class="line">esac</span><br></pre></td></tr></table></figure>
+
+<p><img src="function.png" alt></p>
+<h2 id="循环-loop"><a href="#循环-loop" class="headerlink" title="循环(loop)"></a>循环(loop)</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">while [表达式]</span><br><span class="line">#循环的开始</span><br><span class="line">do</span><br><span class="line">	#功能</span><br><span class="line">#循环的结束</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+
+<p><strong>当表达式成立则停止循环</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">until [表达式]</span><br><span class="line">do</span><br><span class="line">	#功能</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+
+<p><strong>求1+到10的数</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">#Program:</span><br><span class="line">#       this is test</span><br><span class="line">#History:</span><br><span class="line">#2019/10/15</span><br><span class="line"></span><br><span class="line">PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin</span><br><span class="line">export PATH</span><br><span class="line"></span><br><span class="line">i=0</span><br><span class="line">sum=0</span><br><span class="line">while [ &quot;$&#123;i&#125;&quot; != 10  ]</span><br><span class="line">do</span><br><span class="line">        i=$(( $i+1 ))</span><br><span class="line">        sum=$(( $sum+$i ))</span><br><span class="line">done</span><br><span class="line"></span><br><span class="line">echo &quot;sum = $sum&quot;</span><br></pre></td></tr></table></figure>
+
+<h2 id="for-do-done（固定循环）"><a href="#for-do-done（固定循环）" class="headerlink" title="for do done（固定循环）"></a>for do done（固定循环）</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#第一次循环$var为c1，第二次循环$var为c2，以此类推</span><br><span class="line">for var in c1 c2 c3 ...</span><br><span class="line">do</span><br><span class="line">	#功能</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+
+<p><strong>例子</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">#Program:</span><br><span class="line">#       this is test</span><br><span class="line">#History:</span><br><span class="line">#2019/10/15</span><br><span class="line"></span><br><span class="line">PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin</span><br><span class="line">export PATH</span><br><span class="line"></span><br><span class="line">for num in a1 b2 c3</span><br><span class="line">do</span><br><span class="line">	echo -e &quot;$&#123;num&#125;\n&quot;</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+
+<p><strong>输出所有系统账户</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">#Program:</span><br><span class="line">#       this is test</span><br><span class="line">#History:</span><br><span class="line">#2019/10/15</span><br><span class="line"></span><br><span class="line">PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin</span><br><span class="line">export PATH</span><br><span class="line">#cut -d &apos;:&apos; -f1，:作为分割符，取出1段字符串</span><br><span class="line">users=$(cut -d &apos;:&apos; -f1 /etc/passwd)</span><br><span class="line">for username in $&#123;users&#125;</span><br><span class="line">do</span><br><span class="line">		#输出所有账户</span><br><span class="line">        id $&#123;username&#125;</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+
+<h3 id="数值处理版本"><a href="#数值处理版本" class="headerlink" title="数值处理版本"></a>数值处理版本</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for (( 初始值；限制值; 赋值运算 ))</span><br><span class="line">do</span><br><span class="line">	#功能</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+
+<p><strong>输出1-10</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">#Program:</span><br><span class="line">#       this is test</span><br><span class="line">#History:</span><br><span class="line">#2019/10/15</span><br><span class="line"></span><br><span class="line">PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin</span><br><span class="line">export PATH</span><br><span class="line"></span><br><span class="line">for (( i=0; i != 11; i=i+1 ))</span><br><span class="line">do</span><br><span class="line">        echo -e &quot;$i\n&quot;</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+
+<h2 id="输出一个范围的数字或字母"><a href="#输出一个范围的数字或字母" class="headerlink" title="输出一个范围的数字或字母"></a>输出一个范围的数字或字母</h2><p><code>$(seq 1 10)</code>输出1-10的数字</p>
+<p><code>{1..10}</code>输出1-10的数字</p>
+<p><code>{a..z}</code>输出a-z的字母</p>
+<h2 id="搭配随机数与数组"><a href="#搭配随机数与数组" class="headerlink" title="搭配随机数与数组"></a>搭配随机数与数组</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">#Program:</span><br><span class="line">#       this is test</span><br><span class="line">#History:</span><br><span class="line">#2019/10/15</span><br><span class="line"></span><br><span class="line">PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin</span><br><span class="line">export PATH</span><br><span class="line"></span><br><span class="line">n[1]=&quot;a&quot;</span><br><span class="line">n[2]=&quot;b&quot;</span><br><span class="line">n[3]=&quot;c&quot;</span><br><span class="line">num=3</span><br><span class="line"></span><br><span class="line">#生产随机数索引</span><br><span class="line">c=$(( $&#123;RANDOM&#125;*$&#123;num&#125;/32767+1 ))</span><br><span class="line">echo &quot;: $&#123;n[$&#123;c&#125;]&#125;&quot;</span><br></pre></td></tr></table></figure>
+
+<h2 id="shell脚本的跟踪与调试"><a href="#shell脚本的跟踪与调试" class="headerlink" title="shell脚本的跟踪与调试"></a>shell脚本的跟踪与调试</h2><p><code>sh [-nvx] xx.sh</code> <code>n</code>不执行脚本，仅查询语法的文件<code>v</code>执行脚本前，将脚本内容输出到屏幕<code>x</code>将使用到的脚本<br>输出到屏幕</p>
+<hr>
+<h1 id="账户管理"><a href="#账户管理" class="headerlink" title="账户管理"></a>账户管理</h1><p>ID与账户保存在<code>/etc/passwd</code></p>
+<p>组保存在<code>/etc/group</code></p>
+<p><code>/etc/shadow</code>存储用户的密码文件</p>
+<p><code>id 账户名</code>查看该账户的UID，GID，groups</p>
+<ul>
+<li><p>UID：用户ID</p>
+</li>
+<li><p>GID：用户组ID</p>
+</li>
+<li><p>groups：组 </p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="left">ID范围</th>
+<th align="left">ID特性</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">0</td>
+<td align="left">root</td>
+</tr>
+<tr>
+<td align="left">1-999</td>
+<td align="left">系统账户，1-200 Linux自行建立账户 201-999 若用户有系统账户需求，可以用的账户UID</td>
+</tr>
+<tr>
+<td align="left">1000-60000</td>
+<td align="left">可登陆用户</td>
+</tr>
+</tbody></table>
+<ul>
+<li>添加用户</li>
+</ul>
+<p><code>useradd [-u 你的UID] [-g 你的组名] 用户名</code>创建用户</p>
+<p><code>passwd [选项] 用户</code>为新用户添加密码</p>
+<p><code>passwd 密码</code>修改密码</p>
+<ul>
+<li>chage拥有详细的显示密码参数的功能</li>
+</ul>
+<p><code>chage [选项] 用户名</code></p>
+<ul>
+<li>usermod微调用户参数</li>
+</ul>
+<p><code>usermod [选项] 用户名</code></p>
+<ul>
+<li>删除用户</li>
+</ul>
+<p><code>userdel -r 用户名</code></p>
+<ul>
+<li>查询UID/GID</li>
+</ul>
+<p><code>id 用户名</code></p>
+<ul>
+<li>创建用户组</li>
+</ul>
+<p><code>groupadd [-g gid] 组名</code></p>
+<ul>
+<li>修改组参数</li>
+</ul>
+<p><code>groupmod 组名</code></p>
+<ul>
+<li>删除组</li>
+</ul>
+<p><code>groupdel 组名</code></p>
+<ul>
+<li>组管理员</li>
+</ul>
+<p><code>gpasswd 组名</code></p>
+<hr>
+<h1 id="主机的详细权限规划，ACL的使用"><a href="#主机的详细权限规划，ACL的使用" class="headerlink" title="主机的详细权限规划，ACL的使用"></a>主机的详细权限规划，ACL的使用</h1><p>ACL访问控制列表，主要针对用户，组，默认属性</p>
+<p>主要使用<code>getfacl</code>与<code>setfacl</code>这两命令</p>
+<hr>
+<h1 id="用户切换"><a href="#用户切换" class="headerlink" title="用户切换"></a>用户切换</h1><p><code>su</code>切换到root</p>
+<p><code>su 用户名</code>切换到指定用户</p>
+<p><code>sudo 命令</code>使用管理员权限执行该命令（需要通过管理员的审核，审核文件在/etc/sudoers）</p>
+<hr>
+<h1 id="PAM用户验证"><a href="#PAM用户验证" class="headerlink" title="PAM用户验证"></a>PAM用户验证</h1><hr>
+<h1 id="用户信息传递"><a href="#用户信息传递" class="headerlink" title="用户信息传递"></a>用户信息传递</h1><p><code>w</code>目前在该设备登陆的用户</p>
+<p><code>lastlog</code>最近登陆用户的时间</p>
+<h2 id="用户对谈"><a href="#用户对谈" class="headerlink" title="用户对谈"></a>用户对谈</h2><p><code>write</code>对话信息发送</p>
+<p><code>mesg</code>不接收任何人的信息</p>
+<p><code>wall</code>广播</p>
+<h2 id="邮箱"><a href="#邮箱" class="headerlink" title="邮箱"></a>邮箱</h2><p><code>mail</code></p>
+<hr>
+<h1 id="进程管理"><a href="#进程管理" class="headerlink" title="进程管理"></a>进程管理</h1><p>程序：通常为二进制程序，以物理文件的形式存储</p>
+<p>进程：程序被触发，执行者的权限与属性会被加载在内存中，操作系统会给予该内存一个PID</p>
+<p><img src="%E8%BF%9B%E7%A8%8B.jpg" alt></p>
+<p>父进程与子进程，一般子进程的PPID和父进程的PID是一样的</p>
+<p><img src="%E7%88%B6%E5%AD%90%E8%BF%9B%E7%A8%8B.png" alt></p>
+<p><img src="%E7%88%B6%E5%AD%90%E8%BF%9B%E7%A8%8B2.png" alt></p>
+<p><code>ctrl+z</code>当目前进程丢进后台【暂停】</p>
+<p><code>kill(fg) % n</code>删除（返回）指定暂停的程序,通常配合ps和pstree</p>
+<p><code>jobs</code>查看后排任务状态</p>
+<p><code>bg % 1</code>程序在后台运行</p>
+<p><code>nohup</code>及时设备注销后，程序依然运行</p>
+<p><code>ps</code>查看静态进程</p>
+<p><code>top</code>查看动态进程</p>
+<p><code>pstree</code>子进程砍不掉时，获取其父进程</p>
+<table>
+<thead>
+<tr>
+<th align="left">代号</th>
+<th align="left">功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">1</td>
+<td align="left">启动被终止的程序</td>
+</tr>
+<tr>
+<td align="left">9</td>
+<td align="left">强制终止程序，未完成部分以一个文件的形式保留下来</td>
+</tr>
+<tr>
+<td align="left">15</td>
+<td align="left">正常方式终止程序</td>
+</tr>
+</tbody></table>
+<p><code>killall</code>删除服务</p>
+<p><code>nice</code>调整程序优先级</p>
+<p><code>renice</code>修改已存在程序优先级</p>
+<p><code>free</code>查看内存使用情况</p>
+<p><code>uname</code>查看系统与内核信息</p>
+<p><code>uptime</code>系统启动时间与任务负载</p>
+<p><code>netstat</code>追踪网络或socket文件，被用于网络监控方面</p>
+<p><code>dmesg</code>内核产生的信息</p>
+<p><code>vmstat</code>系统资源变化</p>
+<p><code>fuser</code>找出在使用该文件的进程</p>
+<p><code>losf</code>列出被进程使用的文件名</p>
+<p><code>pidof</code>找出正在执行程序的PID</p>
+<hr>
+<h1 id="SELinux"><a href="#SELinux" class="headerlink" title="SELinux"></a>SELinux</h1><p>安全强化版Linux</p>
+<p><code>安全上下文</code></p>
+<blockquote>
+<p>身份识别（用户是否受限制）<br>类型（判断主程序是否可以读取程序）<br>角色（数据属于进程，文件资源代表用户）</p>
+</blockquote>
+<p><img src="selinux%E6%B5%81%E7%A8%8B.png" alt></p>
+<p><code>getsebool</code>查看系统规则是否开启</p>
+<p><code>setsebool [-P] 规则名 [0|1]</code>修改规则</p>
+<p><code>chcon</code>手动修改文件的SELinux类型</p>
+<p><code>restorecon</code>恢复文件的SELinux</p>
+<p><code>semanage</code>默认目录的安全上下文查询与修改</p>
+<h2 id="vsftpd默认FTP服务器软件"><a href="#vsftpd默认FTP服务器软件" class="headerlink" title="vsftpd默认FTP服务器软件"></a>vsftpd默认FTP服务器软件</h2><p>终端输入<code>vsftpd</code>下载软件</p>
+<p><strong>给用户下载的FTP文件会放在<code>/var/fpt/pub目录</code></strong></p>
+<p><code>curl</code>简单的终端浏览器</p>
+<hr>
+<h1 id="daemon与服务"><a href="#daemon与服务" class="headerlink" title="daemon与服务"></a>daemon与服务</h1><p>daemon与服务可以视为相同的东西</p>
+<p>查看进程时，{xxx}d通常是deamon的进程</p>
+<p>所有的服务启动脚本放置在<code>/etc/init.d</code>目录</p>
+<table>
+<thead>
+<tr>
+<th align="left">命令</th>
+<th align="left">功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">start</td>
+<td align="left">启动</td>
+</tr>
+<tr>
+<td align="left">stop</td>
+<td align="left">关闭</td>
+</tr>
+<tr>
+<td align="left">restart</td>
+<td align="left">重启</td>
+</tr>
+<tr>
+<td align="left">status</td>
+<td align="left">查看状态</td>
+</tr>
+</tbody></table>
+<p><code>/etc/init.d/deamon 命令</code></p>
+<p><strong>服务启动分类</strong></p>
+<ul>
+<li><p>独立启动，服务常驻在内存，反应快</p>
+</li>
+<li><p>超级守护进程，由特殊的xinetd或inetd提供socket对应或端口对应的管理</p>
+</li>
+</ul>
+<h2 id="通过systemctl管理服务"><a href="#通过systemctl管理服务" class="headerlink" title="通过systemctl管理服务"></a>通过systemctl管理服务</h2><p><code>systemctl [command] [unit]</code></p>
+<hr>
+
+      
+    </div>
+    
+    
+    
+	
+	<div style="text-align:center;color: #DC143C;font-size:15px;"> ———— Σ( ° △ °|||) The End ———— </div>
+	
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+		  
+            <a href="/tags/CentOS/" rel="tag"><i class="fa fa-tag"></i> CentOS</a>
+			
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/10/02/cent8联网并安装GUI/" rel="next" title="cent8联网并安装GUI">
+                <i class="fa fa-chevron-left"></i> cent8联网并安装GUI
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/10/17/Unix网络编程（套接字联网API）笔记/" rel="prev" title="Unix网络编程（套接字联网API）笔记">
+                Unix网络编程（套接字联网API）笔记 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/p/wb.png" alt="二打禄">
+            
+              <p class="site-author-name" itemprop="name">二打禄</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+				
+<!-- 网易云音乐 -->
+<div id="wang_yi_yun">
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="298" height="52" src="//music.163.com/outchain/player?type=0&id=2875836409&auto=0&height=32"></iframe>
+
+</div>
+
+
+
+
+<div id="yun_xing_time">
+<!-- 网站运行时间的设置 -->
+<span id="timeDate">载入天数...</span>
+<span id="times">载入时分秒...</span> 
+<script>   
+ var now = new Date();    function createtime() {       
+ var grt= new Date("09/26/2019 13:14:21");//此处修改你的建站时间或者网站上线时间       
+ now.setTime(now.getTime()+250);        
+days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+  hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);       
+ if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);        
+mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);        
+snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}        document.getElementById("timeDate").innerHTML = "网站已运行 "+dnum+" 天 ";        
+document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";    }setInterval("createtime()",250);
+</script>
+<dive>
+
+
+
+
+
+
+
+
+
+
+ 		
+
+				
+
+        </dive></div>
+      </div></section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#常用命令"><span class="nav-number">1.</span> <span class="nav-text">常用命令</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#vim编辑器"><span class="nav-number">2.</span> <span class="nav-text">vim编辑器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#环境变量"><span class="nav-number">3.</span> <span class="nav-text">环境变量</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#linux的ext2文件系统"><span class="nav-number">4.</span> <span class="nav-text">linux的ext2文件系统</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#inode-节点-表"><span class="nav-number">4.1.</span> <span class="nav-text">inode(节点)表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#superblock超级区块"><span class="nav-number">4.2.</span> <span class="nav-text">superblock超级区块</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#VFS"><span class="nav-number">5.</span> <span class="nav-text">VFS</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#xfs文件系统"><span class="nav-number">6.</span> <span class="nav-text">xfs文件系统</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#链接"><span class="nav-number">7.</span> <span class="nav-text">链接</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#硬链接"><span class="nav-number">7.1.</span> <span class="nav-text">硬链接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#符号链接（软链接）"><span class="nav-number">7.2.</span> <span class="nav-text">符号链接（软链接）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#观察磁盘分区状态"><span class="nav-number">8.</span> <span class="nav-text">观察磁盘分区状态</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#列出设备的UUID（全局唯一标识符）"><span class="nav-number">8.1.</span> <span class="nav-text">列出设备的UUID（全局唯一标识符）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#列出分区类型与信息"><span class="nav-number">8.2.</span> <span class="nav-text">列出分区类型与信息</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#磁盘分区"><span class="nav-number">9.</span> <span class="nav-text">磁盘分区</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#fdisk"><span class="nav-number">9.1.</span> <span class="nav-text">fdisk</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gdisk"><span class="nav-number">9.2.</span> <span class="nav-text">gdisk</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#新增分区"><span class="nav-number">9.2.1.</span> <span class="nav-text">新增分区</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#删除分区"><span class="nav-number">9.3.</span> <span class="nav-text">删除分区</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#磁盘格式化"><span class="nav-number">10.</span> <span class="nav-text">磁盘格式化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#XFS文件系统mkfs-xfs"><span class="nav-number">10.1.</span> <span class="nav-text">XFS文件系统mkfs.xfs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ext4文件系统mkfs-ext4"><span class="nav-number">10.2.</span> <span class="nav-text">ext4文件系统mkfs.ext4</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他文件系统"><span class="nav-number">10.3.</span> <span class="nav-text">其他文件系统</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#文件系统校验"><span class="nav-number">11.</span> <span class="nav-text">文件系统校验</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#xfs-repair处理XFS系统"><span class="nav-number">11.1.</span> <span class="nav-text">xfs_repair处理XFS系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#fsck-ext4处理ext4文件系统"><span class="nav-number">11.2.</span> <span class="nav-text">fsck.ext4处理ext4文件系统</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#文件系统挂载与卸载"><span class="nav-number">12.</span> <span class="nav-text">文件系统挂载与卸载</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#挂载"><span class="nav-number">12.1.</span> <span class="nav-text">挂载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#卸载"><span class="nav-number">12.2.</span> <span class="nav-text">卸载</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#磁盘-文件系统参数自定义"><span class="nav-number">13.</span> <span class="nav-text">磁盘/文件系统参数自定义</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#修改XFS文件系统的UUID与Lable-name"><span class="nav-number">13.1.</span> <span class="nav-text">修改XFS文件系统的UUID与Lable name</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改ext4的lable与uuid"><span class="nav-number">13.2.</span> <span class="nav-text">修改ext4的lable与uuid</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#生成uuid"><span class="nav-number">14.</span> <span class="nav-text">生成uuid</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#设置启动挂载"><span class="nav-number">15.</span> <span class="nav-text">设置启动挂载</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#特殊设备loop挂载"><span class="nav-number">15.1.</span> <span class="nav-text">特殊设备loop挂载</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用物理分区创建内存交换分区（swap）"><span class="nav-number">16.</span> <span class="nav-text">使用物理分区创建内存交换分区（swap）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#GNU的parted分区"><span class="nav-number">17.</span> <span class="nav-text">GNU的parted分区</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#压缩"><span class="nav-number">18.</span> <span class="nav-text">压缩</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#命令行模式的shell"><span class="nav-number">19.</span> <span class="nav-text">命令行模式的shell</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#编码"><span class="nav-number">19.1.</span> <span class="nav-text">编码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#限制"><span class="nav-number">19.2.</span> <span class="nav-text">限制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#命令别名"><span class="nav-number">19.3.</span> <span class="nav-text">命令别名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#历史命令"><span class="nav-number">19.4.</span> <span class="nav-text">历史命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bash登陆欢迎界面"><span class="nav-number">19.5.</span> <span class="nav-text">bash登陆欢迎界面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#锁定与解锁"><span class="nav-number">19.6.</span> <span class="nav-text">锁定与解锁</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据流重定向"><span class="nav-number">20.</span> <span class="nav-text">数据流重定向</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#命令执行的判断根据"><span class="nav-number">20.1.</span> <span class="nav-text">命令执行的判断根据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#选取命令"><span class="nav-number">20.2.</span> <span class="nav-text">选取命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#排序"><span class="nav-number">20.3.</span> <span class="nav-text">排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#双向重定向"><span class="nav-number">20.4.</span> <span class="nav-text">双向重定向</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字符串转换"><span class="nav-number">20.5.</span> <span class="nav-text">字符串转换</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#tr删除或替换一段文字"><span class="nav-number">20.5.1.</span> <span class="nav-text">tr删除或替换一段文字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#col将其他按键替换成空格"><span class="nav-number">20.5.2.</span> <span class="nav-text">col将其他按键替换成空格</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#join处理多个文件中，相同的数据"><span class="nav-number">20.5.3.</span> <span class="nav-text">join处理多个文件中，相同的数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#paste将数据相同的行粘在一起，并以-tab-键隔开"><span class="nav-number">20.5.4.</span> <span class="nav-text">paste将数据相同的行粘在一起，并以[tab]键隔开</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#expand自动将tab转成空格"><span class="nav-number">20.5.5.</span> <span class="nav-text">expand自动将tab转成空格</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#划分split"><span class="nav-number">20.6.</span> <span class="nav-text">划分split</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参数代换"><span class="nav-number">20.7.</span> <span class="nav-text">参数代换</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#正则表达式"><span class="nav-number">21.</span> <span class="nav-text">正则表达式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#配合grep使用正则表达式"><span class="nav-number">21.1.</span> <span class="nav-text">配合grep使用正则表达式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sed将数据增删，替换，选取特点行等功能"><span class="nav-number">21.2.</span> <span class="nav-text">sed将数据增删，替换，选取特点行等功能</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#文件格式化与相关处理"><span class="nav-number">22.</span> <span class="nav-text">文件格式化与相关处理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#格式化打印printf"><span class="nav-number">22.1.</span> <span class="nav-text">格式化打印printf</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#awk数据处理工具"><span class="nav-number">22.2.</span> <span class="nav-text">awk数据处理工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件比对工具"><span class="nav-number">22.3.</span> <span class="nav-text">文件比对工具</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#shell脚本"><span class="nav-number">23.</span> <span class="nav-text">shell脚本</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#编写格式"><span class="nav-number">23.1.</span> <span class="nav-text">编写格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算术运算"><span class="nav-number">23.2.</span> <span class="nav-text">算术运算</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#子进程与父进程"><span class="nav-number">23.3.</span> <span class="nav-text">子进程与父进程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#test测试功能"><span class="nav-number">23.4.</span> <span class="nav-text">test测试功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用-进行数据判断"><span class="nav-number">23.5.</span> <span class="nav-text">使用 [] 进行数据判断</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#shell的默认变量"><span class="nav-number">23.6.</span> <span class="nav-text">shell的默认变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参数号码偏移"><span class="nav-number">23.7.</span> <span class="nav-text">参数号码偏移</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#if-than判断式"><span class="nav-number">23.8.</span> <span class="nav-text">if than判断式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查询主机的网络端口"><span class="nav-number">23.9.</span> <span class="nav-text">查询主机的网络端口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#求剩余时间的练习"><span class="nav-number">23.10.</span> <span class="nav-text">求剩余时间的练习</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#case判断"><span class="nav-number">23.11.</span> <span class="nav-text">case判断</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数"><span class="nav-number">23.12.</span> <span class="nav-text">函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#循环-loop"><span class="nav-number">23.13.</span> <span class="nav-text">循环(loop)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#for-do-done（固定循环）"><span class="nav-number">23.14.</span> <span class="nav-text">for do done（固定循环）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数值处理版本"><span class="nav-number">23.14.1.</span> <span class="nav-text">数值处理版本</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输出一个范围的数字或字母"><span class="nav-number">23.15.</span> <span class="nav-text">输出一个范围的数字或字母</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#搭配随机数与数组"><span class="nav-number">23.16.</span> <span class="nav-text">搭配随机数与数组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#shell脚本的跟踪与调试"><span class="nav-number">23.17.</span> <span class="nav-text">shell脚本的跟踪与调试</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#账户管理"><span class="nav-number">24.</span> <span class="nav-text">账户管理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#主机的详细权限规划，ACL的使用"><span class="nav-number">25.</span> <span class="nav-text">主机的详细权限规划，ACL的使用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#用户切换"><span class="nav-number">26.</span> <span class="nav-text">用户切换</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#PAM用户验证"><span class="nav-number">27.</span> <span class="nav-text">PAM用户验证</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#用户信息传递"><span class="nav-number">28.</span> <span class="nav-text">用户信息传递</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#用户对谈"><span class="nav-number">28.1.</span> <span class="nav-text">用户对谈</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#邮箱"><span class="nav-number">28.2.</span> <span class="nav-text">邮箱</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#进程管理"><span class="nav-number">29.</span> <span class="nav-text">进程管理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SELinux"><span class="nav-number">30.</span> <span class="nav-text">SELinux</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#vsftpd默认FTP服务器软件"><span class="nav-number">30.1.</span> <span class="nav-text">vsftpd默认FTP服务器软件</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#daemon与服务"><span class="nav-number">31.</span> <span class="nav-text">daemon与服务</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#通过systemctl管理服务"><span class="nav-number">31.1.</span> <span class="nav-text">通过systemctl管理服务</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        
+
+
+<div class="copyright">&copy; 2019 &mdash; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">二打禄</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">45.2k</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+  
+  
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('-1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("evBGAkFlJPvMt1Xh6Jrqlezi-gzGzoHsz", "CDcr1PiSV906HwggN9Y1d098");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+  
+<!-- 代码块复制功能 -->
+<script type="text/javascript" src="/js/src/clipboard.min.js"></script>  
+<script type="text/javascript" src="/js/src/clipboard-use.js"></script>
+  
+</body>
+</html>
+
+
