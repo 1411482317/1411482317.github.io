@@ -106,7 +106,7 @@
 <meta property="og:image" content="https://1411482317.github.io/2019/10/02/c-primer-plus笔记/%E7%BC%93%E5%86%B2%E5%8C%BA.png">
 <meta property="og:image" content="https://1411482317.github.io/2019/10/02/c-primer-plus笔记/%E5%AD%97%E7%AC%A6%E4%B8%B2.jpg">
 <meta property="og:image" content="https://1411482317.github.io/2019/10/02/c-primer-plus笔记/%E6%8E%A9%E7%A0%81.jpg">
-<meta property="og:updated_time" content="2020-01-22T06:36:16.425Z">
+<meta property="og:updated_time" content="2020-01-23T02:25:17.695Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="c primer plus笔记">
 <meta name="twitter:description" content="c primer plus第六版总结">
@@ -429,7 +429,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  9k
+                  9.2k
                 </span>
               
 
@@ -445,7 +445,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  40
+                  41
                 </span>
               
             </div>
@@ -1534,7 +1534,7 @@
 <details>
 <summary>7. 拷贝一个二维数组</summary>
 
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">#include &quot;./ch.hpp&quot;</span><br><span class="line"></span><br><span class="line">#define SIZE_1 2</span><br><span class="line">#define SIZE_2 3</span><br><span class="line"></span><br><span class="line">double** test_10_7(const int size_1, const int \</span><br><span class="line"> size_2, double (*arr)[size_2])&#123;</span><br><span class="line">    double **p = (double**)malloc(sizeof(double) * size_1);</span><br><span class="line">    for(int i = 0; i != size_1; ++i)&#123;</span><br><span class="line">        *(p+i) = (double*)malloc(sizeof(double) *size_2);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    for(int i =0 ; i!= size_1; ++i)&#123;</span><br><span class="line">        for(int j=0; j != size_2; ++j)&#123;</span><br><span class="line">            *(*(p+i)+j) = *(*(arr+i)+j);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return p;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line">int main(void)&#123;</span><br><span class="line">    double arr[SIZE_1][SIZE_2] = &#123;</span><br><span class="line">        &#123;1.1, 2.2, 3.3&#125;,</span><br><span class="line">        &#123;4.4, 5.5, 6.6&#125;</span><br><span class="line">    &#125;;</span><br><span class="line">    const int size_1 = SIZE_1, size_2 = SIZE_2;</span><br><span class="line">    </span><br><span class="line">    double **p = test_10_7(size_1,size_2,arr);</span><br><span class="line">    for(int i =0 ; i!= size_1; ++i)&#123;</span><br><span class="line">        for(int j=0; j != size_2; ++j)&#123;</span><br><span class="line">            printf(&quot;[%d][%d] = %lf\n&quot;,i,j,*(*(p+i)+j));</span><br><span class="line">        &#125;</span><br><span class="line">        printf(&quot;\n&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#undef SIZE_1</span><br><span class="line">#undef SIZE_2</span><br></pre></td></tr></table></figure>
 
 </details>
 
@@ -1815,7 +1815,7 @@ document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " 
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">49.5k</span>
+    <span title="Site words total count">49.6k</span>
   
 </div>
 
