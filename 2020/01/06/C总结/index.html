@@ -112,7 +112,7 @@
 <meta property="og:image" content="https://1411482317.github.io/2020/01/06/C总结/str2.png">
 <meta property="og:image" content="https://1411482317.github.io/2020/01/06/C总结/pf.png">
 <meta property="og:image" content="https://1411482317.github.io/2020/01/06/C总结/sf.png">
-<meta property="og:updated_time" content="2020-01-15T07:36:15.433Z">
+<meta property="og:updated_time" content="2020-01-22T02:53:12.829Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C总结">
 <meta name="twitter:description" content="基于操作系统CentOS8与GCC8.2 粗略总结C语言">
@@ -413,7 +413,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  5.5k
+                  5.8k
                 </span>
               
 
@@ -429,7 +429,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  22
+                  23
                 </span>
               
             </div>
@@ -562,6 +562,10 @@
 <tr>
 <td>double</td>
 <td>双精浮点数</td>
+</tr>
+<tr>
+<td>long double</td>
+<td>长浮点型</td>
 </tr>
 </tbody></table>
 <blockquote>
@@ -704,11 +708,11 @@
 </thead>
 <tbody><tr>
 <td>%f</td>
-<td>float 或 double</td>
+<td>float 或double</td>
 </tr>
 <tr>
-<td>%Lf</td>
-<td>long double</td>
+<td>%lf</td>
+<td>long double 或 double</td>
 </tr>
 <tr>
 <td>%e</td>
@@ -1202,7 +1206,7 @@
 </details>
 
 <hr>
-<h1 id="数组与指针"><a href="#数组与指针" class="headerlink" title="数组与指针"></a>数组与指针</h1><p>存储多个数据的空间</p>
+<h1 id="数组与指针"><a href="#数组与指针" class="headerlink" title="数组与指针"></a>数组与指针</h1><p>存储多个数据的内存空间</p>
 <blockquote>
 <p>数组的名称是一个指针</p>
 <p>指针通过 自增 和 自减 可以获取它的上一个 或 下一个元素</p>
@@ -1212,9 +1216,14 @@
 
 <blockquote>
 <p>数组的定义：</p>
-<p>类型 数组名称[常量整数]</p>
+<p>类型 数组名称[常量整数（数组长度）]</p>
 <p>数组通过索引<code>[]</code>去寻找元素</p>
 <p>索引从0开始</p>
+<p>C语言的const是运行时常量，c++的const是编译时常量</p>
+</blockquote>
+<p><code>注意：</code>数组长度使用了变量则会变成变长数组</p>
+<blockquote>
+<p>变长数组只是数组长度使用了变量，其余的与普通数组没区别</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// 数组的初始化</span><br><span class="line">int arr[3] = &#123;11,22,33&#125;;</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line">arr[0] == 11</span><br><span class="line">arr[1] == 22</span><br><span class="line">arr[2] == 33</span><br><span class="line">*/</span><br></pre></td></tr></table></figure>
 
@@ -1226,12 +1235,16 @@
 <p>嵌套数组，存储数组的数组</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">// 这个数组有 2*3个元素</span><br><span class="line">int arr[2][3] = &#123;</span><br><span class="line">        &#123;11, 22, 33&#125;,</span><br><span class="line">        &#123;44, 55, 66&#125;</span><br><span class="line">    &#125;;</span><br><span class="line">	</span><br><span class="line">/*</span><br><span class="line">arr[0][0] == 11</span><br><span class="line">arr[0][1] == 22</span><br><span class="line">arr[0][2] == 33</span><br><span class="line"></span><br><span class="line">arr[1][0] == 44</span><br><span class="line">arr[1][1] == 55</span><br><span class="line">arr[1][2] == 66</span><br><span class="line">*/</span><br></pre></td></tr></table></figure>
 
+<p><code>多维数组另一种初始化方式</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">int arr[2][3] = &#123;1,2,3,  4,5,6&#125;;</span><br><span class="line">// 注意：4的索引为arr[1][0]</span><br></pre></td></tr></table></figure>
+
 </details>
 
 <details>
 <summary>指针</summary>
 
 <p>指针会指向内存的地址值，通过指针可以直接操作内存</p>
+<p>一个地址值占8字节</p>
 <blockquote>
 <p>指定的定义：</p>
 <p>类型 *名称</p>
@@ -1293,6 +1306,18 @@
 </li>
 </ol>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">int arr[] = &#123;1,2,3&#125;;</span><br><span class="line">size_t size = sizeof(arr) / sizeof(arr[0]);</span><br></pre></td></tr></table></figure>
+
+</details>
+
+<details>
+<summary>变长数组作为函数参数</summary>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int m (int i, int i2. int arr[i][i2]);</span><br></pre></td></tr></table></figure>
+
+</details>
+
+<details>
+<summary>匿名数组</summary><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">int *p = (int [2])&#123;1, 2&#125;;</span><br><span class="line"></span><br><span class="line">int arr[] = (int[])&#123;3,4&#125;;</span><br><span class="line"></span><br><span class="line">// 二维匿名数组</span><br><span class="line">int *p2 = (int[2][2])&#123;</span><br><span class="line">        &#123;1,2&#125;,&#123;3,4&#125;</span><br><span class="line">    &#125;;</span><br></pre></td></tr></table>
 
 </details>
 
@@ -1433,6 +1458,13 @@
 </tr>
 </tbody></table>
 </div></div></div>
+
+</details>
+
+<details>
+<summary>创建一位数组与多维数组</summary>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">// 等同于int arr[2];</span><br><span class="line">int *p = (int*)malloc(sizeof(int) *2);</span><br><span class="line">free(p); // 释放一维数组</span><br><span class="line"></span><br><span class="line">// 等同于int arr[2][3];</span><br><span class="line">int **p2 = (int**)malloc(sizeof(int) *2);</span><br><span class="line">for(unsigned int i =0; i != 2; ++i)&#123;</span><br><span class="line">	*(p2+i) = (int*)malloc(sizeof(int) *3);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 释放二维数组</span><br><span class="line">for (unsigned int i = 0; i &lt; 2; ++i)&#123;</span><br><span class="line">	free(*(p2 + i));</span><br><span class="line">&#125;</span><br><span class="line">free(p2);</span><br></pre></td></tr></table></figure>
 
 </details>
 
@@ -1676,6 +1708,13 @@
 </blockquote>
 </details>
 
+<details>
+<summary>创建返回值类型的结构体</summary>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">typedef struct&#123;</span><br><span class="line">    int i;</span><br><span class="line">&#125;tt;</span><br><span class="line"></span><br><span class="line">tt* mm()&#123;</span><br><span class="line">    tt *t1 = (tt*)malloc(sizeof(tt));</span><br><span class="line">    t1-&gt;i = 11;</span><br><span class="line">    return t1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</details>
+
 <hr>
 <h1 id="位操作"><a href="#位操作" class="headerlink" title="位操作"></a>位操作</h1><details>
 <summary>位运算符</summary>
@@ -1882,6 +1921,10 @@
 <p>字符处理<code>#include &lt;ctype.h&gt;</code></p>
 <p>C标准库<code>#include &lt;stdlib.h&gt;</code></p>
 <hr>
+<h1 id="字面值常量"><a href="#字面值常量" class="headerlink" title="字面值常量"></a>字面值常量</h1><p>以下各种类型的值，都为字面值，并且是常量</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">char c = &apos;c&apos;;</span><br><span class="line"></span><br><span class="line">char *str = &quot;string&quot;;</span><br><span class="line"></span><br><span class="line">int i = 1;</span><br><span class="line"></span><br><span class="line">double 3.14;</span><br><span class="line"></span><br><span class="line">long *p = (long[])&#123;1,2&#125;;</span><br></pre></td></tr></table></figure>
+
+<hr>
 
       
     </div>
@@ -2011,7 +2054,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-count">24</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2033,7 +2076,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -2104,7 +2147,7 @@ document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " 
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#数据类型"><span class="nav-number">1.</span> <span class="nav-text">数据类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#整形溢出"><span class="nav-number">1.0.1.</span> <span class="nav-text">整形溢出</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#位与字节"><span class="nav-number">1.0.2.</span> <span class="nav-text">位与字节</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二进制转换成十进制的例子"><span class="nav-number">1.0.3.</span> <span class="nav-text">二进制转换成十进制的例子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#E记数法"><span class="nav-number">1.0.4.</span> <span class="nav-text">E记数法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#转义字符"><span class="nav-number">1.0.5.</span> <span class="nav-text">转义字符</span></a></li></ol></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#常量"><span class="nav-number">2.</span> <span class="nav-text">常量</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#字符串"><span class="nav-number">3.</span> <span class="nav-text">字符串</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#运算符"><span class="nav-number">4.</span> <span class="nav-text">运算符</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#表达式与语句"><span class="nav-number">4.1.</span> <span class="nav-text">表达式与语句</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#控制语句"><span class="nav-number">5.</span> <span class="nav-text">控制语句</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#函数"><span class="nav-number">6.</span> <span class="nav-text">函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数组与指针"><span class="nav-number">7.</span> <span class="nav-text">数组与指针</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#空间管理"><span class="nav-number">8.</span> <span class="nav-text">空间管理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#I-O"><span class="nav-number">9.</span> <span class="nav-text">I/O</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据结构"><span class="nav-number">10.</span> <span class="nav-text">数据结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#位操作"><span class="nav-number">11.</span> <span class="nav-text">位操作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#预处理器"><span class="nav-number">12.</span> <span class="nav-text">预处理器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#C库"><span class="nav-number">13.</span> <span class="nav-text">C库</span></a></li></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#数据类型"><span class="nav-number">1.</span> <span class="nav-text">数据类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#整形溢出"><span class="nav-number">1.0.1.</span> <span class="nav-text">整形溢出</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#位与字节"><span class="nav-number">1.0.2.</span> <span class="nav-text">位与字节</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二进制转换成十进制的例子"><span class="nav-number">1.0.3.</span> <span class="nav-text">二进制转换成十进制的例子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#E记数法"><span class="nav-number">1.0.4.</span> <span class="nav-text">E记数法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#转义字符"><span class="nav-number">1.0.5.</span> <span class="nav-text">转义字符</span></a></li></ol></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#常量"><span class="nav-number">2.</span> <span class="nav-text">常量</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#字符串"><span class="nav-number">3.</span> <span class="nav-text">字符串</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#运算符"><span class="nav-number">4.</span> <span class="nav-text">运算符</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#表达式与语句"><span class="nav-number">4.1.</span> <span class="nav-text">表达式与语句</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#控制语句"><span class="nav-number">5.</span> <span class="nav-text">控制语句</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#函数"><span class="nav-number">6.</span> <span class="nav-text">函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数组与指针"><span class="nav-number">7.</span> <span class="nav-text">数组与指针</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#空间管理"><span class="nav-number">8.</span> <span class="nav-text">空间管理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#I-O"><span class="nav-number">9.</span> <span class="nav-text">I/O</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据结构"><span class="nav-number">10.</span> <span class="nav-text">数据结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#位操作"><span class="nav-number">11.</span> <span class="nav-text">位操作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#预处理器"><span class="nav-number">12.</span> <span class="nav-text">预处理器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#C库"><span class="nav-number">13.</span> <span class="nav-text">C库</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#字面值常量"><span class="nav-number">14.</span> <span class="nav-text">字面值常量</span></a></li></div>
             
 
           </div>
@@ -2144,7 +2187,7 @@ document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " 
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">45.3k</span>
+    <span title="Site words total count">49.5k</span>
   
 </div>
 

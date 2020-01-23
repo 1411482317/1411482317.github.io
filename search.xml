@@ -1,6 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>搭建aria2下载器</title>
+    <url>/2020/01/19/%E6%90%AD%E5%BB%BAaria2%E4%B8%8B%E8%BD%BD%E5%99%A8/</url>
+    <content><![CDATA[<img src="/2020/01/19/搭建aria2下载器/fm.jpg">
+
+<p>基于win10搭建</p>
+<p><code>aria2</code>是一个没有GUI的服务器，使用它下载的文件不会被限速</p>
+<a id="more"></a>
+
+<p><a href="https://github.com/aria2/aria2/tags" target="_blank" rel="noopener"><strong>下载aria2</strong></a></p>
+<p>创建一个新的目录把下载好的文件解压进去</p>
+<blockquote>
+<p>创建文件</p>
+<ol>
+<li><p>Aria2.log // 日志文件</p>
+</li>
+<li><p>aria2.session // 下载历史</p>
+</li>
+<li><p>aria2.conf // 配置文件</p>
+</li>
+<li><p>HideRun.vbs // 隐藏cmd窗口</p>
+</li>
+</ol>
+</blockquote>
+<h3 id="设置配置文件"><a href="#设置配置文件" class="headerlink" title="设置配置文件"></a>设置配置文件</h3><p><code>aria2.conf</code>写入</p>
+<table>
+<thead>
+<tr>
+<th>写法</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>dir</td>
+<td>下载文件保存路径</td>
+</tr>
+<tr>
+<td>log</td>
+<td>日志文件，不需要可以删掉这行</td>
+</tr>
+<tr>
+<td>input-file 与 save-session</td>
+<td>记录和读取下载历史用的，断电和重启时保证下载任务不会丢失，如果有时aria2不能启动，清空这里面的内容就行了</td>
+</tr>
+</tbody></table>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">dir=下载文件保存路径</span><br><span class="line">log=目录\Aria2.log</span><br><span class="line">input-file=目录\aria2.session </span><br><span class="line">save-session=目录\aria2.session</span><br><span class="line">save-session-interval=60</span><br><span class="line">force-save=true</span><br><span class="line">log-level=error</span><br></pre></td></tr></table></figure>
+
+<p><strong>see –split option</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">max-concurrent-downloads=5</span><br><span class="line">continue=true</span><br><span class="line">max-overall-download-limit=0</span><br><span class="line">max-overall-upload-limit=50K</span><br><span class="line">max-upload-limit=20</span><br></pre></td></tr></table></figure>
+
+<p><strong>Http/FTP options</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">connect-timeout=120</span><br><span class="line">lowest-speed-limit=10K</span><br><span class="line">max-connection-per-server=10</span><br><span class="line">max-file-not-found=2</span><br><span class="line">min-split-size=1M</span><br><span class="line">split=5</span><br><span class="line">check-certificate=false</span><br><span class="line">http-no-cache=true</span><br></pre></td></tr></table></figure>
+
+<p><strong>FTP Specific Options</strong><br><strong>BT/PT Setting</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">bt-enable-lpd=true</span><br><span class="line">#bt-max-peers=55</span><br><span class="line">follow-torrent=true</span><br><span class="line">enable-dht6=false</span><br><span class="line">bt-seed-unverified</span><br><span class="line">rpc-save-upload-metadata=true</span><br><span class="line">bt-hash-check-seed</span><br><span class="line">bt-remove-unselected-file</span><br><span class="line">bt-request-peer-speed-limit=100K</span><br><span class="line">seed-ratio=0.0</span><br></pre></td></tr></table></figure>
+
+<p><strong>Metalink Specific Options</strong><br><strong>RPC Options</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">enable-rpc=true</span><br><span class="line">pause=false</span><br><span class="line">rpc-allow-origin-all=true</span><br><span class="line">rpc-listen-all=true</span><br><span class="line">rpc-save-upload-metadata=true</span><br><span class="line">rpc-secure=false</span><br></pre></td></tr></table></figure>
+
+<p><strong>Advanced Options</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">daemon=true</span><br><span class="line">disable-ipv6=true</span><br><span class="line">enable-mmap=true</span><br><span class="line">file-allocation=falloc</span><br><span class="line">max-download-result=120</span><br><span class="line">#no-file-allocation-limit=32M</span><br><span class="line">force-sequential=true</span><br><span class="line">parameterized-uri=true</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="实现无cmd打开"><a href="#实现无cmd打开" class="headerlink" title="实现无cmd打开"></a>实现无cmd打开</h3><p><code>HideRun.vbs</code>写入</p>
+<ul>
+<li>Run后面的字符串，改成你<code>aria2c.exe</code>文件的目录</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">CreateObject(&quot;WScript.Shell&quot;).Run &quot;目录\aria2c.exe --conf-path=aria2.conf&quot;,0</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="aria2-web界面"><a href="#aria2-web界面" class="headerlink" title="aria2 web界面"></a>aria2 web界面</h3><p>如果是访问本机上的服务器，IP地址选择localhost即可，端口号为6800，如果是远程控制，则需要填写具体的IP，端口号为6800</p>
+<p><a href="http://webui-aria2.ghostry.cn/" target="_blank" rel="noopener"><strong>GUI_1</strong></a><br><a href="https://ziahamza.github.io/webui-aria2/" target="_blank" rel="noopener"><strong>GUI_2</strong></a><br><a href="http://aria2c.com/" target="_blank" rel="noopener"><strong>GUI_3</strong></a></p>
+<hr>
+<h3 id="百度云导出插件"><a href="#百度云导出插件" class="headerlink" title="百度云导出插件"></a>百度云导出插件</h3><p><a href="https://github.com/acgotaku/BaiduExporter/tree/v0.8.5" target="_blank" rel="noopener"><strong>下载</strong></a></p>
+<p>解压后，浏览器添加插件即可</p>
+<blockquote>
+<p>我用的是谷歌浏览器，插件直接添加<code>chrome</code>即可</p>
+</blockquote>
+]]></content>
+      <tags>
+        <tag>aria2</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>hexo错误</title>
     <url>/2020/01/15/hexo%E9%94%99%E8%AF%AF/</url>
     <content><![CDATA[<p>记录我出现过的错误</p>
@@ -514,6 +597,10 @@ function player(src) {
 <td>double</td>
 <td>双精浮点数</td>
 </tr>
+<tr>
+<td>long double</td>
+<td>长浮点型</td>
+</tr>
 </tbody></table>
 <blockquote>
 <p>计算机将浮点数分成 整数与小数部分，并且分开存储</p>
@@ -655,11 +742,11 @@ function player(src) {
 </thead>
 <tbody><tr>
 <td>%f</td>
-<td>float 或 double</td>
+<td>float 或double</td>
 </tr>
 <tr>
-<td>%Lf</td>
-<td>long double</td>
+<td>%lf</td>
+<td>long double 或 double</td>
 </tr>
 <tr>
 <td>%e</td>
@@ -1153,7 +1240,7 @@ function player(src) {
 </details>
 
 <hr>
-<h1 id="数组与指针"><a href="#数组与指针" class="headerlink" title="数组与指针"></a>数组与指针</h1><p>存储多个数据的空间</p>
+<h1 id="数组与指针"><a href="#数组与指针" class="headerlink" title="数组与指针"></a>数组与指针</h1><p>存储多个数据的内存空间</p>
 <blockquote>
 <p>数组的名称是一个指针</p>
 <p>指针通过 自增 和 自减 可以获取它的上一个 或 下一个元素</p>
@@ -1163,9 +1250,14 @@ function player(src) {
 
 <blockquote>
 <p>数组的定义：</p>
-<p>类型 数组名称[常量整数]</p>
+<p>类型 数组名称[常量整数（数组长度）]</p>
 <p>数组通过索引<code>[]</code>去寻找元素</p>
 <p>索引从0开始</p>
+<p>C语言的const是运行时常量，c++的const是编译时常量</p>
+</blockquote>
+<p><code>注意：</code>数组长度使用了变量则会变成变长数组</p>
+<blockquote>
+<p>变长数组只是数组长度使用了变量，其余的与普通数组没区别</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">// 数组的初始化</span><br><span class="line">int arr[3] = &#123;11,22,33&#125;;</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line">arr[0] == 11</span><br><span class="line">arr[1] == 22</span><br><span class="line">arr[2] == 33</span><br><span class="line">*/</span><br></pre></td></tr></table></figure>
 
@@ -1177,12 +1269,16 @@ function player(src) {
 <p>嵌套数组，存储数组的数组</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">// 这个数组有 2*3个元素</span><br><span class="line">int arr[2][3] = &#123;</span><br><span class="line">        &#123;11, 22, 33&#125;,</span><br><span class="line">        &#123;44, 55, 66&#125;</span><br><span class="line">    &#125;;</span><br><span class="line">	</span><br><span class="line">/*</span><br><span class="line">arr[0][0] == 11</span><br><span class="line">arr[0][1] == 22</span><br><span class="line">arr[0][2] == 33</span><br><span class="line"></span><br><span class="line">arr[1][0] == 44</span><br><span class="line">arr[1][1] == 55</span><br><span class="line">arr[1][2] == 66</span><br><span class="line">*/</span><br></pre></td></tr></table></figure>
 
+<p><code>多维数组另一种初始化方式</code></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">int arr[2][3] = &#123;1,2,3,  4,5,6&#125;;</span><br><span class="line">// 注意：4的索引为arr[1][0]</span><br></pre></td></tr></table></figure>
+
 </details>
 
 <details>
 <summary>指针</summary>
 
 <p>指针会指向内存的地址值，通过指针可以直接操作内存</p>
+<p>一个地址值占8字节</p>
 <blockquote>
 <p>指定的定义：</p>
 <p>类型 *名称</p>
@@ -1244,6 +1340,18 @@ function player(src) {
 </li>
 </ol>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">int arr[] = &#123;1,2,3&#125;;</span><br><span class="line">size_t size = sizeof(arr) / sizeof(arr[0]);</span><br></pre></td></tr></table></figure>
+
+</details>
+
+<details>
+<summary>变长数组作为函数参数</summary>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">int m (int i, int i2. int arr[i][i2]);</span><br></pre></td></tr></table></figure>
+
+</details>
+
+<details>
+<summary>匿名数组</summary><table><tr><td class="code"><pre><span class="line">int *p = (int [2])&#123;1, 2&#125;;</span><br><span class="line"></span><br><span class="line">int arr[] = (int[])&#123;3,4&#125;;</span><br><span class="line"></span><br><span class="line">// 二维匿名数组</span><br><span class="line">int *p2 = (int[2][2])&#123;</span><br><span class="line">        &#123;1,2&#125;,&#123;3,4&#125;</span><br><span class="line">    &#125;;</span><br></pre></td></tr></table>
 
 </details>
 
@@ -1384,6 +1492,13 @@ function player(src) {
 </tr>
 </tbody></table>
 </div></div></div>
+
+</details>
+
+<details>
+<summary>创建一位数组与多维数组</summary>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">// 等同于int arr[2];</span><br><span class="line">int *p = (int*)malloc(sizeof(int) *2);</span><br><span class="line">free(p); // 释放一维数组</span><br><span class="line"></span><br><span class="line">// 等同于int arr[2][3];</span><br><span class="line">int **p2 = (int**)malloc(sizeof(int) *2);</span><br><span class="line">for(unsigned int i =0; i != 2; ++i)&#123;</span><br><span class="line">	*(p2+i) = (int*)malloc(sizeof(int) *3);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 释放二维数组</span><br><span class="line">for (unsigned int i = 0; i &lt; 2; ++i)&#123;</span><br><span class="line">	free(*(p2 + i));</span><br><span class="line">&#125;</span><br><span class="line">free(p2);</span><br></pre></td></tr></table></figure>
 
 </details>
 
@@ -1627,6 +1742,13 @@ function player(src) {
 </blockquote>
 </details>
 
+<details>
+<summary>创建返回值类型的结构体</summary>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">typedef struct&#123;</span><br><span class="line">    int i;</span><br><span class="line">&#125;tt;</span><br><span class="line"></span><br><span class="line">tt* mm()&#123;</span><br><span class="line">    tt *t1 = (tt*)malloc(sizeof(tt));</span><br><span class="line">    t1-&gt;i = 11;</span><br><span class="line">    return t1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</details>
+
 <hr>
 <h1 id="位操作"><a href="#位操作" class="headerlink" title="位操作"></a>位操作</h1><details>
 <summary>位运算符</summary>
@@ -1832,6 +1954,10 @@ function player(src) {
 
 <p>字符处理<code>#include &lt;ctype.h&gt;</code></p>
 <p>C标准库<code>#include &lt;stdlib.h&gt;</code></p>
+<hr>
+<h1 id="字面值常量"><a href="#字面值常量" class="headerlink" title="字面值常量"></a>字面值常量</h1><p>以下各种类型的值，都为字面值，并且是常量</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">char c = &apos;c&apos;;</span><br><span class="line"></span><br><span class="line">char *str = &quot;string&quot;;</span><br><span class="line"></span><br><span class="line">int i = 1;</span><br><span class="line"></span><br><span class="line">double 3.14;</span><br><span class="line"></span><br><span class="line">long *p = (long[])&#123;1,2&#125;;</span><br></pre></td></tr></table></figure>
+
 <hr>
 ]]></content>
       <tags>
@@ -4606,7 +4732,7 @@ function player(src) {
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">//系统目录</span><br><span class="line">#include &lt;&gt;</span><br><span class="line"></span><br><span class="line">//相对路径</span><br><span class="line">#include &quot;&quot;</span><br><span class="line"></span><br><span class="line">//绝对路径</span><br><span class="line">#include &quot;/a/b&quot;</span><br></pre></td></tr></table></figure>
 
 <p><code>#undef</code>取消宏指令</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#define A 1</span><br><span class="line"></span><br><span class="line">#undef A</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#define A</span><br><span class="line"></span><br><span class="line">#undef A</span><br></pre></td></tr></table></figure>
 
 <h2 id="条件宏"><a href="#条件宏" class="headerlink" title="条件宏"></a>条件宏</h2><p><code>#ifdef</code>表示宏存在则执行<code>#else</code>和else一样，<code>endif</code>是结束当前宏</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#ifdef A</span><br><span class="line">	// 语句</span><br><span class="line">#else</span><br><span class="line">	//语句</span><br><span class="line">endif// A</span><br></pre></td></tr></table></figure>
@@ -4616,6 +4742,335 @@ function player(src) {
 <hr>
 <h1 id="内敛函数"><a href="#内敛函数" class="headerlink" title="内敛函数"></a>内敛函数</h1><p>可以避免不需要的开销，而且通常被定义在头文件</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">// 一般是inline和static配合使用</span><br><span class="line">inline static void m()&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="练习题答案"><a href="#练习题答案" class="headerlink" title="练习题答案"></a>练习题答案</h1><h2 id="第八章"><a href="#第八章" class="headerlink" title="第八章"></a>第八章</h2><details>
+<summary>1. 统计在读到文件尾之前读取的字符数</summary>
+
+<ol>
+<li><p>获取用户EOF前的输入</p>
+</li>
+<li><p>使用变量，记录文件尾之前的字符数</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">int num = 0; // 字符数量</span><br><span class="line">    while(getchar() != EOF)</span><br><span class="line">        ++num;</span><br><span class="line">    if(num != 0) // 至少读取了一个字符</span><br><span class="line">        printf(&quot;num = %d\n&quot;, num);</span><br><span class="line">    else</span><br><span class="line">        printf(&quot;num = 0\n&quot;);</span><br></pre></td></tr></table></figure>
+
+</details>
+
+
+<details>
+<summary>2. 遇到EOF前，读取字符，并输出每个字符所对应的ASCII十进制值，特殊字符要做特殊处理</summary>
+
+<ol>
+<li><p>获取用户EOF前的输入</p>
+</li>
+<li><p>输出字符的ASCII码</p>
+</li>
+<li><p>特殊字符如’\n’，就以”\n”输出</p>
+</li>
+<li><p>输出10对值后，需要换一行</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">void p_8_2 (char ch)&#123;</span><br><span class="line">    char c[] = &#123;&apos;\n&apos;, &apos;\t&apos;, &apos; &apos;&#125;; // 记录特殊字符</span><br><span class="line">	// 每个特殊字符的特殊输出</span><br><span class="line">    if(ch == c[0])</span><br><span class="line">        printf(&quot;\\n : %d &quot;, ch);</span><br><span class="line">    else if (ch == c[1])</span><br><span class="line">        printf(&quot;\\t : %d &quot;, ch);</span><br><span class="line">    else if (ch == c[2])</span><br><span class="line">        printf(&quot;space : %d &quot;, ch);</span><br><span class="line">    else</span><br><span class="line">        printf(&quot;%c : %d &quot;, ch, ch);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">char c[] = &#123;&apos;\n&apos;, &apos;\t&apos;&#125;;</span><br><span class="line">    printf(&quot;input data\n&quot;);</span><br><span class="line">	// num作为计数器，自增到第10次会增加一个换行符</span><br><span class="line">    for(int ch, num = 0; (ch = getchar()) != EOF;)&#123;</span><br><span class="line">        if(num != 10)&#123;</span><br><span class="line">            num++;</span><br><span class="line">            p_8_2(ch);</span><br><span class="line">        &#125; else&#123;</span><br><span class="line">            printf(&quot;\n&quot;);</span><br><span class="line">            num = 0; // 清0，重新记录</span><br><span class="line">            p_8_2(ch);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+</details>
+
+<details>
+<summary>3. 获取用户输入，记录输入里大写与小写字母的个数</summary>
+
+<ol>
+<li><p>获取用户EOF前的输入</p>
+</li>
+<li><p>使用计数器分别记录大写与小写字符数量</p>
+</li>
+<li><p>判断每个输入的字符，自增计数器</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">int supper = 0, // 大写字母</span><br><span class="line">        lower  = 0; // 小写字母</span><br><span class="line">    for(int ch; (ch = getchar()) != EOF;)&#123;</span><br><span class="line">        if(isupper(ch))</span><br><span class="line">            ++supper;</span><br><span class="line">        if(islower(ch))</span><br><span class="line">            ++lower;</span><br><span class="line">    &#125;</span><br><span class="line">    printf(&quot;大写字母有%d个\n小写字母有%d个\n&quot;, supper, lower);</span><br></pre></td></tr></table></figure>
+
+</details>
+
+
+<details>
+<summary>4. 获取用户输入，以空格为分隔符，记录每个单词的平均字母数</summary>
+
+<ol>
+<li><p>获取用户EOF前的输入</p>
+</li>
+<li><p>获取每个以空格分隔出来的字符串</p>
+</li>
+<li><p>判断这些被分隔出来的字符串是否全部为字母</p>
+</li>
+<li><p>使用计数器记录这些被分割出来的单词的总和</p>
+</li>
+<li><p>获取平均值</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">const int size = 64; // 数组长度</span><br><span class="line">char c[size][size]; // 储存每个单词的容器</span><br><span class="line">unsigned int i = 0, // 单词索引</span><br><span class="line">             j = 0; // 字母索引</span><br><span class="line"></span><br><span class="line">printf(&quot;input data\n&quot;);</span><br><span class="line">// 储存用户输入的每个单词</span><br><span class="line">for(int ch; (ch = getchar()) != EOF; )&#123;</span><br><span class="line">    if(ch == &apos;\n&apos;) // 过滤换行符</span><br><span class="line">        continue;</span><br><span class="line">    if(ch != &apos; &apos;)&#123;</span><br><span class="line">        c[i][j] = ch;</span><br><span class="line">        ++j;</span><br><span class="line">    &#125; else &#123; // 读取到空格或其他字符</span><br><span class="line">        ++j;</span><br><span class="line">        c[i][j] = &apos;\0&apos;;</span><br><span class="line">        ++i; // 储存下一个单词</span><br><span class="line">        j = 0; // 初始化</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">unsigned int temp = 0,  // 记录单个单词长度</span><br><span class="line">             sum  = 0;  // 总和</span><br><span class="line"></span><br><span class="line">// 遍历容器</span><br><span class="line">for(unsigned int index = 0, max_index = i + 1; index != max_index; ++index)&#123;</span><br><span class="line">    for(j = 0; j != strlen(c[index]); )&#123;</span><br><span class="line">        if(isalpha(c[index][j]))&#123; // 判断为字母则true</span><br><span class="line">            printf(&quot;char:%c &quot;, c[index][j]);</span><br><span class="line">            ++temp;</span><br><span class="line">            ++j;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            ++j;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    printf(&quot;字符串：%s有%d个字母\n&quot;, c[index], temp);</span><br><span class="line">    sum += temp;</span><br><span class="line">    temp = 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">printf(&quot;单词的平均值为：%d&quot;, sum / i);</span><br></pre></td></tr></table></figure>
+
+</details>
+
+
+<details>
+<summary>5. 让用户猜测两个数的中间值</summary>
+
+<ol>
+<li><p>获取两个数</p>
+</li>
+<li><p>计算出中间值</p>
+</li>
+<li><p>判断用户输入的值是否为中间值</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">int arr[2]; // 存储两个数</span><br><span class="line">    for(unsigned int i = 0, temp = 0; i != 2; ++i) &#123;</span><br><span class="line">        printf(&quot;input number\n&quot;);</span><br><span class="line">        scanf(&quot;%d&quot;, &amp;temp);</span><br><span class="line">        printf(&quot;you input number is %d\n&quot;, temp);</span><br><span class="line">        arr[i] = temp;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    printf(&quot;输入这两数的中间值\n&quot;);</span><br><span class="line">    int source = 0;</span><br><span class="line">    scanf(&quot;%d&quot;, &amp;source);</span><br><span class="line">    if(source == (arr[0] + arr[1]) / 2)</span><br><span class="line">        printf(&quot;is ok\n&quot;);</span><br><span class="line">    else</span><br><span class="line">        printf(&quot;no\n&quot;);</span><br></pre></td></tr></table></figure>
+
+</details>
+
+
+<details>
+<summary>6. 编写一个菜单程序，返回第一个选择的字符</summary>
+
+<ol>
+<li><p>获取用户EOF前的输入</p>
+</li>
+<li><p>判断该字符是否菜单选项字符</p>
+</li>
+<li><p>记录用户输入的第一个菜单字符，并输出</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">printf(&quot;请输入你的选项：\n&quot;);</span><br><span class="line">   printf(&quot;1. aaa\t2. bbb\n&quot;);</span><br><span class="line">   printf(&quot;3. ccc\t4. ddd\n&quot;);</span><br><span class="line"></span><br><span class="line">   char ch =0;</span><br><span class="line">   if((ch = getchar()) != EOF)&#123;</span><br><span class="line">       if(ch == &apos;1&apos;)</span><br><span class="line">           printf(&quot;选择了1\n&quot;);</span><br><span class="line">       else if(ch == &apos;2&apos;)</span><br><span class="line">           printf(&quot;选择了2\n&quot;);</span><br><span class="line">       else if(ch == &apos;3&apos;)</span><br><span class="line">           printf(&quot;选择了3\n&quot;);</span><br><span class="line">       else if(ch == &apos;4&apos;)</span><br><span class="line">           printf(&quot;选择了4\n&quot;);</span><br><span class="line">       else</span><br><span class="line">           printf(&quot;无效的输入\n&quot;);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+</details>
+
+
+<details>
+<summary>7. 编写一个菜单程序，拥有数字选项与字母选项的版本</summary>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">printf(&quot;----------\n&quot;);</span><br><span class="line">    printf(&quot;|        |\n&quot;);</span><br><span class="line">    printf(&quot;|  test  |\n&quot;);</span><br><span class="line">    printf(&quot;|        |\n&quot;);</span><br><span class="line">    printf(&quot;----------\n&quot;);</span><br><span class="line"></span><br><span class="line">    printf(&quot;输入a为字母界面，输入0为数字界面\n&quot;);</span><br><span class="line">    int ch;</span><br><span class="line">    if((ch = getchar()) == &apos;a&apos;)&#123;</span><br><span class="line">        printf(&quot;a.AAA\tb.BBB\n&quot;);</span><br><span class="line">        printf(&quot;c.CCC\td.DDD\n&quot;);</span><br><span class="line">    &#125; else if (ch == &apos;0&apos;)&#123;</span><br><span class="line">        printf(&quot;1.AAA\t2.BBB\n&quot;);</span><br><span class="line">        printf(&quot;3.CCC\t4.DDD\n&quot;);</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        printf(&quot;无效的输入\n&quot;);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+</details>
+
+<details>
+<summary>8. 简易计算器</summary>
+
+<ol>
+<li><p>提供+-*/的菜单</p>
+</li>
+<li><p>选择后提示输入两个数值</p>
+</li>
+<li><p>根据选择，处理两个数值</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">printf(&quot;1.+\t2.-\t3.*\t4./\t5.exit\n&quot;);</span><br><span class="line">    short num = 0;</span><br><span class="line">    float n1 = 0.0,n2 = 0.0;</span><br><span class="line">    int t1 = 0,t2 = 0, t3 = 0;</span><br><span class="line">    t1 = scanf(&quot;%d&quot;, &amp;num);</span><br><span class="line">    printf(&quot;t1 = %d\n&quot;, t1);</span><br><span class="line">    if(num == 1)&#123;</span><br><span class="line">        printf(&quot;输入数字1\n&quot;);</span><br><span class="line">        t2 = scanf(&quot;%f&quot;, &amp;n1);</span><br><span class="line">        printf(&quot;t2 = %d\n&quot;, t2);</span><br><span class="line">        printf(&quot;输入数字2\n&quot;);</span><br><span class="line">        t3 = scanf(&quot;%f&quot;, &amp;n2);</span><br><span class="line">        printf(&quot;t3 = %d\n&quot;, t3);</span><br><span class="line">        printf(&quot;%f + %f = %f\n&quot;, n1, n2, n1+n2);</span><br><span class="line">    &#125; else if (num == 2)&#123;</span><br><span class="line">        printf(&quot;输入数字1\n&quot;);</span><br><span class="line">        t2 = scanf(&quot;%f&quot;, &amp;n1);</span><br><span class="line">        printf(&quot;t2 = %d\n&quot;, t2);</span><br><span class="line">        printf(&quot;输入数字2\n&quot;);</span><br><span class="line">        t3 = scanf(&quot;%f&quot;, &amp;n2);</span><br><span class="line">        printf(&quot;t3 = %d\n&quot;, t3);</span><br><span class="line">        printf(&quot;%f - %f = %f\n&quot;, n1, n2, n1-n2);</span><br><span class="line">    &#125; else if (num == 3)&#123;</span><br><span class="line">        printf(&quot;输入数字1\n&quot;);</span><br><span class="line">        t2 = scanf(&quot;%f&quot;, &amp;n1);</span><br><span class="line">        printf(&quot;t2 = %d\n&quot;, t2);</span><br><span class="line">        printf(&quot;输入数字2\n&quot;);</span><br><span class="line">        t3 = scanf(&quot;%f&quot;, &amp;n2);</span><br><span class="line">        printf(&quot;t3 = %d\n&quot;, t3);</span><br><span class="line">        printf(&quot;%f * %f = %f\n&quot;, n1, n2, n1*n2);</span><br><span class="line">    &#125; else if (num == 4)&#123;</span><br><span class="line">        printf(&quot;输入数字1\n&quot;);</span><br><span class="line">        t2 = scanf(&quot;%f&quot;, &amp;n1);</span><br><span class="line">        printf(&quot;t2 = %d\n&quot;, t2);</span><br><span class="line">        printf(&quot;输入数字2\n&quot;);</span><br><span class="line">        t3 = scanf(&quot;%f&quot;, &amp;n2);</span><br><span class="line">        printf(&quot;t3 = %d\n&quot;, t3);</span><br><span class="line">        printf(&quot;%f / %f = %f\n&quot;, n1, n2, n1/n2);</span><br><span class="line">    &#125; else if(num == 5)&#123;</span><br><span class="line">        printf(&quot;is exit\n&quot;);</span><br><span class="line">        return;</span><br><span class="line">    &#125; else if(num == 0)&#123;</span><br><span class="line">        printf(&quot;input error \&quot;num == 0\&quot;\n&quot;);</span><br><span class="line">        exit(1);</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        printf(&quot;input error\n&quot;);</span><br><span class="line">        exit(1);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+</details>
+
+<h2 id="第九章"><a href="#第九章" class="headerlink" title="第九章"></a>第九章</h2><details>
+<summary>1. 返回两个数值的最小值</summary>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">double function_9_1(double d1, double d2)&#123;</span><br><span class="line">    return d1 &gt; d2 ? d2 : d1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</details>
+
+
+<details>
+<summary>2~3. 用二维数组打印图案</summary>
+
+<ol>
+<li>输入一个图案，行的值，列的值</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">void function_9_2(char c, int i, int j)&#123;</span><br><span class="line">    for(unsigned int n = 0; n != j; ++n)&#123;</span><br><span class="line">        for(unsigned int n2 = 0; n2 != i; ++n2)&#123;</span><br><span class="line">            printf(&quot;%c&quot;, c);</span><br><span class="line">        &#125;</span><br><span class="line">        printf(&quot;\n&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</details>
+
+
+<details>
+<summary>4. 获取两个数值的调和平均值</summary>
+
+<ol>
+<li><p>调和平均值：获取数值的倒数，计算出来的平均值，结果的倒数</p>
+</li>
+<li><p>倒数：2/1的倒数为1/2 （公式：1 / num）</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">double function_9_4(double num1 , double num2)&#123;</span><br><span class="line">    if(num1 == 0 || num2 == 0)&#123;</span><br><span class="line">        printf(&quot;0不能被除\n&quot;);</span><br><span class="line">        exit(1);</span><br><span class="line">    &#125;</span><br><span class="line">    // 获取倒数</span><br><span class="line">    double n1 = 1 / num1;</span><br><span class="line">    printf(&quot;n1 = %f\n&quot;, n1);</span><br><span class="line">    double n2 = 1 / num2; </span><br><span class="line">    printf(&quot;n2 = %f\n&quot;, n2);</span><br><span class="line">    return 1 / ((n1 + n2) / 2);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</details>
+
+
+<details>
+<summary>5. 获取最大值，并将所有数值替换成最大值</summary>
+
+<ol>
+<li>找出最大值</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">void function_9_5(double *num1, double *num2)&#123;</span><br><span class="line">    double max_val = *num1 &gt; *num2 ? *num1 : *num2;</span><br><span class="line">    printf(&quot;最大值是：%f\n&quot;, max_val);</span><br><span class="line">    *num1 = max_val;</span><br><span class="line">    *num2 = max_val;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</details>
+
+
+<details>
+<summary>6. 排序3个数值</summary>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">void function_9_6(double d1, double d2, double d3)&#123;</span><br><span class="line">    double d_arr[3] = &#123;d1, d2, d3&#125;;</span><br><span class="line">    double temp = 0.0;</span><br><span class="line">    unsigned int i = 0;</span><br><span class="line"></span><br><span class="line">    // 冒泡排序</span><br><span class="line">    for(i = 0; i != 3; ++i)&#123;</span><br><span class="line">        for(unsigned int j = 0; j != 3-1; j++)&#123;</span><br><span class="line">            if(d_arr[j] &gt; d_arr[j+1])&#123;</span><br><span class="line">                temp = d_arr[j];</span><br><span class="line">                d_arr[j] = d_arr[j+1];</span><br><span class="line">                d_arr[j+1] = temp;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 遍历</span><br><span class="line">    for(i = 0; i != 3; ++i)&#123;</span><br><span class="line">        printf(&quot;num : %f\n&quot;, d_arr[i]);</span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</details>
+
+<details>
+<summary>7. 输出字母与字母在字母表的位置</summary>
+
+<ol>
+<li>创建字母表</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">int function_9_7(char c)&#123;</span><br><span class="line">    if(isalpha(c))&#123;</span><br><span class="line">        #define size1 3</span><br><span class="line">        #define size2 2</span><br><span class="line">        // const unsigned int size1 = 3, size2 = 2;</span><br><span class="line">        char c_carr[size1][size2] = &#123;</span><br><span class="line">            &#123;&apos;a&apos;, &apos;A&apos;&#125;,</span><br><span class="line">            &#123;&apos;b&apos;, &apos;B&apos;&#125;,</span><br><span class="line">            &#123;&apos;c&apos;, &apos;C&apos;&#125;</span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">        for(unsigned int i = 0; i != size1; ++i)</span><br><span class="line">            for(unsigned int j = 0; j != size2; j++)</span><br><span class="line">                if(c_carr[i][j] == c)</span><br><span class="line">                    return i;</span><br><span class="line">    &#125;</span><br><span class="line">    return -1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</details>
+
+
+<details>
+<summary>8. 次幂计算</summary>
+
+<ol>
+<li><p>获取需要计算的次冥与次冥数 （次冥计算格式：2^2 两个2相乘， 3^4 4个3相乘）</p>
+</li>
+<li><p>任何0^任何数都为0</p>
+</li>
+<li><p>任何数^0都为1</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">double function_9_8(double n, int p)&#123;</span><br><span class="line">    if(n == 0.0)</span><br><span class="line">        return 0.0;</span><br><span class="line">    else if(p == 0)</span><br><span class="line">        return 1;</span><br><span class="line"></span><br><span class="line">    double pow = 1.0;</span><br><span class="line">    for(unsigned int i = 1; i != p+1; ++i)&#123;</span><br><span class="line">        pow *= n;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return pow;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</details>
+
+
+<details>
+<summary>9. 递归</summary>
+
+<ol>
+<li>传入递归次数</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">void function_9_9(unsigned int num)&#123;</span><br><span class="line">    unsigned int i = 1; // 记录递归次数</span><br><span class="line">    double n = 1.0;</span><br><span class="line">    int p = 1;</span><br><span class="line"></span><br><span class="line">    while(i != num+1)&#123;</span><br><span class="line">        printf(&quot;%f\n&quot;,function_9_8(n++, p++));</span><br><span class="line">        printf(&quot;第%d次递归\n&quot;, i);</span><br><span class="line">        ++i;</span><br><span class="line">    &#125;</span><br><span class="line">    return;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</details>
+
+
+<details>
+<summary>10. 以指定进制打印整数</summary>
+
+<ol>
+<li>进制的范围在2~8</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">void function_9_10(int num, unsigned int n)&#123;</span><br><span class="line">    int r = num % n; </span><br><span class="line">    if(num &gt;= 2)</span><br><span class="line">        function_9_10(num / n, n);</span><br><span class="line">    </span><br><span class="line">    if (n == 8)&#123;</span><br><span class="line">        printf(&quot;0%d\n&quot;, r);</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    printf(&quot;%d\n&quot;, r);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</details>
+
+
+<details>
+<summary>11. 计算斐波那契数</summary>
+
+<ol>
+<li><p>用循环计算斐波那契数 （斐波那契数：1 1 2 3 5 … , 第三个数是前两数的相加结果）</p>
+</li>
+<li><p>传入获取斐波那契数的数量</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">void function_9_11(unsigned int i)&#123;</span><br><span class="line">    int n1 = 1, n2 = 1, n3 = 0;</span><br><span class="line">    for(unsigned int n = 0; n != i; ++n)&#123;</span><br><span class="line">        if(n == 0 || n == 1)&#123;</span><br><span class="line">            printf(&quot;%d &quot;,1);</span><br><span class="line">            continue;</span><br><span class="line">        &#125;</span><br><span class="line">        n3 = n1 + n2;</span><br><span class="line">        n1 = n2;</span><br><span class="line">        n2 = n3;</span><br><span class="line">        printf(&quot;%d &quot;, n3);</span><br><span class="line">    &#125;</span><br><span class="line">    printf(&quot;\n&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</details>
+
+
+<h2 id="第十章"><a href="#第十章" class="headerlink" title="第十章"></a>第十章</h2><details>
+<summary>1. 计算n年里每年的降水量，n年的平均降水量，每年的月平均降水量，n年的月平均降水量</summary>
+
+<ol>
+<li><p>创建降水量</p>
+</li>
+<li><p>循环遍历数组，进行计算</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">#define _YEAR  5</span><br><span class="line">#define _MONTH 12</span><br><span class="line"></span><br><span class="line">double arr[_YEAR][_MONTH] = &#123;</span><br><span class="line">    &#123;4.3, 4.3, 4.3, 3.0, 2.0, 1.2, 0.2, 0.2, 0.4, 2.4, 3.5, 6.6&#125;,</span><br><span class="line">    &#123;8.5, 8.2, 1.2, 1.6, 2.4, 0.0, 5.2, 0.9, 0.3, 0.9, 1.4, 7.3&#125;,</span><br><span class="line">    &#123;9.1, 8.5, 6.7, 4.3, 2.1, 0.8, 0.2, 0.2, 1.1, 2.3, 6.1, 8.4&#125;,</span><br><span class="line">    &#123;7.2, 9.9, 8.4, 3.3, 1.2, 0.8, 0.4, 0.0, 0.6, 1.7, 4.3, 6.2&#125;,</span><br><span class="line">    &#123;7.6, 5.6, 3.8, 2.8, 3.8, 0.2, 0.0, 0.0, 0.0, 1.3, 2.6, 5.2&#125;</span><br><span class="line">&#125;;</span><br><span class="line">double num1 = 0.0, // n年总数</span><br><span class="line">       num2 = 0.0; // i年总数</span><br><span class="line">for(int i =0; i != _YEAR; ++i)&#123;</span><br><span class="line">    for(int j=0; j != _MONTH; ++j)&#123;</span><br><span class="line">        num1 += arr[i][j];</span><br><span class="line">        printf(&quot;第%d年   第%d个月   为%lf\n&quot;,i+1,j+1,arr[i][j]);</span><br><span class="line">    &#125;</span><br><span class="line">    printf(&quot;第%d年的总和为%lf\t月平均为%lf\n&quot;,i+1,num1,num1/_MONTH);</span><br><span class="line">    num2 += num1;</span><br><span class="line">    num1 = 0;</span><br><span class="line">    printf(&quot;\n&quot;);</span><br><span class="line">&#125;</span><br><span class="line">printf(&quot;%d年总数为%lf\t月平均为%lf\n&quot;,_YEAR, num2, num2/_YEAR/_MONTH);</span><br><span class="line"></span><br><span class="line">#undef _YEAR</span><br><span class="line">#undef _MONTH</span><br></pre></td></tr></table></figure>
+
+</details>
+
+
+<details>
+<summary>2. 将一个数组的内容，以不同的方法拷贝到其他三个数组里</summary>
+
+<ol>
+<li><p>使用一个形参数组作为源，返回一个拷贝数据</p>
+</li>
+<li><p>使用迭代器拷贝</p>
+</li>
+<li><p>第一个参数为目标数组，第二个参数为源数组，第三个参数为数组长度</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#include &quot;./ch.hpp&quot; // 拥有stdio,stdlib等头文件</span><br><span class="line"></span><br><span class="line">#define ARRAY_SIZE 3</span><br><span class="line"></span><br><span class="line">//遍历数组</span><br><span class="line">void print_array(double *arr, const int size)&#123;</span><br><span class="line">    for(int i =0; i != size; ++i)&#123;</span><br><span class="line">        printf(&quot;[%d] = %lf\n&quot;, i, *(arr+i));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 带数组表示法</span><br><span class="line">double* test_10_2_cp1(const double arr[], const int size)&#123;</span><br><span class="line">    double *p = (double*)malloc(sizeof(double) *size);</span><br><span class="line">    for(int i =0; i != size; ++i)&#123;</span><br><span class="line">        *(p+i) = arr[i];</span><br><span class="line">    &#125;</span><br><span class="line">    return p;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 使用迭代器</span><br><span class="line">double* test_10_2_cp2( double *begin,  double *end)&#123;</span><br><span class="line">    const int size = end - begin;</span><br><span class="line">    double *p = (double*)malloc(sizeof(double) * size);</span><br><span class="line">    for(; begin != end; ++begin, ++p)&#123;</span><br><span class="line">        *p = *begin;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 重置指针位置</span><br><span class="line">    for(int i =0; i != size; ++i)&#123;</span><br><span class="line">        --p;</span><br><span class="line">    &#125;</span><br><span class="line">    return p;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 将arr1 的数据拷贝到 arr2</span><br><span class="line">void test_10_2_cp3(double *p, double arr[], const int size)&#123;</span><br><span class="line">    for(int i =0; i != size; ++i)&#123;</span><br><span class="line">        *(p+i) = arr[i];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main(void)&#123;</span><br><span class="line">    double source_arr[ARRAY_SIZE] = &#123; // 源数组</span><br><span class="line">        11.11, 22.22, 33.33</span><br><span class="line">    &#125;;</span><br><span class="line">    // 指向数组的指针</span><br><span class="line">    double *p, *p2;</span><br><span class="line"></span><br><span class="line">    const int size = ARRAY_SIZE;</span><br><span class="line"></span><br><span class="line">    p = test_10_2_cp1(source_arr, size);</span><br><span class="line">    // print_array(p, size);</span><br><span class="line">    </span><br><span class="line">    p2 = test_10_2_cp2(source_arr, source_arr + size);</span><br><span class="line">    // print_array(p2, (source_arr + size) - source_arr);</span><br><span class="line">   </span><br><span class="line">    double arr[size];</span><br><span class="line">    test_10_2_cp3(arr, source_arr, size);</span><br><span class="line">    print_array(arr, size);</span><br><span class="line"></span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#undef ARRAY_SIZE</span><br></pre></td></tr></table></figure>
+
+</details>
+
+<details>
+<summary>3. 返回数组中的最大值</summary>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#include &quot;./ch.hpp&quot;</span><br><span class="line"></span><br><span class="line">int get_MAX(const int *arr, const int size)&#123;</span><br><span class="line">    int max = *arr;</span><br><span class="line">    for(int i =0; i != size; ++i)&#123;</span><br><span class="line">        if(max &lt; *(arr+i))&#123;</span><br><span class="line">            max = *(arr+i); // 比max大的元素就进行赋值操作，然后继续循环比较</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return max;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main(void)&#123;</span><br><span class="line">    int arr[] = &#123;11,22,33,44,55,66&#125;;</span><br><span class="line">    printf(&quot;max value = %d\n&quot;, \</span><br><span class="line">    get_MAX(arr, sizeof(arr) / sizeof(*arr)));</span><br><span class="line">    </span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</details>
+
+
+<details>
+<summary>4. 返回数组中的最大值的索引</summary>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#include &quot;./ch.hpp&quot;</span><br><span class="line"></span><br><span class="line">int get_max_index(const double *arr, const int size)&#123;</span><br><span class="line">    double max = *arr;</span><br><span class="line">    int max_index = 0;</span><br><span class="line">    for(int i =0; i != size; ++i)&#123;</span><br><span class="line">        if(max &lt; *(arr+i))&#123;</span><br><span class="line">            max = *(arr+i);</span><br><span class="line">            max_index = i;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return max_index;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main(void)&#123;</span><br><span class="line">    double arr[] = &#123;1.1, 2.2, 3.3, 4.4&#125;;</span><br><span class="line">    printf(&quot;max index = %d\n&quot;, get_max_index(\</span><br><span class="line">     arr, sizeof(arr) / sizeof(*arr)));</span><br><span class="line">    </span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</details>
+
+
+<details>
+<summary>5. 返回最大值与最小值的差值</summary>
+
+<ol>
+<li><p>遍历数组，寻找最大值和最小值</p>
+</li>
+<li><p>最大值 - 最小值 = 差值</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#include &quot;./ch.hpp&quot;</span><br><span class="line"></span><br><span class="line">double get_value(double *begin, double *end)&#123;</span><br><span class="line">    double max = *begin,</span><br><span class="line">           min = *begin;</span><br><span class="line">    for(; begin != end; ++begin)&#123;</span><br><span class="line">        if(max &lt; *begin)&#123;</span><br><span class="line">            max = *begin;</span><br><span class="line">        &#125;</span><br><span class="line">        if(min &gt; *begin)&#123;</span><br><span class="line">            min = *begin;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return max - min;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main(void)&#123;</span><br><span class="line">    double arr[] = &#123;1.1, 2.2, 3.3, 4.4, 5.5, 6.6&#125;;</span><br><span class="line">    printf(&quot;差值为%lf\n&quot;, get_value(arr, arr + (sizeof(\</span><br><span class="line">     arr) / sizeof(*arr))));</span><br><span class="line"></span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</details>
+
+
+<details>
+<summary>6. 数组元素反转</summary>
+
+<ol>
+<li><p>第一个元素变成最后一个元素， 第二个元素变成倒数第二个元素，以此类推</p>
+</li>
+<li><p>一次处理两个元素，所以循环次数为size / 2</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#include &quot;./ch.hpp&quot;</span><br><span class="line"></span><br><span class="line">double* px(const double *begin, const double *end)&#123;</span><br><span class="line">    const int size = end - begin;</span><br><span class="line">    double *p = (double*)malloc(sizeof(double) * size);</span><br><span class="line"></span><br><span class="line">    while(begin != end)&#123;</span><br><span class="line">        *(p++) = *(begin++);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 重置到begin的位置</span><br><span class="line">    for(int i =0; i != size; ++i)&#123;</span><br><span class="line">        --p;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 反转数组</span><br><span class="line">    double temp = 0.0;</span><br><span class="line">    double *p_begin = p,</span><br><span class="line">           *p_end   = p + size;</span><br><span class="line">    for(int i=0; i != size/2; ++i, ++p_begin)&#123;</span><br><span class="line">        temp = *p_begin;</span><br><span class="line">        *p_begin = *(p_end -1 -i);</span><br><span class="line">        *(p_end -1 -i) = temp;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return p;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main(void)&#123;</span><br><span class="line">    double arr[] = &#123;1.1, 2.2, 3.3, 4.4, 5.5, 6.6&#125;;</span><br><span class="line">    double *p = px(arr, arr + (sizeof(arr) / sizeof(*arr)));</span><br><span class="line">    for(int i =0; i != sizeof(arr) / sizeof(*arr); ++i)&#123;</span><br><span class="line">        printf(&quot;[%d] = %lf\n&quot;, i, *(p+i));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</details>
+
+<details>
+<summary>7. 拷贝一个二维数组</summary>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+</details>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <hr>
 ]]></content>
