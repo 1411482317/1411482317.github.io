@@ -112,7 +112,7 @@
 <meta property="og:image" content="https://1411482317.github.io/2020/01/06/C总结/str2.png">
 <meta property="og:image" content="https://1411482317.github.io/2020/01/06/C总结/pf.png">
 <meta property="og:image" content="https://1411482317.github.io/2020/01/06/C总结/sf.png">
-<meta property="og:updated_time" content="2020-01-22T02:53:12.829Z">
+<meta property="og:updated_time" content="2020-01-24T05:25:56.048Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C总结">
 <meta name="twitter:description" content="基于操作系统CentOS8与GCC8.2 粗略总结C语言">
@@ -1258,8 +1258,12 @@
 </li>
 <li><p>printf 的 %p 输出指针的地址值</p>
 </li>
+<li><p>++p，等同于p+=1，会修改指针的地址值</p>
+</li>
+<li><p>p+1，返回一个右值，不会修改指针的地址值</p>
+</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">int i = 11;</span><br><span class="line">    int *p = &amp;i;</span><br><span class="line">    (*p)++;</span><br><span class="line">    printf(&quot;%d\n&quot;, *p);</span><br><span class="line">	printf(&quot;指针的地址值：%p\n&quot;, p);</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">int i = 11;</span><br><span class="line">    int *p = &amp;i;</span><br><span class="line">    (*p)++;</span><br><span class="line">    printf(&quot;%d\n&quot;, *p);</span><br><span class="line">	printf(&quot;指针的地址值：%p\n&quot;, p);</span><br><span class="line">	</span><br><span class="line">	printf(&quot;%p\n&quot;, ++p);</span><br><span class="line">	printf(&quot;%p\n&quot;, p+1);</span><br></pre></td></tr></table></figure>
 
 <blockquote>
 <p>解引或使用 未初始化的指针（空指针）或导致未知的错误</p>
@@ -2187,7 +2191,7 @@ document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " 
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">49.6k</span>
+    <span title="Site words total count">51k</span>
   
 </div>
 

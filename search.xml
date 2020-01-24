@@ -1292,8 +1292,12 @@ function player(src) {
 </li>
 <li><p>printf 的 %p 输出指针的地址值</p>
 </li>
+<li><p>++p，等同于p+=1，会修改指针的地址值</p>
+</li>
+<li><p>p+1，返回一个右值，不会修改指针的地址值</p>
+</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">int i = 11;</span><br><span class="line">    int *p = &amp;i;</span><br><span class="line">    (*p)++;</span><br><span class="line">    printf(&quot;%d\n&quot;, *p);</span><br><span class="line">	printf(&quot;指针的地址值：%p\n&quot;, p);</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">int i = 11;</span><br><span class="line">    int *p = &amp;i;</span><br><span class="line">    (*p)++;</span><br><span class="line">    printf(&quot;%d\n&quot;, *p);</span><br><span class="line">	printf(&quot;指针的地址值：%p\n&quot;, p);</span><br><span class="line">	</span><br><span class="line">	printf(&quot;%p\n&quot;, ++p);</span><br><span class="line">	printf(&quot;%p\n&quot;, p+1);</span><br></pre></td></tr></table></figure>
 
 <blockquote>
 <p>解引或使用 未初始化的指针（空指针）或导致未知的错误</p>
@@ -5059,19 +5063,86 @@ function player(src) {
 </details>
 
 
+<details>
+
+<summary>8. 指定拷贝数组一个范围里的元素</summary>
+
+<ol>
+<li><p>使用指针，获取数组里一段范围的元素</p>
+</li>
+<li><p>返回这段数据的指针</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#include &quot;./ch.hpp&quot;</span><br><span class="line"></span><br><span class="line">double * test_10_7(double *begin, double *end)&#123;</span><br><span class="line">    const int size = end - begin;</span><br><span class="line">    double *p = (double*)malloc(sizeof(double) *size);</span><br><span class="line">    for(int i =0; i != size; ++i)&#123;</span><br><span class="line">        *(p+i) = *(begin+i);</span><br><span class="line">    &#125;</span><br><span class="line">    return p;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main(void)&#123;</span><br><span class="line">    double arr[] = &#123;1.1, 2.2, 3.3, 4.4, 5.5, 6.6&#125;;</span><br><span class="line">    double *begin = arr+2, </span><br><span class="line">           *end   = arr+4; </span><br><span class="line">    double *p = test_10_7(begin, end);</span><br><span class="line"></span><br><span class="line">    for(int i =0; i != end-begin; ++i)&#123;</span><br><span class="line">        printf(&quot;%lf\n&quot;, *(p+i));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</details>
 
 
+<details>
+<summary>9. 编写拷贝二维数组，与遍历二维数组的函数</summary>
+
+<ol>
+<li><p>二维数组拷贝函数的参数使用变长数组</p>
+</li>
+<li><p>二维数组遍历函数也要用变长数组</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#include &quot;./ch.hpp&quot;</span><br><span class="line"></span><br><span class="line">double** test_10_9_cp(const int size_1, const \</span><br><span class="line"> int size_2, const double (*arr)[size_2])&#123;</span><br><span class="line">     double **p = (double**)malloc(sizeof(double) * size_1);</span><br><span class="line">     for(int i =0; i != size_1; ++i)&#123;</span><br><span class="line">         *(p+i) = (double*)malloc(sizeof(double) * size_2);</span><br><span class="line">     &#125;</span><br><span class="line">     </span><br><span class="line">     for(int i =0; i != size_1; ++i)&#123;</span><br><span class="line">         for(int j=0; j != size_2; ++j)&#123;</span><br><span class="line">             *(*(p+i)+j) = (*(arr+i))[j];</span><br><span class="line">         &#125;</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     return p;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void test_10_9_print(const int size_1, const int \</span><br><span class="line"> size_2, double **arr)&#123;</span><br><span class="line">     for(int i =0; i != size_1; ++i)&#123;</span><br><span class="line">         for(int j =0;  j != size_2; ++j)&#123;</span><br><span class="line">            printf(&quot;[%d][%d] = %lf\n&quot;, i,j, *(*(arr+i)+j));</span><br><span class="line">         &#125;</span><br><span class="line">     &#125;</span><br><span class="line">        </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#define SIZE_1 2</span><br><span class="line">#define SIZE_2 3</span><br><span class="line"></span><br><span class="line">int main(void)&#123;</span><br><span class="line">    double arr[2][3] = &#123;</span><br><span class="line">        &#123;1.1, 2.2, 3.3&#125;,</span><br><span class="line">        &#123;4.4, 5.5, 6.6&#125;</span><br><span class="line">    &#125;;</span><br><span class="line">    const int s1 = SIZE_1, s2 = SIZE_2;</span><br><span class="line">    double **p = test_10_9_cp(s1, s2, arr);</span><br><span class="line">    test_10_9_print(s1, s2,p);</span><br><span class="line"></span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#undef SIZE_1</span><br><span class="line">#undef SIZE_2</span><br></pre></td></tr></table></figure>
+
+</details>
 
 
+<details>
+<summary>10. 获取两个数组的元素之和，储存到另一个数组</summary>
+
+<ol>
+<li><p>两个数组使得这两数组的元素相加</p>
+</li>
+<li><p>元素相加后的数值，储存到另一个数组</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#include &quot;/my_dirent/gcc_file/ch.hpp&quot;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">double* test_10_10(const int size ,const double *arr, \</span><br><span class="line"> const double *arr2)&#123;</span><br><span class="line">     double *p = (double*)malloc(sizeof(double) *size);</span><br><span class="line">     for(int i =0; i != size; ++i)&#123;</span><br><span class="line">         *(p+i) = *(arr+i) + *(arr2+i);</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     return p;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#define SIZE 3</span><br><span class="line"></span><br><span class="line">int main(void)&#123;</span><br><span class="line">    double arr[SIZE] = &#123;1.1, 2.2, 3.3&#125;,</span><br><span class="line">           arr2[SIZE] = &#123;4.4, 5.5, 6.6&#125;;</span><br><span class="line">    const int size = SIZE;</span><br><span class="line">    double *p = test_10_10(size ,arr, arr2);</span><br><span class="line"></span><br><span class="line">    for(int i=0; i != size; ++i)&#123;</span><br><span class="line">        printf(&quot;[%d] = %lf\n&quot;, i, *(p+i));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#undef SIZE</span><br></pre></td></tr></table></figure>
+
+</details>
 
 
+<details>
+<summary>11. 将数组里的每个元素的值，进行翻倍</summary>
+
+<ol>
+<li>遍历数组，数组里所有的元素都乘2</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#include &quot;./ch.hpp&quot;</span><br><span class="line"></span><br><span class="line">void test_10_11(const int size, int *arr, const int bs)&#123;</span><br><span class="line">    for(int i =0; i != size; ++i)&#123;</span><br><span class="line">        *(arr+i) *= bs;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main(void)&#123;</span><br><span class="line">    int arr[] = &#123;1, 2, 3&#125;;</span><br><span class="line">    const int bs = 2; // 需要乘的倍数</span><br><span class="line">    test_10_11(sizeof(arr) / sizeof(*arr), arr, bs);</span><br><span class="line">    </span><br><span class="line">    for(int i =0; i != sizeof(arr) / sizeof(*arr); ++i)&#123;</span><br><span class="line">        printf(&quot;[%d] = %d\n&quot;, i, *(arr+i));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</details>
 
 
+<ol start="12">
+<li>略</li>
+</ol>
+<details>
+<summary>13. 要求输入数组元素，并进行处理</summary>
+
+<ol>
+<li><p>输入3个double类型数组的元素，每个数组5个元素</p>
+</li>
+<li><p>将3个数组的元素储存在3*5二维数组里</p>
+</li>
+<li><p>计算每个数组的平均值</p>
+</li>
+<li><p>计算所有数据的平均值</p>
+</li>
+<li><p>找出所有数据中的最大值</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#include &quot;./ch.hpp&quot;</span><br><span class="line"></span><br><span class="line">// 传入一个数组长度，用户输入数据，返回一个数组</span><br><span class="line">double* test_10_13_0(const int);</span><br><span class="line"></span><br><span class="line">// 传入3个数组，返回一个二维数组</span><br><span class="line">double** test_10_13_1(const int,const int,const double*,\</span><br><span class="line"> const double*, const double*);</span><br><span class="line"></span><br><span class="line">// 计算一维数组的平均值</span><br><span class="line">double test_10_13_2(const int ,const double*);</span><br><span class="line"></span><br><span class="line">// 计算二维数组的平均值</span><br><span class="line">double test_10_13_3(const int, const int,  double**);</span><br><span class="line"></span><br><span class="line">// 查找二维数组的最大值</span><br><span class="line">double test_10_13_4(const int ,const int ,  double**);</span><br><span class="line"></span><br><span class="line">int main(void)&#123;</span><br><span class="line">    const int size = 5;</span><br><span class="line"></span><br><span class="line">     double *p1 = test_10_13_0(size);</span><br><span class="line">    printf(&quot;p1的平均值为%lf\n&quot;, test_10_13_2(size, p1));</span><br><span class="line"></span><br><span class="line">     double *p2 = test_10_13_0(size);</span><br><span class="line">    printf(&quot;p2的平均值为%lf\n&quot;, test_10_13_2(size, p2));</span><br><span class="line"></span><br><span class="line">     double *p3 = test_10_13_0(size);</span><br><span class="line">    printf(&quot;p3的平均值为%lf\n&quot;, test_10_13_2(size, p3));</span><br><span class="line"></span><br><span class="line">    printf(&quot;\n\n&quot;);</span><br><span class="line">     double **p4 = test_10_13_1(3, size, p1, p2, p3);</span><br><span class="line">    printf(&quot;所有元素的平均值为%lf\n&quot;, test_10_13_3(3, size, p4));</span><br><span class="line">    printf(&quot;所有元素的最大值为%lf\n&quot;, test_10_13_4(3, size, p4));</span><br><span class="line"></span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">double* test_10_13_0(const int size)&#123;</span><br><span class="line">    double *p = (double*)malloc(sizeof(double) * size);</span><br><span class="line">    for(int i =0; i != size; ++i)&#123;</span><br><span class="line">        printf(&quot;输入第%d个元素（还剩下%d个元素没有输入）\n&quot;, i+1, size-1-i);</span><br><span class="line">        scanf(&quot;%lf&quot;, p+i);</span><br><span class="line">        printf(&quot;[%d] = %lf\n&quot;, i , *(p+i));</span><br><span class="line">    &#125;</span><br><span class="line">    return p;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">double** test_10_13_1(const int size_1 ,const int size_2,const  double *arr1,\</span><br><span class="line"> const double *arr2,const double *arr3)&#123;</span><br><span class="line">     double **p = (double**)malloc(sizeof(double) * size_1);</span><br><span class="line">     for(int i =0; i != size_1; ++i)&#123;</span><br><span class="line">         *(p+i) = (double*)malloc(sizeof(double) * size_2);</span><br><span class="line">     &#125;</span><br><span class="line">     </span><br><span class="line">     for(int i =0; i != size_1; ++i)&#123;</span><br><span class="line">        for(int j =0; j != size_2; ++j)&#123;</span><br><span class="line">            if(i == 0)&#123;</span><br><span class="line">                *(*(p+i)+j) = *(arr1+j);</span><br><span class="line">                printf(&quot;[%d][%d] = %lf\n&quot;, i,j, *(*(p+i)+j));</span><br><span class="line">            &#125; else if(i == 1)&#123;</span><br><span class="line">                *(*(p+i)+j) = *(arr2+j);</span><br><span class="line">                printf(&quot;[%d][%d] = %lf\n&quot;, i,j, *(*(p+i)+j));</span><br><span class="line">            &#125; else if(i == 2)&#123;</span><br><span class="line">                *(*(p+i)+j) = *(arr3+j);</span><br><span class="line">                printf(&quot;[%d][%d] = %lf\n&quot;, i,j, *(*(p+i)+j));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">     &#125;</span><br><span class="line">     </span><br><span class="line">     return p;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">double test_10_13_2(const int size, const double *arr)&#123;</span><br><span class="line">    double num = 0.0;</span><br><span class="line">    for(int i =0 ; i != size; ++i)&#123;</span><br><span class="line">        num += *(arr+i);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return num / size;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">double test_10_13_3(const int size_1, const int size_2,\</span><br><span class="line">  double **arr)&#123;</span><br><span class="line">     double num1 = 0.0, // 一位数组的总和</span><br><span class="line">            num2 = 0.0; // 二维数组的总和</span><br><span class="line">     for(int i =0; i != size_1; ++i)&#123;</span><br><span class="line">         for(int j =0; j != size_2; ++j)&#123;</span><br><span class="line">            num1 += *(*(arr+i)+j);</span><br><span class="line">         &#125;</span><br><span class="line">         num2 += num1;</span><br><span class="line">         num1 = 0; // 初始化，记录下一个一维数组的总和</span><br><span class="line">     &#125;</span><br><span class="line">     return num2 / size_1 / size_2;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> double test_10_13_4(const int size_1,const int size_2, \</span><br><span class="line">  double **arr)&#123;</span><br><span class="line">      double max = **arr;</span><br><span class="line">      for(int i =0; i != size_1; ++i)&#123;</span><br><span class="line">          for(int j =0; j != size_2; ++j)&#123;</span><br><span class="line">              if(max &lt; *(*(arr+i)+j))&#123;</span><br><span class="line">                  max = *(*(arr+i)+j);</span><br><span class="line">              &#125;</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      return max;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+</details>
 
 
-
-
-
+<ol start="14">
+<li>略</li>
+</ol>
 <hr>
 ]]></content>
       <categories>
