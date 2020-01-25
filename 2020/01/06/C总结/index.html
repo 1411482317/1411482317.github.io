@@ -110,9 +110,10 @@
 <meta property="og:image" content="https://1411482317.github.io/2020/01/06/C总结/jg.png">
 <meta property="og:image" content="https://1411482317.github.io/2020/01/06/C总结/str.png">
 <meta property="og:image" content="https://1411482317.github.io/2020/01/06/C总结/str2.png">
+<meta property="og:image" content="https://1411482317.github.io/2020/01/06/C总结/canshu.png">
 <meta property="og:image" content="https://1411482317.github.io/2020/01/06/C总结/pf.png">
 <meta property="og:image" content="https://1411482317.github.io/2020/01/06/C总结/sf.png">
-<meta property="og:updated_time" content="2020-01-24T05:25:56.048Z">
+<meta property="og:updated_time" content="2020-01-25T12:52:04.236Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C总结">
 <meta name="twitter:description" content="基于操作系统CentOS8与GCC8.2 粗略总结C语言">
@@ -413,7 +414,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  5.8k
+                  6.2k
                 </span>
               
 
@@ -429,7 +430,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  23
+                  25
                 </span>
               
             </div>
@@ -757,6 +758,7 @@
 
 <hr>
 <h1 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h1><p>字符串是由多个字符所组成的，并且每个字符串的最后的一个字符是<code>\0</code></p>
+<p>用<code>&quot;&quot;</code>引起来的字符串自动添加\0</p>
 <details>
 <summary>字符串的输入输出</summary>
 
@@ -839,27 +841,27 @@
 </tr>
 <tr>
 <td>strcat (str1, str2)</td>
-<td><strong>拼接字符串</strong>，将第二个字符串添加到第一个字符串的末尾处，不判断str1的大小是否能容纳str2</td>
+<td><strong>拼接字符串</strong>，将第二个字符串添加到第一个字符串的末尾处，不判断str1的大小是否能容纳str2，返回指向str1第一位置的指针</td>
 </tr>
 <tr>
 <td>strncat (str1, str2, n)</td>
-<td><strong>拼接字符串</strong>，用n判断str1是否能容纳str2</td>
+<td><strong>拼接字符串</strong>，n为需要拷贝str2的字符数量，返回指向str1第一位置的指针</td>
 </tr>
 <tr>
 <td>strcmp (str1, str2)</td>
-<td><strong>字符串比较</strong>，str1 &gt; str2 ，返回值：str1比str2大，则用正数表示多出的数，比str2小的话用负数表示少的数，一样用0表示</td>
+<td><strong>字符串比较</strong>，传入数组（相同返回0，str1的字符比str2的字符多返回1，少则返回-1），传入指针（相同返回0，不同则返回第一个不同字符ASCII的差值）</td>
 </tr>
 <tr>
 <td>strncmp (str1, str2, n)</td>
-<td><strong>比较</strong>n个字符串</td>
+<td><strong>字符串比较</strong>类似strcmp，第三个参数为比较str2，n个字符数量</td>
 </tr>
 <tr>
 <td>strcpy (str1, str2)</td>
-<td><strong>字符串拷贝</strong>，str2的字符串拷贝给str1</td>
+<td><strong>字符串拷贝</strong>，str2的字符串拷贝给str1，返回str1的第一个位置</td>
 </tr>
 <tr>
 <td>strncpy (str1, str2, n)</td>
-<td><strong>字符串拷贝</strong>，指定从str2拷贝n个字符到str1</td>
+<td><strong>字符串拷贝</strong>，类似strcpy，第三个参数为指定从str2拷贝n个字符到str1</td>
 </tr>
 <tr>
 <td>sprintf (str, str_format, …)</td>
@@ -881,7 +883,57 @@
 <td>strstr (str1, str2)</td>
 <td><strong>str1里查找 str2出现的首位置</strong>，找不到返回空指针</td>
 </tr>
+<tr>
+<td>atoi(str)</td>
+<td>将字符串转换成int类型</td>
+</tr>
+<tr>
+<td>atol(str)</td>
+<td>将字符串转换成long类型</td>
+</tr>
+<tr>
+<td>atof(str)</td>
+<td>将字符串转换成double类型</td>
+</tr>
+<tr>
+<td>strtol</td>
+<td>将long类型转换成字符串</td>
+</tr>
+<tr>
+<td>strtoul</td>
+<td>将unsigned long类型转换成字符串</td>
+</tr>
+<tr>
+<td>strtod</td>
+<td>将double类型转换成字符串</td>
+</tr>
 </tbody></table>
+</details>
+
+<details>
+<summary>命令行参数</summary>
+
+<ol>
+<li><p>argc记录参数的数量 （文件名也算一个）</p>
+</li>
+<li><p>argv记录每行参数，以字符串形式</p>
+</li>
+<li><p>argv第一个索引的字符串为当前文件的名称</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// 使用特殊的main函数</span><br><span class="line">int main(int argc, char **argv)&#123;</span><br><span class="line">    printf(&quot;一共有%d个参数&quot;, argc - 1);</span><br><span class="line">    printf(&quot;文件名为%s\n&quot;, *argv);</span><br><span class="line">	</span><br><span class="line">    // 输出所有参数</span><br><span class="line">    for(int i = 1; i != argc; ++i)&#123;</span><br><span class="line">        printf(&quot;[%d] = %s\n&quot;, i, *(argv+i));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="canshu.png" alt></p>
+<p><strong>使用命令行参数，控制循环次数的例子</strong></p>
+<ol>
+<li><p>最多只能有一个参数</p>
+</li>
+<li><p>循环次数至少有一次</p>
+</li>
+</ol>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">int main(int argc, char **argv)&#123;</span><br><span class="line">    int i = 0; // 记录第一个参数，即循环次数</span><br><span class="line">    if(argc != 2 || (i = atoi(*(argv+1))) &lt; 1)&#123;</span><br><span class="line">        printf(&quot;输入错误\n&quot;);</span><br><span class="line">        return 1;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        for(int j =0; j != i ; ++j)&#123;</span><br><span class="line">            printf(&quot;[%d] is ok\n&quot;, j);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</blockquote>
 </details>
 
 <hr>
@@ -2191,7 +2243,7 @@ document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " 
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">51k</span>
+    <span title="Site words total count">51.3k</span>
   
 </div>
 
