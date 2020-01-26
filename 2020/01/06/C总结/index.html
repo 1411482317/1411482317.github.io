@@ -113,7 +113,7 @@
 <meta property="og:image" content="https://1411482317.github.io/2020/01/06/C总结/canshu.png">
 <meta property="og:image" content="https://1411482317.github.io/2020/01/06/C总结/pf.png">
 <meta property="og:image" content="https://1411482317.github.io/2020/01/06/C总结/sf.png">
-<meta property="og:updated_time" content="2020-01-25T12:52:04.236Z">
+<meta property="og:updated_time" content="2020-01-26T12:45:44.653Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C总结">
 <meta name="twitter:description" content="基于操作系统CentOS8与GCC8.2 粗略总结C语言">
@@ -414,7 +414,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  6.2k
+                  6.3k
                 </span>
               
 
@@ -829,7 +829,7 @@
 </tr>
 <tr>
 <td>fgets (str, n, input)</td>
-<td><strong>功能与gets一样</strong>,通过第二个参数限制字符溢出的问题，\n也会停止读取</td>
+<td><strong>功能与gets一样</strong>,获取n-1个字符（最后一个字符为\0），\n会停止读取，不会丢弃\n，返回值为指向这个字符串的指针（注意：假如输入的字符大于下次限定，数据将会储存在缓冲区里）</td>
 </tr>
 <tr>
 <td>gets_s (str, n)</td>
@@ -896,16 +896,16 @@
 <td>将字符串转换成double类型</td>
 </tr>
 <tr>
-<td>strtol</td>
-<td>将long类型转换成字符串</td>
+<td>strtol(begin, &amp;end, 进制类型)</td>
+<td>将字符串转换成long类型</td>
 </tr>
 <tr>
-<td>strtoul</td>
-<td>将unsigned long类型转换成字符串</td>
+<td>strtoul(begin, &amp;end, 进制类型)</td>
+<td>将字符串转换成unsigned long类型</td>
 </tr>
 <tr>
-<td>strtod</td>
-<td>将double类型转换成字符串</td>
+<td>strtod(begin, &amp;end)</td>
+<td>将字符串转换成double类型，只能转成10进制</td>
 </tr>
 </tbody></table>
 </details>
@@ -1586,11 +1586,11 @@
 </thead>
 <tbody><tr>
 <td>getchar()</td>
-<td>输入一个字符</td>
+<td>从标准输入里输入一个字符</td>
 </tr>
 <tr>
 <td>putchar(int)</td>
-<td>输出一个字符，包括空格与换行符</td>
+<td>从标准输出里一个字符，包括空格与换行符</td>
 </tr>
 </tbody></table>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">char c;</span><br><span class="line">    if(c = getchar())</span><br><span class="line">        putchar(c);</span><br></pre></td></tr></table></figure>
@@ -2243,7 +2243,7 @@ document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " 
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">51.3k</span>
+    <span title="Site words total count">52.9k</span>
   
 </div>
 
