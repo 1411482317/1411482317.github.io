@@ -106,7 +106,7 @@
 <meta property="og:image" content="https://1411482317.github.io/2019/10/02/c-primer-plus笔记/%E7%BC%93%E5%86%B2%E5%8C%BA.png">
 <meta property="og:image" content="https://1411482317.github.io/2019/10/02/c-primer-plus笔记/%E5%AD%97%E7%AC%A6%E4%B8%B2.jpg">
 <meta property="og:image" content="https://1411482317.github.io/2019/10/02/c-primer-plus笔记/%E6%8E%A9%E7%A0%81.jpg">
-<meta property="og:updated_time" content="2020-01-26T14:23:32.427Z">
+<meta property="og:updated_time" content="2020-02-03T07:25:03.627Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="c primer plus笔记">
 <meta name="twitter:description" content="c primer plus第六版总结">
@@ -429,7 +429,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  11.9k
+                  12.3k
                 </span>
               
 
@@ -445,7 +445,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  56
+                  58
                 </span>
               
             </div>
@@ -1715,19 +1715,47 @@
 <details>
 <summary>9. 反转字符串</summary>
 
+<ol>
+<li><p>源字符串逆向循环</p>
+</li>
+<li><p>源字符串空白符前一个位置作为索引</p>
+</li>
+</ol>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">#include &quot;./ch.hpp&quot;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">char* test(const char *str)&#123;</span><br><span class="line">    char *temp = (char*)malloc(sizeof(char) * strlen(str) + 1);</span><br><span class="line">    for(unsigned int i = strlen(str)-1, j =0; i != -1; --i, ++j)&#123;</span><br><span class="line">        *(temp+j) = *(str+i);</span><br><span class="line">        printf(&quot;[%d] = %c\n&quot;, j , *(temp+ j));</span><br><span class="line">    &#125;</span><br><span class="line">    *(temp+strlen(str)) = &apos;\0&apos;;</span><br><span class="line">    return temp;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 获取字符串</span><br><span class="line">char* test2(char *str, const unsigned int size)&#123;</span><br><span class="line">    char *p = fgets(str, size, stdin);</span><br><span class="line">    if(p)&#123;</span><br><span class="line">        unsigned int i =0;</span><br><span class="line">        while(*(p+i) != &apos;\0&apos; &amp;&amp; *(p+i) != &apos;\n&apos;)&#123;</span><br><span class="line">            ++i;</span><br><span class="line">        &#125;</span><br><span class="line">        if(*(p+i) == &apos;\n&apos;)&#123;</span><br><span class="line">            *(p+i) = &apos;\0&apos;;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            while(getchar() != &apos;\n&apos;)&#123;</span><br><span class="line">                continue;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return p;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">int main(void)&#123;</span><br><span class="line">    const unsigned int size =7;</span><br><span class="line">    char *str = (char*)malloc(sizeof(char) * size);</span><br><span class="line"></span><br><span class="line">    char *p = test2(str, size);</span><br><span class="line">    char *p2 = test(str);</span><br><span class="line">    </span><br><span class="line">    puts(p2);</span><br><span class="line"></span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 </details>
 
 
+<details>
+<summary>10. 删除字符串中的空格</summary>
+
+<ol>
+<li><p>获取用户输入</p>
+</li>
+<li><p>创建一个数组，将字符串拷贝进去（空格字符除外）</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line">#include &lt;string.h&gt;</span><br><span class="line"></span><br><span class="line">// 获取用户输入</span><br><span class="line">char* test(char *str, const unsigned int size)&#123;</span><br><span class="line">    char *data = fgets(str, size, stdin);</span><br><span class="line">    if(data)&#123;</span><br><span class="line">        unsigned int i = 0;</span><br><span class="line">        while(*(data+i) != &apos;\n&apos; &amp;&amp; *(data+i) != &apos;\0&apos;)&#123;</span><br><span class="line">            ++i;</span><br><span class="line">        &#125;</span><br><span class="line">        if(*(data+i) == &apos;\n&apos;)&#123;</span><br><span class="line">            *(data+i) == &apos;\0&apos;;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            while(getchar() != &apos;\n&apos;)&#123;</span><br><span class="line">                continue;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return data;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">char* test2(const char *str)&#123;</span><br><span class="line">    unsigned int kg_num = 0, i = 0, j = 0;</span><br><span class="line">    while(*(str+i) != &apos;\0&apos;)&#123;</span><br><span class="line">        if(*(str    + i++) == &apos; &apos;)&#123;</span><br><span class="line">            ++kg_num;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    char *data = (char*)malloc(sizeof(char) * strlen(str) +1 - kg_num);</span><br><span class="line">    // 拷贝非空白字符</span><br><span class="line">    for(i = 0; i != strlen(str)+1; ++i)&#123;</span><br><span class="line">        if(*(str+i) != &apos; &apos;)&#123;</span><br><span class="line">            *(data + j++) = *(str+i);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return data;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main(void)&#123;</span><br><span class="line"> const unsigned int size = 100;</span><br><span class="line"> char arr[size];</span><br><span class="line"> // 第一个字符不是换行符，并且不是空白符</span><br><span class="line"> while(*arr != &apos;\0&apos; &amp;&amp; *arr != &apos;\n&apos;)&#123; </span><br><span class="line"> printf(&quot;input data\n&quot;);</span><br><span class="line"> char *data = test(arr, size);</span><br><span class="line"> char *p =  test2(data);</span><br><span class="line"> printf(&quot;%s\n&quot;, p);</span><br><span class="line"> &#125;</span><br><span class="line"> return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</details>
 
 
+<details>
+<summary>11. 5种功能的菜单</summary>
 
-
-
-
-
-
+<ol>
+<li><p>循环输入10个或以上的字符串</p>
+<blockquote>
+<p>以\n结束第n个字符串的输入</p>
+</blockquote>
+</li>
+<li><p>功能1，输出输入的所有字符串</p>
+</li>
+<li><p>功能2，以ASCII顺序输出所有字符串</p>
+<blockquote>
+<p>以字符串首字符的ASCII码进行比较，小到大进行排序</p>
+</blockquote>
+</li></ol></details>
 
 
 
@@ -1874,7 +1902,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1896,7 +1924,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">15</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -2007,7 +2035,7 @@ document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " 
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">52.9k</span>
+    <span title="Site words total count">53.4k</span>
   
 </div>
 
