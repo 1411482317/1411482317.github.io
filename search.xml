@@ -1,6 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>gdb使用笔记</title>
+    <url>/2020/02/11/gdb%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<p>基于 <code>cent8</code> 操作系统的<code>gcc 8.3</code> 和 <code>gdb 8.2</code> </p>
+<img src="/2020/02/11/gdb使用笔记/fm.gif">
+
+<a id="more"></a>
+
+
+<p>若是需要用gdb进行调试，gcc进行编译时必须加上<code>-g</code>选项</p>
+<details>
+<summary>例子</summary>
+
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>gcc</td>
+<td>gcc的 绝对/相对 目录</td>
+</tr>
+<tr>
+<td>-g</td>
+<td>使用gdb进行调试</td>
+</tr>
+<tr>
+<td>test.c</td>
+<td>c文件</td>
+</tr>
+<tr>
+<td>-o</td>
+<td>指定输出文件</td>
+</tr>
+<tr>
+<td>a.out</td>
+<td>-o选项 输出的文件</td>
+</tr>
+</tbody></table>
+<p>相对目录</p>
+<blockquote>
+<p>注意：gcc需要全局变量才能直接运行</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">gcc -g test.c -o a.out</span><br></pre></td></tr></table></figure>
+
+
+<p>绝对目录</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">/usr/bin/gcc -g /mnt/my_dirent/gcc_file/test.c -o /mnt/my_dirent/gcc_file/a,out</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>whereis</td>
+<td>能查询软件安装的路径</td>
+</tr>
+</tbody></table>
+<p>gcc安装路径查询命令</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">whereis gcc</span><br></pre></td></tr></table></figure>
+
+<p><img src="1.png" alt></p>
+</details>
+
+<hr>
+<p>gdb的常用命令</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>gdb</td>
+<td>启动gdb</td>
+</tr>
+<tr>
+<td>gdb ./a.out</td>
+<td>打开gdb并打开文件</td>
+</tr>
+<tr>
+<td>quit</td>
+<td>退出gdb</td>
+</tr>
+<tr>
+<td>file ./a.out</td>
+<td>打开文件</td>
+</tr>
+<tr>
+<td>list</td>
+<td>查看10行代码</td>
+</tr>
+<tr>
+<td>run</td>
+<td>运行文件，若main有参数，则在run后面添加参数(如：run 10 20)</td>
+</tr>
+<tr>
+<td>next</td>
+<td>单步调试</td>
+</tr>
+<tr>
+<td>shell clear</td>
+<td>清屏</td>
+</tr>
+</tbody></table>
+]]></content>
+      <tags>
+        <tag>gdb</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>使用win10自带虚拟机安装linux，并添加共享目录</title>
     <url>/2020/02/05/%E4%BD%BF%E7%94%A8win10%E8%87%AA%E5%B8%A6%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%89%E8%A3%85linux/</url>
     <content><![CDATA[<img src="/2020/02/05/使用win10自带虚拟机安装linux/fm.jpg">
@@ -4048,7 +4164,7 @@ function player(src) {
 <p><strong>vs code安装c++语法</strong><br><img src="vsc.png" alt></p>
 <p><strong>设置配置文件：</strong></p>
 <blockquote>
-<p>按F1输入<code>launch.json</code> -&gt; gdb -&gt; <code>debug配置文件</code><br>按F1输入<code>tasks.json</code> -&gt; <code>configure tasks</code> -&gt; <code>create</code> -&gt; <code>others</code>生成编<code>译配置文件</code></p>
+<p>按F1输入<code>launch.json</code> -&gt; gdb -&gt; <code>debug配置文件</code><br>按F1输入<code>tasks</code> -&gt; <code>configure tasks</code> -&gt; <code>create</code> -&gt; <code>others</code>生成编<code>译配置文件</code></p>
 </blockquote>
 <p><strong>launch.json</strong></p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">    &quot;version&quot;: &quot;0.2.0&quot;,</span><br><span class="line">    &quot;configurations&quot;: [</span><br><span class="line">        &#123;</span><br><span class="line">            &quot;name&quot;: &quot;(gdb) Launch&quot;,					//名字，随便起</span><br><span class="line">            &quot;type&quot;: &quot;cppdbg&quot;,</span><br><span class="line">            &quot;request&quot;: &quot;launch&quot;,</span><br><span class="line">            &quot;program&quot;: &quot;$&#123;workspaceFolder&#125;/a.out&quot;,	//debug当前目录下的a.out文件</span><br><span class="line">            &quot;args&quot;: [],</span><br><span class="line">            &quot;stopAtEntry&quot;: false,</span><br><span class="line">            &quot;cwd&quot;: &quot;$&#123;workspaceFolder&#125;&quot;,</span><br><span class="line">            &quot;environment&quot;: [],</span><br><span class="line">            &quot;externalConsole&quot;: false,</span><br><span class="line">            &quot;MIMode&quot;: &quot;gdb&quot;,</span><br><span class="line">            &quot;preLaunchTask&quot;: &quot;build&quot;,				//生成编译文件，与tasks.json的&quot;label&quot;一样，名字也可以随便取</span><br><span class="line">            &quot;setupCommands&quot;: [</span><br><span class="line">                &#123;</span><br><span class="line">                    &quot;description&quot;: &quot;Enable pretty-printing for gdb&quot;,</span><br><span class="line">                    &quot;text&quot;: &quot;-enable-pretty-printing&quot;,</span><br><span class="line">                    &quot;ignoreFailures&quot;: true</span><br><span class="line">                &#125;</span><br><span class="line">            ],</span><br><span class="line">            &quot;miDebuggerPath&quot;: &quot;/GNU/gdb/bin/gdb&quot;  	//gdb路径</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -5424,7 +5540,179 @@ function player(src) {
 
 <h1 id="我的整个next主题"><a href="#我的整个next主题" class="headerlink" title="我的整个next主题"></a>我的整个next主题</h1><a class="btn" href="https://pan.baidu.com/s/1-ZNihHTC0HeQk1O_e25clA" target="_blank" rel="noopener"><i class="fa fa-download fa-lg fa-fw"></i>我的next主题</a>
 
-<h1 id="黑群晖6-17与安装所需工具"><a href="#黑群晖6-17与安装所需工具" class="headerlink" title="黑群晖6.17与安装所需工具"></a>黑群晖6.17与安装所需工具</h1><a class="btn" href="https://pan.baidu.com/s/1D-biTMeb8zf33qrzb34uew" target="_blank" rel="noopener"><i class="fa fa-download fa-lg fa-fw"></i>下载黑群晖6.17与安装所需的工具</a>]]></content>
+<hr>
+<h1 id="黑群晖6-17与安装所需工具"><a href="#黑群晖6-17与安装所需工具" class="headerlink" title="黑群晖6.17与安装所需工具"></a>黑群晖6.17与安装所需工具</h1><a class="btn" href="https://pan.baidu.com/s/1D-biTMeb8zf33qrzb34uew" target="_blank" rel="noopener"><i class="fa fa-download fa-lg fa-fw"></i>下载黑群晖6.17与安装所需的工具</a>
+
+<hr>
+<h1 id="程序员常用工具"><a href="#程序员常用工具" class="headerlink" title="程序员常用工具"></a>程序员常用工具</h1><details>
+<summary>折叠</summary>
+
+<ol>
+<li><p>IntelliJ IDEA</p>
+<blockquote>
+<p>JAVA编程语言开发的集成环境，收费的</p>
+</blockquote>
+</li>
+<li><p>Navicat</p>
+<blockquote>
+<p>数据可视化，收费的</p>
+</blockquote>
+</li>
+<li><p>Postman</p>
+<blockquote>
+<p>API&amp;HTTP请求调试工具，用来测接口</p>
+</blockquote>
+</li>
+<li><p>TypeAndRun</p>
+<blockquote>
+<p>快速启动工具，可以用热键呼出的控制台</p>
+</blockquote>
+</li>
+<li><p>Everything</p>
+<blockquote>
+<p>速度最快的文件搜索软件</p>
+</blockquote>
+</li>
+<li><p>HiJson</p>
+<blockquote>
+<p>快速查看JSON字符串</p>
+</blockquote>
+</li>
+<li><p>Sublime Text</p>
+<blockquote>
+<p>跨平台代码编辑器</p>
+</blockquote>
+</li>
+<li><p>Fiddler</p>
+<blockquote>
+<p>http协议调试代理工具</p>
+</blockquote>
+</li>
+<li><p>FinalShell</p>
+<blockquote>
+<p>网络管理软件</p>
+</blockquote>
+</li>
+<li><p>WinSCP </p>
+<blockquote>
+<p>Windows环境下使用SSH的开源图形化SFTP客户端</p>
+</blockquote>
+</li>
+<li><p>有道云笔记</p>
+<blockquote>
+<p>云同步笔记</p>
+</blockquote>
+</li>
+<li><p>Todoist</p>
+<blockquote>
+<p>任务管理应用程序和在线待办事项列表</p>
+</blockquote>
+</li>
+<li><p>XMind ZEN</p>
+<blockquote>
+<p>思维导图软件，收费的</p>
+</blockquote>
+</li>
+<li><p>source insight</p>
+<blockquote>
+<p>编辑器</p>
+</blockquote>
+</li>
+<li><p>Mindmanager</p>
+<blockquote>
+<p>思维导图</p>
+</blockquote>
+</li>
+<li><p>MarkdownPad</p>
+<blockquote>
+<p>windows上最好用的Markdown编辑器</p>
+</blockquote>
+</li>
+<li><p>Snipaste截图</p>
+<blockquote>
+<p>简单但强大的截图工具</p>
+</blockquote>
+</li>
+<li><p>Kafka Tool</p>
+<blockquote>
+<p>Kafka的可视化客户端工具，可以非常方便的查看Topic的队列信息以及消费者信息以及kafka节点信息</p>
+</blockquote>
+</li>
+<li><p>redisDesktopManager</p>
+<blockquote>
+<p>redis数据库管理软件</p>
+</blockquote>
+</li>
+<li><p>数据结构和算法动态可视化</p>
+<blockquote>
+<p><strong><a href="https://visualgo.net/zh" target="_blank" rel="noopener">网站</a></strong></p>
+</blockquote>
+</li>
+<li><p>果核剥壳</p>
+<blockquote>
+<p>一个良心软件下载网站；界面清晰，软件超多</p>
+</blockquote>
+</li>
+<li><p>爱资料在线工具</p>
+<blockquote>
+<p>为开发运维提供全面的在线工具箱,已开发工具270款,包含开发工具,运维工具,常用工具,SEO站长工具等,是好用,方便的在线工具网站</p>
+</blockquote>
+</li>
+<li><p>DogeDoge搜索</p>
+<blockquote>
+<p>搜索结果准确率高，不含广告，页面简洁、干净。百度搜索的替代品</p>
+</blockquote>
+</li>
+<li><p>processon</p>
+<blockquote>
+<p>在线作图工具的聚合平台</p>
+</blockquote>
+</li>
+<li><p>EVERSQL</p>
+<blockquote>
+<p>sql在线优化工具</p>
+</blockquote>
+</li>
+<li><p>yaml与properties互转工具</p>
+<blockquote>
+<p><strong><a href="https://www.toyaml.com/index.html" target="_blank" rel="noopener">网站</a></strong></p>
+</blockquote>
+</li>
+<li><p>ShowDoc接口文档 </p>
+<blockquote>
+<p>在线文档分享工具</p>
+</blockquote>
+</li>
+<li><p>sourceCRT</p>
+<blockquote>
+<p>SSH远程连接软件</p>
+</blockquote>
+</li>
+<li><p>vs code</p>
+<blockquote>
+<p>微软的强大文本编辑器</p>
+</blockquote>
+</li>
+<li><p>vmware fusion</p>
+<blockquote>
+<p>虚拟机</p>
+</blockquote>
+</li>
+<li><p>dash</p>
+<blockquote>
+<p>开发文档管理器</p>
+</blockquote>
+</li>
+<li><p>wireshark</p>
+<blockquote>
+<p>捉包工具</p>
+</blockquote>
+</li>
+</ol>
+
+
+<hr>
+</details>]]></content>
   </entry>
   <entry>
     <title>学习路线</title>

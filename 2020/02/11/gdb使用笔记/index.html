@@ -83,7 +83,7 @@
 
 
 
-  <meta name="keywords" content="C,">
+  <meta name="keywords" content="gdb,">
 
 
 
@@ -94,24 +94,21 @@
 
 
 
-<meta name="description" content="基于centos8,gcc8.2的错误 段错误应该就是访问了不可访问的内存，这个内存区要么是不存在的，要么是受到系统保护的。">
-<meta name="keywords" content="C">
+<meta name="description" content="基于 cent8 操作系统的gcc 8.3 和 gdb 8.2">
+<meta name="keywords" content="gdb">
 <meta property="og:type" content="article">
-<meta property="og:title" content="C段错误(Segmentation fault)">
-<meta property="og:url" content="https://1411482317.github.io/2020/01/13/C段错误-Segmentation-fault/index.html">
+<meta property="og:title" content="gdb使用笔记">
+<meta property="og:url" content="https://1411482317.github.io/2020/02/11/gdb使用笔记/index.html">
 <meta property="og:site_name" content="大石砸死蟹">
-<meta property="og:description" content="基于centos8,gcc8.2的错误 段错误应该就是访问了不可访问的内存，这个内存区要么是不存在的，要么是受到系统保护的。">
+<meta property="og:description" content="基于 cent8 操作系统的gcc 8.3 和 gdb 8.2">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://1411482317.github.io/2020/01/13/C段错误-Segmentation-fault/fm.jpg">
-<meta property="og:image" content="https://1411482317.github.io/2020/01/13/C段错误-Segmentation-fault/error.png">
-<meta property="og:image" content="https://1411482317.github.io/2020/01/13/C段错误-Segmentation-fault/gdb_error.png">
-<meta property="og:image" content="https://1411482317.github.io/2020/01/13/C段错误-Segmentation-fault/err1.png">
-<meta property="og:image" content="https://1411482317.github.io/2020/01/13/C段错误-Segmentation-fault/sf.png">
-<meta property="og:updated_time" content="2020-01-13T11:35:23.670Z">
+<meta property="og:image" content="https://1411482317.github.io/2020/02/11/gdb使用笔记/fm.gif">
+<meta property="og:image" content="https://1411482317.github.io/2020/02/11/gdb使用笔记/1.png">
+<meta property="og:updated_time" content="2020-02-11T04:07:20.880Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="C段错误(Segmentation fault)">
-<meta name="twitter:description" content="基于centos8,gcc8.2的错误 段错误应该就是访问了不可访问的内存，这个内存区要么是不存在的，要么是受到系统保护的。">
-<meta name="twitter:image" content="https://1411482317.github.io/2020/01/13/C段错误-Segmentation-fault/fm.jpg">
+<meta name="twitter:title" content="gdb使用笔记">
+<meta name="twitter:description" content="基于 cent8 操作系统的gcc 8.3 和 gdb 8.2">
+<meta name="twitter:image" content="https://1411482317.github.io/2020/02/11/gdb使用笔记/fm.gif">
 
 
 
@@ -144,7 +141,7 @@
 
 
 
-  <link rel="canonical" href="https://1411482317.github.io/2020/01/13/C段错误-Segmentation-fault/">
+  <link rel="canonical" href="https://1411482317.github.io/2020/02/11/gdb使用笔记/">
 
 
 
@@ -152,7 +149,7 @@
 
 
 
-  <title>C段错误(Segmentation fault) | 大石砸死蟹</title>
+  <title>gdb使用笔记 | 大石砸死蟹</title>
   
 
 
@@ -336,7 +333,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://1411482317.github.io/2020/01/13/C段错误-Segmentation-fault/">
+    <link itemprop="mainEntityOfPage" href="https://1411482317.github.io/2020/02/11/gdb使用笔记/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="二打禄">
@@ -353,7 +350,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">C段错误(Segmentation fault)</h1>
+          <h1 class="post-title" itemprop="name headline">gdb使用笔记</h1>
         
 
         <div class="post-meta">
@@ -365,8 +362,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-01-13T17:56:02+08:00">
-                2020-01-13
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-02-11T11:10:16+08:00">
+                2020-02-11
               </time>
             
 
@@ -383,7 +380,7 @@
 
           
           
-             <span id="/2020/01/13/C段错误-Segmentation-fault/" class="leancloud_visitors" data-flag-title="C段错误(Segmentation fault)">
+             <span id="/2020/02/11/gdb使用笔记/" class="leancloud_visitors" data-flag-title="gdb使用笔记">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -408,7 +405,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  819
+                  230
                 </span>
               
 
@@ -424,7 +421,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  4
+                  1
                 </span>
               
             </div>
@@ -445,46 +442,114 @@
       
 
       
-        <img src="/2020/01/13/C段错误-Segmentation-fault/fm.jpg">
+        <p>基于 <code>cent8</code> 操作系统的<code>gcc 8.3</code> 和 <code>gdb 8.2</code> </p>
+<img src="/2020/02/11/gdb使用笔记/fm.gif">
 
-<p>基于centos8,gcc8.2的错误</p>
-<p>段错误应该就是访问了不可访问的内存，这个内存区要么是不存在的，要么是受到系统保护的。</p>
 <a id="more"></a>
 
-<p>vs_code错误图<br><img src="error.png" alt></p>
-<p>GDB单步错误图<br><img src="gdb_error.png" alt></p>
-<p>段错误代码</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">void function_8_8(void)&#123;</span><br><span class="line">    printf(&quot;1.+\t2.-\t3.*\t4./\t5.exit\n&quot;);</span><br><span class="line">    short num;</span><br><span class="line">    float n1,n2;</span><br><span class="line">    scanf(&quot;%d&quot;, &amp;num);</span><br><span class="line">    if(num == 1)&#123;</span><br><span class="line">        printf(&quot;输入数字1\n&quot;);</span><br><span class="line">        scanf(&quot;%f&quot;, &amp;n1);</span><br><span class="line">        printf(&quot;输入数字2\n&quot;);</span><br><span class="line">        scanf(&quot;%f&quot;, &amp;n2);</span><br><span class="line">        printf(&quot;%f + %f = %f\n&quot;, n1, n2, n1+n2);</span><br><span class="line">    &#125; else if (num == 2)&#123;</span><br><span class="line">        printf(&quot;输入数字1\n&quot;);</span><br><span class="line">        scanf(&quot;%f&quot;, &amp;n1);</span><br><span class="line">        printf(&quot;输入数字2\n&quot;);</span><br><span class="line">        scanf(&quot;%f&quot;, &amp;n2);</span><br><span class="line">        printf(&quot;%f - %f = %f\n&quot;, n1, n2, n1-n2);</span><br><span class="line">    &#125; else if (num == 3)&#123;</span><br><span class="line">        printf(&quot;输入数字1\n&quot;);</span><br><span class="line">        scanf(&quot;%f&quot;, &amp;n1);</span><br><span class="line">        printf(&quot;输入数字2\n&quot;);</span><br><span class="line">        scanf(&quot;%f&quot;, &amp;n2);</span><br><span class="line">        printf(&quot;%f * %f = %f\n&quot;, n1, n2, n1*n2);</span><br><span class="line">    &#125; else if (num == 4)&#123;</span><br><span class="line">        printf(&quot;输入数字1\n&quot;);</span><br><span class="line">        scanf(&quot;%f&quot;, &amp;n1);</span><br><span class="line">        printf(&quot;输入数字2\n&quot;);</span><br><span class="line">        scanf(&quot;%f&quot;, &amp;n2);</span><br><span class="line">        printf(&quot;%f / %f = %f\n&quot;, n1, n2, n1/n2);</span><br><span class="line">    &#125; else if(num == 5)&#123;</span><br><span class="line">        return;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        printf(&quot;input error\n&quot;);</span><br><span class="line">        exit(1);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>解决：</p>
+<p>若是需要用gdb进行调试，gcc进行编译时必须加上<code>-g</code>选项</p>
+<details>
+<summary>例子</summary>
+
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>gcc</td>
+<td>gcc的 绝对/相对 目录</td>
+</tr>
+<tr>
+<td>-g</td>
+<td>使用gdb进行调试</td>
+</tr>
+<tr>
+<td>test.c</td>
+<td>c文件</td>
+</tr>
+<tr>
+<td>-o</td>
+<td>指定输出文件</td>
+</tr>
+<tr>
+<td>a.out</td>
+<td>-o选项 输出的文件</td>
+</tr>
+</tbody></table>
+<p>相对目录</p>
 <blockquote>
-<p>在创建变量之前，先初始化变量，在scanf的结束的时候，判输入的变量程是否为我们的初始值。<br>如果是的话，说明我们的scanf并没有成功，用printf查看scanf的返回值，查看是否有错误信息</p>
+<p>注意：gcc需要全局变量才能直接运行</p>
 </blockquote>
-<p>我将上列代码该成如下，并进行测试</p>
-<ol>
-<li><p>只是为变量添加了初始值</p>
-</li>
-<li><p>查看scanf的返回值</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">void function_8_8(void)&#123;</span><br><span class="line">    printf(&quot;1.+\t2.-\t3.*\t4./\t5.exit\n&quot;);</span><br><span class="line">    short num = 0; // 使用前初始化</span><br><span class="line">    float n1 = 0.0,n2 = 0.0; // 使用前初始化</span><br><span class="line">    int t1 = 0,t2 = 0, t3 = 0; // 测试scanf返回值</span><br><span class="line">    t1 = scanf(&quot;%d&quot;, &amp;num);</span><br><span class="line">    printf(&quot;t1 = %d\n&quot;, t1);</span><br><span class="line">    if(num == 1)&#123;</span><br><span class="line">        printf(&quot;输入数字1\n&quot;);</span><br><span class="line">        t2 = scanf(&quot;%f&quot;, &amp;n1);</span><br><span class="line">        printf(&quot;t2 = %d\n&quot;, t2);</span><br><span class="line">        printf(&quot;输入数字2\n&quot;);</span><br><span class="line">        t3 = scanf(&quot;%f&quot;, &amp;n2);</span><br><span class="line">        printf(&quot;t3 = %d\n&quot;, t3);</span><br><span class="line">        printf(&quot;%f + %f = %f\n&quot;, n1, n2, n1+n2);</span><br><span class="line">    &#125; else if (num == 2)&#123;</span><br><span class="line">        printf(&quot;输入数字1\n&quot;);</span><br><span class="line">        t2 = scanf(&quot;%f&quot;, &amp;n1);</span><br><span class="line">        printf(&quot;t2 = %d\n&quot;, t2);</span><br><span class="line">        printf(&quot;输入数字2\n&quot;);</span><br><span class="line">        t3 = scanf(&quot;%f&quot;, &amp;n2);</span><br><span class="line">        printf(&quot;t3 = %d\n&quot;, t3);</span><br><span class="line">        printf(&quot;%f - %f = %f\n&quot;, n1, n2, n1-n2);</span><br><span class="line">    &#125; else if (num == 3)&#123;</span><br><span class="line">        printf(&quot;输入数字1\n&quot;);</span><br><span class="line">        t2 = scanf(&quot;%f&quot;, &amp;n1);</span><br><span class="line">        printf(&quot;t2 = %d\n&quot;, t2);</span><br><span class="line">        printf(&quot;输入数字2\n&quot;);</span><br><span class="line">        t3 = scanf(&quot;%f&quot;, &amp;n2);</span><br><span class="line">        printf(&quot;t3 = %d\n&quot;, t3);</span><br><span class="line">        printf(&quot;%f * %f = %f\n&quot;, n1, n2, n1*n2);</span><br><span class="line">    &#125; else if (num == 4)&#123;</span><br><span class="line">        printf(&quot;输入数字1\n&quot;);</span><br><span class="line">        t2 = scanf(&quot;%f&quot;, &amp;n1);</span><br><span class="line">        printf(&quot;t2 = %d\n&quot;, t2);</span><br><span class="line">        printf(&quot;输入数字2\n&quot;);</span><br><span class="line">        t3 = scanf(&quot;%f&quot;, &amp;n2);</span><br><span class="line">        printf(&quot;t3 = %d\n&quot;, t3);</span><br><span class="line">        printf(&quot;%f / %f = %f\n&quot;, n1, n2, n1/n2);</span><br><span class="line">    &#125; else if(num == 5)&#123;</span><br><span class="line">        printf(&quot;is exit\n&quot;);</span><br><span class="line">        return;</span><br><span class="line">    &#125; else if(num == 0)&#123;</span><br><span class="line">        printf(&quot;input error \&quot;num == 0\&quot;\n&quot;);</span><br><span class="line">        exit(1);</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        printf(&quot;input error\n&quot;);</span><br><span class="line">        exit(1);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<ul>
-<li>scanf的返回值为1，意思是我只有一个输入内容</li>
-</ul>
-<p><img src="err1.png" alt></p>
-<blockquote>
-<p>测试并没有出现任何的问题</p>
-<p>可能是我用了没有初始化的变量所导致的错误？</p>
-</blockquote>
-<p><a href="https://blog.csdn.net/cs_polebear/article/details/38904783" target="_blank" rel="noopener"><strong>分段错误参考</strong></a></p>
-<div class="tabs" id="sf"><ul class="nav-tabs"><li class="tab active"><a href="#sf-1">多个scanf输入</a></li></ul><div class="tab-content"><div class="tab-pane active" id="sf-1"><p><img src="sf.png" alt></p>
-<p><a href="https://www.runoob.com/cprogramming/c-function-scanf.html" target="_blank" rel="noopener"><strong>scanf参考</strong></a></p>
-</div></div></div>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -g test.c -o a.out</span><br></pre></td></tr></table></figure>
 
 
+<p>绝对目录</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/bin/gcc -g /mnt/my_dirent/gcc_file/test.c -o /mnt/my_dirent/gcc_file/a,out</span><br></pre></td></tr></table></figure>
 
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>whereis</td>
+<td>能查询软件安装的路径</td>
+</tr>
+</tbody></table>
+<p>gcc安装路径查询命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">whereis gcc</span><br></pre></td></tr></table></figure>
 
+<p><img src="1.png" alt></p>
+</details>
 
+<hr>
+<p>gdb的常用命令</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>gdb</td>
+<td>启动gdb</td>
+</tr>
+<tr>
+<td>gdb ./a.out</td>
+<td>打开gdb并打开文件</td>
+</tr>
+<tr>
+<td>quit</td>
+<td>退出gdb</td>
+</tr>
+<tr>
+<td>file ./a.out</td>
+<td>打开文件</td>
+</tr>
+<tr>
+<td>list</td>
+<td>查看10行代码</td>
+</tr>
+<tr>
+<td>run</td>
+<td>运行文件，若main有参数，则在run后面添加参数(如：run 10 20)</td>
+</tr>
+<tr>
+<td>next</td>
+<td>单步调试</td>
+</tr>
+<tr>
+<td>shell clear</td>
+<td>清屏</td>
+</tr>
+</tbody></table>
 
       
     </div>
@@ -505,7 +570,7 @@
         <div class="post-tags">
           
 		  
-            <a href="/tags/C/" rel="tag"><i class="fa fa-tag"></i> C</a>
+            <a href="/tags/gdb/" rel="tag"><i class="fa fa-tag"></i> gdb</a>
 			
           
         </div>
@@ -519,8 +584,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/01/10/markdown格式里为html5播放器添加选集列表/" rel="next" title="markdown格式里为html5播放器添加选集列表">
-                <i class="fa fa-chevron-left"></i> markdown格式里为html5播放器添加选集列表
+              <a href="/2020/02/05/使用win10自带虚拟机安装linux/" rel="next" title="使用win10自带虚拟机安装linux，并添加共享目录">
+                <i class="fa fa-chevron-left"></i> 使用win10自带虚拟机安装linux，并添加共享目录
               </a>
             
           </div>
@@ -528,10 +593,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2020/01/13/vmware桥接无法连接网络/" rel="prev" title="vmware桥接无法连接网络">
-                vmware桥接无法连接网络 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
