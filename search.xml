@@ -1,6 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>使用vs code连接linux，实现远程开发环境</title>
+    <url>/2020/02/11/%E4%BD%BF%E7%94%A8vs-code%E8%BF%9C%E7%A8%8B%E5%BC%80%E5%8F%91%EF%BC%8C%E5%B9%B6%E6%8A%8Avs-code%E9%83%A8%E7%BD%B2%E5%88%B0%E6%9C%8D%E5%8A%A1%E7%AB%AFhttp%E8%AE%BF%E9%97%AE/</url>
+    <content><![CDATA[<p>基于 <code>win10的 vs code</code> 使用ssh连接cent8</p>
+<img src="/2020/02/11/使用vs-code远程开发，并把vs-code部署到服务端http访问/fm.jpg">
+
+<a id="more"></a>
+
+<h3 id="使用vs-code-远程连接linux"><a href="#使用vs-code-远程连接linux" class="headerlink" title="使用vs code 远程连接linux"></a>使用vs code 远程连接linux</h3><p>安装 Remote-SSH 插件</p>
+<p><img src="1.png" alt></p>
+<div class="tabs" id="x1"><ul class="nav-tabs"><li class="tab active"><a href="#x1-1">添加linux</a></li></ul><div class="tab-content"><div class="tab-pane active" id="x1-1"><blockquote>
+<p>按<code>F1</code>切换到命令面板输入<code>Remote-SSH</code>，然后选择<code>Connect to Host - Configure SSH Hosts</code></p>
+</blockquote>
+<p><img src="2.png" alt></p>
+<blockquote>
+<p>选择配置文件</p>
+</blockquote>
+<p><img src="3.png" alt></p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Host</td>
+<td>连接标识, 随便写</td>
+</tr>
+<tr>
+<td>HostName</td>
+<td>linux ip</td>
+</tr>
+<tr>
+<td>User</td>
+<td>linux 用户名</td>
+</tr>
+</tbody></table>
+<p><img src="4.png" alt></p>
+<blockquote>
+<p>新建窗口并连接linux</p>
+</blockquote>
+<p><img src="5.png" alt></p>
+<details>
+<summary>或者</summary>
+
+<p><code>F1</code> -&gt; <code>Remote-SSH</code> -&gt; <code>Connect to Host</code></p>
+</details>
+
+<hr>
+<blockquote>
+<p>输入密码</p>
+</blockquote>
+<p><img src="6.png" alt></p>
+<blockquote>
+<p>选择<code>file</code>，打开 文件/目录，即可找到linux内的文件</p>
+</blockquote>
+<p><img src="7.png" alt></p>
+</div></div></div>
+
+<p><code>注意：连接linux后，可以直接在 VSCode 上使用终端，执行远程 Linux 的命令（右键新建终端即可）</code></p>
+<hr>
+]]></content>
+      <tags>
+        <tag>vs code</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>gdb使用笔记</title>
     <url>/2020/02/11/gdb%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<p>基于 <code>cent8</code> 操作系统的<code>gcc 8.3</code> 和 <code>gdb 8.2</code> </p>
@@ -76,39 +143,73 @@
 <tr>
 <th>名称</th>
 <th>功能</th>
+<th>简写</th>
 </tr>
 </thead>
 <tbody><tr>
 <td>gdb</td>
 <td>启动gdb</td>
+<td></td>
 </tr>
 <tr>
 <td>gdb ./a.out</td>
 <td>打开gdb并打开文件</td>
+<td></td>
 </tr>
 <tr>
 <td>quit</td>
 <td>退出gdb</td>
+<td>q</td>
 </tr>
 <tr>
 <td>file ./a.out</td>
 <td>打开文件</td>
+<td>f ./a.out</td>
 </tr>
 <tr>
 <td>list</td>
 <td>查看10行代码</td>
+<td>l</td>
 </tr>
 <tr>
 <td>run</td>
 <td>运行文件，若main有参数，则在run后面添加参数(如：run 10 20)</td>
+<td>r</td>
+</tr>
+<tr>
+<td>start</td>
+<td>单步运行文件</td>
+<td></td>
 </tr>
 <tr>
 <td>next</td>
-<td>单步调试</td>
+<td>单步调试，不进入函数</td>
+<td>n</td>
+</tr>
+<tr>
+<td>step</td>
+<td>单步调试，进入函数</td>
+<td>s</td>
+</tr>
+<tr>
+<td>break 1</td>
+<td>在第1行添加断点</td>
+<td>b 1</td>
+</tr>
+<tr>
+<td>delete breakpoints 1</td>
+<td>删除第1个断点</td>
+<td>d 1</td>
 </tr>
 <tr>
 <td>shell clear</td>
 <td>清屏</td>
+<td></td>
+</tr>
+<tr>
+<td>print i</td>
+<td>查看变量i</td>
+<td>p i</td>
 </tr>
 </tbody></table>
 ]]></content>
@@ -147,6 +248,19 @@
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">// 创建映射目录</span><br><span class="line">mkdir /mnt/自定义名称目录</span><br><span class="line"></span><br><span class="line">// 挂载目录</span><br><span class="line">mount -o username=test,password=hacg5.me //192.168.1.101/e/file /mnt/file</span><br></pre></td></tr></table></figure>
 
 <p><img src="6.png" alt></p>
+<hr>
+<h3 id="设置网络状态共享"><a href="#设置网络状态共享" class="headerlink" title="设置网络状态共享"></a>设置网络状态共享</h3><blockquote>
+<p>创建虚拟网络</p>
+</blockquote>
+<p><img src="7.png" alt></p>
+<blockquote>
+<p>查看IP地址是否和宿主机相同</p>
+</blockquote>
+<p><img src="8.png" alt></p>
+<blockquote>
+<p>更换虚拟机网络</p>
+</blockquote>
+<p><img src="9.png" alt></p>
 <hr>
 ]]></content>
       <tags>
@@ -407,7 +521,7 @@ function player(src) {
 </script>
 
 </body>
-</body></html>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body></html>
 
 
 ]]></content>
