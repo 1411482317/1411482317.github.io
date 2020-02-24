@@ -1,0 +1,1523 @@
+<!DOCTYPE html>
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+
+
+  
+
+
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#FFE4E1">
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-center-atom.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/p/hz.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#FFE4E1">
+
+
+
+
+
+  <meta name="keywords" content="C开源,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="这是一个用C写的轻量级http server，使用cent8与vs code进行测试运行与修改">
+<meta name="keywords" content="C开源">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Tinyhttpd笔记">
+<meta property="og:url" content="https://1411482317.github.io/2020/02/19/CTinyhttpd笔记/index.html">
+<meta property="og:site_name" content="大石砸死蟹">
+<meta property="og:description" content="这是一个用C写的轻量级http server，使用cent8与vs code进行测试运行与修改">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://1411482317.github.io/2020/02/19/CTinyhttpd笔记/fm.jpg">
+<meta property="og:updated_time" content="2020-02-24T15:27:23.861Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Tinyhttpd笔记">
+<meta name="twitter:description" content="这是一个用C写的轻量级http server，使用cent8与vs code进行测试运行与修改">
+<meta name="twitter:image" content="https://1411482317.github.io/2020/02/19/CTinyhttpd笔记/fm.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":true},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+
+
+
+  <link rel="canonical" href="https://1411482317.github.io/2020/02/19/CTinyhttpd笔记/">
+
+
+
+
+
+
+
+  <title>Tinyhttpd笔记 | 大石砸死蟹</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner">
+
+<div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+
+
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">大石砸死蟹</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+	  
+
+	
+	  
+  </div>
+
+
+
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css">
+
+
+<script src="https://cdn.jsdelivr.net/gh/1411482317/live2d-widget/autoload.js"></script>
+
+
+ </div>
+	  
+	  
+	  
+	  
+	  
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://1411482317.github.io/2020/02/19/CTinyhttpd笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="二打禄">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/p/wb.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="大石砸死蟹">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Tinyhttpd笔记</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-02-19T14:02:34+08:00">
+                2020-02-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2020/02/19/CTinyhttpd笔记/" class="leancloud_visitors" data-flag-title="Tinyhttpd笔记">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2.4k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  10
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <img src="/2020/02/19/CTinyhttpd笔记/fm.jpg">
+
+<p>这是一个用C写的轻量级http server，使用<code>cent8</code>与vs code进行测试运行与修改</p>
+<a id="more"></a>
+
+<hr>
+<ul>
+<li><strong>下载项目</strong><br><a href="https://github.com/EZLippi/Tinyhttpd" target="_blank" rel="noopener"><strong>Download</strong></a></li>
+</ul>
+<p>由于Tinyhttpd在linux下会出现各种错误，所有首先需要修改一下源码</p>
+<hr>
+<h3 id="修改源码"><a href="#修改源码" class="headerlink" title="修改源码"></a>修改源码</h3><div class="tabs" id="xgym"><ul class="nav-tabs"><li class="tab active"><a href="#xgym-1">httpd.c</a></li></ul><div class="tab-content"><div class="tab-pane active" id="xgym-1"><table>
+<thead>
+<tr>
+<th>改前</th>
+<th>改后</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>所有的 u_short</td>
+<td>__u_short</td>
+</tr>
+<tr>
+<td>S_IFMT</td>
+<td>__S_IFMT</td>
+</tr>
+<tr>
+<td>S_IFDIR</td>
+<td>__S_IFDIR</td>
+</tr>
+</tbody></table>
+</div></div></div>
+
+<hr>
+<h3 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a>源码分析</h3><blockquote>
+<p>常量与依赖头文件</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;sys/socket.h&gt;</span><br><span class="line">#include &lt;netinet/in.h&gt;</span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line">#include &lt;pthread.h&gt;</span><br><span class="line">#include &lt;unistd.h&gt;</span><br><span class="line">#include &lt;stdint.h&gt;</span><br><span class="line">#include &lt;strings.h&gt;</span><br><span class="line">#include &lt;string.h&gt;</span><br><span class="line">#include &lt;ctype.h&gt;</span><br><span class="line">#include &lt;sys/stat.h&gt;</span><br><span class="line"></span><br><span class="line">#define ISspace(x)      isspace((int)(x)) // 判断字符是否为空白，true则空白</span><br><span class="line">#define SERVER_STRING   &quot;Server: jdbhttpd/0.1.0\r\n&quot; // 用来描述该服务器的字符串</span><br><span class="line"></span><br><span class="line">const size_t buf_size    = 1024, // accept_request(), unimplemented(), </span><br><span class="line">not_found(), serve_file(), cat() buf size</span><br><span class="line">             method_size = 255,  // accept_request() method size, url size</span><br><span class="line">             path_size   = 512;  // accept_request() path size</span><br><span class="line"></span><br><span class="line">const char *html_file_name = &quot;test.html&quot;; // html页面文件名称</span><br></pre></td></tr></table></figure>
+
+<h4 id="main函数"><a href="#main函数" class="headerlink" title="main函数"></a>main函数</h4><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>pthread_t</td>
+<td>线程pid</td>
+</tr>
+<tr>
+<td>accept(套接字，套接字地址结构，套接字地址结构占用的字节数)</td>
+<td>tcp协议调用，从已完成连接的队列头，返回下一个已完成连接，假如已连接成功的队列为空则进入睡眠。监听客户端，并返回一个新的套接字进行通道的建立</td>
+</tr>
+<tr>
+<td>pthread_create(线程pid，线程属性，线程运行函数，线程运行函数的参数)</td>
+<td>创建线程，返回非0值则错误</td>
+</tr>
+<tr>
+<td>close(套接字)</td>
+<td>关闭套接字连接</td>
+</tr>
+</tbody></table>
+<hr>
+<h4 id="startup函数"><a href="#startup函数" class="headerlink" title="startup函数"></a>startup函数</h4><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>socket(域，套接字类型，协议)</td>
+<td>创建套接字，返回-1则创建失败</td>
+</tr>
+<tr>
+<td>htons(端口)</td>
+<td>将一个无符号 短 整型数值转换为网络字节序，即 大 端模式(big-endian)</td>
+</tr>
+<tr>
+<td>htonl(地址)</td>
+<td>htonl()将一个无符号 长 整型数值转换为网络字节序，即 小 端模式(big-endian)</td>
+</tr>
+<tr>
+<td>setsockopt(套接字，级别，特性，选项，选项长度)</td>
+<td>设置套接字特殊功能，返回0则成功。SO_REUSEADDR:端口复用就是把多个用户的传输数据合在一个物理端口上进行传输，而又相互不干扰。</td>
+</tr>
+<tr>
+<td>bind(套接字，套接字地址结构，套接字地址结构占用的字节数)</td>
+<td>将套接字绑定在套接字地址结构对象，返回0则成功。</td>
+</tr>
+<tr>
+<td>getsockname(套接字，套接字地址结构，套接字地址结构占用的字节数)</td>
+<td>返回套接字地址结构的地址，返回-1则失败</td>
+</tr>
+<tr>
+<td>ntohs(端口)</td>
+<td>由网络字节序转化为主机字节序，转换类型为short</td>
+</tr>
+<tr>
+<td>listen(套接字，数量)</td>
+<td>监听套接字，参数2为套接字队列的最大连接数，返回0则成功</td>
+</tr>
+</tbody></table>
+<div class="tabs" id="struct_sockaddr_in"><ul class="nav-tabs"><li class="tab active"><a href="#struct_sockaddr_in-1">struct sockaddr_in</a></li></ul><div class="tab-content"><div class="tab-pane active" id="struct_sockaddr_in-1"><blockquote>
+<p>套接字地址结构</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>sin_family</td>
+<td>协议</td>
+</tr>
+<tr>
+<td>sin_port</td>
+<td>端口</td>
+</tr>
+<tr>
+<td>sin_addr.s_addr</td>
+<td>地址</td>
+</tr>
+</tbody></table>
+</div></div></div>
+
+
+
+<blockquote>
+<p>传入一个端口，获取一个套接字</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line">port：端口</span><br><span class="line">流程：</span><br><span class="line">    1. 建立一个套接字连接</span><br><span class="line">    2. 创建一个套接字地址结构</span><br><span class="line">    3. 初始化套接字地址结构</span><br><span class="line">    4. 开启套接字特性</span><br><span class="line">    5. 给予 套接字地址结构 一个 套接字</span><br><span class="line">    6. 判断是否创建动态端口</span><br><span class="line">       |-5.1 返回套接字地址结构 的 套接字</span><br><span class="line">       |-5.2 修改端口 为 套接字地址结构的端口</span><br><span class="line">    7.监听套接字</span><br><span class="line">    8.返回套接字</span><br><span class="line">*/</span><br><span class="line">int startup(__u_short *port)&#123;</span><br><span class="line">    /* </span><br><span class="line">    用socket建立连接，返回-1表示连接失败</span><br><span class="line">    参数1 域 PF_INET 为 socket的ipv4</span><br><span class="line">    参数2 套接字类型 SOCK_STREAM 为 有序可靠，基于连接的字节流</span><br><span class="line">    第三个参数为协议，传入0表示将会自动选择协议</span><br><span class="line">    */</span><br><span class="line">    int httpd = socket(PF_INET, SOCK_STREAM, 0); // 接收套接字</span><br><span class="line">    if(httpd == -1) error_die(&quot;socket&quot;); // 连接失败输出socket错误</span><br><span class="line"></span><br><span class="line">    struct sockaddr_in name; // sockaddr_in与协议无关的套接字地址结构</span><br><span class="line">    name.sin_family = AF_INET; // AF_INET 为 ipv4</span><br><span class="line">    // htons()将一个无符号 短 整型数值转换为网络字节序，即 大 端模式(big-endian)</span><br><span class="line">    // htonl()将一个无符号 长 整型数值转换为网络字节序，即 小 端模式(big-endian)</span><br><span class="line">    /*</span><br><span class="line">    h  | host 本地主机</span><br><span class="line">    to | to</span><br><span class="line">    n  | network 网络的意思</span><br><span class="line">    l  | unsigned long</span><br><span class="line">    s  | unsigned short</span><br><span class="line">    */</span><br><span class="line">    /*</span><br><span class="line">    如下：</span><br><span class="line">            00000000 00000000 00000000 00000001 的存储</span><br><span class="line">            低位                           高位</span><br><span class="line">       </span><br><span class="line">    大尾端： </span><br><span class="line">            00000000 00000000 00000000 00000001</span><br><span class="line">            addr+0    addr+1   addr+2   addr+3     // 先存高有效位（在低地址）</span><br><span class="line">    </span><br><span class="line">    大端模式：符号位的判定固定为第一个字节，容易判断正负</span><br><span class="line"></span><br><span class="line">    小尾端： </span><br><span class="line">            00000001 00000000 00000000 00000000</span><br><span class="line">            addr+0    addr+1   addr+2   addr+3     // 先存低有效位（在低地址）</span><br><span class="line"></span><br><span class="line">    小端模式：强制转换数据不需要调整字节内容，1、2、4字节的存储方式一样。</span><br><span class="line">    */</span><br><span class="line">    name.sin_port = htons(*port); // 端口</span><br><span class="line">    name.sin_addr.s_addr = htonl(INADDR_ANY); // ip地址,INADDR_ANY 为 任意地址</span><br><span class="line"></span><br><span class="line">    int on = 1; // setsockopt的选项,1启动特性，0关闭特性，函数第三个参数为特性</span><br><span class="line">    /*</span><br><span class="line">    设置套接字选项函数 setsocketopt</span><br><span class="line">    set    | 设置</span><br><span class="line">    socket | 套接字</span><br><span class="line">    opt    | option选项</span><br><span class="line">    参数1 套接字</span><br><span class="line">    参数2 协议 SOL_SOCKET 为 通用套接字选项</span><br><span class="line">    参数3 特性 SO_REUSEADDR 为 允许重用本地地址</span><br><span class="line">    参数4 为 是否开启特性的选项</span><br><span class="line">    参数5 为 </span><br><span class="line">    返回0表示执行成功</span><br><span class="line">    */</span><br><span class="line">    if((setsockopt(httpd, SOL_SOCKET, SO_REUSEADDR, &amp;on, sizeof(on))) &lt; 0) </span><br><span class="line">     error_die(&quot;setsocketopt failed&quot;);</span><br><span class="line"></span><br><span class="line">    /*</span><br><span class="line">    bind()，给套接字地址结构赋予一个套接字</span><br><span class="line">    参数1 为 套接字</span><br><span class="line">    参数2 为 协议的地址结构</span><br><span class="line">    参数3 为 协议地址结构的长度</span><br><span class="line">    返回0表示执行成功</span><br><span class="line">    */</span><br><span class="line">    if(bind(httpd, (struct sockaddr*)&amp;name, sizeof(name)) &lt; 0)</span><br><span class="line">      error_die(&quot;bind&quot;);</span><br><span class="line"></span><br><span class="line">    if(*port == 0)&#123; // 分配动态端口</span><br><span class="line">        socklen_t namelen = sizeof(name); // 对象name占用的字节数</span><br><span class="line"></span><br><span class="line">        /*</span><br><span class="line">        getsockname()返回指定套接字地址结构的IP地址</span><br><span class="line">        参数1 为 套接字</span><br><span class="line">        参数2 为 协议的地址结构</span><br><span class="line">        参数3 为 协议地址结构的长度</span><br><span class="line">        返回-1表示错误</span><br><span class="line">        */</span><br><span class="line">        if(getsockname(httpd, (struct sockaddr*)&amp;name, &amp;namelen) == -1)</span><br><span class="line">            error_die(&quot;getsockname&quot;);</span><br><span class="line"></span><br><span class="line">        /*</span><br><span class="line">        ntohs()将一个short，由网络字节序转化为主机字节序</span><br><span class="line">        n  为 network网络</span><br><span class="line">        to 为</span><br><span class="line">        h  为 host本地主机</span><br><span class="line">        s  为 unsigned short</span><br><span class="line">        */</span><br><span class="line">        *port = ntohs(name.sin_port);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    /*</span><br><span class="line">    listen()监听套接字，仅tcp服务器调用</span><br><span class="line">    参数1 套接字</span><br><span class="line">    参数2 套接字队列的最大连接数</span><br><span class="line">    返回0表示执行成功</span><br><span class="line">    */</span><br><span class="line">    if(listen(httpd, 5) &lt; 0)</span><br><span class="line">        error_die(&quot;listen&quot;);</span><br><span class="line"></span><br><span class="line">    return httpd; // 返回套接字</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="cat函数"><a href="#cat函数" class="headerlink" title="cat函数"></a>cat函数</h4><blockquote>
+<p>读取服务器里的文件，输出到套接字</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>FILE</td>
+<td>文件类型</td>
+</tr>
+<tr>
+<td>fgets(输出地址，字节数，源数据)</td>
+<td>从指定流读取n个数据，并输出到指定位置</td>
+</tr>
+<tr>
+<td>send(套接字，数据，字节数，标识)</td>
+<td>发送消息到一个套接字连接</td>
+</tr>
+</tbody></table>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">oid cat(int client, FILE *resource)&#123;</span><br><span class="line">    char buf[1024]; // 数据</span><br><span class="line">    fgets(buf, sizeof(buf), resource); // 从文件里获取数据，存储到缓冲区</span><br><span class="line">    /*</span><br><span class="line">    feof(),只要文件没有读取到EOF</span><br><span class="line">    当设置了与流关联的文件结束标识符时，该函数返回一个非零值，否则返回零</span><br><span class="line">    */</span><br><span class="line">    while(!feof(resource))&#123;</span><br><span class="line">        send(client, buf, strlen(buf), 0); // 将数据发送到套接字连接</span><br><span class="line">        fgets(buf, sizeof(buf), resource);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="accept-request函数"><a href="#accept-request函数" class="headerlink" title="accept_request函数"></a>accept_request函数</h4><blockquote>
+<p>监听套接字http请求</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line">void accept_request(void *arg)&#123;</span><br><span class="line">    int client = (intptr_t)arg; // 客户端套接字</span><br><span class="line">    char buf[buf_size]; // 缓冲区</span><br><span class="line">    size_t numchars = get_len(client, buf, buf_size); // 从套接字里获取数据</span><br><span class="line"></span><br><span class="line">    char method[method_size]; // http请求</span><br><span class="line">    size_t i = 0, // 记录循环次数</span><br><span class="line">           j = 0; // method元素个数</span><br><span class="line">    while(!ISspace(buf[i]) &amp;&amp; (i != method_size))    method[i] = buf[i++]; // 获取请求数据</span><br><span class="line">    method[i] = &apos;\0&apos;;</span><br><span class="line">    j = i; </span><br><span class="line"></span><br><span class="line">    // // 不区分字母大小写进行比较，请求不是GET或POST</span><br><span class="line">    // if(strcasecmp(method, &quot;GET&quot;) &amp;&amp; strcasecmp(method, &quot;POST&quot;))&#123;</span><br><span class="line">    //     unimplemented(client); // 输出错误信息</span><br><span class="line">    //     return;</span><br><span class="line">    // &#125;</span><br><span class="line"></span><br><span class="line">    int cgi = 0; // 通用网关接口</span><br><span class="line">    // http POST请求</span><br><span class="line">    if(strcasecmp(method, &quot;POST&quot;) == 0) cgi = 1;</span><br><span class="line"></span><br><span class="line">    // 跳过缓冲区里的空白字符</span><br><span class="line">    while(ISspace(buf[j]) &amp;&amp; (j &lt; numchars))    ++j;</span><br><span class="line"></span><br><span class="line">    char url[method_size];</span><br><span class="line">    i = 0;</span><br><span class="line">    while(!ISspace(buf[j]) &amp;&amp; (i != method_size) &amp;&amp; (j &lt; numchars)) url[i++] = buf[j++];</span><br><span class="line">    url[i] = &apos;\0&apos;;</span><br><span class="line"></span><br><span class="line">    char *query_string = url; </span><br><span class="line">    // http GET请求</span><br><span class="line">    if(strcasecmp(method, &quot;GET&quot;) == 0)&#123;</span><br><span class="line">        while((*query_string) != &apos;?&apos; &amp;&amp; (*query_string != &apos;\0&apos;))    ++query_string;</span><br><span class="line">        if(*query_string == &apos;?&apos;)&#123;</span><br><span class="line">            cgi = 1;</span><br><span class="line">            *query_string = &apos;\0&apos;; // 将?替换成\0</span><br><span class="line">            ++query_string;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    char path[path_size]; // index.html路径</span><br><span class="line">    sprintf(path, &quot;html_file%s&quot;, url);</span><br><span class="line">    if(path[path_size - 1] == &apos;/&apos;)  strcat(path, html_file_name);</span><br><span class="line"></span><br><span class="line">    struct stat st; // 储存文件属性的对象</span><br><span class="line">    if(stat(path, &amp;st) == -1)&#123; // 获取文件属性失败</span><br><span class="line">        while((numchars &gt; 0) &amp;&amp; strcmp(&quot;\n&quot;, buf)) // 当缓冲区里并不是只有一个\n</span><br><span class="line">            numchars = get_len(client, buf, buf_size); // 从套接字里获取数据</span><br><span class="line">        not_found(client); // 404页面</span><br><span class="line">    &#125; else &#123; // 成功获取文件属性</span><br><span class="line">        /* </span><br><span class="line">        struct stat</span><br><span class="line">            st_mode 文件属性</span><br><span class="line">        </span><br><span class="line">        __S_IFDIR 目录</span><br><span class="line">        __S_IFMT  这些位确定文件类型</span><br><span class="line">        */</span><br><span class="line">        if((st.st_mode &amp; __S_IFMT) == __S_IFDIR)    strcat(path, html_file_name); // 如果是目录，则使用该目录下的 html_file_name</span><br><span class="line">        /*</span><br><span class="line">        S_IXUSR 用户可执行</span><br><span class="line">        S_IXGRP 用户组可执行</span><br><span class="line">        S_IXOTH 其他执行</span><br><span class="line">        */</span><br><span class="line">        if((st.st_mode &amp; S_IXUSR) || (st.st_mode &amp; S_IXGRP) || (st.st_mode &amp; S_IXOTH))  cgi = 1;</span><br><span class="line">        if(!cgi)    serve_file(client, path);</span><br><span class="line">        else        printf(&quot;execute_cgi\n&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    close(client);</span><br><span class="line">    return;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="serve-file函数"><a href="#serve-file函数" class="headerlink" title="serve_file函数"></a>serve_file函数</h4><blockquote>
+<p>将服务器文件返还给浏览器</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">void serve_file(int client, const char *filename)&#123;</span><br><span class="line">    char buf[buf_size]; </span><br><span class="line">    buf[0] = &apos;A&apos;;   buf[1] = &apos;\0&apos;;</span><br><span class="line"></span><br><span class="line">    int numchars = 1;</span><br><span class="line">    while((numchars &gt; 0) &amp;&amp; strcmp(&quot;\n&quot;, buf))</span><br><span class="line">        numchars = get_len(client, buf, buf_size); // 从套接字里获取数据</span><br><span class="line">    </span><br><span class="line">    FILE *resource = fopen(filename, &quot;r&quot;); // 只读打开文件</span><br><span class="line">    if(resource == NULL)    not_found(client); // 文件打开失败</span><br><span class="line">    else &#123;</span><br><span class="line">        headers(client, filename); // 把响应头写到套接字里</span><br><span class="line">        cat(client, resource); </span><br><span class="line">    &#125;</span><br><span class="line">    fclose(resource); // 关闭文件</span><br><span class="line">    return;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="haeters函数"><a href="#haeters函数" class="headerlink" title="haeters函数"></a>haeters函数</h4><blockquote>
+<p>把响应头写到套接字里</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">void headers(int client, const char *filename)&#123;</span><br><span class="line">    char buf[buf_size];</span><br><span class="line">    (void)filename; // 可以使用文件名确定文件类型</span><br><span class="line">    /*</span><br><span class="line">    HTTP/1.0 200 OK</span><br><span class="line">    Content-Type: text/html</span><br><span class="line">    */</span><br><span class="line">    strcpy(buf, &quot;HTTP/1.0 200 OK\r\n&quot;);</span><br><span class="line">    send(client, buf, strlen(buf), 0);</span><br><span class="line">    strcpy(buf, SERVER_STRING);</span><br><span class="line">    send(client, buf, strlen(buf), 0);</span><br><span class="line">    sprintf(buf, &quot;Content-Type: text/html\r\n&quot;);</span><br><span class="line">    send(client, buf, strlen(buf), 0);</span><br><span class="line">    strcpy(buf, &quot;\r\n&quot;);</span><br><span class="line">    send(client, buf, strlen(buf), 0);</span><br><span class="line">    return;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+
+      
+    </div>
+    
+    
+    
+	
+	<div style="text-align:center;color: #DC143C;font-size:15px;"> ———— Σ( ° △ °|||) The End ———— </div>
+	
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+		  
+            <a href="/tags/C开源/" rel="tag"><i class="fa fa-tag"></i> C开源</a>
+			
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/02/12/比较高效的学习方式/" rel="next" title="比较高效的学习方式">
+                <i class="fa fa-chevron-left"></i> 比较高效的学习方式
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/02/24/修改wordpress-url/" rel="prev" title="修改wordpress url">
+                修改wordpress url <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/p/wb.png" alt="二打禄">
+            
+              <p class="site-author-name" itemprop="name">二打禄</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+				
+<!-- 网易云音乐 -->
+<div id="wang_yi_yun">
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="298" height="52" src="//music.163.com/outchain/player?type=0&id=2875836409&auto=0&height=32"></iframe>
+
+</div>
+
+
+
+
+<div id="yun_xing_time">
+<!-- 网站运行时间的设置 -->
+<span id="timeDate">载入天数...</span>
+<span id="times">载入时分秒...</span> 
+<script>   
+ var now = new Date();    function createtime() {       
+ var grt= new Date("09/26/2019 13:14:21");//此处修改你的建站时间或者网站上线时间       
+ now.setTime(now.getTime()+250);        
+days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+  hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);       
+ if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);        
+mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);        
+snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}        document.getElementById("timeDate").innerHTML = "网站已运行 "+dnum+" 天 ";        
+document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";    }setInterval("createtime()",250);
+</script>
+<dive>
+
+
+
+
+
+
+
+
+
+
+ 		
+
+				
+
+        </dive></div>
+      </div></section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#修改源码"><span class="nav-number">1.</span> <span class="nav-text">修改源码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#源码分析"><span class="nav-number">2.</span> <span class="nav-text">源码分析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#main函数"><span class="nav-number">2.1.</span> <span class="nav-text">main函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#startup函数"><span class="nav-number">2.2.</span> <span class="nav-text">startup函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#cat函数"><span class="nav-number">2.3.</span> <span class="nav-text">cat函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#accept-request函数"><span class="nav-number">2.4.</span> <span class="nav-text">accept_request函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#serve-file函数"><span class="nav-number">2.5.</span> <span class="nav-text">serve_file函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#haeters函数"><span class="nav-number">2.6.</span> <span class="nav-text">haeters函数</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        
+
+
+<div class="copyright">&copy; 2019 &mdash; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">二打禄</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">56.8k</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+  
+  
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('-1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("evBGAkFlJPvMt1Xh6Jrqlezi-gzGzoHsz", "CDcr1PiSV906HwggN9Y1d098");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+  
+<!-- 代码块复制功能 -->
+<script type="text/javascript" src="/js/src/clipboard.min.js"></script>  
+<script type="text/javascript" src="/js/src/clipboard-use.js"></script>
+  
+</body>
+</html>
+
+

@@ -83,7 +83,7 @@
 
 
 
-  <meta name="keywords" content="docker,wordpress,">
+  <meta name="keywords" content="？？？">
 
 
 
@@ -94,25 +94,13 @@
 
 
 
-<meta name="description" content="使用cent8进行操作 docker是一种容器技术，能将应用封装成一个镜像wordpress动态博客">
-<meta name="keywords" content="docker,wordpress">
-<meta property="og:type" content="article">
-<meta property="og:title" content="使用docker搭建wordpress博客">
-<meta property="og:url" content="https://1411482317.github.io/2019/12/25/使用docker搭建wordpress博客/index.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="大石砸死蟹">
+<meta property="og:url" content="https://1411482317.github.io/page/15/index.html">
 <meta property="og:site_name" content="大石砸死蟹">
-<meta property="og:description" content="使用cent8进行操作 docker是一种容器技术，能将应用封装成一个镜像wordpress动态博客">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://1411482317.github.io/2019/12/25/使用docker搭建wordpress博客/封面.gif">
-<meta property="og:image" content="https://1411482317.github.io/2019/12/25/使用docker搭建wordpress博客/containerd.io.png">
-<meta property="og:image" content="https://1411482317.github.io/2019/12/25/使用docker搭建wordpress博客/yum_list_containerd.io.png">
-<meta property="og:image" content="https://1411482317.github.io/2019/12/25/使用docker搭建wordpress博客/rpm_install.png">
-<meta property="og:image" content="https://1411482317.github.io/2019/12/25/使用docker搭建wordpress博客/n1.png">
-<meta property="og:image" content="https://1411482317.github.io/2019/12/25/使用docker搭建wordpress博客/n2.png">
-<meta property="og:updated_time" content="2020-01-06T15:11:27.663Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="使用docker搭建wordpress博客">
-<meta name="twitter:description" content="使用cent8进行操作 docker是一种容器技术，能将应用封装成一个镜像wordpress动态博客">
-<meta name="twitter:image" content="https://1411482317.github.io/2019/12/25/使用docker搭建wordpress博客/封面.gif">
+<meta name="twitter:title" content="大石砸死蟹">
 
 
 
@@ -145,7 +133,7 @@
 
 
 
-  <link rel="canonical" href="https://1411482317.github.io/2019/12/25/使用docker搭建wordpress博客/">
+  <link rel="canonical" href="https://1411482317.github.io/page/15/">
 
 
 
@@ -153,7 +141,7 @@
 
 
 
-  <title>使用docker搭建wordpress博客 | 大石砸死蟹</title>
+  <title>大石砸死蟹</title>
   
 
 
@@ -172,7 +160,8 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <div class="container sidebar-position-left 
+  page-home">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -323,8 +312,685 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-expand">
+<!--轮播图-->
+
+
+
+
+
+<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<style type="text/css">
+
+.glyphicon-chevron-left:before{
+	/* content: "《" */
+}
+.glyphicon-chevron-right:before{
+	/* content: "》" */
+}
+
+.right-siders{
+   border-radius: 10px;
+   /*margin-top: 5px;*/
+   margin-bottom: 5px;
+}
+
+.my-carousel:hover{
+  margin-left: 5px;
+  //padding: 5px 1px;
+  border-radius: 5px;
+  transform: scale(1.1);
+  box-shadow: 10px 10px 15px 2px rgba(0,0,0,.12), 0 0 6px 0 rgba(104, 104, 105, 0.1);
+}
+
+@media (max-width: 767px){
+	.rights{
+		display: none;
+	}
+	.carousel{
+		width: 100% !important;
+		height: 100% !important;
+	}
+	.slide{
+		width: 100% !important;
+		height: 100% !important;
+	}
+
+}
+
+
+
+.carousel{		/* 设置播图框 */
+	min-width: 25%;			
+	min-height: 40%;
+	position: relative;
+}
+
+.carousel-inner {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+}
+
+.carousel-inner > .item {
+  display: none;
+  position: relative;
+  -webkit-transition: 0.6s ease-in-out left;
+  -o-transition: 0.6s ease-in-out left;
+  transition: 0.6s ease-in-out left;
+}
+.carousel-inner > .item > img,
+.carousel-inner > .item > a > img {
+  line-height: 1;
+}
+
+@media all and (transform-3d), (-webkit-transform-3d) {
+  .carousel-inner > .item {
+    -webkit-transition: -webkit-transform 0.6s ease-in-out;
+    -moz-transition: -moz-transform 0.6s ease-in-out;
+    -o-transition: -o-transform 0.6s ease-in-out;
+    transition: transform 0.6s ease-in-out;
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-perspective: 1000px;
+    -moz-perspective: 1000px;
+    perspective: 1000px;
+  }
+  .carousel-inner > .item.next,
+  .carousel-inner > .item.active.right {
+    -webkit-transform: translate3d(100%, 0, 0);
+    transform: translate3d(100%, 0, 0);
+    left: 0;
+  }
+  .carousel-inner > .item.prev,
+  .carousel-inner > .item.active.left {
+    -webkit-transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0);
+    left: 0;
+  }
+  .carousel-inner > .item.next.left,
+  .carousel-inner > .item.prev.right,
+  .carousel-inner > .item.active {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    left: 0;
+  }
+}
+.carousel-inner > .active,
+.carousel-inner > .next,
+.carousel-inner > .prev {
+  display: block;
+}
+.carousel-inner > .active {
+  left: 0;
+}
+.carousel-inner > .next,
+.carousel-inner > .prev {
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+.carousel-inner > .next {
+  left: 100%;
+}
+.carousel-inner > .prev {
+  left: -100%;
+}
+.carousel-inner > .next.left,
+.carousel-inner > .prev.right {
+  left: 0;
+}
+.carousel-inner > .active.left {
+  left: -100%;
+}
+.carousel-inner > .active.right {
+  left: 100%;
+}
+.carousel-control {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  /*width: 5%;*/
+  opacity: 0.5;
+  filter: alpha(opacity=50);
+  font-size: 20px;
+  color: #fff;
+  text-align: center;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0);
+}
+.carousel-control.left {
+  background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.0001) 100%);
+  background-image: -o-linear-gradient(left, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.0001) 100%);
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.0001) 100%);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#80000000, endColorstr=#00000000, GradientType=1);
+}
+.carousel-control.right {
+  left: auto;
+  right: 0;
+  background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, 0.0001) 0%, rgba(0, 0, 0, 0.5) 100%);
+  background-image: -o-linear-gradient(left, rgba(0, 0, 0, 0.0001) 0%, rgba(0, 0, 0, 0.5) 100%);
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0.0001) 0%, rgba(0, 0, 0, 0.5) 100%);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#00000000, endColorstr=#80000000, GradientType=1);
+}
+.carousel-control:hover,
+.carousel-control:focus {
+  outline: 0;
+  color: #fff;
+  text-decoration: none;
+  opacity: 0.9;
+  filter: alpha(opacity=90);
+}
+.carousel-control .icon-prev,
+.carousel-control .icon-next,
+.carousel-control .glyphicon-chevron-left,
+.carousel-control .glyphicon-chevron-right {
+  position: absolute;
+  top: 50%;
+  margin-top: -10px;
+  z-index: 5;
+  display: inline-block;
+}
+/*
+.carousel-control .icon-prev,
+.carousel-control .glyphicon-chevron-left {
+  left: 50%;
+  margin-left: -10px;
+}
+*/
+
+.carousel-control .icon-prev,
+.carousel-control .glyphicon-chevron-left {
+  background: url('/images/icon-slides.png');
+  background-position-y: -20px;
+  left: 9px;
+}
+
+/*
+.carousel-control .icon-next,
+.carousel-control .glyphicon-chevron-right {
+  right: 50%;
+  margin-right: -10px;
+}
+*/
+
+.carousel-control .icon-next,
+.carousel-control .glyphicon-chevron-right {
+  background: url('/images/icon-slides.png');
+  background-position-x: -50px;
+  background-position-y: -20px;
+  right: 0px;
+}
+
+.carousel-control .icon-prev,
+.carousel-control .icon-next {
+  width: 20px;
+  height: 20px;
+  line-height: 1;
+  font-family: serif;
+}
+
+.carousel-control .icon-prev:before {
+  content: 2039;
+}
+.carousel-control .icon-next:before {
+  content: 203a;
+}
+
+.carousel-indicators {
+  position: absolute;
+  bottom: 2px;
+  left: 50%;
+  z-index: 15;
+  width: 60%;
+  margin-left: -30%;
+  padding-left: 0;
+  list-style: none;
+  text-align: center;
+}
+.carousel-indicators li {
+  display: inline-block;
+  width: 30px;
+  height: 3px;
+  margin: 5px;
+  text-indent: -999px;
+  border: 1px solid #bbb;
+  border-radius: 10px;
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, .24);
+}
+.carousel-indicators .active {
+  width: 30px;
+  height: 3px;
+  background-color: #fff;
+}
+.carousel-caption {
+  position: absolute;
+  left: 15%;
+  right: 15%;
+  bottom: 20px;
+  z-index: 10;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  color: #fff;
+  text-align: center;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+}
+.carousel-caption .btn {
+  text-shadow: none;
+}
+@media screen and (min-width: 768px) {
+  .carousel-control .glyphicon-chevron-left,
+  .carousel-control .glyphicon-chevron-right,
+  .carousel-control .icon-prev,
+  .carousel-control .icon-next {
+    width: 30px;
+    height: 30px;
+    margin-top: -10px;
+    font-size: 30px;
+  }
+  .carousel-control .glyphicon-chevron-left,
+  .carousel-control .icon-prev {
+    margin-left: -10px;
+  }
+  .carousel-control .glyphicon-chevron-right,
+  .carousel-control .icon-next {
+   /* margin-right: -10px; */
+  }
+  .carousel-caption {
+    left: 20%;
+    right: 20%;
+    padding-bottom: 30px;
+  }
+  .carousel-indicators {
+    bottom: -10px;
+  }
+}
+</style>
+
+<div width="100%" height="320px" style="border: 0px; overflow: hidden; border-radius: 10px; margin-bottom: 25px;" scrolling="no">
+
+    <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="3500" style="float:left">
+
+      <!-- 轮播（Carousel）指标 -->
+      <ol class="carousel-indicators">
+      
+      
+        <li data-target="#myCarousel" data-slide-to="0"></li>
+        
+      
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        
+      
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+        
+      
+      </ol>
+
+      <!-- 轮播（Carousel）项目 -->
+      <div class="carousel-inner" style="height: 280px; border-radius: 10px; width: 480px;">
+       
+       
+          
+          <a class="item active" href="https://www.runoob.com/w3cnote/code-website-recommend.html" target="_blank" style="height: 100%">
+            
+            <img src="/p/gd1.jpg" class="nofancybox" style="width: 100%; height: 100%">
+          </a>
+          
+          
+      
+          
+            <a class="item" href="https://github.com/stevenjoezhang/live2d-widget" target="_blank" style="height: 100%">
+              <img src="/p/gd2.jpg" class="nofancybox" style="width: 100%; height: 100%;">
+            </a>
+        
+      
+          
+            <a class="item" href="https://1411482317.github.io/2020/02/12/%E6%AF%94%E8%BE%83%E9%AB%98%E6%95%88%E7%9A%84%E5%AD%A6%E4%B9%A0%E6%96%B9%E5%BC%8F/" target="_blank" style="height: 100%">
+              <img src="/p/gd3.jpg" class="nofancybox" style="width: 100%; height: 100%;">
+            </a>
+        
+      
+      </div>
+
+      <!-- 轮播（Carousel）导航 -->
+      <a class="left carousel-control" data-target="#myCarousel" href="javascript:void(0);" role="button" data-slide="prev">
+          <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+      </a>
+      <a class="right carousel-control" data-target="#myCarousel" href="javascript:void(0);" role="button" data-slide="next">
+          <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+      </a>
+
+	</div>
+
+	<div class="rights" style="width: 30%; height: 250px; margin-right: 0px;margin-left: 18px;float: left;">
+       <!-- 天气插件，地区在后面可以进行修改 -->
+       <!-- <iframe width="300px" scrolling="no" height="50px" frameborder="0" allowtransparency="true" src="//i.tianqi.com/index.php?c=code&id=12&color=%23&bdc=%23&icon=1&py=guangzhou&num=2&site=12"></iframe> -->
+	   
+	   <!-- 右上角天气插件 -->
+<script type="text/javascript">
+WIDGET = {FID: 'VP0pnELDQC'}
+</script>
+<script type="text/javascript" src="https://apip.weatherdt.com/float/static/js/r.js?v=1111"></script>
+  
+<!-- 颗粒时间 -->
+<div id="lock">
+<div style>
+  <canvas id="canvas" style="width:60%;">当前浏览器不支持canvas，请更换浏览器后再试</canvas>
+</div>
+<script>
+(function(){
+
+   var digit=
+    [
+        [
+            [0,0,1,1,1,0,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,0,1,1,0],
+            [0,0,1,1,1,0,0]
+        ],//0
+        [
+            [0,0,0,1,1,0,0],
+            [0,1,1,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [1,1,1,1,1,1,1]
+        ],//1
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,1,1],
+            [1,1,1,1,1,1,1]
+        ],//2
+        [
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//3
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,0],
+            [0,0,1,1,1,1,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,1,1,0],
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,1]
+        ],//4
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,1,1,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//5
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//6
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0]
+        ],//7
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//8
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,1,1,0,0,0,0]
+        ],//9
+        [
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0]
+        ]//:
+    ];
+
+var canvas = document.getElementById('canvas');
+
+if(canvas.getContext){
+    var cxt = canvas.getContext('2d');
+    //声明canvas的宽高
+    var H = 100,W = 700;
+    canvas.height = H;
+    canvas.width = W;
+    cxt.fillStyle = '#ffffff';
+    cxt.fillRect(10,10,50,50);
+
+    //存储时间数据
+    var data = [];
+    //存储运动的小球
+    var balls = [];
+    //设置粒子半径
+    var R = canvas.height/20-1;
+    (function(){
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        //存储时间数字，由十位小时、个位小时、冒号、十位分钟、个位分钟、冒号、十位秒钟、个位秒钟这7个数字组成
+        data.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+    })();
+
+    /*生成点阵数字*/
+    function renderDigit(index,num){
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    cxt.beginPath();
+                    cxt.arc(14*(R+2)*index + j*2*(R+1)+(R+1),i*2*(R+1)+(R+1),R,0,2*Math.PI);
+                    cxt.closePath();
+                    cxt.fill();
+                }
+            }
+        }
+    }
+
+    /*更新时钟*/
+    function updateDigitTime(){
+        var changeNumArray = [];
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        var NewData = [];
+        NewData.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+        for(var i = data.length-1; i >=0 ; i--){
+            //时间发生变化
+            if(NewData[i] !== data[i]){
+                //将变化的数字值和在data数组中的索引存储在changeNumArray数组中
+                changeNumArray.push(i+'_'+(Number(data[i])+1)%10);
+            }
+        }
+        //增加小球
+        for(var i = 0; i< changeNumArray.length; i++){
+            addBalls.apply(this,changeNumArray[i].split('_'));
+        }
+        data = NewData.concat();
+    }
+
+    /*更新小球状态*/
+    function updateBalls(){
+        for(var i = 0; i < balls.length; i++){
+            balls[i].stepY += balls[i].disY;
+            balls[i].x += balls[i].stepX;
+            balls[i].y += balls[i].stepY;
+            if(balls[i].x > W + R || balls[i].y > H + R){
+                balls.splice(i,1);
+                i--;
+            }
+        }
+    }
+
+    /*增加要运动的小球*/
+    function addBalls(index,num){
+        var numArray = [1,2,3];
+        var colorArray =  ["#3BE","#09C","#A6C","#93C","#9C0","#690","#FB3","#F80","#F44","#C00"];
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    var ball = {
+                        x:14*(R+2)*index + j*2*(R+1)+(R+1),
+                        y:i*2*(R+1)+(R+1),
+                        stepX:Math.floor(Math.random() * 4 -2),
+                        stepY:-2*numArray[Math.floor(Math.random()*numArray.length)],
+                        color:colorArray[Math.floor(Math.random()*colorArray.length)],
+                        disY:1
+                    };
+                    balls.push(ball);
+                }
+            }
+        }
+    }
+
+    /*渲染*/
+    function render(){
+        //重置画布宽度，达到清空画布的效果
+        canvas.height = 100;
+        //渲染时钟
+        for(var i = 0; i < data.length; i++){
+            renderDigit(i,data[i]);
+        }
+        //渲染小球
+        for(var i = 0; i < balls.length; i++){
+            cxt.beginPath();
+            cxt.arc(balls[i].x,balls[i].y,R,0,2*Math.PI);
+            cxt.fillStyle = balls[i].color;
+            cxt.closePath();
+            cxt.fill();
+        }
+    }
+
+    clearInterval(oTimer);
+    var oTimer = setInterval(function(){
+        //更新时钟
+        updateDigitTime();
+        //更新小球状态
+        updateBalls();
+        //渲染
+        render();
+    },50);
+}
+
+})();
+</script>
+</div>
     
+       <!-- 学习路线 -->
+       <div class="my-carousel">
+         <a href="/2019/10/01/学习路线/" target="_blank">
+            <img class="right-siders nofancybox" src="/images/lx.png">
+         </a>
+       </div>
+    
+       <!-- ss/ssr -->
+       <div class="my-carousel">
+         <a href="https://github.com/selierlin/Share-SSR-V2ray" target="_blank">
+           <img class="right-siders nofancybox" src="/images/ss.png">
+         </a>
+       </div>
+
+      <!-- 相关下载 -->
+      <div class="my-carousel">
+        <a href="/2019/10/01/相关下载/" target="_blank">
+          <img class="right-siders nofancybox" src="/images/dw.png">
+        </a>
+      </div>
+
+      <!-- 参考 -->
+      <div class="my-carousel">
+        <a href="/2019/10/01/参考/" target="_blank">
+          <img class="right-siders nofancybox" src="/images/ck.png">
+        </a>
+      </div>
+
+
+
+
+   </div>
+   
+   
+   
+
+</div>
+
+
+
+
+
+  <section id="posts" class="posts-expand">
+    
+      
 
   
 
@@ -337,7 +1003,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://1411482317.github.io/2019/12/25/使用docker搭建wordpress博客/">
+    <link itemprop="mainEntityOfPage" href="https://1411482317.github.io/2019/09/27/hexo博客的搭建与使用/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="二打禄">
@@ -354,7 +1020,9 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">使用docker搭建wordpress博客</h1>
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/09/27/hexo博客的搭建与使用/" itemprop="url">hexo博客的搭建与使用</a></h1>
         
 
         <div class="post-meta">
@@ -366,8 +1034,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-25T13:56:56+08:00">
-                2019-12-25
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-27T13:40:50+08:00">
+                2019-09-27
               </time>
             
 
@@ -389,8 +1057,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/CentOS/" itemprop="url" rel="index">
-                    <span itemprop="name">CentOS</span>
+                  <a href="/categories/hexo/" itemprop="url" rel="index">
+                    <span itemprop="name">hexo</span>
                   </a>
                 </span>
 
@@ -406,7 +1074,7 @@
 
           
           
-             <span id="/2019/12/25/使用docker搭建wordpress博客/" class="leancloud_visitors" data-flag-title="使用docker搭建wordpress博客">
+             <span id="/2019/09/27/hexo博客的搭建与使用/" class="leancloud_visitors" data-flag-title="hexo博客的搭建与使用">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -431,7 +1099,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.4k
+                  491
                 </span>
               
 
@@ -447,7 +1115,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  5
+                  1
                 </span>
               
             </div>
@@ -468,126 +1136,18 @@
       
 
       
-        <img src="/2019/12/25/使用docker搭建wordpress博客/封面.gif">
+        
+          <img src="/2019/09/27/hexo博客的搭建与使用/封面.jpg">
 
-<p>使用<code>cent8</code>进行操作</p>
-<p><code>docker</code>是一种容器技术，能将应用封装成一个镜像<br><code>wordpress</code>动态博客</p>
-<a id="more"></a>
-
-<h1 id="安装docker"><a href="#安装docker" class="headerlink" title="安装docker"></a>安装docker</h1><h2 id="设置仓库"><a href="#设置仓库" class="headerlink" title="设置仓库"></a>设置仓库</h2><blockquote>
-<p>安装所需的软件包。yum-utils 提供了 yum-config-manager ，并且<br>device mapper 存储驱动程序需要 device-mapper-persistent-data 和 lvm2</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// 设置仓库</span><br><span class="line"></span><br><span class="line">sudo yum install -y yum-utils \</span><br><span class="line">  device-mapper-persistent-data \</span><br><span class="line">  lvm2</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// 设置稳定的仓库</span><br><span class="line"></span><br><span class="line">sudo yum-config-manager \</span><br><span class="line">    --add-repo \</span><br><span class="line">    https://download.docker.com/linux/centos/docker-ce.repo</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">// 安装docker与其依赖</span><br><span class="line"></span><br><span class="line">sudo yum install docker-ce docker-ce-cli containerd.io</span><br></pre></td></tr></table></figure>
-
-<p><font color="red"><strong>安装时候，出现下图的错误</strong></font></p>
-<p><img src="containerd.io.png" alt></p>
-<blockquote>
-<p>containerd.io的版本必须&gt;=1.2.2-3<br><img src="yum_list_containerd.io.png" alt><br>yum源的containerd.io版本太低</p>
-</blockquote>
-<a class="btn" href="https://download.docker.com/linux/centos/7/x86_64/stable/Packages/" target="_blank" rel="noopener"><i class="fa fa-download fa-lg fa-fw"></i>版本较高的containerd.io</a>
-
-<ul>
-<li><p>找到下载好的安装包，直接用yum安装</p>
-<blockquote>
-<p><img src="rpm_install.png" alt></p>
-</blockquote>
-</li>
-<li><p>最后，在安装docker</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install docker-ce docker-ce-cli</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h2 id="使用docker"><a href="#使用docker" class="headerlink" title="使用docker"></a>使用docker</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">// 启动[停止][重启]docker</span><br><span class="line">systemctl start[stop][restart] docker</span><br><span class="line"></span><br><span class="line">// 查看正在运行的容器</span><br><span class="line">docker ps</span><br><span class="line"></span><br><span class="line">// 查看所有的容器(包括没有运行的)</span><br><span class="line">docker ps -a</span><br><span class="line"></span><br><span class="line">// 启动[停止][重启]容器</span><br><span class="line">docker start[stop][restart] 容器ID</span><br></pre></td></tr></table></figure>
-
-<h2 id="更改镜像源为国内"><a href="#更改镜像源为国内" class="headerlink" title="更改镜像源为国内"></a>更改镜像源为国内</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">// 创建文件</span><br><span class="line"></span><br><span class="line">sudo vim /etc/docker/daemon.json</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><a href="https://cr.console.aliyun.com/" target="_blank" rel="noopener"><strong>阿里云，容器</strong></a><blockquote>
-<p>注册好后，选择镜像仓库，并创建</p>
-<p>然后选择镜像加速</p>
-</blockquote>
-</li>
-</ul>
-<h1 id="安装docker-compose"><a href="#安装docker-compose" class="headerlink" title="安装docker-compose"></a>安装docker-compose</h1><p>这个是用于定义与运行多个docker应用程序的工具</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// 终端输入 pip 连按两下 Tab键 查看有没有pip(没有则自行百度python-pip)</span><br><span class="line"></span><br><span class="line">// 安装docker-compose</span><br><span class="line">pip3 install docker-compose</span><br><span class="line"></span><br><span class="line">// 查看docker-compose版本</span><br><span class="line">docker-compose -v</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h1 id="使用docker-compose-yml，编写一键搭建wordpress博客的配置文件"><a href="#使用docker-compose-yml，编写一键搭建wordpress博客的配置文件" class="headerlink" title="使用docker-compose.yml，编写一键搭建wordpress博客的配置文件"></a>使用docker-compose.yml，编写一键搭建wordpress博客的配置文件</h1><ul>
-<li><a href="https://www.runoob.com/docker/docker-compose.html" target="_blank" rel="noopener"><strong>详细教程</strong></a></li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 查看所有已被占用的端口</span><br><span class="line">netstat -tulnp</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">// 创建文件 docker-compose.yml，并写入以下内容</span><br><span class="line"></span><br><span class="line">version: &apos;3.3&apos; # compose版本</span><br><span class="line"></span><br><span class="line">services: # 创建服务</span><br><span class="line"> db: # 创建名为 db 的对象（以下是对象参数）</span><br><span class="line">  image: mysql:5.7 # 指定容器镜像:版本</span><br><span class="line">  volumes: # 将主机的数据挂载到容器里</span><br><span class="line">   - db_data:/my_dirent/blog/wordpress/mysql</span><br><span class="line">  restart: always # 重启模式，always容器总是重新启动</span><br><span class="line">  environment: # 添加环境变量</span><br><span class="line">   MYSQL_ROOT_PASSWORD: root # mysql root密码</span><br><span class="line">   MYSQL_DATABASE: wordpress # 数据库名称</span><br><span class="line">   MYSQL_USER: wordpress # 账户</span><br><span class="line">   MYSQL_PASSWORD: wordpress # 密码</span><br><span class="line"></span><br><span class="line"> wordpress:  # 创建名为 wordpress 的对象（以下是对象参数）</span><br><span class="line">  depends_on: # 设置依赖关系，先运行依赖关系db，最后在运行wordpress</span><br><span class="line">    - db # 依赖于 db 对象</span><br><span class="line">  image: wordpress:latest # 指定容器镜像:最新版本</span><br><span class="line">  ports: # 端口</span><br><span class="line">    - &quot;8000:80&quot; # 80端口 映射到8000端口</span><br><span class="line">  restart: always # 重启模式，always容器总是重新启动</span><br><span class="line">  environment: # 添加环境变量</span><br><span class="line">    WORDPRESS_DB_HOST: db:3306 # 主机（连接到mysql）</span><br><span class="line">    WORDPRESS_DB_USER: wordpress # 账户</span><br><span class="line">    WORDPRESS_DB_PASSWORD: wordpress # 密码</span><br><span class="line">    WORDPRESS_DB_NAME: wordpress # 名称</span><br><span class="line">volumes: # 将主机的数据挂载到容器里</span><br><span class="line"> db_data: &#123;&#125;</span><br></pre></td></tr></table></figure>
-
-<p><code>注意！</code></p>
-<blockquote>
-<p>使用dockerfile是挂载不了目录的</p>
-</blockquote>
-<h2 id="使用docker-compose-yml文件"><a href="#使用docker-compose-yml文件" class="headerlink" title="使用docker-compose.yml文件"></a>使用docker-compose.yml文件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// 启动应用程序</span><br><span class="line">docker-compose up</span><br><span class="line"></span><br><span class="line">// 启动应用程序，并且在后台执行</span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h1 id="初始化wordpress"><a href="#初始化wordpress" class="headerlink" title="初始化wordpress"></a>初始化wordpress</h1><blockquote>
-<p>打开浏览器，输入<code>localhost:8000</code> 8000为映射的端口</p>
-</blockquote>
-<p>如果出现<code>无法连接到数据库的错误</code></p>
-<blockquote>
-<ol>
-<li><p>重启一下linux</p>
-</li>
-<li><p>使用systemctl启动docker</p>
-</li>
-<li><p>关闭防火墙</p>
-</li>
-<li><p>关闭selinux</p>
-</li>
-</ol>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// 永久关闭selinux</span><br><span class="line">vim /etc/sysconfig/selinux</span><br><span class="line"></span><br><span class="line">// 改成以下</span><br><span class="line">SELINUX=disabled</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h1 id="使用自定义主题"><a href="#使用自定义主题" class="headerlink" title="使用自定义主题"></a>使用自定义主题</h1><p>将下载好的主题，解压</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 终端运行，将宿主机的文件，拷贝到容器里</span><br><span class="line">docker cp /主题目录 容器名称:/指定的目录</span><br></pre></td></tr></table></figure>
-
-<p>进入后端，刷新主题即可显示</p>
-<hr>
-<h1 id="使用内网穿透达到外网可以访问本地wordpress"><a href="#使用内网穿透达到外网可以访问本地wordpress" class="headerlink" title="使用内网穿透达到外网可以访问本地wordpress"></a>使用内网穿透达到外网可以访问本地wordpress</h1><ul>
-<li><a href="http://www.nat123.com/" target="_blank" rel="noopener"><font color="red"><strong>下载nat123</strong></font></a></li>
-</ul>
-<p>下载，注册，登陆后</p>
-<p><img src="n1.png" alt></p>
-<p><img src="n2.png" alt></p>
-<hr>
-<h1 id="修改媒体文件最大上传大小"><a href="#修改媒体文件最大上传大小" class="headerlink" title="修改媒体文件最大上传大小"></a>修改媒体文件最大上传大小</h1><blockquote>
-<p>更新软件<code>apt-get update -y</code></p>
-<p>安装vim<code>apt-get install vim -y</code></p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// 进入容器，创建文件</span><br><span class="line">vim /usr/local/etc/php/conf.d/uploads.ini</span><br><span class="line"></span><br><span class="line">// 写入以下内容</span><br><span class="line"></span><br><span class="line">file_uploads = On</span><br><span class="line">memory_limit = 500M</span><br><span class="line">upload_max_filesize = 30M //可以自定义大小</span><br><span class="line">post_max_size = 30M //可以自定义大小</span><br><span class="line">max_execution_time = 600</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h1 id="增加文件上传类型"><a href="#增加文件上传类型" class="headerlink" title="增加文件上传类型"></a>增加文件上传类型</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// 进入容器，修改配置文件</span><br><span class="line">vim /var/www/html/wp-config.php</span><br><span class="line"></span><br><span class="line">// 写入</span><br><span class="line">define( &apos;ALLOW_UNFILTERED_UPLOADS&apos;, true);  // 去除上传的文件类型限制</span><br></pre></td></tr></table></figure>
-
-<h1 id="手动创建容器（可选）"><a href="#手动创建容器（可选）" class="headerlink" title="手动创建容器（可选）"></a>手动创建容器（可选）</h1><p>以下是我的容器创建的例子</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">// 这是一个bash</span><br><span class="line"></span><br><span class="line"># !/bin/bash</span><br><span class="line"></span><br><span class="line"># docker pull myql5.7 and wordpress</span><br><span class="line">function pull () &#123;</span><br><span class="line"> docker pull mysql:5.7;</span><br><span class="line"> docker pull wordpress:latest;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># create mysql </span><br><span class="line"></span><br><span class="line"># --privileged=true  CentOS系统下的安全Selinux禁止了一些安全权限，导致MySQL容器 # 在运行时会因为权限不足而报错，所以需要增加该选项</span><br><span class="line"></span><br><span class="line"># -p 端口</span><br><span class="line"></span><br><span class="line"># -e 环境变量</span><br><span class="line">function create_mysql () &#123;</span><br><span class="line"> docker run -d --privileged=true --name myMysql -v /my_dirent/mysql:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=root -p 33306:3306 mysql:5.7;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># create wordpress</span><br><span class="line"></span><br><span class="line"># &quot;WORDPRESS_DB_HOST&quot;: 链接的docker的MySQL的IP地址和端口，一般设置成mysql的表示</span><br><span class="line"># 用默认的设置</span><br><span class="line"></span><br><span class="line"># &quot;WORDPRESS_DB_USER&quot;: 以什么用户使用MySQL，默认是root</span><br><span class="line"></span><br><span class="line"># &quot;WORDPRESS_DB_PASSWORD&quot; 这设置MySQL的登陆用户密码，由于上一项是默认的root，所</span><br><span class="line"># 以这一项和之前的&quot;MYSQL_ROOT_PASSWORD“要相同</span><br><span class="line"></span><br><span class="line"># &quot;WORDPRESS_DB_NAME&quot;: 数据库的表名，不需要修改，用默认的”wordpress&quot;就行</span><br><span class="line">function create_wordpress () &#123;</span><br><span class="line">docker run -d --name mwp -e WORDPRESS_DB_HOST=mysql -e WORDPRESS_DB_PASSWORD=root -p 8000:80 --link myMysql:mysql -v /my_dirent/NFS_file:/var/www/html/data1 -v /my_dirent/NFS_file2:/var/www/html/data2 wordpress;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># start docker and create</span><br><span class="line">function all () &#123;</span><br><span class="line"> systemctl start docker;</span><br><span class="line"> pull;</span><br><span class="line"> create_mysql;</span><br><span class="line"> create_wordpress;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$1</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h1 id="wordpress文章里插入nas里的视频"><a href="#wordpress文章里插入nas里的视频" class="headerlink" title="wordpress文章里插入nas里的视频"></a>wordpress文章里插入nas里的视频</h1><ol>
-<li><p>创建容器的时候，将nas的共享目录，映射到<code>/var/www/html</code>目录里</p>
-</li>
-<li><p>修改映射目录的权限</p>
-</li>
-<li><p>添加markdown插件<code>WP Githuber MD</code></p>
-</li>
-<li><p>视频插入写法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// width宽，height高，src视频源</span><br><span class="line">// http://192.168.32.130:8000 表示 wordpress网站地址</span><br><span class="line">// /data1/video/qyaxl/1.mp4 表示 视频目录 （nas映射目录下的文件）</span><br><span class="line"></span><br><span class="line">[video width=&quot;1280&quot; height=&quot;720&quot; mp4=</span><br><span class="line">&quot;http://192.168.32.130:8000/data1/video/qyaxl/1.mp4&quot;]</span><br><span class="line">[/video]</span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
-<hr>
-
+<p>将<code>hexo</code>博客搭建到<code>github</code></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/09/27/hexo博客的搭建与使用/" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
       
     </div>
     
@@ -604,46 +1164,14 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-		  
-            <a href="/tags/docker/" rel="tag"><i class="fa fa-tag"></i> docker</a>
-			
-          
-		  
-            <a href="/tags/wordpress/" rel="tag"><i class="fa fa-tag"></i> wordpress</a>
-			
-          
-        </div>
+
+      
+
       
 
       
       
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2019/11/25/c-笔记/" rel="next" title="c++笔记">
-                <i class="fa fa-chevron-left"></i> c++笔记
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2020/01/03/添加宿主机与黑群晖共享文件夹/" rel="prev" title="添加宿主机与黑群晖共享文件夹">
-                添加宿主机与黑群晖共享文件夹 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
+        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -653,11 +1181,14 @@
   </article>
 
 
+    
+  </section>
 
-    <div class="post-spread">
-      
-    </div>
-  </div>
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/14/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><span class="page-number current">15</span>
+  </nav>
+
 
 
           </div>
@@ -665,10 +1196,6 @@
 
 
           
-
-  
-
-
 
         </div>
         
@@ -693,17 +1220,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -803,22 +1321,6 @@ document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " 
         </dive></div>
       </div></section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#安装docker"><span class="nav-number">1.</span> <span class="nav-text">安装docker</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#设置仓库"><span class="nav-number">1.1.</span> <span class="nav-text">设置仓库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用docker"><span class="nav-number">1.2.</span> <span class="nav-text">使用docker</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更改镜像源为国内"><span class="nav-number">1.3.</span> <span class="nav-text">更改镜像源为国内</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装docker-compose"><span class="nav-number">2.</span> <span class="nav-text">安装docker-compose</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用docker-compose-yml，编写一键搭建wordpress博客的配置文件"><span class="nav-number">3.</span> <span class="nav-text">使用docker-compose.yml，编写一键搭建wordpress博客的配置文件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用docker-compose-yml文件"><span class="nav-number">3.1.</span> <span class="nav-text">使用docker-compose.yml文件</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#初始化wordpress"><span class="nav-number">4.</span> <span class="nav-text">初始化wordpress</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用自定义主题"><span class="nav-number">5.</span> <span class="nav-text">使用自定义主题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用内网穿透达到外网可以访问本地wordpress"><span class="nav-number">6.</span> <span class="nav-text">使用内网穿透达到外网可以访问本地wordpress</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#修改媒体文件最大上传大小"><span class="nav-number">7.</span> <span class="nav-text">修改媒体文件最大上传大小</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#增加文件上传类型"><span class="nav-number">8.</span> <span class="nav-text">增加文件上传类型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#手动创建容器（可选）"><span class="nav-number">9.</span> <span class="nav-text">手动创建容器（可选）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#wordpress文章里插入nas里的视频"><span class="nav-number">10.</span> <span class="nav-text">wordpress文章里插入nas里的视频</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
@@ -990,10 +1492,6 @@ document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " 
   
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
-
-
 
   
 

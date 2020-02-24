@@ -115,7 +115,7 @@
 <meta property="og:image" content="https://1411482317.github.io/2020/01/06/C总结/1.png">
 <meta property="og:image" content="https://1411482317.github.io/2020/01/06/C总结/pf.png">
 <meta property="og:image" content="https://1411482317.github.io/2020/01/06/C总结/sf.png">
-<meta property="og:updated_time" content="2020-02-14T07:42:38.409Z">
+<meta property="og:updated_time" content="2020-02-18T07:15:34.692Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C总结">
 <meta name="twitter:description" content="基于操作系统CentOS8与GCC8.2 粗略总结C语言">
@@ -416,7 +416,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  6.4k
+                  7.9k
                 </span>
               
 
@@ -432,7 +432,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  26
+                  32
                 </span>
               
             </div>
@@ -756,9 +756,28 @@ printf(&quot;%.3f&quot;, num); // .3f限制输出3个小数位 </code></pre></di
 <details>
 <summary>创建const常量</summary>
 
-<ol>
-<li>使用到关键字<code>const</code></li>
-</ol>
+<table>
+<thead>
+<tr>
+<th>写法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>const int *p = i;</td>
+<td>底层const，指针是常量，值是变量</td>
+</tr>
+<tr>
+<td>int const *p = i;</td>
+<td>顶层const，指针是变量，值是常量</td>
+</tr>
+<tr>
+<td>const int const *p = i;</td>
+<td>指针与值都是常量</td>
+</tr>
+</tbody></table>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line"></span><br><span class="line">int main(void)&#123;</span><br><span class="line">    int i = 11;</span><br><span class="line">    const int *p1 = &amp;i; // 底层const</span><br><span class="line">    printf(&quot;p1=%d\n&quot;, *p1);</span><br><span class="line">    i = 22;</span><br><span class="line">    printf(&quot;p1=%d\n&quot;, *p1);</span><br><span class="line"></span><br><span class="line">    const int i2 = 33, i3 = 44;</span><br><span class="line">    int const *p2 = &amp;i2; // 顶层const</span><br><span class="line">    printf(&quot;p2=%d\n&quot;, *p2);</span><br><span class="line">    p2 = &amp;i3;</span><br><span class="line">    printf(&quot;p2=%d\n&quot;, *p2);</span><br><span class="line"></span><br><span class="line">    const int i4 = 55; // 双层const</span><br><span class="line">    const int const *p3 = &amp;i4;</span><br><span class="line">    printf(&quot;p3=%d\n&quot;, *p3);</span><br><span class="line"></span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 </details>
 
 <hr>
@@ -1409,27 +1428,40 @@ printf(&quot;%.3f&quot;, num); // .3f限制输出3个小数位 </code></pre></di
 <p>这是程序的生命周期，一旦出了作用域，程序就会失效</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123; // 这是一个作用域</span><br><span class="line">int i = 11;</span><br><span class="line">&#125; // 结束作用域</span><br><span class="line"></span><br><span class="line">i = 22; // 错误，i已经失效</span><br></pre></td></tr></table></figure>
 
-</details>
+<blockquote>
+<p>假如外部作用域与外部作用域拥有同样的变量，内部作用域则使用内部的变量，可以理解为就近使用，哪个最近就使用哪个</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">int i = 0; // 外部作用域的i</span><br><span class="line">&#123;</span><br><span class="line">    int i = 0; // 内部作用域的i（新创建的变量，隐藏了外部作用域的i）</span><br><span class="line">    i = 11; // 使用内部作用域的i</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+</details>
+s
 <details>
 <summary>链接</summary>
 
-<p>编译后产生的文件，它会和目标文件与系统的组件组合成一个可执行文件</p>
-<p>目标文件 -&gt; 编译 -&gt; 生成链接 -&gt; 可执行文件</p>
-<div class="tabs" id="链接"><ul class="nav-tabs"><li class="tab active"><a href="#链接-1">外部链接</a></li><li class="tab"><a href="#链接-2">内部链接</a></li><li class="tab"><a href="#链接-3">无链接</a></li></ul><div class="tab-content"><div class="tab-pane active" id="链接-1"><p>当前文件以外的文件可以使用</p>
+<p>编译后产生的文件，它会和目标文件与系统的组件组合成一个可执行文件，用作于多文件的操作</p>
+<div class="tabs" id="链接"><ul class="nav-tabs"><li class="tab active"><a href="#链接-1">外部链接</a></li><li class="tab"><a href="#链接-2">内部链接</a></li><li class="tab"><a href="#链接-3">无链接</a></li></ul><div class="tab-content"><div class="tab-pane active" id="链接-1"><p>当前文件的数据可以被其他文件操作</p>
 <blockquote>
-<p>外部链接变量可以用在多文件程序里使用</p>
+<p>关键字：<code>extern</code>声明，表明该变量或函数已经在别处定义</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">// head.h</span><br><span class="line">#ifndef __HEAD_H__</span><br><span class="line">#define __HEAD_H__</span><br><span class="line"></span><br><span class="line">int num = 11;</span><br><span class="line">double d;</span><br><span class="line"></span><br><span class="line">#endif // __HEAD_H__</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// test.c</span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &quot;./head.h&quot;</span><br><span class="line"></span><br><span class="line">int main(void)&#123;</span><br><span class="line">    extern int num; // 声明外部变量</span><br><span class="line">    printf(&quot;num=%d\n&quot;, num); // 输出11</span><br><span class="line">    num = 22; </span><br><span class="line">    printf(&quot;num=%d\n&quot;, num); // 修改外部链接变量，输出22</span><br><span class="line"></span><br><span class="line">    extern double d; // 声明外部变量</span><br><span class="line">    d = 1.1; // 初始化外部变量</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</div><div class="tab-pane" id="链接-2"><p>只能在当前文件使用，比如变量</p>
+<blockquote>
+<p>内部链接变量只能在一个文件中使用，static就是一种内部链接属性</p>
 </blockquote>
 <blockquote>
-<p>关键字：extern</p>
+<p>被static修饰的数据会被专门存放到<code>静态内存</code>里，并且保证了数据的唯一性</p>
 </blockquote>
-</div><div class="tab-pane" id="链接-2"><p>只能在当前文件使用</p>
 <blockquote>
-<p>内部链接变量只能在一个文件中使用</p>
+<p>静态变量的地址不会改变，但值可变</p>
 </blockquote>
-</div><div class="tab-pane" id="链接-3"><p>只能在当前代码块里使用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line"></span><br><span class="line">int main(void)&#123;</span><br><span class="line">    static int a = 0;</span><br><span class="line">    int b = 0;</span><br><span class="line">    &#123;</span><br><span class="line">        ++a;</span><br><span class="line">        ++b;</span><br><span class="line">    &#125;</span><br><span class="line">    printf(&quot;a=%d\nb=%d\n&quot;, a, b);</span><br><span class="line"></span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+</div><div class="tab-pane" id="链接-3"><p>只能在当前代码块里使用，比如函数</p>
 <blockquote>
 <p>块作用域，函数作用域，函数原型作用域的变量都是无连接变量</p>
+</blockquote>
+<blockquote>
 <p>这表示了这些作用域里的变量都是私有的</p>
 </blockquote>
 </div></div></div>
@@ -1439,26 +1471,44 @@ printf(&quot;%.3f&quot;, num); // .3f限制输出3个小数位 </code></pre></di
 <details>
 <summary>存储期</summary>
 
+<p>对象的生命周期</p>
 <ul>
 <li><p>静态存储期 </p>
 <blockquote>
-<p>用关键字<code>static</code>标识，程序执行期间一直存在</p>
+<p>程序执行时一直存在</p>
+<p>用关键字<code>static</code>程序执行期间一直存在，表明了其链接属性，并非储存期</p>
+<p>无论外部还是内部链接，所有文件作用域变量都会有静态存储期</p>
 </blockquote>
 </li>
 <li><p>线程存储期</p>
 <blockquote>
+<p>作用于并发程序的设计</p>
 <p>从被声明到线程结束一直存在</p>
 </blockquote>
 </li>
 <li><p>自动存储期</p>
 <blockquote>
-<p>块作用域具有自动存储期，程序进入块时，才会为变量分配内存</p>
-<p>关键字：auto</p>
+<p>块作用域具有自动存储期，程序进入块时，才会为变量分配内存，当块作用域结束时，就会释放掉这些内存</p>
 </blockquote>
 </li>
-<li><p>动态分配存储期 </p>
-<blockquote>
+</ul>
+<table>
+<thead>
+<tr>
+<th>自动变量</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>使用可以使用<code>auto</code>显示说明（比如：auto int i;）</td>
+</tr>
+<tr>
+<td>自动变量不会自动初始化，可以通过显示初始化与非常量表达式进行初始化</td>
+</tr>
+</tbody></table>
+<ul>
+<li>动态分配存储期 <blockquote>
 <p>可以根据需要设计扩大（或缩小）</p>
+<p>使用malloc申请动态内存空间，calloc修改动态内存空间,free释放动态内存空间</p>
 </blockquote>
 </li>
 </ul>
@@ -1470,26 +1520,47 @@ printf(&quot;%.3f&quot;, num); // .3f限制输出3个小数位 </code></pre></di
 <p>寄存器变量存储在 CPU的寄存器里，访问这些变量非常快</p>
 <blockquote>
 <p>由于寄存器不是内存，所有没法获取寄存器变量的地址值</p>
-<p>寄存器类似于自动变量</p>
-<p>寄存器变量关键字<code>register</code></p>
+<p>寄存器类似于自动变量，但是需要用关键字<code>register</code></p>
+<p>向寄存器申请寄存器变量不一定会申请成功，申请失败寄存器变量则会变成自动变量</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">register int i;</span><br></pre></td></tr></table></figure>
 
 </details>
 
+
+
 <details>
 <summary>定义与声明</summary>
 
-<p>定义只有一个，声明可以有多个</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">int i = 1l; // 定义int类型变量i，值为11</span><br><span class="line"></span><br><span class="line">extern int num; // 声明int类型变量num</span><br></pre></td></tr></table></figure>
+<p>定义只有一个，声明可以有多个，声明并不会引起内存分配</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">int i = 11; // 定义</span><br><span class="line">int main(void)&#123;</span><br><span class="line">    extern int i; // 声明</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</details>
+
+<details>
+<summary>随机数</summary>
+
+<p>使用静态变量与表达式，计算出一个随机数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line">// head.h</span><br><span class="line">#ifndef __HEAD_H__</span><br><span class="line">#define __HEAD_H__</span><br><span class="line"></span><br><span class="line">static unsigned long n = 1; // 种子，相同的种子则会生成相同的伪随机数</span><br><span class="line">// 随机数生成器</span><br><span class="line">unsigned long func(void)&#123;</span><br><span class="line">    n = n * 123456789 + 12345;</span><br><span class="line">    return (unsigned long)(n / 987654) % 4561;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 种子修改器</span><br><span class="line">void set_func(unsigned long seed)&#123;</span><br><span class="line">    n = seed;</span><br><span class="line">    return;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#endif // __HEAD_H__</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// test.c</span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &quot;./head.h&quot;</span><br><span class="line"></span><br><span class="line">extern unsigned long func(void);</span><br><span class="line">extern void set_func(unsigned long seed);</span><br><span class="line"></span><br><span class="line">int main(void)&#123;</span><br><span class="line">    for(int i = 0; i != 5; ++i)</span><br><span class="line">        printf(&quot;%ld\n&quot;, func());</span><br><span class="line">    printf(&quot;\n&quot;);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// test2.c</span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &quot;./head.h&quot;</span><br><span class="line"></span><br><span class="line">extern unsigned long func(void);</span><br><span class="line">extern void set_func(unsigned long seed);</span><br><span class="line"></span><br><span class="line">int main(void)&#123;</span><br><span class="line">    // 与test.c一样</span><br><span class="line">    for(int i = 0; i != 5; ++i)</span><br><span class="line">        printf(&quot;%ld\n&quot;, func());</span><br><span class="line">    printf(&quot;\n&quot;);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// test3.c</span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &quot;./head.h&quot;</span><br><span class="line"></span><br><span class="line">extern unsigned long func(void);</span><br><span class="line">extern void set_func(unsigned long seed);</span><br><span class="line"></span><br><span class="line">int main(void)&#123;</span><br><span class="line">    set_func(2); // 修改随机数种子</span><br><span class="line">    // 结果与test.c 与 test2.c 不同</span><br><span class="line">    for(int i = 0; i != 5; ++i)</span><br><span class="line">        printf(&quot;%ld\n&quot;, func());</span><br><span class="line">    printf(&quot;\n&quot;);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<div class="tabs" id="sjs"><ul class="nav-tabs"><li class="tab active"><a href="#sjs-1">自动重置随机数种子</a></li></ul><div class="tab-content"><div class="tab-pane active" id="sjs-1"><blockquote>
+<p>使用时间值初始化随机数种子</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt; // srand() 与 rand()</span><br><span class="line">#include &lt;time.h&gt;</span><br><span class="line"></span><br><span class="line">int main(void)&#123;</span><br><span class="line">    srand((unsigned int)time(0)); // 使用时间设置随机数种子</span><br><span class="line">    for(int i = 0; i != 5; ++i)</span><br><span class="line">        printf(&quot;%d\n&quot;, rand());</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</div></div></div>
 
 </details>
 
 <details>
 <summary>内存操作</summary>
 
+<blockquote>
+<p>静态数据，动态数据，自由数据分别储存在3个不同的区域里</p>
+</blockquote>
 <p>需要头文件<code>#include &lt;stdlib.h&gt;</code></p>
-<div class="tabs" id="内存"><ul class="nav-tabs"><li class="tab active"><a href="#内存-1">分配内存</a></li><li class="tab"><a href="#内存-2">释放内存</a></li></ul><div class="tab-content"><div class="tab-pane active" id="内存-1"><p>创建动态内存</p>
+<div class="tabs" id="内存"><ul class="nav-tabs"><li class="tab active"><a href="#内存-1">分配内存</a></li><li class="tab"><a href="#内存-2">释放内存</a></li></ul><div class="tab-content"><div class="tab-pane active" id="内存-1"><blockquote>
+<p>s创建动态内存</p>
+</blockquote>
 <table>
 <thead>
 <tr>
@@ -1502,15 +1573,18 @@ printf(&quot;%.3f&quot;, num); // .3f限制输出3个小数位 </code></pre></di
 <td>向内存申请n bit的空间，并返回一个指针指向这个空间</td>
 </tr>
 <tr>
-<td>calloc (n, n2)</td>
+<td>void* calloc (n, n2)</td>
 <td>类似malloc，两个参数为无符号类型，n为数量，n2为类型大小</td>
 </tr>
 </tbody></table>
 <p><code>void*</code>任意类型指针，使用前需要强转</p>
-<blockquote>
-<p>// 申请3个int类型大小的内存空间<br>int <em>p = ( int*</em> ) malloc(3 * sizeof(int));</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line"></span><br><span class="line">int main(void)&#123;</span><br><span class="line">    // 申请3个int类型大小的内存空间</span><br><span class="line">    int *p  = (int*)malloc(sizeof(int) * 3);</span><br><span class="line"></span><br><span class="line">    // 修改内存空间，使得p可以储存10个int</span><br><span class="line">    p = (int*)calloc(10, sizeof(int));</span><br><span class="line">    return 0;</span><br><span class="line">&#125;s</span><br></pre></td></tr></table></figure>
+</div><div class="tab-pane" id="内存-2"><blockquote>
+<p>释放动态内存，若用完的动态内存不及时释放，则会操作内存泄漏，会导致内存越来越小</p>
 </blockquote>
-</div><div class="tab-pane" id="内存-2"><p>释放动态内存，若用完的动态内存不及时释放，则会操作内存泄漏，会导致内存越来越小</p>
+<blockquote>
+<p>不能释放同一块指针两个</p>
+</blockquote>
 <table>
 <thead>
 <tr>
@@ -1519,18 +1593,49 @@ printf(&quot;%.3f&quot;, num); // .3f限制输出3个小数位 </code></pre></di
 </tr>
 </thead>
 <tbody><tr>
-<td>free (动态内存指针)</td>
-<td>释放动态内存</td>
+<td>free (指针)</td>
+<td>释放指针，如果是多级指针需要通过循环释放子指针的内存</td>
 </tr>
 </tbody></table>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line"></span><br><span class="line">int main(void)&#123;</span><br><span class="line">    int **p  = (int**)malloc(sizeof(int*) * 2);</span><br><span class="line">    int i = 0;</span><br><span class="line">    while(i != 2)   *(p + i++) = (int*)malloc(sizeof(int) * 3);</span><br><span class="line"></span><br><span class="line">    // 释放二级指针，其他级别指针以此类推</span><br><span class="line">    for(i = 0; i != 2; ++i)</span><br><span class="line">        free(*(p + i)); // 释放子指针的内存</span><br><span class="line">    free(p);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 </div></div></div>
 
 </details>
 
 <details>
-<summary>创建一位数组与多维数组</summary>
+<summary>创建多维数组</summary>
 
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">// 等同于int arr[2];</span><br><span class="line">int *p = (int*)malloc(sizeof(int) *2);</span><br><span class="line">free(p); // 释放一维数组</span><br><span class="line"></span><br><span class="line">// 等同于int arr[2][3];</span><br><span class="line">int **p2 = (int**)malloc(sizeof(int) *2);</span><br><span class="line">for(unsigned int i =0; i != 2; ++i)&#123;</span><br><span class="line">	*(p2+i) = (int*)malloc(sizeof(int) *3);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 释放二维数组</span><br><span class="line">for (unsigned int i = 0; i &lt; 2; ++i)&#123;</span><br><span class="line">	free(*(p2 + i));</span><br><span class="line">&#125;</span><br><span class="line">free(p2);</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line"></span><br><span class="line">int main(void)&#123;</span><br><span class="line">    // 创建一个 2*3的数组</span><br><span class="line">    const int s1 = 2, s2 = 3;</span><br><span class="line">    int (*p)[s2];</span><br><span class="line">    p = (int(*)[s2])malloc(sizeof(int) * s1 * s2);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</details>
+
+<details>
+<summary>用作于编译器优化的类型限定符</summary>
+
+<div class="tabs" id="vyrxdf"><ul class="nav-tabs"><li class="tab active"><a href="#vyrxdf-1">编译器优化</a></li><li class="tab"><a href="#vyrxdf-2">volatile类型限定符</a></li><li class="tab"><a href="#vyrxdf-3">restrict类型限定符</a></li></ul><div class="tab-content"><div class="tab-pane active" id="vyrxdf-1"><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">硬件执行：</span><br><span class="line">    x = 0x04;</span><br><span class="line">    x = 0x06;</span><br><span class="line">    x = 0x08;</span><br><span class="line">对于硬件来说这是3条指令，依次执行，但是如果让编译器进行编译，则它会忽略前面两条语句，</span><br><span class="line">编译器执行：</span><br><span class="line">    直接得到 </span><br><span class="line">    x = 0x08；</span><br><span class="line"></span><br><span class="line">编译器执行：</span><br><span class="line">    int i = 5, j, k;</span><br><span class="line">    j = i;</span><br><span class="line">    k = i;</span><br><span class="line">编译器进行编译时，由于i在第二条和第三条语句之间没有作为左值存在，所以第三条语句k=i;</span><br><span class="line">并没有真正到i所在的内存区域去取得i的值，而是直接取第二条语句保存在寄存器中的副本。</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>可见，所谓编译器优化就是假设了某个变量地址，而volatile的作用就是让编译器不去假设变量的值，每次都到内存中访问变量值。</p>
+</blockquote>
+</div><div class="tab-pane" id="vyrxdf-2"><blockquote>
+<p>它的主要作用是防止编译器进行优化</p>
+</blockquote>
+<p>编译器优化是有可能产生错误的。因为上面提到，编译器优化后，对变量取值是有可能会取寄存器中的副本，但是在实际运行时，一些变量的值随时都有可能被一些未知的因素所改变。下面是几种变量的值会被改变，需要用到volatile的情况：</p>
+<ul>
+<li><p>并行设备的硬件寄存器</p>
+</li>
+<li><p>一个中断子程序会用到的非自动变量</p>
+</li>
+<li><p>多线程应用中被几个线程用到的共享变量</p>
+</li>
+</ul>
+</div><div class="tab-pane" id="vyrxdf-3"><blockquote>
+<p>用于修饰指针，用来告诉编译器，该指针所指向的对象只能通过该指针访问，让编译器可以进行优化</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// 比如编译器执行：</span><br><span class="line">        int var = 5;</span><br><span class="line">        int *restrict varp = &amp;var;</span><br><span class="line">        *varp = 10;   </span><br><span class="line">        *varp = 15;</span><br><span class="line">        *varp = 20;</span><br><span class="line">// 编译器会直接优化为：</span><br><span class="line">        int var = 5;</span><br><span class="line">        int *restrict varp = &amp;var;</span><br><span class="line">        *varp = 20;</span><br></pre></td></tr></table></figure>
+
+</div></div></div>
 
 </details>
 
@@ -2140,7 +2245,7 @@ printf(&quot;%.3f&quot;, num); // .3f限制输出3个小数位 </code></pre></di
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-count">29</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2162,7 +2267,7 @@ printf(&quot;%.3f&quot;, num); // .3f限制输出3个小数位 </code></pre></di
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -2273,7 +2378,7 @@ document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " 
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">44k</span>
+    <span title="Site words total count">56.8k</span>
   
 </div>
 

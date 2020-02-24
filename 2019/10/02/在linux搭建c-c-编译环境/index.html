@@ -108,7 +108,7 @@
 <meta property="og:image" content="https://1411482317.github.io/2019/10/02/在linux搭建c-c-编译环境/include.png">
 <meta property="og:image" content="https://1411482317.github.io/2019/10/02/在linux搭建c-c-编译环境/include2.png">
 <meta property="og:image" content="https://1411482317.github.io/2019/10/02/在linux搭建c-c-编译环境/c++new.png">
-<meta property="og:updated_time" content="2020-02-12T07:18:20.137Z">
+<meta property="og:updated_time" content="2020-02-22T03:05:25.196Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="在linux搭建c&#x2F;c++编译环境">
 <meta name="twitter:description" content="基于Cent8虚拟机下，搭建gcc/g++，gdb并使用vs code进行c/c++程序的开发">
@@ -431,7 +431,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.1k
+                  1.2k
                 </span>
               
 
@@ -593,6 +593,35 @@
 </blockquote>
 <h2 id="设置vs-code默认以最新版本的c"><a href="#设置vs-code默认以最新版本的c" class="headerlink" title="设置vs code默认以最新版本的c++"></a>设置vs code默认以最新版本的c++</h2><p><img src="c++new.png" alt></p>
 <hr>
+<h1 id="gcc-g-编译命令"><a href="#gcc-g-编译命令" class="headerlink" title="gcc/g++编译命令"></a>gcc/g++编译命令</h1><table>
+<thead>
+<tr>
+<th>选项</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-W</td>
+<td>显示编译器认为的错误与警告</td>
+</tr>
+<tr>
+<td>-Wall</td>
+<td>编译后显示所有的错误与警告</td>
+</tr>
+<tr>
+<td>-lpthread</td>
+<td>使用线程时，必须添加表示在链接阶段链接到pthread.h</td>
+</tr>
+<tr>
+<td>-g</td>
+<td>使用gdb</td>
+</tr>
+<tr>
+<td>-o</td>
+<td>指定输出文件</td>
+</tr>
+</tbody></table>
+<hr>
 
       
     </div>
@@ -726,7 +755,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-count">29</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -748,7 +777,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -819,7 +848,7 @@ document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " 
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前置"><span class="nav-number">1.</span> <span class="nav-text">前置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装gcc依赖库"><span class="nav-number">2.</span> <span class="nav-text">安装gcc依赖库</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装gcc与gdb"><span class="nav-number">3.</span> <span class="nav-text">安装gcc与gdb</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装gcc"><span class="nav-number">3.1.</span> <span class="nav-text">安装gcc</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装gdb"><span class="nav-number">3.2.</span> <span class="nav-text">安装gdb</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装并使用vs-code"><span class="nav-number">4.</span> <span class="nav-text">安装并使用vs code</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#include的查找"><span class="nav-number">4.1.</span> <span class="nav-text">#include的查找</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置vs-code默认以最新版本的c"><span class="nav-number">4.2.</span> <span class="nav-text">设置vs code默认以最新版本的c++</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前置"><span class="nav-number">1.</span> <span class="nav-text">前置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装gcc依赖库"><span class="nav-number">2.</span> <span class="nav-text">安装gcc依赖库</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装gcc与gdb"><span class="nav-number">3.</span> <span class="nav-text">安装gcc与gdb</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装gcc"><span class="nav-number">3.1.</span> <span class="nav-text">安装gcc</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装gdb"><span class="nav-number">3.2.</span> <span class="nav-text">安装gdb</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装并使用vs-code"><span class="nav-number">4.</span> <span class="nav-text">安装并使用vs code</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#include的查找"><span class="nav-number">4.1.</span> <span class="nav-text">#include的查找</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置vs-code默认以最新版本的c"><span class="nav-number">4.2.</span> <span class="nav-text">设置vs code默认以最新版本的c++</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#gcc-g-编译命令"><span class="nav-number">5.</span> <span class="nav-text">gcc/g++编译命令</span></a></li></ol></div>
             
 
           </div>
@@ -859,7 +888,7 @@ document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " 
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">44k</span>
+    <span title="Site words total count">56.8k</span>
   
 </div>
 
