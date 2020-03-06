@@ -1,6 +1,184 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>TCP/IP笔记</title>
+    <url>/2020/03/06/TCP-IP%E7%AC%94%E8%AE%B0-1/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>TCP/IP笔记</title>
+    <url>/2020/03/06/TCP-IP%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<img src="/2020/03/06/TCP-IP笔记/fm.jpg">
+
+<p>基于书籍<code>TCP/IP详解卷1第二版</code></p>
+<a id="more"></a>
+
+<hr>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>SYN</td>
+<td>建立连接</td>
+</tr>
+<tr>
+<td>FIN</td>
+<td>关闭连接</td>
+</tr>
+<tr>
+<td>ACK</td>
+<td>响应</td>
+</tr>
+<tr>
+<td>PSH</td>
+<td>有数据传输</td>
+</tr>
+<tr>
+<td>RST</td>
+<td>连接重置</td>
+</tr>
+</tbody></table>
+<hr>
+]]></content>
+  </entry>
+  <entry>
+    <title>使用bat编写win桌面时间</title>
+    <url>/2020/02/29/%E4%BD%BF%E7%94%A8bat%E7%BC%96%E5%86%99win%E6%A1%8C%E9%9D%A2%E6%97%B6%E9%97%B4/</url>
+    <content><![CDATA[<img src="/2020/02/29/使用bat编写win桌面时间/fm.jpg">
+
+<p>基于win10</p>
+<p>bat是dos（磁盘操作系统）下的批处理文件，bat文件的后缀为<code>.bat</code>打开该文件则会调用cmd运行</p>
+<a id="more"></a>
+
+<hr>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">// localhost_time.bat</span><br><span class="line"></span><br><span class="line">mode con cols=60 lines=7 // 窗口宽和高</span><br><span class="line">@echo off                // 死循环块</span><br><span class="line">:loop</span><br><span class="line">// 内容</span><br><span class="line">net time \\localhost     // 输出本地时间</span><br><span class="line">timeout /T 1 /NOBREAK    // 睡眠1秒</span><br><span class="line">cls                      // 清屏</span><br><span class="line">goto loop                // 死循环块</span><br></pre></td></tr></table></figure>
+
+<p><strong>运行</strong></p>
+<p><img src="1.png" alt></p>
+<hr>
+]]></content>
+      <tags>
+        <tag>bat</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>docker安装oracle 11g</title>
+    <url>/2020/02/27/docker%E5%AE%89%E8%A3%85oracle-11g/</url>
+    <content><![CDATA[<img src="/2020/02/27/docker安装oracle-11g/fm.jpg">
+
+<p>基于centos8的docker</p>
+<a id="more"></a>
+
+<hr>
+<blockquote>
+<p>下载并启动镜像</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#下载镜像</span><br><span class="line">docker pull registry.cn-hangzhou.aliyuncs.com/helowin/oracle_11g</span><br><span class="line"></span><br><span class="line">#创建并启动容器</span><br><span class="line">docker run -d -p 1521:1521 --name oracle_11g registry.aliyuncs.com/helowin/oracle_11g</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>切换到root并修改文件</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#进入容器</span><br><span class="line">docker exec -it oracle_11g /bin/bash</span><br><span class="line"></span><br><span class="line">#切换到root（注意，这是容器内）</span><br><span class="line">su root</span><br><span class="line"></span><br><span class="line">#密码</span><br><span class="line">helowin</span><br><span class="line"></span><br><span class="line">#打开文件</span><br><span class="line">vi /etc/profile</span><br><span class="line"></span><br><span class="line">#以下为写入的内容</span><br><span class="line">export ORACLE_HOME=/home/oracle/app/oracle/product/11.2.0/dbhome_2</span><br><span class="line">export ORACLE_SID=helowin</span><br><span class="line">export PATH=$ORACLE_HOME/bin:$PATH</span><br><span class="line"></span><br><span class="line">#重新加载profile文件</span><br><span class="line">source /etc/profile</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>创建软连接与切换用户</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#软连接</span><br><span class="line">ln -s $ORACLE_HOME/bin/sqlplus /usr/bin</span><br><span class="line"></span><br><span class="line">#切换用户，不切换的话会在sql里发生:TNS:permission denied</span><br><span class="line">su - oracle</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>登录sqlplus并修改sys与system的密码</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#启动sqlplus连接到sysdba</span><br><span class="line">sqlplus /nolog</span><br><span class="line">conn /as sysdba</span><br><span class="line"></span><br><span class="line">#修改sys、system用户密码</span><br><span class="line">alter user system identified by oracle;</span><br><span class="line">alter user sys identified by oracle;</span><br><span class="line">ALTER PROFILE DEFAULT LIMIT PASSWORD_LIFE_TIME UNLIMITED;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>使用navicat登陆</p>
+</blockquote>
+<p><img src="1.png" alt></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>解决docker磁盘空间不足问题</title>
+    <url>/2020/02/27/%E8%A7%A3%E5%86%B3docker%E7%A3%81%E7%9B%98%E7%A9%BA%E9%97%B4%E4%B8%8D%E8%B6%B3%E9%97%AE%E9%A2%98/</url>
+    <content><![CDATA[<img src="/2020/02/27/解决docker磁盘空间不足问题/fm.gif">
+
+<p>基于centos8的docker</p>
+<a id="more"></a>
+
+<hr>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#启动docker</span><br><span class="line">service docker start</span><br><span class="line"></span><br><span class="line">#查看docker镜像存放目录占用空间</span><br><span class="line">du -hs /var/lib/docker/</span><br><span class="line"></span><br><span class="line">#停止docker</span><br><span class="line">service docker stop</span><br><span class="line"></span><br><span class="line">#创建新的目录</span><br><span class="line">mkdir -p /目录</span><br><span class="line"></span><br><span class="line">#迁移数据</span><br><span class="line">rsync -avz /var/lib/docker /目录</span><br><span class="line"></span><br><span class="line">#创建文件，并写入</span><br><span class="line">vim /etc/docker/daemon.json</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  &quot;graph&quot;: &quot;/目录&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#重新加载docker，并重启docker服务</span><br><span class="line">systemctl daemon-reload &amp;&amp; systemctl restart docker</span><br><span class="line"></span><br><span class="line">#查看docker是否更换目录</span><br><span class="line">docker info | grep &quot;Docker Root Dir&quot;</span><br><span class="line"></span><br><span class="line">#删除旧目录</span><br><span class="line">rm -rf /var/lib/docker</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>常见docker清理方法</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#查看Docker的磁盘使用情况</span><br><span class="line">docker system df</span><br><span class="line"></span><br><span class="line">#可以用于清理磁盘，删除关闭的容器、无用的数据卷和网络，以及dangling镜像</span><br><span class="line">docker system prune</span><br><span class="line"></span><br><span class="line">#删除所有容器与镜像</span><br><span class="line">docker system prune -a</span><br></pre></td></tr></table></figure>
+
+<hr>
+]]></content>
+  </entry>
+  <entry>
+    <title>makefile笔记</title>
+    <url>/2020/02/27/makefile%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<img src="/2020/02/27/makefile笔记/fm.jpg">
+
+<p>可以用来自动化编译c/c++项目</p>
+<a id="more"></a>
+
+<hr>
+<blockquote>
+<p>makefile的主要部分由<code>显示规则</code> <code>隐式规则</code> <code>变量</code> <code>文件指示</code> <code>注释</code>组成</p>
+</blockquote>
+<blockquote>
+<p><strong>makefile的注释用</strong><code>#</code></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>字符</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>%</td>
+<td>匹配零或若干字符</td>
+</tr>
+</tbody></table>
+<h3 id="Makefile规则"><a href="#Makefile规则" class="headerlink" title="Makefile规则"></a>Makefile规则</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">目标文件: 源文件 [可选:依赖文件]</span><br><span class="line">	需要执行命令(shell)</span><br><span class="line"></span><br><span class="line"># 例子1</span><br><span class="line">a.out: hellow.c</span><br><span class="line">	gcc hellow.c -o a.out</span><br><span class="line"></span><br><span class="line"># 例子2，命令同时运行</span><br><span class="line">exec:</span><br><span class="line">	cd /; pwd;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 例子3，命令分开运行</span><br><span class="line">exec:</span><br><span class="line">	cd / </span><br><span class="line">	pwd</span><br></pre></td></tr></table></figure>
+
+<p><img src="1.png" alt></p>
+<hr>
+<h3 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h3><div class="tabs" id="bian_liang"><ul class="nav-tabs"><li class="tab active"><a href="#bian_liang-1">创建变量</a></li><li class="tab"><a href="#bian_liang-2">使用变量</a></li></ul><div class="tab-content"><div class="tab-pane active" id="bian_liang-1"><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">变量名 = 值</span><br><span class="line"></span><br><span class="line"># 例子</span><br><span class="line">SOURCE = hellow.c</span><br><span class="line">TARGET = a.out</span><br></pre></td></tr></table></figure>
+</div><div class="tab-pane" id="bian_liang-2"><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$(变量名)</span><br><span class="line"></span><br><span class="line"># 例子</span><br><span class="line">SOURCE = hellow.c</span><br><span class="line">TARGET = a.out</span><br><span class="line">$(TARGET): $(SOURCE)</span><br><span class="line">    gcc $(SOURCE) -o $(TARGET)</span><br></pre></td></tr></table></figure>
+</div></div></div>
+
+<hr>
+<h3 id="删除目标文件"><a href="#删除目标文件" class="headerlink" title="删除目标文件"></a>删除目标文件</h3><ul>
+<li><p>在<code>rm</code>命令前面加了一个<code>-</code>的意思就是，也许某些文件出现问题，但不要管，程序继续运行</p>
+</li>
+<li><p><code>clean</code>需要放在文件的最后面</p>
+</li>
+<li><p><code>.PHONY</code>伪目标，表示这只是一个标签</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">.PHONY: clean</span><br><span class="line">clean:</span><br><span class="line">	-rm 文件</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h3><blockquote>
+<p>可以使用类似于#include的方式把别的Makefile包含进来</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># a.mk为Makefile的头文件</span><br><span class="line">include a.mk</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="在不同的目录执行make"><a href="#在不同的目录执行make" class="headerlink" title="在不同的目录执行make"></a>在不同的目录执行make</h3><p><code>all</code>执行多个变量</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">all: a.o exec </span><br><span class="line"></span><br><span class="line">a.o: test.c</span><br><span class="line">	gcc -c test.c</span><br><span class="line"></span><br><span class="line">exec:</span><br><span class="line">	cd ./dirent; gcc -c test_2.c</span><br></pre></td></tr></table></figure>
+
+<hr>
+]]></content>
+  </entry>
+  <entry>
     <title>CGI笔记</title>
     <url>/2020/02/26/CGI%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<img src="/2020/02/26/CGI笔记/fm.gif">
@@ -14,6 +192,9 @@
 </blockquote>
 <blockquote>
 <p>主流的CGI程序用Perl编写，Perl是一款强大的脚本语言</p>
+</blockquote>
+<blockquote>
+<p>cgi是一种脚本</p>
 </blockquote>
 <hr>
 <h3 id="准备阶段，安装并启动web服务器"><a href="#准备阶段，安装并启动web服务器" class="headerlink" title="准备阶段，安装并启动web服务器"></a>准备阶段，安装并启动web服务器</h3><blockquote>
@@ -41,7 +222,7 @@
 <blockquote>
 <p>安装 fcgiwrap 与 fastcgi</p>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">yum install fcgi fcgi-devel autoconf automake libtool</span><br><span class="line"></span><br><span class="line">#安装spawn-fcgi</span><br><span class="line">wget http://download.godaner.com/spawn-fcgi.tar.gz</span><br><span class="line"></span><br><span class="line">#解压</span><br><span class="line">tar -zxvf spawn-fcgi.tar.gz</span><br><span class="line"></span><br><span class="line">#进入目录</span><br><span class="line">cd spawn-fcgi</span><br><span class="line"></span><br><span class="line">#生成./configure与make</span><br><span class="line">/autogen.sh</span><br><span class="line"></span><br><span class="line">#生成makefile</span><br><span class="line">./configure</span><br><span class="line"></span><br><span class="line">#生成执行文件并安装</span><br><span class="line">make &amp;&amp; make install</span><br><span class="line"></span><br><span class="line">#安装fcgiwrap</span><br><span class="line">git clone https://github.com/gnosek/fcgiwrap.git</span><br><span class="line"></span><br><span class="line">#进入目录</span><br><span class="line">cd fcgiwrap</span><br><span class="line"></span><br><span class="line">#生成configure</span><br><span class="line">autoreconf -i</span><br><span class="line"></span><br><span class="line">#生成Makefile</span><br><span class="line">./configure</span><br><span class="line"></span><br><span class="line">#生成执行文件并安装</span><br><span class="line">make &amp;&amp; make install</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">yum install fcgi fcgi-devel autoconf automake libtool</span><br><span class="line"></span><br><span class="line">#安装spawn-fcgi</span><br><span class="line">wget http://download.godaner.com/spawn-fcgi.tar.gz</span><br><span class="line"></span><br><span class="line">#解压</span><br><span class="line">tar -zxvf spawn-fcgi.tar.gz</span><br><span class="line"></span><br><span class="line">#进入目录</span><br><span class="line">cd spawn-fcgi</span><br><span class="line"></span><br><span class="line">#生成./configure与make</span><br><span class="line">/autogen.sh</span><br><span class="line"></span><br><span class="line">#生成makefile</span><br><span class="line">./configure</span><br><span class="line"></span><br><span class="line">#生成执行文件并安装</span><br><span class="line">make &amp;&amp; make install</span><br><span class="line"></span><br><span class="line">#安装fcgiwrap</span><br><span class="line">git clone https://github.com/gnosek/fcgiwrap.git</span><br><span class="line"></span><br><span class="line">#进入目录</span><br><span class="line">cd fcgiwrap</span><br><span class="line"></span><br><span class="line">#生成configure</span><br><span class="line">autoreconf -i</span><br><span class="line"></span><br><span class="line">#生成Makefile</span><br><span class="line">./configure</span><br><span class="line"></span><br><span class="line">#生成执行文件并安装</span><br><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
 
 <ul>
 <li><p>spawn-fcgi，make出错</p>
@@ -126,7 +307,7 @@
     <url>/2020/02/19/CTinyhttpd%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<img src="/2020/02/19/CTinyhttpd笔记/fm.jpg">
 
-<p>这是一个用C写的轻量级http server，在centos8用vs code进行测试运行与修改</p>
+<p>这是一个用C写的轻量级http server，在centos8用<code>win vs code</code>使用ssh远程连接进行测试运行与修改</p>
 <a id="more"></a>
 
 <hr>
@@ -134,35 +315,221 @@
 <li><strong>下载项目</strong><br><a href="https://github.com/EZLippi/Tinyhttpd" target="_blank" rel="noopener"><strong>Download</strong></a></li>
 </ul>
 <hr>
-<h3 id="修改源码"><a href="#修改源码" class="headerlink" title="修改源码"></a>修改源码</h3><p>由于Tinyhttpd在centos8下会出现一些错误，所有首先需要修改一下源码</p>
-<div class="tabs" id="xgym"><ul class="nav-tabs"><li class="tab active"><a href="#xgym-1">httpd.c</a></li></ul><div class="tab-content"><div class="tab-pane active" id="xgym-1"><table>
+<h3 id="http"><a href="#http" class="headerlink" title="http"></a>http</h3><blockquote>
+<p>http协议是基于tcp/ip协议的，要获取服务端的html数据只需要创建socket连接即可</p>
+</blockquote>
+<p><strong>http通信流程</strong></p>
+<p><img src="http.png" alt></p>
+<hr>
+<details>
+<summary>需要注意的事项</summary>
+
+<ul>
+<li><p>http是无连接的，每次连接只处理一个请求。服务端处理完客户端的请求并且接收到客户端的答应就会断开连接</p>
+</li>
+<li><p>http是媒体独立的，只要客户端和服务端知道如何处理数据内容，任何类型都可以通过http发送。客户端与服务器指定使用合适的mime-type（内容类型）</p>
+</li>
+<li><p>http是无状态的，对事务处理没有记忆能力，需要处理前面的数据时需要重新传输</p>
+</li></ul></details>
+
+
+
+
+<details>
+<summary>请求格式</summary>
+
+<ul>
+<li><strong>客户端请求格式</strong><blockquote>
+<p>由请求行，请求头，空行，请求数据组成<br><img src="client.png" alt></p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">// 客户端请求例子</span><br><span class="line">GET /hello.txt HTTP/1.1</span><br><span class="line">User-Agent: curl/7.16.3 libcurl/7.16.3 OpenSSL/0.9.7l zlib/1.2.3</span><br><span class="line">Host: www.example.com</span><br><span class="line">Accept-Language: en, mi</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<hr>
+<ul>
+<li><strong>服务端响应格式</strong><blockquote>
+<p>由状态行，消息头，空行，响应正文组成<br><img src="server.png" alt></p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">// 服务端响应例子</span><br><span class="line">HTTP/1.1 200 OK</span><br><span class="line">Date: Mon, 27 Jul 2009 12:28:53 GMT</span><br><span class="line">Server: Apache</span><br><span class="line">Last-Modified: Wed, 22 Jul 2009 19:15:56 GMT</span><br><span class="line">ETag: &quot;34aa387-d-1568eb00&quot;</span><br><span class="line">Accept-Ranges: bytes</span><br><span class="line">Content-Length: 51</span><br><span class="line">Vary: Accept-Encoding</span><br><span class="line">Content-Type: text/plain</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+</details>
+
+
+<details>
+<summary>http请求方法</summary>
+
+<table>
 <thead>
 <tr>
-<th>改前</th>
-<th>改后</th>
+<th>方法</th>
+<th>描述</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>所有的 u_short</td>
-<td>__u_short</td>
+<td>GET</td>
+<td>请求指定的页面信息，并返回实体主体</td>
 </tr>
 <tr>
-<td>S_IFMT</td>
-<td>__S_IFMT</td>
-</tr>
-<tr>
-<td>S_IFDIR</td>
-<td>__S_IFDIR</td>
+<td>POST</td>
+<td>向指定资源提交数据进行处理请求（例如提交表单或者上传文</td>
 </tr>
 </tbody></table>
-</div></div></div>
+</details>
+
+
+<details>
+<summary>http响应头信息</summary>
+
+<table>
+<thead>
+<tr>
+<th>答应头</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Content-Length</td>
+<td>表示内容长度</td>
+</tr>
+<tr>
+<td>Content-Type</td>
+<td>表示后面的文档属于什么MIME类型</td>
+</tr>
+</tbody></table>
+</details>
+
+
+<details>
+<summary>http状态码</summary>
+
+<table>
+<thead>
+<tr>
+<th>分类</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1开头</td>
+<td>信息，服务器收到请求，需要请求者继续执行操作</td>
+</tr>
+<tr>
+<td>2开头</td>
+<td>成功，操作被成功接收并处理</td>
+</tr>
+<tr>
+<td>3开头</td>
+<td>重定向，需要进一步的操作以完成请求</td>
+</tr>
+<tr>
+<td>4开头</td>
+<td>客户端错误，请求包含语法错误或无法完成请求</td>
+</tr>
+<tr>
+<td>5开头</td>
+<td>服务器错误，服务器在处理请求的过程中发生了错误</td>
+</tr>
+<tr>
+<td></td></tr></tbody></table></details>
+<td></td>
+
+
+<details>
+<summary>http内容类型</summary>
+
+<blockquote>
+<p>用于定义网络文件的类型和网页的编码，决定浏览器将以什么形式、什么编码读取这个文件</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>text/html</td>
+<td>html格式</td>
+</tr>
+<tr>
+<td>text/plain</td>
+<td>纯文本格式</td>
+</tr>
+<tr>
+<td>text/html</td>
+<td>xml格式</td>
+</tr>
+<tr>
+<td>image/gif</td>
+<td>gif图片格式</td>
+</tr>
+<tr>
+<td>image/jpeg</td>
+<td>jpg图片格式</td>
+</tr>
+<tr>
+<td>image/png</td>
+<td>png图片格式</td>
+</tr>
+</tbody></table>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">// 例子</span><br><span class="line">Content-Type: text/html; charset=utf-8</span><br></pre></td></tr></table></figure>
+
+</details>
 
 <hr>
-<h2 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a>源码分析</h2><p>注意：源码做了一些修改，为了方便阅读</p>
-<h4 id="头文件以及宏"><a href="#头文件以及宏" class="headerlink" title="头文件以及宏"></a>头文件以及宏</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="cgi"><a href="#cgi" class="headerlink" title="cgi"></a>cgi</h3><blockquote>
+<p>CGI(Common Gateway Interface) 是 HTTP 服务器与你的或其它机器上的程序进行“交谈”的一种工具，其程序须运行在网络服务器上。</p>
+</blockquote>
+<blockquote>
+<p>绝大多数的 CGI 程序被用来解释处理来自表单的输入信息，并在服务器产生相应的处理，或将相应的信息反馈给浏览器。CGI 程序使网页具有交互功能。</p>
+</blockquote>
+<hr>
+<h2 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a>源码分析</h2><p>注意：源码做了一些修改</p>
+<p><img src="1.png" alt></p>
+<hr>
+<p><img src="2.png" alt></p>
+<hr>
+<h5 id="startup-创建http套接字连接"><a href="#startup-创建http套接字连接" class="headerlink" title="startup()创建http套接字连接"></a>startup()创建http套接字连接</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">int startup(__u_short *port)&#123;</span><br><span class="line">    /*</span><br><span class="line">    创建http服务端套接字接连。</span><br><span class="line">    PF_INET     : ipv4协议域</span><br><span class="line">    SOCK_STREAM : 字节流套接字</span><br><span class="line">    0           : 使用系统分配的网络协议</span><br><span class="line">    */</span><br><span class="line">    int httpd = socket(PF_INET, SOCK_STREAM, 0);</span><br><span class="line">    if(httpd != -1)&#123; </span><br><span class="line">        // 创建ipv4协议结构</span><br><span class="line">        struct sockaddr_in obj;</span><br><span class="line">        obj.sin_family = AF_INET; // 使用ipv4协议域</span><br><span class="line">        obj.sin_port = htons(*port); // 使用本地字序short转网络字序short，初始化端口</span><br><span class="line">        obj.sin_addr.s_addr = htonl(INADDR_ANY); // 使用本地字序long转网络字序long，初始化地址（INADDR_ANY转地址为:0.0.0.0）</span><br><span class="line"></span><br><span class="line">        int on = 1; // setsockopt()的开关</span><br><span class="line">        /*</span><br><span class="line">        为httpd开启地址重用功能</span><br><span class="line">        SOL_SOCKET   : 常用的套接字</span><br><span class="line">        SO_REUSEADDR : 地址重用</span><br><span class="line">        */</span><br><span class="line">        if(setsockopt(httpd, SOL_SOCKET, SO_REUSEADDR, &amp;on, sizeof(on)) == -1)</span><br><span class="line">            error_die(&quot;setsockopt&quot;);</span><br><span class="line">        </span><br><span class="line">        // 将ipv4协议结构obj里的地址绑定到httpd</span><br><span class="line">        if(bind(httpd, (struct sockaddr*)&amp;obj, sizeof(obj)) == -1)</span><br><span class="line">            error_die(&quot;bind&quot;);</span><br><span class="line">        </span><br><span class="line">        if(*port == 0)&#123; // 生成动态端口</span><br><span class="line">            socklen_t len = sizeof(obj);</span><br><span class="line">            // 在端口为0时使用bind()后在调用getsockname()，obj的端口会由内核分配</span><br><span class="line">            if(getsockname(httpd, (struct sockaddr*)&amp;obj, &amp;len) == -1)</span><br><span class="line">                error_die(&quot;getsockname&quot;);</span><br><span class="line">            *port = ntohs(obj.sin_port); // 网络字序short转本地字序short，将端口指向obj的端口</span><br><span class="line">        &#125;  </span><br><span class="line"></span><br><span class="line">        // httpd由关闭状态转成监听状态，并且最大未连接队列排队数为5</span><br><span class="line">        if(listen(httpd, 5) == -1) </span><br><span class="line">            error_die(&quot;listen&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    return httpd; // 返回http套接字描述符</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>listen()监听队列<br><img src="3.png" alt></p>
+</blockquote>
+<hr>
+<h5 id="error-die-输出错误信息，并退出程序"><a href="#error-die-输出错误信息，并退出程序" class="headerlink" title="error_die()输出错误信息，并退出程序"></a>error_die()输出错误信息，并退出程序</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">void error_dir(const char *err_str)&#123;</span><br><span class="line">    perror(err_str);</span><br><span class="line">    exit(1);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <hr>
-<h4 id="main"><a href="#main" class="headerlink" title="main"></a>main</h4><hr>
+<h5 id="get-line-从客户端读取一行数据，以-r或-r-n作为行结束符"><a href="#get-line-从客户端读取一行数据，以-r或-r-n作为行结束符" class="headerlink" title="get_line()从客户端读取一行数据，以\r或\r\n作为行结束符"></a>get_line()从客户端读取一行数据，以\r或\r\n作为行结束符</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">int get_line(int client, char *buf, int size)&#123;</span><br><span class="line">    int i  = 0, // 字节数</span><br><span class="line">        n  = 0;</span><br><span class="line">    char c = &apos;\0&apos;;</span><br><span class="line">    while(i != size &amp;&amp; c != &apos;\n&apos;)&#123;</span><br><span class="line">        n = recv(client, &amp;c ,1, 0); // 从客户端接收数据</span><br><span class="line">        if(n &gt; 0)&#123;</span><br><span class="line">            if(c == &apos;\r&apos;)&#123;</span><br><span class="line">                // MSG_PEEK偷看数据但不接收，下次使用recv()还是这个数据</span><br><span class="line">                n = recv(client, &amp;c, 1, MSG_PEEK); // 接收上一个recv()的数据</span><br><span class="line">                if(n &gt; 0 &amp;&amp; c == &apos;\n&apos;)</span><br><span class="line">                    recv(client, &amp;c, 1, 0);</span><br><span class="line">                else</span><br><span class="line">                    c = &apos;\n&apos;;</span><br><span class="line">            &#125;</span><br><span class="line">            *(buf + i++) = c;</span><br><span class="line">        &#125; else // 接收不到任何数据</span><br><span class="line">            c = &apos;\n&apos;;</span><br><span class="line">    &#125;</span><br><span class="line">    *(buf + i) = &apos;\0&apos;;</span><br><span class="line">    return i;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h5 id="accept-requst-请求处理"><a href="#accept-requst-请求处理" class="headerlink" title="accept_requst()请求处理"></a>accept_requst()请求处理</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">void accept_requst(void *sock)&#123;</span><br><span class="line">    int client = (intptr_t)sock; // 客户端套接字描述符</span><br><span class="line">    char buf[buf_size]; // 客户端请求数据</span><br><span class="line">    int numchars = get_line(client, buf, buf_size); // 获取数据</span><br><span class="line"></span><br><span class="line">    char method[method_size]; // 请求</span><br><span class="line">    int i = 0; // 循环次数</span><br><span class="line">    while(!ISspace(buf[i]) &amp;&amp; i != method_size)&#123; // 获取请求</span><br><span class="line">        method[i] = buf[i];</span><br><span class="line">        ++i;</span><br><span class="line">    &#125;</span><br><span class="line">    method[i] = &apos;\0&apos;;</span><br><span class="line"></span><br><span class="line">    // 处理不被支持的请求类型</span><br><span class="line">    if(strcasecmp(method, &quot;POST&quot;) &amp;&amp; strcasecmp(method, &quot;GET&quot;))&#123;</span><br><span class="line">        unimplemented(client); </span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    int j = i; // buf的索引</span><br><span class="line">    while(ISspace(buf[j]) &amp;&amp; j != buf_size) // 将索引定位到下一个字符</span><br><span class="line">        ++j;</span><br><span class="line">    </span><br><span class="line">    i = 0;</span><br><span class="line">    char url[url_size]; // 服务端文件路径</span><br><span class="line">    if(!ISspace(buf[j]) &amp;&amp; j &lt; numchars)</span><br><span class="line">        url[i++] = buf[j++];</span><br><span class="line">    url[i] = &apos;\0&apos;;</span><br><span class="line">    </span><br><span class="line">    /* cgi文件类型标识符 */</span><br><span class="line">    int cgi = 0; </span><br><span class="line"></span><br><span class="line">    char *query_string = NULL;</span><br><span class="line">    if(strcasecmp(method, &quot;POST&quot;) == 0)</span><br><span class="line">        cgi = 1;</span><br><span class="line">    else if(strcasecmp(method, &quot;GET&quot;) == 0)&#123;</span><br><span class="line">        query_string = url;</span><br><span class="line">        while(*query_string != &apos;?&apos; &amp;&amp; *query_string != &apos;\0&apos;)</span><br><span class="line">            ++query_string; </span><br><span class="line">        if(*query_string == &apos;?&apos;)&#123; // 动态请求</span><br><span class="line">            cgi           = 1;</span><br><span class="line">            *query_string = &apos;\0&apos;;</span><br><span class="line">            ++query_string;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    char path[path_size]; // 服务器文件路径</span><br><span class="line">    // 获取服务器根目录文件</span><br><span class="line">    sprintf(path, &quot;%s%s&quot;, dir, url);</span><br><span class="line">    if(path[strlen(path) - 1] == &apos;/&apos;)</span><br><span class="line">        strcat(path, file_1);</span><br><span class="line">    </span><br><span class="line">    struct stat st;</span><br><span class="line">    // 获取服务器文件的属性</span><br><span class="line">    if(stat(path, &amp;st) == -1)&#123; // 获取失败</span><br><span class="line">        while(numchars &gt; 0 &amp;&amp; strcmp(&quot;\n&quot;, buf))</span><br><span class="line">            numchars = get_line(client, buf, buf_size); // 从客户端获取数据</span><br><span class="line">        not_found(client); // 找不到文件</span><br><span class="line">    &#125; else &#123; // __S_IFMT是子掩码</span><br><span class="line">        if((st.st_mode &amp; __S_IFMT) == __S_IFDIR) // 是目录</span><br><span class="line">            strcat(path, file_2);</span><br><span class="line">        /* 拥有执行权则被视为cgi文件，服务端文件需要没有执行权 */</span><br><span class="line">        if((st.st_mode &amp; S_IXUSR) || (st.st_mode &amp; S_IXGRP) || (st.st_mode &amp; S_IXOTH))</span><br><span class="line">            cgi = 1;</span><br><span class="line">        if(cgi)</span><br><span class="line">            execute_cgi(client, path, method, query_string); // 处理cgi文件</span><br><span class="line">        else </span><br><span class="line">            serve_file(client, path); // 处理服务端文件</span><br><span class="line">    &#125;</span><br><span class="line">    close(client); // 处理完请求</span><br><span class="line">    return;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h5 id="serve-file-处理服务端文件"><a href="#serve-file-处理服务端文件" class="headerlink" title="serve_file()处理服务端文件"></a>serve_file()处理服务端文件</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">void serve_file(int client, const char *path)&#123;</span><br><span class="line">    char buf[buf_size];</span><br><span class="line">    buf[0] = &apos;A&apos;;   buf[1] = &apos;\0&apos;;</span><br><span class="line">    int numchars = 1;</span><br><span class="line">    while(numchars &gt; 0 &amp;&amp; strcmp(&quot;\n&quot;, buf))</span><br><span class="line">        numchars = get_line(client, buf, buf_size);</span><br><span class="line">    </span><br><span class="line">    FILE *resource = fopen(path, &quot;r&quot;); // 只读模式打开文件</span><br><span class="line">    if(resource == NULL) // 打开文件失败</span><br><span class="line">        not_found(client);</span><br><span class="line">    else &#123;</span><br><span class="line">        headres(client); // 获取响应头</span><br><span class="line">        cat(client, resource); // 读取文件的数据并发送到客户端</span><br><span class="line">    &#125;</span><br><span class="line">    fclose(resource); // 关闭文件</span><br><span class="line">    return;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h5 id="cat-读取文件数据并发送到客户端"><a href="#cat-读取文件数据并发送到客户端" class="headerlink" title="cat()读取文件数据并发送到客户端"></a>cat()读取文件数据并发送到客户端</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">void cat(int client, FILE *resource)&#123;</span><br><span class="line">    char buf[buf_size];</span><br><span class="line">    fgets(buf, buf_size, resource); // 读取一行数据</span><br><span class="line">    while(!feof(resource))&#123; // 读取EOF前的数据</span><br><span class="line">        send(client, buf, strlen(buf), 0); // 发送数据</span><br><span class="line">        fgets(buf, buf_size, resource); // 读取下一行数据</span><br><span class="line">    &#125;</span><br><span class="line">    return;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="execute-cgi-处理CGI文件"><a href="#execute-cgi-处理CGI文件" class="headerlink" title="execute_cgi()处理CGI文件"></a>execute_cgi()处理CGI文件</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">void execute_cgi(int client, const char *path, const char *method, const char *query_string)&#123;</span><br><span class="line">    char buf[BUF_SIZE];</span><br><span class="line">    int numchars = 1; // 消息长度</span><br><span class="line">    int content_length = -1;</span><br><span class="line">    if(strcasecmp(method, &quot;GET&quot;) == 0)&#123;</span><br><span class="line">        while(numchars &gt; 0 &amp;&amp; strcmp(&quot;\n&quot;, buf)) // 丢弃数据</span><br><span class="line">            numchars = get_line(client, buf, BUF_SIZE);</span><br><span class="line">    &#125; else &#123; // POST</span><br><span class="line">        numchars = get_line(client, buf, BUF_SIZE);</span><br><span class="line">        while(numchars &gt; 0 &amp;&amp; strcmp(&quot;\n&quot;, buf))&#123;</span><br><span class="line">            buf[15] = &apos;\0&apos;;</span><br><span class="line">            if(strcasecmp(buf, &quot;Content-Lenght:&quot;) == 0)</span><br><span class="line">                content_length = atoi(buf + 16);</span><br><span class="line">            numchars = get_line(client, buf, BUF_SIZE);</span><br><span class="line">        &#125;</span><br><span class="line">        if(content_length == -1)&#123;</span><br><span class="line">            bad_requst(client); // 执行cgi程序出现错误</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    int cgi_input[2],</span><br><span class="line">        cgi_output[2];</span><br><span class="line">    </span><br><span class="line">    // 建立线程单向管道,[0]读，[1]写</span><br><span class="line">    if(pipe(cgi_input) == -1)&#123;</span><br><span class="line">        cannot_execute(client); // 服务器内部错误，无法完成请求</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    if(pipe(cgi_output) == -1)&#123;</span><br><span class="line">        cannot_execute(client);</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    pid_t pid = 0; // 进程ip</span><br><span class="line">    if((pid = fork()) == -1)&#123; // 创建当前进程的副本</span><br><span class="line">        cannot_execute(client);</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 告诉客户端执行成功</span><br><span class="line">    sprintf(buf, &quot;HTTP/1.1 200 OK\r\n&quot;); </span><br><span class="line">    send(client, buf, strlen(buf), 0);</span><br><span class="line"></span><br><span class="line">    if(pid)&#123; // 父进程</span><br><span class="line">        close(cgi_input[0]);</span><br><span class="line">        close(cgi_output[1]);</span><br><span class="line"></span><br><span class="line">        char c = &apos;\0&apos;;</span><br><span class="line">        if(strcasecmp(method, &quot;POST&quot;) == 0)</span><br><span class="line">            for(int i =0; i != content_length; ++i)&#123;</span><br><span class="line">                recv(client, &amp;c, 1, 0);</span><br><span class="line">                write(cgi_input[1], &amp;c, 1);</span><br><span class="line">            &#125;</span><br><span class="line">        while(read(cgi_output[0], &amp;c, 1) &gt; 0)</span><br><span class="line">            send(client, &amp;c, 1, 0);</span><br><span class="line">        close(cgi_input[1]);</span><br><span class="line">        close(cgi_output[0]);</span><br><span class="line">        int status = 0; // 线程状态</span><br><span class="line">        waitpid(pid, &amp;status, 0); // 等待子进程</span><br><span class="line">    &#125; else &#123; // 子进程</span><br><span class="line">        // 环境变量</span><br><span class="line">        char meth_env[ENV_SIZE],</span><br><span class="line">             query_env[ENV_SIZE],</span><br><span class="line">             length_env[ENV_SIZE];</span><br><span class="line">        </span><br><span class="line">        dup2(cgi_input[0], STDIN);</span><br><span class="line">        dup2(cgi_output[1], STDOUT);</span><br><span class="line">        close(cgi_input[1]);</span><br><span class="line">        close(cgi_output[0]);</span><br><span class="line"></span><br><span class="line">        sprintf(meth_env, &quot;REQUST_METHOD=%s&quot;, method);</span><br><span class="line">        putenv(meth_env); // 设置环境变量</span><br><span class="line"></span><br><span class="line">        if(strcasecmp(method, &quot;GET&quot;) == 0)&#123;</span><br><span class="line">            sprintf(query_env, &quot;QUERY_STRING=%s&quot;, query_string);</span><br><span class="line">            putenv(query_env);</span><br><span class="line">        &#125; else &#123; // POST</span><br><span class="line">            sprintf(length_env, &quot;CONTENT_LENGTH=%d&quot;, content_length);</span><br><span class="line">            putenv(length_env);</span><br><span class="line">        &#125;</span><br><span class="line">        execl(path, path, NULL); // 执行cgi文件</span><br><span class="line">        exit(0);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    return;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h5 id="unimplemented-不被支持的请求"><a href="#unimplemented-不被支持的请求" class="headerlink" title="unimplemented()不被支持的请求"></a>unimplemented()不被支持的请求</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">void unimplemented(int client)&#123;</span><br><span class="line">    char buf[buf_size];</span><br><span class="line">    sprintf(buf, &quot;HTTP/1.1 501 Not Implemented\r\n&quot;);</span><br><span class="line">    send(client, buf, strlen(buf), 0);</span><br><span class="line">    sprintf(buf, SERVER_STRING);</span><br><span class="line">    send(client, buf, strlen(buf), 0);</span><br><span class="line">    sprintf(buf, &quot;Content-Type: text/html\r\n&quot;);</span><br><span class="line">    send(client, buf, strlen(buf), 0);</span><br><span class="line">    sprintf(buf, &quot;\r\n&quot;);</span><br><span class="line">    send(client, buf, strlen(buf), 0);</span><br><span class="line">    sprintf(buf, &quot;&lt;HTML&gt;&lt;HEAD&gt;&lt;TITLE&gt;Method Not Implemented\r\n&quot;);</span><br><span class="line">    send(client, buf, strlen(buf), 0);</span><br><span class="line">    sprintf(buf, &quot;&lt;/TITLE&gt;&lt;/HEAD&gt;\r\n&quot;);</span><br><span class="line">    send(client, buf, strlen(buf), 0);</span><br><span class="line">    sprintf(buf, &quot;&lt;BODY&gt;&lt;P&gt;HTTP request method not supported.\r\n&quot;);</span><br><span class="line">    send(client, buf, strlen(buf), 0);</span><br><span class="line">    sprintf(buf, &quot;&lt;/BODY&gt;&lt;/HTML&gt;\r\n&quot;);</span><br><span class="line">    send(client, buf, strlen(buf), 0);</span><br><span class="line">    return;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h5 id="not-found-需要访问的文件不存在"><a href="#not-found-需要访问的文件不存在" class="headerlink" title="not_found()需要访问的文件不存在"></a>not_found()需要访问的文件不存在</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">void not_found(int client)&#123;</span><br><span class="line">    char buf[buf_size];</span><br><span class="line">    sprintf(buf, &quot;HTTP/1.1 404 Not Found\r\n&quot;);</span><br><span class="line">    send(client, buf, strlen(buf), 0);</span><br><span class="line">    sprintf(buf, SERVER_STRING);</span><br><span class="line">    send(client, buf, strlen(buf), 0);</span><br><span class="line">    sprintf(buf, &quot;Content-Type: text/html\r\n&quot;);</span><br><span class="line">    send(client, buf, strlen(buf), 0);</span><br><span class="line">    sprintf(buf, &quot;\r\n&quot;);</span><br><span class="line">    send(client, buf, strlen(buf), 0);</span><br><span class="line">    sprintf(buf, &quot;&lt;HTML&gt;&lt;TITLE&gt;Not Found&lt;/TITLE&gt;\r\n&quot;);</span><br><span class="line">    send(client, buf, strlen(buf), 0);</span><br><span class="line">    sprintf(buf, &quot;&lt;BODY&gt;&lt;P&gt;The server could not fulfill\r\n&quot;);</span><br><span class="line">    send(client, buf, strlen(buf), 0);</span><br><span class="line">    sprintf(buf, &quot;your request because the resource specified\r\n&quot;);</span><br><span class="line">    send(client, buf, strlen(buf), 0);</span><br><span class="line">    sprintf(buf, &quot;is unavailable or nonexistent.\r\n&quot;);</span><br><span class="line">    send(client, buf, strlen(buf), 0);</span><br><span class="line">    sprintf(buf, &quot;&lt;/BODY&gt;&lt;/HTML&gt;\r\n&quot;);</span><br><span class="line">    send(client, buf, strlen(buf), 0);</span><br><span class="line">    return;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h5 id="headres-返回服务端响应头"><a href="#headres-返回服务端响应头" class="headerlink" title="headres()返回服务端响应头"></a>headres()返回服务端响应头</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">void headres(int client)&#123;</span><br><span class="line">    char buf[buf_size];</span><br><span class="line">    sprintf(buf, &quot;HTTP/1.1 200 OK\r\n&quot;);</span><br><span class="line">    send(client, buf, strlen(buf), 0);</span><br><span class="line">    sprintf(buf, SERVER_STRING);</span><br><span class="line">    send(client, buf, strlen(buf), 0);</span><br><span class="line">    sprintf(buf, &quot;Content-Type: text/html\r\n&quot;);</span><br><span class="line">    send(client, buf, strlen(buf), 0);</span><br><span class="line">    sprintf(buf, &quot;\r\n&quot;);</span><br><span class="line">    send(client, buf, strlen(buf), 0);</span><br><span class="line">    return;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h5 id="cannot-execute-执行cgi程序时出错"><a href="#cannot-execute-执行cgi程序时出错" class="headerlink" title="cannot_execute()执行cgi程序时出错"></a>cannot_execute()执行cgi程序时出错</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">void cannot_execute(int client)&#123;</span><br><span class="line">    char buf[buf_size];</span><br><span class="line">    sprintf(buf, &quot;HTTP/1.1 500 Inetmal Server Error\r\n&quot;);</span><br><span class="line">    send(client, buf, strlen(buf), 0);</span><br><span class="line">    sprintf(buf, &quot;Content-Type: text/html\r\n&quot;);</span><br><span class="line">    send(client, buf, strlen(buf), 0);</span><br><span class="line">    sprintf(buf, &quot;\r\n&quot;);</span><br><span class="line">    send(client, buf, strlen(buf), 0);</span><br><span class="line">    sprintf(buf, &quot;&lt;P&gt;Error prohibited CGI execution.\r\n&quot;);</span><br><span class="line">    send(client, buf, strlen(buf), 0);</span><br><span class="line">    return;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h5 id="bad-request-请求出错"><a href="#bad-request-请求出错" class="headerlink" title="bad_request()请求出错"></a>bad_request()请求出错</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">void bad_request(int client)&#123;</span><br><span class="line">    char buf[buf_size];</span><br><span class="line">    sprintf(buf, &quot;HTTP/1.1 400 Bad Request\r\n&quot;);</span><br><span class="line">    send(client, buf, strlen(buf), 0);</span><br><span class="line">    sprintf(buf, &quot;Content-Type: text/html\r\n&quot;);</span><br><span class="line">    send(client, buf, strlen(buf), 0);</span><br><span class="line">    sprintf(buf, &quot;\r\n&quot;);</span><br><span class="line">    send(client, buf, strlen(buf), 0);</span><br><span class="line">    sprintf(buf, &quot;&lt;P&gt;Your browser sent a bad request, &quot;);</span><br><span class="line">    send(client, buf, sizeof(buf), 0);</span><br><span class="line">    sprintf(buf, &quot;such as a POST without a Content-Length.\r\n&quot;);</span><br><span class="line">    send(client, buf, sizeof(buf), 0);</span><br><span class="line">    return;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
 ]]></content>
       <tags>
         <tag>C开源</tag>
@@ -177,8 +544,7 @@
 <a id="more"></a>
 
 <hr>
-<p>学习一门新的知识需要做到以下三点</p>
-<ul>
+<h3 id="学习一门新的知识需要做到以下三点"><a href="#学习一门新的知识需要做到以下三点" class="headerlink" title="学习一门新的知识需要做到以下三点"></a>学习一门新的知识需要做到以下三点</h3><ul>
 <li><p>这是什么？</p>
 </li>
 <li><p>可以用来干嘛？</p>
@@ -197,8 +563,7 @@
 </li>
 </ul>
 <hr>
-<p>技术学习流程</p>
-<ul>
+<h3 id="技术学习流程"><a href="#技术学习流程" class="headerlink" title="技术学习流程"></a>技术学习流程</h3><ul>
 <li><p>认知阶段</p>
 <blockquote>
 <p>这技术可以干嘛 -&gt; 了解同类的技术 —&gt; 该技术的主要组成部分</p>
@@ -211,8 +576,15 @@
 </li>
 </ul>
 <hr>
-<p>实践要求</p>
-<p>运行代码 -&gt; 研究源码 -&gt; 定制修改</p>
+<h3 id="实践要求"><a href="#实践要求" class="headerlink" title="实践要求"></a>实践要求</h3><p>运行代码 -&gt; 研究源码 -&gt; 定制修改</p>
+<hr>
+<h3 id="学习模块"><a href="#学习模块" class="headerlink" title="学习模块"></a>学习模块</h3><ul>
+<li>语言  </li>
+<li>数据结构与算法 </li>
+<li>计算机网络 </li>
+<li>操作系统 </li>
+<li>设计模式</li>
+</ul>
 <hr>
 ]]></content>
   </entry>
@@ -476,7 +848,7 @@
       </tags>
   </entry>
   <entry>
-    <title>gdb使用笔记</title>
+    <title>gdb与gcc使用笔记</title>
     <url>/2020/02/11/gdb%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<p>基于 <code>cent8</code> 操作系统的<code>gcc 8.3</code> 和 <code>gdb 8.2</code> </p>
 <img src="/2020/02/11/gdb使用笔记/fm.gif">
@@ -625,6 +997,49 @@
 <p>gdb命令行形式的gui</p>
 <p>进入gdb后输入<code>ctrl + x</code> 然后在输入一个<code>a</code></p>
 </blockquote>
+<hr>
+<p>gcc 常用命令</p>
+<table>
+<thead>
+<tr>
+<th>写法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-g</td>
+<td>使用gdb</td>
+</tr>
+<tr>
+<td>-o</td>
+<td>编译成指定文件</td>
+</tr>
+<tr>
+<td>-W</td>
+<td>示编译器认为会出现错误的警告</td>
+</tr>
+<tr>
+<td>-Wall</td>
+<td>编译后显示所有警告</td>
+</tr>
+<tr>
+<td>-c</td>
+<td>编译成.o文件（gcc -c a.c 会生成 a.o文件）</td>
+</tr>
+<tr>
+<td>-lpthread</td>
+<td>启用线程功能</td>
+</tr>
+<tr>
+<td>-M</td>
+<td>与头文件生成依赖，包括标准库</td>
+</tr>
+<tr>
+<td>-MM</td>
+<td>仅与头文件生成依赖</td>
+</tr>
+</tbody></table>
+<hr>
 ]]></content>
       <tags>
         <tag>gdb</tag>

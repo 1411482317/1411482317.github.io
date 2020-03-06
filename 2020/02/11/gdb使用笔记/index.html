@@ -97,16 +97,16 @@
 <meta name="description" content="基于 cent8 操作系统的gcc 8.3 和 gdb 8.2">
 <meta name="keywords" content="gdb">
 <meta property="og:type" content="article">
-<meta property="og:title" content="gdb使用笔记">
+<meta property="og:title" content="gdb与gcc使用笔记">
 <meta property="og:url" content="https://1411482317.github.io/2020/02/11/gdb使用笔记/index.html">
 <meta property="og:site_name" content="大石砸死蟹">
 <meta property="og:description" content="基于 cent8 操作系统的gcc 8.3 和 gdb 8.2">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://1411482317.github.io/2020/02/11/gdb使用笔记/fm.gif">
 <meta property="og:image" content="https://1411482317.github.io/2020/02/11/gdb使用笔记/1.png">
-<meta property="og:updated_time" content="2020-02-11T13:08:50.058Z">
+<meta property="og:updated_time" content="2020-03-05T06:13:13.030Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="gdb使用笔记">
+<meta name="twitter:title" content="gdb与gcc使用笔记">
 <meta name="twitter:description" content="基于 cent8 操作系统的gcc 8.3 和 gdb 8.2">
 <meta name="twitter:image" content="https://1411482317.github.io/2020/02/11/gdb使用笔记/fm.gif">
 
@@ -149,7 +149,7 @@
 
 
 
-  <title>gdb使用笔记 | 大石砸死蟹</title>
+  <title>gdb与gcc使用笔记 | 大石砸死蟹</title>
   
 
 
@@ -350,7 +350,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">gdb使用笔记</h1>
+          <h1 class="post-title" itemprop="name headline">gdb与gcc使用笔记</h1>
         
 
         <div class="post-meta">
@@ -380,7 +380,7 @@
 
           
           
-             <span id="/2020/02/11/gdb使用笔记/" class="leancloud_visitors" data-flag-title="gdb使用笔记">
+             <span id="/2020/02/11/gdb使用笔记/" class="leancloud_visitors" data-flag-title="gdb与gcc使用笔记">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -405,7 +405,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  318
+                  413
                 </span>
               
 
@@ -589,6 +589,49 @@
 <p>gdb命令行形式的gui</p>
 <p>进入gdb后输入<code>ctrl + x</code> 然后在输入一个<code>a</code></p>
 </blockquote>
+<hr>
+<p>gcc 常用命令</p>
+<table>
+<thead>
+<tr>
+<th>写法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-g</td>
+<td>使用gdb</td>
+</tr>
+<tr>
+<td>-o</td>
+<td>编译成指定文件</td>
+</tr>
+<tr>
+<td>-W</td>
+<td>示编译器认为会出现错误的警告</td>
+</tr>
+<tr>
+<td>-Wall</td>
+<td>编译后显示所有警告</td>
+</tr>
+<tr>
+<td>-c</td>
+<td>编译成.o文件（gcc -c a.c 会生成 a.o文件）</td>
+</tr>
+<tr>
+<td>-lpthread</td>
+<td>启用线程功能</td>
+</tr>
+<tr>
+<td>-M</td>
+<td>与头文件生成依赖，包括标准库</td>
+</tr>
+<tr>
+<td>-MM</td>
+<td>仅与头文件生成依赖</td>
+</tr>
+</tbody></table>
+<hr>
 
       
     </div>
@@ -709,7 +752,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-count">36</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -731,7 +774,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -826,7 +869,7 @@ document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " 
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">55.7k</span>
+    <span title="Site words total count">59.3k</span>
   
 </div>
 
