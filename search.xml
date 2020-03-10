@@ -2,17 +2,275 @@
 <search>
   <entry>
     <title>TCP/IP笔记</title>
-    <url>/2020/03/06/TCP-IP%E7%AC%94%E8%AE%B0-1/</url>
-    <content><![CDATA[]]></content>
-  </entry>
-  <entry>
-    <title>TCP/IP笔记</title>
-    <url>/2020/03/06/TCP-IP%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<img src="/2020/03/06/TCP-IP笔记/fm.jpg">
+    <url>/2020/03/09/TCP-IP%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<img src="/2020/03/09/TCP-IP笔记/fm.gif">
 
-<p>基于书籍<code>TCP/IP详解卷1第二版</code></p>
+<p>基于书籍<code>TCP/IP详解卷1第二版</code>，与win的<code>wireshark</code></p>
 <a id="more"></a>
 
+<hr>
+<blockquote>
+<p>学习的时候，必须与wireshark配套使用</p>
+</blockquote>
+<ul>
+<li><a href="https://www.wireshark.org/download.html" target="_blank" rel="noopener"><strong>wireshark官网</strong></a></li>
+</ul>
+<hr>
+<p><img src="1.png" alt></p>
+<hr>
+<h3 id="Internet（网络）地址结构"><a href="#Internet（网络）地址结构" class="headerlink" title="Internet（网络）地址结构"></a>Internet（网络）地址结构</h3><ul>
+<li>IPV4结构<blockquote>
+<p>四点十进制，范围0~255表示一个点，32位<br>10进制表示:<strong>255.255.255.255</strong></p>
+<p>二进制表示:<br><strong>11111111 11111111 11111111 11111111</strong></p>
+</blockquote>
+</li>
+</ul>
+<hr>
+<ul>
+<li>IPV6结构<blockquote>
+<p>八块十六进制，范围0~65535表示一个块，128位<br>16进制表示:<strong>ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff</strong></p>
+<p>二进制表示:<br><strong>1111111111111111 1111111111111111</strong><br><strong>1111111111111111 1111111111111111</strong><br><strong>1111111111111111 1111111111111111</strong><br><strong>1111111111111111 1111111111111111</strong></p>
+</blockquote>
+</li>
+</ul>
+<hr>
+<h4 id="分类寻址"><a href="#分类寻址" class="headerlink" title="分类寻址"></a>分类寻址</h4><p><img src="3.png" alt></p>
+<p>A~C类作用于Internet单播地址</p>
+<hr>
+<blockquote>
+<p>单播，就比如两个人之间的对话<br><img src="4.png" alt></p>
+</blockquote>
+<hr>
+<blockquote>
+<p>组播，一大群人对一个人说话<br><img src="5.png" alt></p>
+</blockquote>
+<hr>
+<blockquote>
+<p>广播，一个人用大喇叭，对一大群人说话<br><img src="6.png" alt></p>
+</blockquote>
+<hr>
+<h4 id="子网掩码"><a href="#子网掩码" class="headerlink" title="子网掩码"></a>子网掩码</h4><p>子网掩码由主机或路由器分配位，以确认从一台主机对应的IP地址中获取网络和子网的信息。</p>
+<hr>
+<blockquote>
+<p>当子网掩码为<code>255.255.255.0</code>时，处理ipv4地址<code>128.32.1.14</code></p>
+</blockquote>
+<p><strong>IP与子网掩码使用 <code>按位与</code>进行操作</strong><br><img src="2.png" alt></p>
+<p><code>/24</code>表示二进制1位的数量，上例子网掩码一共有24个二进制1位</p>
+<hr>
+<h3 id="链路层"><a href="#链路层" class="headerlink" title="链路层"></a>链路层</h3><h4 id="以太网帧格式"><a href="#以太网帧格式" class="headerlink" title="以太网帧格式"></a>以太网帧格式</h4><blockquote>
+<p>在以太网链路上的数据包称作以太帧</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>前导</td>
+<td>为了隔离每个以太网帧的，也是定位符</td>
+</tr>
+<tr>
+<td>SFD</td>
+<td>帧起始分隔符</td>
+</tr>
+<tr>
+<td>DST</td>
+<td>目标地址</td>
+</tr>
+<tr>
+<td>SRC</td>
+<td>源地址</td>
+</tr>
+<tr>
+<td>FCS</td>
+<td>帧校验序列</td>
+</tr>
+<tr>
+<td>MAC</td>
+<td>物理网卡地址</td>
+</tr>
+</tbody></table>
+<p><img src="7.png" alt></p>
+<ul>
+<li>以太网 EthernetII 最大的数据帧是 1518 Bytes</li>
+</ul>
+<hr>
+<h4 id="最大传输单元MTU"><a href="#最大传输单元MTU" class="headerlink" title="最大传输单元MTU"></a>最大传输单元MTU</h4><p>在使用互联网时进行的各种网络操作，都是通过一个又一个“数据包”传输来实现的。而MTU指定了网络中可传输数据包的最大尺寸，常用的以太网中，MTU是1500字节。超过此大小的数据包就会将多余的部分拆分再单独传输</p>
+<hr>
+<h4 id="地址解析协议ARP"><a href="#地址解析协议ARP" class="headerlink" title="地址解析协议ARP"></a>地址解析协议ARP</h4><p>作用于解析目标主机的MAC地址，ARP只在同一个广播域生效</p>
+<ul>
+<li><p>只要是局域网通信就会用到ARP（局域网通信使用MAC地址），ARP的功能是<code>二层寻址</code>寻的是单播地址</p>
+</li>
+<li><p>广播可组播的MAC都是固定的，所有不需要寻址</p>
+</li>
+<li><p>只要设备更换就会导致IP地址和MAC地址 对应（映射） 关系的改变，所以需要ARP来保证每次传输数据之前首先获取到正确的目标设备MAC地址</p>
+</li>
+</ul>
+<hr>
+<p><strong>ARP表（ARP缓存）</strong></p>
+<blockquote>
+<p>记录IP与MAC地址的 对应（映射） 关系<br><img src="8.png" alt><br>ARP表是有老化时间的，一旦老化时间到了就会使用ARP重新构建ARP表</p>
+</blockquote>
+<p><img src="9.png" alt></p>
+<blockquote>
+<p><strong>如上图，主机1与主机2的ARP表就都有了对方的MAC地址</strong></p>
+</blockquote>
+<hr>
+<p><strong>无故ARP</strong></p>
+<blockquote>
+<p>终端设备使用无故ARP主动通告它的MAC地址，也可以用来检测局域网有没有IP冲突（在wireshark看到<code>gratuitous arp for xxx.xxx.xxx.xxx (request)</code>就表示这是一个无故ARP包）</p>
+</blockquote>
+<hr>
+<p><strong>二层交换</strong></p>
+<blockquote>
+<p>用作于内网数据的传输<br><img src="10.png" alt></p>
+</blockquote>
+<hr>
+<p><strong>ARP帧格式</strong></p>
+<p><img src="11.png" alt></p>
+<hr>
+<h3 id="网络层"><a href="#网络层" class="headerlink" title="网络层"></a>网络层</h3><h4 id="IP首部格式"><a href="#IP首部格式" class="headerlink" title="IP首部格式"></a>IP首部格式</h4><blockquote>
+<p>IPV4首部格式<br><img src="12.png" alt><br><code>IHL</code>首部长度，<code>DS</code>分区服务字段，<code>ECN</code>显式拥塞通知字段</p>
+</blockquote>
+<ul>
+<li><p>16位分片标识：唯一标识主机发送的每一个数据报，其初始值是系统随机生成：每发送一个数据报，其值加1.该值在分片时被复制到每一个分片中，因此同一个数据报的所有分片都有相同的标识值</p>
+</li>
+<li><p>DF不分片标志：第1位保留，第2位表示“禁止分片”，如果设置了该位，IP模板将不对数据报分片，超过MTU的数据将会丢弃并返回一个ICMP差错报文。第3位表示“更多分片”，除了最后一个分片外，其他的分片都要置1</p>
+</li>
+<li><p>13位分片标识：是分片相对原始IP数据报开始处的偏移（仅指数据部分）。实际偏移值是该值左移3位得到的。所以出最后一个分片，其他分片的数据部分长度必须是8的整数倍</p>
+</li>
+<li><p>8位生存时间（TTL）：设置了数据可以经过的最多的路由器数（一般是64），每经过一次路由器，该值减1，如果该值减为0依旧没有到达目的主机，就丢弃改数据报，发送ICMP差错报文（目标不可达）</p>
+</li>
+<li><p>16位首部校验：由发送端填充，接收端对其使用CRC算法检验IP数据报头部在传输过程中是否损坏（只检查头部，不管数据部分）</p>
+</li>
+</ul>
+<hr>
+<blockquote>
+<p>wireshark抓包分析<br><img src="13.png" alt></p>
+</blockquote>
+<hr>
+<h4 id="IP分片"><a href="#IP分片" class="headerlink" title="IP分片"></a>IP分片</h4><p>在TCP/IP中使链路层使用MTU限制数据包长度，当发送的数据包超出MTU长度则就需要对数据进行 分片（将一份数据拆分成多份数据） 否则将无法发送</p>
+<hr>
+<ul>
+<li>避免IP分片<blockquote>
+<p>如果IP层对一个数据包进行了分片，只要有一个分片丢失了，只能依赖于传输层进行重传。对于TCP数据，在建立连接的三次握手的过程中，连接双方会相互通告MSS（最大报文段长度），每次发送的TCP数据都不会超过双方MSS的最小值，所以就保证了IP数据报不会超过MTU，避免了IP分片</p>
+</blockquote>
+</li>
+</ul>
+<hr>
+<h4 id="路由表"><a href="#路由表" class="headerlink" title="路由表"></a>路由表</h4><p>使用cmd输入<code>netstat -r</code>显示本地路由表（主要是看IPV4路由表）</p>
+<div class="tabs" id="1"><ul class="nav-tabs"><li class="tab active"><a href="#1-1">网络地址（Network Destination）与 网络掩码（Netmask）</a></li></ul><div class="tab-content"><div class="tab-pane active" id="1-1"><ul>
+<li>用于定义本地计算机可以到达的网络目的地址范围</li>
+</ul>
+<blockquote>
+<p>主机地址:某个特定主机的网络地址，网络掩码为255.255.255.255</p>
+</blockquote>
+<blockquote>
+<p>子网地址：某个特定子网的网络地址，网络掩码为255.255.255.240</p>
+</blockquote>
+<blockquote>
+<p>网络地址：某个特定网络的网络地址，网络掩码为255.0.0.0 与 255.255.255.0 和 240.0.0.0</p>
+</blockquote>
+<blockquote>
+<p>默认路由；所有未在路由表中指定的网络地址，网络掩码为0.0.0.0</p>
+</blockquote>
+</div></div></div>
+
+<div class="tabs" id="2"><ul class="nav-tabs"><li class="tab active"><a href="#2-1">网关（Gateway）</a></li></ul><div class="tab-content"><div class="tab-pane active" id="2-1"><p>在发送IP数据包时，网关定义了针对特定的网络目的地址，数据包发送到的下一个要经过的服务器</p>
+</div></div></div>
+
+<div class="tabs" id="3"><ul class="nav-tabs"><li class="tab active"><a href="#3-1">接口（Interface）</a></li></ul><div class="tab-content"><div class="tab-pane active" id="3-1"><p>接口定义了针对特定的网络目的地址，本地计算机用于发送数据包的网络接口</p>
+</div></div></div>
+
+<div class="tabs" id="4"><ul class="nav-tabs"><li class="tab active"><a href="#4-1">跃点数（Metric）</a></li></ul><div class="tab-content"><div class="tab-pane active" id="4-1"><p>于指出路由的成本，通常情况下代表到达目标地址所需要经过的跃点数量，一个跃点代表经过一个路由器。跃点数越低，代表路由成本越低；跃点数越高，代表路由成本越高。</p>
+</div></div></div>
+
+<hr>
+<h4 id="ICMP-Internet控制报文协议"><a href="#ICMP-Internet控制报文协议" class="headerlink" title="ICMP Internet控制报文协议"></a>ICMP Internet控制报文协议</h4><p>更有效的转发IP数据包，提高数据交付的成功率</p>
+<hr>
+<blockquote>
+<p>ICMP报文格式<br><img src="14.png" alt></p>
+</blockquote>
+<hr>
+<p><strong>常见的查询报文</strong></p>
+<table>
+<thead>
+<tr>
+<th>类型的值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>ping应答，返回数据</td>
+</tr>
+<tr>
+<td>8</td>
+<td>ping请求</td>
+</tr>
+<tr>
+<td>13</td>
+<td>时间戳请求</td>
+</tr>
+<tr>
+<td>14</td>
+<td>时间戳答应</td>
+</tr>
+</tbody></table>
+<hr>
+<p><strong>常见的差错报文</strong></p>
+<table>
+<thead>
+<tr>
+<th>类型的值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>3</td>
+<td>不可到达的主机或协议</td>
+</tr>
+<tr>
+<td>4</td>
+<td>源点抑制，阻塞</td>
+</tr>
+<tr>
+<td>5</td>
+<td>路由重定向</td>
+</tr>
+<tr>
+<td>11</td>
+<td>超时</td>
+</tr>
+<tr>
+<td>12</td>
+<td>参数问题，有问题的数据包或头部</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="传输层"><a href="#传输层" class="headerlink" title="传输层"></a>传输层</h3><h4 id="UDP协议"><a href="#UDP协议" class="headerlink" title="UDP协议"></a>UDP协议</h4><p>UPD是保留消息边界的面向数据报传输协议，不保证数据能到达目的地，由于是无连接所以传输速度要比其他协议快</p>
+<p>特点：</p>
+<ul>
+<li>无连接</li>
+<li>无确认和阻塞</li>
+<li>传输效率高</li>
+<li>面向报文</li>
+<li>支持1对1，1对多，多对多，多对1的交互通信</li>
+</ul>
+<hr>
+<blockquote>
+<p>UDP格式报文头<br><img src="15.png" alt></p>
+</blockquote>
+<hr>
+<h4 id="TCP协议"><a href="#TCP协议" class="headerlink" title="TCP协议"></a>TCP协议</h4><p>TCP是面向连接的单播可靠协议，由 四元组（两个地址与端口） 构成</p>
+<p>特点：</p>
+<ul>
+<li>基于字节流</li>
+<li>面向连接</li>
+<li>双工服务（数据可以流向两个方向，两个方向都是独立的）</li>
+</ul>
 <hr>
 <table>
 <thead>
@@ -26,22 +284,70 @@
 <td>建立连接</td>
 </tr>
 <tr>
-<td>FIN</td>
-<td>关闭连接</td>
+<td>ISN</td>
+<td>初始化初始序列号，(c)表示客户端，(s)表示服务端</td>
 </tr>
 <tr>
 <td>ACK</td>
-<td>响应</td>
+<td>确认号</td>
 </tr>
 <tr>
-<td>PSH</td>
-<td>有数据传输</td>
+<td>FIN</td>
+<td>结束连接</td>
 </tr>
 <tr>
-<td>RST</td>
-<td>连接重置</td>
+<td>K</td>
+<td>自己当前的序列号</td>
+</tr>
+<tr>
+<td>L</td>
+<td>最后一次发来的数据</td>
+</tr>
+<tr>
+<td>seq</td>
+<td>存储一个序列号</td>
 </tr>
 </tbody></table>
+<blockquote>
+<p>TCP的连接（三次握手）与关闭（四次挥手）<br><img src="16.png" alt></p>
+</blockquote>
+<ul>
+<li><p>服务器为了确认客户端的SYN，将 ISN(c) + 1 作为返回的ACK，每发送一个SYN序列号就会自增1</p>
+</li>
+<li><p>客户端为了确认服务器的SYN，将 ISN(s) + 1 作为返回的ACK</p>
+</li>
+</ul>
+<hr>
+<h5 id="TCP半关闭"><a href="#TCP半关闭" class="headerlink" title="TCP半关闭"></a>TCP半关闭</h5><p>连接的一个方向被关闭，而另一个方向仍在传输数据，直到它被关闭为止</p>
+<p><img src="17.png" alt></p>
+<hr>
+<h5 id="TCP同时打开与关闭"><a href="#TCP同时打开与关闭" class="headerlink" title="TCP同时打开与关闭"></a>TCP同时打开与关闭</h5><p>需要通信双方拥有一个地址与端口，并告知对方。它们被区分为两个不同的TCP连接</p>
+<ul>
+<li>由于双方都扮演了服务端与客户端的角色，因此不能将任何一方称作为服务端或客户端</li>
+</ul>
+<hr>
+<blockquote>
+<p>同时打开<br><img src="18.png" alt></p>
+</blockquote>
+<hr>
+<blockquote>
+<p>同时关闭<br><img src="19.png" alt></p>
+</blockquote>
+<hr>
+]]></content>
+  </entry>
+  <entry>
+    <title>进程间通信笔记</title>
+    <url>/2020/03/07/%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<img src="/2020/03/07/进程间通信笔记/fm.png">
+
+<p>基于书籍<code>unix网络编程卷2第二版</code>，在centos8的gcc8.3进行操作</p>
+<a id="more"></a>
+
+<hr>
+<blockquote>
+<p>进程间通信（IPC），为系统里不同的进程进行消息传递</p>
+</blockquote>
 <hr>
 ]]></content>
   </entry>
@@ -305,7 +611,7 @@
   <entry>
     <title>Tinyhttpd笔记</title>
     <url>/2020/02/19/CTinyhttpd%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<img src="/2020/02/19/CTinyhttpd笔记/fm.jpg">
+    <content><![CDATA[
 
 <p>这是一个用C写的轻量级http server，在centos8用<code>win vs code</code>使用ssh远程连接进行测试运行与修改</p>
 <a id="more"></a>
@@ -1039,6 +1345,114 @@
 <td>仅与头文件生成依赖</td>
 </tr>
 </tbody></table>
+<hr>
+<h3 id="使用gdb调试多进程"><a href="#使用gdb调试多进程" class="headerlink" title="使用gdb调试多进程"></a>使用gdb调试多进程</h3><blockquote>
+<p>需要设置<code>follow-fork-mode</code>(默认值：parent)和<code>detach-on-fork</code>（默认值：on）</p>
+</blockquote>
+<hr>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>状态</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>parent</td>
+<td>on</td>
+<td>只调试主进程（GDB默认）</td>
+</tr>
+<tr>
+<td>parent</td>
+<td>off</td>
+<td>同时调试两个进程，gdb跟主进程，子进程block在fork位置</td>
+</tr>
+<tr>
+<td>child</td>
+<td>on</td>
+<td>只调试子进程</td>
+</tr>
+<tr>
+<td>child</td>
+<td>off</td>
+<td>同时调试两个进程，gdb跟子进程，主进程block在fork位置</td>
+</tr>
+</tbody></table>
+<hr>
+<blockquote>
+<p>首先需要进入gdb </p>
+</blockquote>
+<div class="tabs" id="1"><ul class="nav-tabs"><li class="tab active"><a href="#1-1">设置follow-fork-mode</a></li><li class="tab"><a href="#1-2">设置detach-on-fork</a></li></ul><div class="tab-content"><div class="tab-pane active" id="1-1"><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 查看</span><br><span class="line">show follow-fork-mode </span><br><span class="line"></span><br><span class="line"># 设置</span><br><span class="line">set follow-fork-mode [parent|child]</span><br></pre></td></tr></table></figure>
+</div><div class="tab-pane" id="1-2"><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 查看</span><br><span class="line">show detach-on-fork</span><br><span class="line"></span><br><span class="line"># 设置</span><br><span class="line">set detach-on-fork [on|off]</span><br></pre></td></tr></table></figure>
+</div></div></div>
+
+<table>
+<thead>
+<tr>
+<th>写法</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>info inferiors</td>
+<td>查看当前所有进程</td>
+</tr>
+<tr>
+<td>inferior num</td>
+<td>切换第num个进程</td>
+</tr>
+</tbody></table>
+<hr>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">// 测试代码</span><br><span class="line">#include &lt;unistd.h&gt;</span><br><span class="line">#include &lt;sys/types.h&gt;</span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line"></span><br><span class="line">void func(void)&#123;</span><br><span class="line">    pid_t pid = 0;</span><br><span class="line">    if((pid = fork()) != -1)&#123;</span><br><span class="line">        if(pid)</span><br><span class="line">            printf(&quot;fu\n&quot;);</span><br><span class="line">        else </span><br><span class="line">            printf(&quot;zi\n&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main(void)&#123;</span><br><span class="line">    func();</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<blockquote>
+<p>将set detach-on-fork设置成off，在func()设置断点<br><img src="2.png" alt></p>
+</blockquote>
+<hr>
+<h3 id="使用gdb调试多线程"><a href="#使用gdb调试多线程" class="headerlink" title="使用gdb调试多线程"></a>使用gdb调试多线程</h3><table>
+<thead>
+<tr>
+<th>语法</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>info threads</td>
+<td>查看当前所有的线程</td>
+</tr>
+<tr>
+<td>thread num</td>
+<td>切换到第num个线程</td>
+</tr>
+</tbody></table>
+<hr>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">// 测试代码</span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;pthread.h&gt;</span><br><span class="line"></span><br><span class="line">void m1(void)&#123;</span><br><span class="line">    printf(&quot;线程1\n&quot;);</span><br><span class="line">    return;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void m2(void)&#123;</span><br><span class="line">    printf(&quot;线程2\n&quot;);</span><br><span class="line">    return;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void func(void)&#123;</span><br><span class="line">    pthread_t t1 = 0,</span><br><span class="line">              t2 = 0;</span><br><span class="line">    pthread_create(&amp;t1, NULL, (void*)m1, NULL);</span><br><span class="line">    pthread_create(&amp;t2, NULL, (void*)m2, NULL);</span><br><span class="line"></span><br><span class="line">    // 等待线程</span><br><span class="line">    pthread_join(t1, NULL);</span><br><span class="line">    pthread_join(t2, NULL);</span><br><span class="line">    return;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main(void)&#123;</span><br><span class="line">    func();</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<blockquote>
+<p>在main()设置断点，此时线程1与2还没有创建<br><img src="3.png" alt></p>
+</blockquote>
+<hr>
+<blockquote>
+<p>取消main()的断点，在m1()设置断点，此时拥有main线程与线程1<br><img src="4.png" alt></p>
+</blockquote>
+<hr>
+<blockquote>
+<p>取消m1()的断点，在m2()设置断点，由于线程1已经运行完了，此时拥有main线程与线程2<br><img src="5.png" alt></p>
+</blockquote>
+<hr>
+<blockquote>
+<p>切换线程<br><img src="6.png" alt></p>
+</blockquote>
+<hr>
+<h3 id="vs-code调试多进程"><a href="#vs-code调试多进程" class="headerlink" title="vs code调试多进程"></a>vs code调试多进程</h3><blockquote>
+<p>将<code>setupCommands</code>的<code>text</code>修改成</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&quot;text&quot;: &quot;-gdb-set detach-on-fork off&quot;</span><br></pre></td></tr></table></figure>
+
+<p>单步到进程的时候，在<code>CALL STACK</code>处选择进程进行debug</p>
 <hr>
 ]]></content>
       <tags>
@@ -3790,245 +4204,42 @@ s
 <p>基于<code>cent8</code>与<code>Unix高级环境编程第三版</code></p>
 <a id="more"></a>
 
-<h1 id="配置官网上下载的源码"><a href="#配置官网上下载的源码" class="headerlink" title="配置官网上下载的源码"></a>配置官网上下载的源码</h1><p><a href="http://apuebook.com/code3e.html" target="_blank" rel="noopener"><strong>源码下载</strong></a></p>
-<p>解压文件后，将里面include目录的<code>apue.h</code>与lib目录的<code>error.c</code>拷贝到<code>usr/include</code></p>
 <hr>
-<h1 id="Unix基础"><a href="#Unix基础" class="headerlink" title="Unix基础"></a>Unix基础</h1><p>Unix结构：应用程序 -&gt; shell或公用函数 -&gt; 系统调用 -&gt; 内核</p>
-<h2 id="文件和目录"><a href="#文件和目录" class="headerlink" title="文件和目录"></a>文件和目录</h2><p><code>argc</code>命令行的参数数量</p>
-<p><code>argv</code>argv[0]表示程序的路径和名称，之后的都是命令行的参数</p>
-<p><strong>输出文件名称以及路径，和所有命令行的参数</strong></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">void func(const int &amp;argc, char **argv)&#123;</span><br><span class="line">	printf(&quot;argc: %d\n&quot;, argc);</span><br><span class="line">	for(unsigned int i = 0; i != argc; ++i)</span><br><span class="line">		printf(&quot;%s\n&quot;, argv[i]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main(int argc, char **argv)&#123;</span><br><span class="line">	func(argc, argv);</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><img src="main.png" alt></p>
-<p><strong>列出目录中所有文件</strong> </p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">//这本书每一个程序都会有的头文件</span><br><span class="line">#include &quot;apue.h&quot;</span><br><span class="line">#include &quot;error.c&quot;</span><br><span class="line"></span><br><span class="line">// DIR和dirent</span><br><span class="line">#include &lt;dirent.h&gt;</span><br><span class="line"></span><br><span class="line">void getDir(const int &amp;argc, char **argv)&#123;</span><br><span class="line">	DIR	*dp;</span><br><span class="line">	dirent  *dirp;</span><br><span class="line"></span><br><span class="line">	// 命令行参数不等于两个则输出错误信息</span><br><span class="line">	if(argc != 2)</span><br><span class="line">		err_quit(&quot;usage: ls directory_name&quot;);</span><br><span class="line">		</span><br><span class="line">	// 命令行的参数2为路径，路径为空则输出错误信息</span><br><span class="line">	if( ( dp = opendir(argv[1]) ) == NULL )</span><br><span class="line">		err_sys(&quot;can&apos;t open %s&quot;, argv[1]);</span><br><span class="line">	</span><br><span class="line">	// 当dp获取的路径存在，将当前目录下的所有文件和目录名称都存放在dirp里</span><br><span class="line">	while( ( dirp = readdir(dp) ) != NULL) // dirp不为NULL才会输出文件和目录的名称</span><br><span class="line">		printf(&quot;%s\n&quot;, dirp-&gt;d_name);</span><br><span class="line">	</span><br><span class="line">	//释放资源</span><br><span class="line">	closedir(dp);</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main(int argc, char **argv)&#123;</span><br><span class="line">	getDir(argc, argv);</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><img src="dir.png" alt></p>
-<h2 id="输入和输出"><a href="#输入和输出" class="headerlink" title="输入和输出"></a>输入和输出</h2><p>不带缓冲区的I/O函数<code>open</code> <code>read</code> <code>write</code> <code>lseek</code> <code>close</code></p>
-<p><strong>使用标准输入，读取一行一个字符的程序</strong></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">void my_io()&#123;</span><br><span class="line">	// 缓冲区大小</span><br><span class="line">	const int buffsize = 4096;</span><br><span class="line">	// 记录每一个字符</span><br><span class="line">	int  n;</span><br><span class="line">	// 缓冲区</span><br><span class="line">	char buf[buffsize];</span><br><span class="line">	</span><br><span class="line">	// read函数返回读取的字节数，返回0停止程序，返回-1则出现错误</span><br><span class="line">	// 循环输入字符，ctrl+d结束输入</span><br><span class="line">	while(n = read(STDIN_FILENO, buf, buffsize) &gt; 0 )</span><br><span class="line">		if(write(STDOUT_FILENO, buf, n) != n)</span><br><span class="line">			err_sys(&quot;write error&quot;);</span><br><span class="line">	</span><br><span class="line">	if(n &lt; 0)</span><br><span class="line">		err_sys(&quot;read error&quot;);</span><br><span class="line">&#125;</span><br><span class="line">		</span><br><span class="line">int main()&#123;</span><br><span class="line">	my_io();</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><img src="io.png" alt></p>
-<p><strong>vim打开test文件</strong></p>
-<p><img src="io2.png" alt></p>
-<p>如果使用<code>./a.out &lt;&lt; infile &gt;&gt; outfile</code>infile的内容会复制到outfile</p>
-<p><strong>使用标准输入，读取一整行输入</strong></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">void my_io2()&#123;</span><br><span class="line">	// 记录每个字符</span><br><span class="line">	int c;</span><br><span class="line">	</span><br><span class="line">	while( (c = getc(stdin)) != EOF )</span><br><span class="line">		if(putc(c, stdout) == EOF)</span><br><span class="line">			err_sys(&quot;output error&quot;);</span><br><span class="line">	</span><br><span class="line">	if(ferror(stdin))</span><br><span class="line">		err_sys(&quot;input error&quot;);</span><br><span class="line">		</span><br><span class="line">int main()&#123;</span><br><span class="line">	my_io2();</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="程序与进程"><a href="#程序与进程" class="headerlink" title="程序与进程"></a>程序与进程</h2><p><strong>获取进程ID（PID）</strong></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">int main(int argc, char **argv)&#123;</span><br><span class="line"></span><br><span class="line">	printf(&quot;%ld\n&quot;, static_cast&lt;long&gt;(getpid()));</span><br><span class="line"></span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>从标准输入读取命令，然后执行</strong></p>
-<p>类似于shell</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">void in_shell()&#123;</span><br><span class="line">	char buf[MAXLINE];</span><br><span class="line">	pid_t pid;</span><br><span class="line">	int status;</span><br><span class="line"></span><br><span class="line">	printf(&quot;%% &quot;);</span><br><span class="line">	</span><br><span class="line">	//fgets以\n作为结束符，但下面的execlp函数只能用null字符作为结束符</span><br><span class="line">	while(fgets(buf, MAXLINE, stdin) != NULL)&#123;</span><br><span class="line">		if(buf[strlen(buf) - 1] == &apos;\n&apos;)</span><br><span class="line">			buf[strlen(buf) - 1] = 0;</span><br><span class="line">		</span><br><span class="line">		//fork返回负数则表示出错</span><br><span class="line">		if((pid = fork()) &lt; 0)&#123;</span><br><span class="line">			err_sys(&quot;fork error&quot;);</span><br><span class="line">		&#125; else if(pid == 0)&#123;</span><br><span class="line">			//execlp执行从标准输入流读入的命令</span><br><span class="line">			execlp(buf,buf, static_cast&lt;char*&gt;(0));</span><br><span class="line">			err_ret(&quot;couldn&apos;t execute: %s&quot;, buf);</span><br><span class="line">			exit(127);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		//等待子进程终止</span><br><span class="line">		if((pid = waitpid(pid, &amp;status, 0)) &lt; 0)</span><br><span class="line">			err_sys(&quot;waitpid error&quot;);</span><br><span class="line"></span><br><span class="line">		printf(&quot;%% &quot;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main()&#123;</span><br><span class="line">	in_shell();</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="出错处理"><a href="#出错处理" class="headerlink" title="出错处理"></a>出错处理</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#include &quot;apue.h&quot;</span><br><span class="line">#include &quot;error.c&quot;</span><br><span class="line"></span><br><span class="line">//需要头文件</span><br><span class="line">#include &lt;errno.h&gt;</span><br><span class="line"></span><br><span class="line">int main(int argc, char **argv)&#123;</span><br><span class="line"></span><br><span class="line">//fprintf使用指定的流</span><br><span class="line">//sterr错误流</span><br><span class="line">//strerror将errno的值以字符串形式输出</span><br><span class="line">//errno的值定义在头文件errno.h</span><br><span class="line">//EACCES为整形常量13</span><br><span class="line">fprintf(stderr &quot;EACCES: %s\n&quot;, strerror(EACCES));</span><br><span class="line"></span><br><span class="line">//ENOENT为常量整形2</span><br><span class="line">errno = ENOENT;</span><br><span class="line"></span><br><span class="line">//perror基于errno的值产生错误消息</span><br><span class="line">perror(argv[0]);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="输出用户id和该用户的组id"><a href="#输出用户id和该用户的组id" class="headerlink" title="输出用户id和该用户的组id"></a>输出用户id和该用户的组id</h2><p><code>getuid</code>函数，输出用户id</p>
-<p><code>getgid</code>函数，输出当前用户的组id</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">printf(&quot;uid = %d\ngid = %d\n&quot;, getuid(), getgid());</span><br></pre></td></tr></table></figure>
-
-<h2 id="信号"><a href="#信号" class="headerlink" title="信号"></a>信号</h2><p>用于通知进程发生了某种情况</p>
-<p><strong>进程的三种处理信号的方式</strong></p>
-<ul>
-<li><p>忽略，不推荐</p>
-</li>
-<li><p>按系统默认方式处理，除数为0则终止程序</p>
-</li>
-<li><p>提供自定义的函数</p>
-</li>
-</ul>
-<p><strong>为上面的in_shell函数，添加信号</strong></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">// +</span><br><span class="line">// 自定义信号处理</span><br><span class="line">static void sig_int(int signo)&#123;</span><br><span class="line">	printf(&quot;interrupt\n%% &quot;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void in_shell()&#123;</span><br><span class="line">	char buf[MAXLINE];</span><br><span class="line">	pid_t pid;</span><br><span class="line">	int status;</span><br><span class="line"></span><br><span class="line">	// +</span><br><span class="line">	// signal捕获信号</span><br><span class="line">	// SIGINT终止程序</span><br><span class="line">	if(signal(SIGINT, sig_int) == SIG_ERR)</span><br><span class="line">		err_sys(&quot;signal error&quot;);</span><br><span class="line"></span><br><span class="line">	printf(&quot;%% &quot;);</span><br><span class="line">	</span><br><span class="line">	//fgets以\n作为结束符，但下面的execlp函数只能用null字符作为结束符</span><br><span class="line">	while(fgets(buf, MAXLINE, stdin) != NULL)&#123;</span><br><span class="line">		if(buf[strlen(buf) - 1] == &apos;\n&apos;)</span><br><span class="line">			buf[strlen(buf) - 1] = 0;</span><br><span class="line">		</span><br><span class="line">		//fork返回负数则表示出错</span><br><span class="line">		if((pid = fork()) &lt; 0)&#123;</span><br><span class="line">			err_sys(&quot;fork error&quot;);</span><br><span class="line">		&#125; else if(pid == 0)&#123;</span><br><span class="line">			//execlp执行从标准输入流读入的命令</span><br><span class="line">			execlp(buf,buf, static_cast&lt;char*&gt;(0));</span><br><span class="line">			err_ret(&quot;couldn&apos;t execute: %s&quot;, buf);</span><br><span class="line">			exit(127);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		//等待子进程终止</span><br><span class="line">		if((pid = waitpid(pid, &amp;status, 0)) &lt; 0)</span><br><span class="line">			err_sys(&quot;waitpid error&quot;);</span><br><span class="line"></span><br><span class="line">		printf(&quot;%% &quot;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="时间值"><a href="#时间值" class="headerlink" title="时间值"></a>时间值</h2><p><code>时钟时间</code>进程运行的时间总量</p>
-<p><code>用户cpu时间</code>执行用户指令所用的时间量</p>
-<p><code>系统cpu时间</code>为该进程执行内核所经历的时间</p>
-<h2 id="系统调用和库函数"><a href="#系统调用和库函数" class="headerlink" title="系统调用和库函数"></a>系统调用和库函数</h2><p><img src="m.jpg" alt></p>
+<h3 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h3><blockquote>
+<p>运行一个a.out文件，就是创建一个进程，进程可以使用<code>exit()</code>进行结束。</p>
+</blockquote>
+<p><strong>查看a.out的进程id</strong><br><img src="1.png" alt></p>
 <hr>
-<h1 id="文件I-O"><a href="#文件I-O" class="headerlink" title="文件I/O"></a>文件I/O</h1><p>基于<code>fcntl.h</code>与<code>unistd.h</code>头文件</p>
-<p><code>文件描述符</code>是一个索引（非负整数）用来访问文件，打开或新建文件内核会返回一个文件<br>描述符，文件的读写会用到文件描述符</p>
-<p><code>open</code>函数与<code>openat</code>函数，打开或创建文件，openat第一个参数为文件描述符</p>
-<p><code>close</code>函数，关闭打开文件</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#include &quot;apue.h&quot;</span><br><span class="line">#include &quot;error.c&quot;</span><br><span class="line"></span><br><span class="line">// open所在地</span><br><span class="line">#include &lt;fcntl.h&gt;</span><br><span class="line">// perror所在地</span><br><span class="line">#include &lt;errno.h&gt;</span><br><span class="line"></span><br><span class="line">int main(int argc, char **argv)&#123;</span><br><span class="line">	if(argc != 2)</span><br><span class="line">		err_sys(&quot;input error&quot;);</span><br><span class="line">	</span><br><span class="line">	int fd; // 存放文件描述符</span><br><span class="line">	</span><br><span class="line">	// O_RDWR以读写格式打开</span><br><span class="line">	// O_CREAT如果文件不存在，则创建文件</span><br><span class="line">	// O_EXCL文件存在则出错，不存在则创建，配合O_CREATE使用</span><br><span class="line">	if((fd = open(argv[1], O_RDWR | O_CREAT | O_EXCL)) &lt; 0)&#123;</span><br><span class="line">		perror(&quot;open&quot;); // 文件描述符为负数，输出错误信息</span><br><span class="line">		return 1;</span><br><span class="line">	&#125;</span><br><span class="line">	printf(&quot;file open\n&quot;); // 输出成功信息</span><br><span class="line">	close(fd); // 关闭文件</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><code>creat</code>函数，创建新文件，效果等同于<code>open(path, O_WRONLY|O_CREATE|O_TRUNC, mode)</code></p>
-<p><code>lseek</code>函数，设置文件偏移量</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#include &quot;apue.h&quot;</span><br><span class="line">#include &quot;error.c&quot;</span><br><span class="line"></span><br><span class="line">#include &lt;fcntl.h&gt;</span><br><span class="line">#include &lt;errno.h&gt;</span><br><span class="line"></span><br><span class="line">int main(int argc, char **argv)&#123;</span><br><span class="line">	if(argc != 2)</span><br><span class="line">		err_sys(&quot;input error&quot;);</span><br><span class="line">	</span><br><span class="line">	int fd;</span><br><span class="line">	if((fd = open(argv[1], O_RDWR)) &lt; 0)</span><br><span class="line">		perror(&quot;open&quot;);</span><br><span class="line">	printf(&quot;file is open\n&quot;); // 文件打开成功的提示</span><br><span class="line"></span><br><span class="line">	off_t c; // long int类型</span><br><span class="line">	// lseek设置当前偏移量（除了使用O_APPEND选项，否则偏移量都为0）</span><br><span class="line">	// SEEK_CUR当前偏移量加上函数的第二个参数（也就是10）</span><br><span class="line">	if((c = lseek(fd, 10, SEEK_CUR)) &lt; 0)</span><br><span class="line">		perror(&quot;lseek&quot;);</span><br><span class="line">	printf(&quot;seek is %d\n&quot;, c); // 不出意外，会输出当前的偏移量为10（默认的0加上10）</span><br><span class="line"></span><br><span class="line">	close(fd); // 关闭文件</span><br><span class="line">	</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><code>write</code>函数，从打开文件写入数据</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#include &quot;apue.h&quot;</span><br><span class="line">#include &quot;error.c&quot;</span><br><span class="line"></span><br><span class="line">#include &lt;fcntl.h&gt;</span><br><span class="line"></span><br><span class="line">int main(int argc, char **argv)&#123;</span><br><span class="line">	if(argc != 2)</span><br><span class="line">		err_sys(&quot;input error&quot;);</span><br><span class="line"></span><br><span class="line">	int fd;</span><br><span class="line">	if((fd = open(argv[1], O_RDWR | O_CREAT | O_EXCL)) &lt; 0)</span><br><span class="line">		perror(&quot;open&quot;);</span><br><span class="line">	</span><br><span class="line">	printf(&quot;file is open\n&quot;);</span><br><span class="line"></span><br><span class="line">	char buf[] = &quot;abcdefghij&quot;; // 需要写的数据</span><br><span class="line"></span><br><span class="line">	if(write(fd, buf, 10) != 10) // 数据写入</span><br><span class="line">		err_sys(&quot;buf write error&quot;);</span><br><span class="line">		</span><br><span class="line">	close(fd);</span><br><span class="line"></span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>空洞文件：</strong>文件偏移量大于当前文件长度，也就是强行增加文件大小，那些多出来的文件<br>数据，每个字节默认的数据为\0，这些多出来的数据就是文件的空洞</p>
-<blockquote>
-<p>空洞文件的作用有：<br>   比如下载文件，会生成一个与你所下载文件大小一样的文件，但里面没有数据，需要等待<br>下载，把数据写进这个空洞文件</p>
+<div class="tabs" id="1"><ul class="nav-tabs"><li class="tab active"><a href="#1-1">taexit()</a></li></ul><div class="tab-content"><div class="tab-pane active" id="1-1"><blockquote>
+<p>终止处理程序：为进程注册一个退出时要执行的函数（被标记多次则会被多次调用），该函数返回0表示成功</p>
 </blockquote>
-<p><code>read</code>函数，从打开文件读取数据</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#include &quot;apue.h&quot;</span><br><span class="line">#include &quot;error.c&quot;</span><br><span class="line"></span><br><span class="line">#include &lt;fcntl.h&gt;</span><br><span class="line"></span><br><span class="line">int main(int argc, char **argv)&#123;</span><br><span class="line">	if(argc != 2)</span><br><span class="line">		err_sys(&quot;input error&quot;);</span><br><span class="line"></span><br><span class="line">	int fd;</span><br><span class="line">	if((fd = open(argv[1], O_RDWR)) &lt; 0)</span><br><span class="line">		err_sys(&quot;open error&quot;);</span><br><span class="line">	</span><br><span class="line">	const int si = 10;</span><br><span class="line">	char buf[si]; // 缓冲区，一次只读取10个字节</span><br><span class="line">	</span><br><span class="line">	ssize_t s; // 读取到的字节数</span><br><span class="line">	</span><br><span class="line">	while((s = read(fd, buf, si)) != 0)&#123; // read返回0表示读取到文件尾</span><br><span class="line">		if(s == -1) // read返回-1则表示读取错误</span><br><span class="line">			err_sys(&quot;read error&quot;);</span><br><span class="line">		printf(&quot;%d\n&quot;,s);</span><br><span class="line">	&#125;</span><br><span class="line">		</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">// test.c</span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line"></span><br><span class="line">void m()&#123;</span><br><span class="line">    printf(&quot;m\n&quot;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void m2()&#123;</span><br><span class="line">    printf(&quot;m2\n&quot;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main(void)&#123;</span><br><span class="line">    atexit(m);</span><br><span class="line">    atexit(m2);</span><br><span class="line">    atexit(m2);</span><br><span class="line">    printf(&quot;is main\n&quot;);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p><strong>测试数据：</strong></p>
-<blockquote>
-<p>hellow<br>word!<br>12345678900</p>
-</blockquote>
-<p><strong>注意：</strong>记得把换行符给算进去，一共22个字节加上3个换行符的字节</p>
-<p><img src="t.png" alt></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">/* 将标准输入的数据，输入到文件 */</span><br><span class="line"></span><br><span class="line">#include &quot;apue.h&quot;</span><br><span class="line">#include &quot;error.c&quot;</span><br><span class="line"></span><br><span class="line">#include &lt;fcntl.h&gt;</span><br><span class="line"></span><br><span class="line">int main(int argc, char **argv)&#123;</span><br><span class="line">	if(argc != 2)</span><br><span class="line">		err_sys(&quot;input error&quot;);</span><br><span class="line"></span><br><span class="line">	// output</span><br><span class="line">	int fd2;</span><br><span class="line">	if((fd2 = open(argv[1], O_RDWR)) &lt; 0)</span><br><span class="line">		err_sys(&quot;output open error&quot;);</span><br><span class="line">	</span><br><span class="line">	int n; // 读取到的字节数</span><br><span class="line">	char buf[MAXLINE]; // 缓冲区</span><br><span class="line"></span><br><span class="line">	while((n = read(STDIN_FILENO, buf, MAXLINE)) &gt; 0)</span><br><span class="line">		if(write(fd2, buf, n) != n)</span><br><span class="line">			err_sys(&quot;write error&quot;);</span><br><span class="line"></span><br><span class="line">	if(n &lt; 0)</span><br><span class="line">		err_sys(&quot;read error&quot;);</span><br><span class="line"></span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>结果</strong><br><img src="2.png" alt></p>
+</div></div></div>
 
-<h2 id="文件共享与原子操作"><a href="#文件共享与原子操作" class="headerlink" title="文件共享与原子操作"></a>文件共享与原子操作</h2><p><strong>文件共享</strong></p>
-<blockquote>
-<p>每个文件或设备都有一个v节点（结构），v节点里有一个i节点（索引节点）</p>
-<p>Linux没有使用v节点，而是使用i节点，虽然实现不同但概念一样</p>
-</blockquote>
-<p><strong>该进程有两个不同的打开文件：一个文件从标准输入打开（文件描述符0）一个文件<br>从标准输出打开（文件描述符1）</strong></p>
-<p><img src="v-node.png" alt></p>
-<p><strong>两个进程打开同一个文件</strong></p>
-<p><img src="n-node2.jpg" alt></p>
-<p><strong>原子操作：</strong>要么执行所有步骤，要么不执行</p>
-<h2 id="dup返回与修改文件描述符"><a href="#dup返回与修改文件描述符" class="headerlink" title="dup返回与修改文件描述符"></a>dup返回与修改文件描述符</h2><p><code>dup</code>函数，返回当前可用的最小的文件描述符</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#include &quot;apue.h&quot;</span><br><span class="line">#include &quot;error.c&quot;</span><br><span class="line"></span><br><span class="line">#include &lt;fcntl.h&gt;</span><br><span class="line">// dup函数所在地</span><br><span class="line">#include &lt;unistd.h&gt; </span><br><span class="line"></span><br><span class="line">int main(int argc, char **argv)&#123;</span><br><span class="line">	if(argc != 2)</span><br><span class="line">		err_sys(&quot;input error&quot;);</span><br><span class="line"></span><br><span class="line">	int fd;</span><br><span class="line">	if((fd = open(argv[1], O_RDWR)) &lt; 0)&#123;</span><br><span class="line">		err_sys(&quot;open error&quot;);</span><br><span class="line">		return 1;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	printf(&quot;old fd: %d\n&quot;, fd);</span><br><span class="line"></span><br><span class="line">	int n_fd; // 存储新的文件描述符</span><br><span class="line">	// 返回小于0则表示出错</span><br><span class="line">	if((n_fd = dup(fd)) &lt; 0)&#123; // 获取当前最小可用的文件描述符</span><br><span class="line">		err_sys(&quot;dup error&quot;);</span><br><span class="line">		return 1;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	printf(&quot;new fd: %d\n&quot;, n_fd); </span><br><span class="line"></span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p><code>dup2</code>函数，可用修改当前的文件描述符，假如fd等于fd2则返回fd2并且不关闭它（fd2已经打开<br>的情况下，需要将其关闭）</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#include &quot;apue.h&quot;</span><br><span class="line">#include &quot;error.c&quot;</span><br><span class="line"></span><br><span class="line">#include &lt;fcntl.h&gt;</span><br><span class="line">// dup2函数所在地</span><br><span class="line">#include &lt;unistd.h&gt; </span><br><span class="line"></span><br><span class="line">int main(int argc, char **argv)&#123;</span><br><span class="line">	if(argc != 2)</span><br><span class="line">		err_sys(&quot;input error&quot;);</span><br><span class="line"></span><br><span class="line">	int fd;</span><br><span class="line">	if((fd = open(argv[1], O_RDWR)) &lt; 0)&#123;</span><br><span class="line">		err_sys(&quot;open error&quot;);</span><br><span class="line">		return 1;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	printf(&quot;old fd: %d\n&quot;, fd);</span><br><span class="line"></span><br><span class="line">	int n_fd, // 存储新的文件描述符</span><br><span class="line">		new_fd = 999; // 新的文件描述符，如果该描述符已经被打开，则需要关闭它</span><br><span class="line">	</span><br><span class="line">	if((n_fd = dup2(fd, new_fd)) &lt; 0)&#123; // dup2返回小于0的数则表示错误</span><br><span class="line">		err_sys(&quot;dup2 error&quot;);</span><br><span class="line">		return 1;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	printf(&quot;new fd: %d\n&quot;, n_fd);</span><br><span class="line"></span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="sync保证实际文件与缓冲区内容的一致性"><a href="#sync保证实际文件与缓冲区内容的一致性" class="headerlink" title="sync保证实际文件与缓冲区内容的一致性"></a>sync保证实际文件与缓冲区内容的一致性</h2><p>当写入数据时，内核会将数据复制到缓冲区，然后排入队列，延迟写入硬盘</p>
-<p><code>sync</code>函数，将修改过的块缓冲区排入 写队列，然后返回（并不会等待实际写磁盘操作结束）</p>
-<p><code>fsync</code>函数，只对由文件描述符指定的文件起作用（磁盘写入结束才返回）</p>
-<p><code>fdatasync</code>函数，只影响文件数据部分</p>
-<h2 id="fcntl修改-已打开文件-的属性"><a href="#fcntl修改-已打开文件-的属性" class="headerlink" title="fcntl修改 已打开文件 的属性"></a>fcntl修改 已打开文件 的属性</h2><p><strong>只需要主动打开文件的描述符，就可以修改描述符的属性</strong></p>
-<p><code>fcntl</code>函数，出错会返回-1</p>
-<p>函数原型与所属头文件：</p>
-<blockquote>
-<p>#include &lt;fcntl.h&gt;<br>int fcntl(int fd, int cmd, … /* int arg */)</p>
-<p>fd  : 文件标识符<br>cmd : 命令,一共有11种<br>arg : 基于cmd的值，传入的第三个参数</p>
-</blockquote>
-<p><code>功能：</code></p>
-<ol>
-<li><p>复制一个已有文件描述符 </p>
-</li>
-<li><p>获取/设置 文件描述符标志</p>
-</li>
-<li><p>获取/设置 文件状态标志</p>
-</li>
-<li><p>获取/设置 异步I/O所有权</p>
-</li>
-<li><p>获取/设置 记录锁</p>
-</li>
-</ol>
-<p><strong>例子</strong></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">#include &lt;apue.h&gt;</span><br><span class="line">#include &lt;error.c&gt;</span><br><span class="line"></span><br><span class="line">#include &lt;fcntl.h&gt;</span><br><span class="line"></span><br><span class="line">void m(const int &amp;argc , char *argv[])&#123;</span><br><span class="line">    if(argc != 2)</span><br><span class="line">        err_quit(&quot;usage: a.out &lt;descriptor#&gt;&quot;);</span><br><span class="line"></span><br><span class="line">    int val; // 指定文件描述符</span><br><span class="line">    if((val = fcntl(atoi(argv[1]), F_GETFL, 0)) &lt; 0)</span><br><span class="line">        err_sys(&quot;fcntl error for fd %d&quot;, atoi(argv[1]));</span><br><span class="line"></span><br><span class="line">    int v = val &amp; O_ACCMODE;// 读写操作时，取出flag(标识)中的低2位</span><br><span class="line"></span><br><span class="line">        /* fcntl函数的标识 */</span><br><span class="line">        if(v = O_RDONLY)</span><br><span class="line">            printf(&quot;read only &quot;);</span><br><span class="line">        if(v = O_WRONLY)</span><br><span class="line">            printf(&quot;write only &quot;);</span><br><span class="line">        if(v = O_RDWR)</span><br><span class="line">            printf(&quot;read write &quot;);</span><br><span class="line">        else</span><br><span class="line">            err_dump(&quot;unknown access mode&quot;);</span><br><span class="line"></span><br><span class="line">    /* open函数已有的文件状态标识 */</span><br><span class="line">    if(v == O_RDONLY)</span><br><span class="line">            printf(&quot;read only &quot;);</span><br><span class="line">    else if(v == O_WRONLY)</span><br><span class="line">            printf(&quot;write only &quot;);</span><br><span class="line">    else if(v == O_RDWR)</span><br><span class="line">            printf(&quot;read write &quot;);</span><br><span class="line">	else</span><br><span class="line">            err_dump(&quot;unknown access mode&quot;);</span><br><span class="line">	</span><br><span class="line">	// _POSIX_C_SOURCE功能测试宏</span><br><span class="line">    #if !defined(_POSIX_C_SOURCE) &amp;&amp; defined(O_FSYNC) &amp;&amp; (O_FSYNC != O_SYNC)</span><br><span class="line">        if(val &amp; O_FSYNC)  </span><br><span class="line">            printf(&quot;, synchronous writes&quot;);</span><br><span class="line">    #endif</span><br><span class="line"></span><br><span class="line">    putchar(&apos;\n&apos;);</span><br><span class="line">    exit(0);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main(int argc , char *argv[])&#123;</span><br><span class="line">    m(argc, argv);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><img src="fcntl_test.png" alt></p>
-<blockquote>
-<p>第一个为输出文件状态标志</p>
-<p>第二个为将文件状态标志输入到文件</p>
-<p>第三个为修改文件描述符标志，改为写追加模式</p>
-<p>第四个为修改文件描述符标志，改为读写模式</p>
-</blockquote>
-<h2 id="ioctl-I-O操作的杂物箱（终端I-O最常用的）"><a href="#ioctl-I-O操作的杂物箱（终端I-O最常用的）" class="headerlink" title="ioctl I/O操作的杂物箱（终端I/O最常用的）"></a>ioctl I/O操作的杂物箱（终端I/O最常用的）</h2><p>作用于：文件IO，磁带IO，套接字IO，终端IO</p>
-<blockquote>
-<p>#include &lt;unistd.h&gt;</p>
-<p>#include &lt;sys/ioctl.h&gt;<br>int ioctl(int fd, int request, …)<br>返回值：出错返回-1</p>
-<p>fd : 文件描述符<br>request : 一个依赖于设备的请求</p>
-</blockquote>
-<h2 id="dev-fd目录"><a href="#dev-fd目录" class="headerlink" title="/dev/fd目录"></a>/dev/fd目录</h2><p>里面有0,1,2,3等文件，打开这些文件，等同于复制描述符（假定描述符是打开的）</p>
-<blockquote>
-<p>fd = open(“/dev/fd/0”, mode) 等同于 fd = dup(0)</p>
-</blockquote>
-<p>作用：/dev/fd目录里的文件主要由shell使用，提高文件名参数的一致性，看起来更加清晰</p>
-<h2 id="3-2练习，实现dup2，但不使用fcntl"><a href="#3-2练习，实现dup2，但不使用fcntl" class="headerlink" title="3.2练习，实现dup2，但不使用fcntl"></a>3.2练习，实现dup2，但不使用fcntl</h2><hr>
+<hr>
 ]]></content>
       <categories>
         <category>Unix</category>
       </categories>
   </entry>
   <entry>
-    <title>Unix网络编程（套接字联网API）笔记</title>
+    <title>套接字笔记</title>
     <url>/2019/10/17/Unix%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%EF%BC%88%E5%A5%97%E6%8E%A5%E5%AD%97%E8%81%94%E7%BD%91API%EF%BC%89%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<img src="/2019/10/17/Unix网络编程（套接字联网API）笔记/封面.gif">
 
 <p>基于CentOS8,与书籍<code>Unix网络编程卷1</code></p>
 <a id="more"></a>
 
-<h1 id="配置unp-h头文件"><a href="#配置unp-h头文件" class="headerlink" title="配置unp.h头文件"></a>配置unp.h头文件</h1><p><a href="http://www.unpbook.com/src.html" target="_blank" rel="noopener"><strong>源码下载</strong></a></p>
-<p>解压后，会有一个<code>unpv13e</code>目录</p>
+<hr>
 <blockquote>
-<p>进入目录输入<code>./configure</code></p>
-<p>打开README文件，按里面顺序进行make（我只make了前两个）</p>
-<p>此时<code>unpv13e</code>目录会生成一个<code>libunp.o</code>文件，将这个文件拷贝到/usr/lib<code>和</code>/usr/lib64/</p>
-<p>将unpv13e目录下的~config.h<code>文件和unpv13e/lib目录下的</code>unp.h`文件拷贝到/usr/include目录下</p>
-<p>打开拷贝过去的<code>unp.h</code>文件，<code>#include &quot;../config.h&quot;</code>改成<code>#include &quot;config.h</code></p>
-<p>在<code>unp.h</code>中需要添加一行<code>#define MAX_LINE 2048</code></p>
+<p>套接字（soccket），使用协议将双方进行连接的通信技术</p>
 </blockquote>
-<p><strong>unpv13e/libfree目录下 make报错</strong></p>
-<blockquote>
-<p>打开<code>inet_ntop.c</code>文件<br>在所有头文件下面加入<code>#define size_t socklen_t</code><br>重新make即可</p>
-</blockquote>
-<ul>
-<li>unp.h使用方法：直接添加头文件<code>#include &quot;unp.h&quot;</code></li>
-</ul>
-<p>使用的时候出现了：</p>
-<p><img src="err.png" alt></p>
-<p>这些函数没有实现，实现这些的函数在<code>unpv13e/lib/error.c</code>头文件里</p>
-<p>将<code>error.c</code>拷贝到lib/include在main函数里<code>#include &quot;unp.h&quot;</code>下方添加即可</p>
-<div class="tabs" id="参考"><ul class="nav-tabs"><li class="tab active"><a href="#参考-1">参考 1</a></li><li class="tab"><a href="#参考-2">参考 2</a></li><li class="tab"><a href="#参考-3">参考 3</a></li></ul><div class="tab-content"><div class="tab-pane active" id="参考-1"><p><a href="https://blog.csdn.net/u011068702/article/details/60970131" target="_blank" rel="noopener"><strong>参考</strong></a></p>
-</div><div class="tab-pane" id="参考-2"><p><a href="https://www.cnblogs.com/wuyuegb2312/articles/2455902.html" target="_blank" rel="noopener"><strong>参考2</strong></a></p>
-</div><div class="tab-pane" id="参考-3"><p><a href="https://www.jianshu.com/p/a0037f327b96" target="_blank" rel="noopener"><strong>参考3</strong></a></p>
-</div></div></div>
-
-<hr>
-<h1 id="使用下载的源文件"><a href="#使用下载的源文件" class="headerlink" title="使用下载的源文件"></a>使用下载的源文件</h1><p>使用图1-5的时间获取客户程序</p>
-<ol>
-<li><p>打开<code>unpv13e/intro</code>目录，然后执行<code>make</code>目录</p>
-</li>
-<li><p><code>./daytimetcpsrv</code>执行文件，打开服务器</p>
-</li>
-<li><p>打开另一个终端，执行<code>./daytimetcpcli 你的IP</code></p>
-</li>
-</ol>
-<hr>
-<h1 id="OSI模型"><a href="#OSI模型" class="headerlink" title="OSI模型"></a>OSI模型</h1><p><img src="OSI.png" alt></p>
-<hr>
-<h1 id="网络细节命令"><a href="#网络细节命令" class="headerlink" title="网络细节命令"></a>网络细节命令</h1><p><code>ifconfig</code>每个接口的详细信息</p>
-<p><code>netstat [选项]</code> <code>n</code>输出数值地址<code>i</code>提供网络接口信息<code>r</code>展示路由表</p>
-<hr>
-<h1 id="POSIX"><a href="#POSIX" class="headerlink" title="POSIX"></a>POSIX</h1><p>POSIX可移植操作系统接口</p>
-<hr>
-<h1 id="64位体系结构"><a href="#64位体系结构" class="headerlink" title="64位体系结构"></a>64位体系结构</h1><p>每个进程内部可以由此时用更长的编址长度（即64位指针），从而可以寻址很大的内存空间</p>
-<p>64位Unix模型称为LP64（L长整数，P指针）占用64位</p>
-<hr>
-<h1 id="传输层：TCP-UDP-SCTP"><a href="#传输层：TCP-UDP-SCTP" class="headerlink" title="传输层：TCP,UDP,SCTP"></a>传输层：TCP,UDP,SCTP</h1><p>UDP：无连接协议，速度快，不保证数据会到达目的地，缺乏可靠性</p>
-<p>TCP：面向协议，先与服务器建立连接，需要三次握手，可靠</p>
-<p>SCTP：面向消息，提供多宿特性（使单个端点支持多个IP），四次握手</p>
-<h2 id="TCP链接分组交换图"><a href="#TCP链接分组交换图" class="headerlink" title="TCP链接分组交换图"></a>TCP链接分组交换图</h2><p><img src="tcp.jpg" alt></p>
-<h2 id="SCTP分组交换图"><a href="#SCTP分组交换图" class="headerlink" title="SCTP分组交换图"></a>SCTP分组交换图</h2><p><img src="sctp.jpg" alt></p>
-<h2 id="端口号"><a href="#端口号" class="headerlink" title="端口号"></a>端口号</h2><p>16位整数，用于区分TPC,UDP,SCTP的进程</p>
-<p><code>LANA</code>因特网已经分配数值权威机构</p>
-<ul>
-<li><p>0-1023端口由LANA控制</p>
-</li>
-<li><p>1024-49151由LANA登记使用情况，不控制</p>
-</li>
-<li><p>49152-65535动态端口，LANA不管</p>
-</li>
-</ul>
-<h2 id="TCP与并发服务器图"><a href="#TCP与并发服务器图" class="headerlink" title="TCP与并发服务器图"></a>TCP与并发服务器图</h2><p><img src="tcp%E5%B9%B6%E5%8F%91%E6%9C%8D%E5%8A%A1%E5%99%A8.png" alt> </p>
-<h2 id="缓冲器大小以及限制"><a href="#缓冲器大小以及限制" class="headerlink" title="缓冲器大小以及限制"></a>缓冲器大小以及限制</h2><p><code>MTU</code>最大传输单元</p>
-<p><code>特大净荷</code>IPv6特有选项，需要MTU</p>
-<p><code>IPv4</code>最大65535字节，总长度字段16位，最小MTU为64字节,最小重组缓冲区为576字节</p>
-<p><code>IPv6</code>最大65575字节，可以用特大净荷将字段长度拓展到32位，最小MTU为1280字节，最小重组缓冲区为1500字节</p>
-<hr>
-<h1 id="套接字"><a href="#套接字" class="headerlink" title="套接字"></a>套接字</h1><p>大多数套接字函数都需要一个指向套接字地址结构的指针作为参数</p>
-<p>套接字地址结构，以引用传递</p>
-<p><code>#include &lt;netlinet/in.h&gt;</code>网络套接字地址结构，POSIX数据类型</p>
-<p><code>#include &lt;strings.h&gt;</code>字节操作</p>
 <hr>
 ]]></content>
-      <categories>
-        <category>Unix</category>
-      </categories>
-      <tags>
-        <tag>套接字</tag>
-      </tags>
   </entry>
   <entry>
     <title>linux基础笔记</title>

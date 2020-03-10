@@ -83,7 +83,7 @@
 
 
 
-  <meta name="keywords" content="套接字,">
+  <meta name="keywords" content="？？？">
 
 
 
@@ -95,22 +95,16 @@
 
 
 <meta name="description" content="基于CentOS8,与书籍Unix网络编程卷1">
-<meta name="keywords" content="套接字">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Unix网络编程（套接字联网API）笔记">
+<meta property="og:title" content="套接字笔记">
 <meta property="og:url" content="https://1411482317.github.io/2019/10/17/Unix网络编程（套接字联网API）笔记/index.html">
 <meta property="og:site_name" content="大石砸死蟹">
 <meta property="og:description" content="基于CentOS8,与书籍Unix网络编程卷1">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://1411482317.github.io/2019/10/17/Unix网络编程（套接字联网API）笔记/封面.gif">
-<meta property="og:image" content="https://1411482317.github.io/2019/10/17/Unix网络编程（套接字联网API）笔记/err.png">
-<meta property="og:image" content="https://1411482317.github.io/2019/10/17/Unix网络编程（套接字联网API）笔记/OSI.png">
-<meta property="og:image" content="https://1411482317.github.io/2019/10/17/Unix网络编程（套接字联网API）笔记/tcp.jpg">
-<meta property="og:image" content="https://1411482317.github.io/2019/10/17/Unix网络编程（套接字联网API）笔记/sctp.jpg">
-<meta property="og:image" content="https://1411482317.github.io/2019/10/17/Unix网络编程（套接字联网API）笔记/tcp%E5%B9%B6%E5%8F%91%E6%9C%8D%E5%8A%A1%E5%99%A8.png">
-<meta property="og:updated_time" content="2019-10-18T10:05:27.277Z">
+<meta property="og:updated_time" content="2020-03-08T03:52:22.476Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Unix网络编程（套接字联网API）笔记">
+<meta name="twitter:title" content="套接字笔记">
 <meta name="twitter:description" content="基于CentOS8,与书籍Unix网络编程卷1">
 <meta name="twitter:image" content="https://1411482317.github.io/2019/10/17/Unix网络编程（套接字联网API）笔记/封面.gif">
 
@@ -153,7 +147,7 @@
 
 
 
-  <title>Unix网络编程（套接字联网API）笔记 | 大石砸死蟹</title>
+  <title>套接字笔记 | 大石砸死蟹</title>
   
 
 
@@ -354,7 +348,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Unix网络编程（套接字联网API）笔记</h1>
+          <h1 class="post-title" itemprop="name headline">套接字笔记</h1>
         
 
         <div class="post-meta">
@@ -377,28 +371,6 @@
           </span>
 
           
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Unix/" itemprop="url" rel="index">
-                    <span itemprop="name">Unix</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
 
           
             
@@ -406,7 +378,7 @@
 
           
           
-             <span id="/2019/10/17/Unix网络编程（套接字联网API）笔记/" class="leancloud_visitors" data-flag-title="Unix网络编程（套接字联网API）笔记">
+             <span id="/2019/10/17/Unix网络编程（套接字联网API）笔记/" class="leancloud_visitors" data-flag-title="套接字笔记">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -431,7 +403,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  765
+                  32
                 </span>
               
 
@@ -447,7 +419,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  2
+                  1
                 </span>
               
             </div>
@@ -473,78 +445,10 @@
 <p>基于CentOS8,与书籍<code>Unix网络编程卷1</code></p>
 <a id="more"></a>
 
-<h1 id="配置unp-h头文件"><a href="#配置unp-h头文件" class="headerlink" title="配置unp.h头文件"></a>配置unp.h头文件</h1><p><a href="http://www.unpbook.com/src.html" target="_blank" rel="noopener"><strong>源码下载</strong></a></p>
-<p>解压后，会有一个<code>unpv13e</code>目录</p>
+<hr>
 <blockquote>
-<p>进入目录输入<code>./configure</code></p>
-<p>打开README文件，按里面顺序进行make（我只make了前两个）</p>
-<p>此时<code>unpv13e</code>目录会生成一个<code>libunp.o</code>文件，将这个文件拷贝到/usr/lib<code>和</code>/usr/lib64/</p>
-<p>将unpv13e目录下的~config.h<code>文件和unpv13e/lib目录下的</code>unp.h`文件拷贝到/usr/include目录下</p>
-<p>打开拷贝过去的<code>unp.h</code>文件，<code>#include &quot;../config.h&quot;</code>改成<code>#include &quot;config.h</code></p>
-<p>在<code>unp.h</code>中需要添加一行<code>#define MAX_LINE 2048</code></p>
+<p>套接字（soccket），使用协议将双方进行连接的通信技术</p>
 </blockquote>
-<p><strong>unpv13e/libfree目录下 make报错</strong></p>
-<blockquote>
-<p>打开<code>inet_ntop.c</code>文件<br>在所有头文件下面加入<code>#define size_t socklen_t</code><br>重新make即可</p>
-</blockquote>
-<ul>
-<li>unp.h使用方法：直接添加头文件<code>#include &quot;unp.h&quot;</code></li>
-</ul>
-<p>使用的时候出现了：</p>
-<p><img src="err.png" alt></p>
-<p>这些函数没有实现，实现这些的函数在<code>unpv13e/lib/error.c</code>头文件里</p>
-<p>将<code>error.c</code>拷贝到lib/include在main函数里<code>#include &quot;unp.h&quot;</code>下方添加即可</p>
-<div class="tabs" id="参考"><ul class="nav-tabs"><li class="tab active"><a href="#参考-1">参考 1</a></li><li class="tab"><a href="#参考-2">参考 2</a></li><li class="tab"><a href="#参考-3">参考 3</a></li></ul><div class="tab-content"><div class="tab-pane active" id="参考-1"><p><a href="https://blog.csdn.net/u011068702/article/details/60970131" target="_blank" rel="noopener"><strong>参考</strong></a></p>
-</div><div class="tab-pane" id="参考-2"><p><a href="https://www.cnblogs.com/wuyuegb2312/articles/2455902.html" target="_blank" rel="noopener"><strong>参考2</strong></a></p>
-</div><div class="tab-pane" id="参考-3"><p><a href="https://www.jianshu.com/p/a0037f327b96" target="_blank" rel="noopener"><strong>参考3</strong></a></p>
-</div></div></div>
-
-<hr>
-<h1 id="使用下载的源文件"><a href="#使用下载的源文件" class="headerlink" title="使用下载的源文件"></a>使用下载的源文件</h1><p>使用图1-5的时间获取客户程序</p>
-<ol>
-<li><p>打开<code>unpv13e/intro</code>目录，然后执行<code>make</code>目录</p>
-</li>
-<li><p><code>./daytimetcpsrv</code>执行文件，打开服务器</p>
-</li>
-<li><p>打开另一个终端，执行<code>./daytimetcpcli 你的IP</code></p>
-</li>
-</ol>
-<hr>
-<h1 id="OSI模型"><a href="#OSI模型" class="headerlink" title="OSI模型"></a>OSI模型</h1><p><img src="OSI.png" alt></p>
-<hr>
-<h1 id="网络细节命令"><a href="#网络细节命令" class="headerlink" title="网络细节命令"></a>网络细节命令</h1><p><code>ifconfig</code>每个接口的详细信息</p>
-<p><code>netstat [选项]</code> <code>n</code>输出数值地址<code>i</code>提供网络接口信息<code>r</code>展示路由表</p>
-<hr>
-<h1 id="POSIX"><a href="#POSIX" class="headerlink" title="POSIX"></a>POSIX</h1><p>POSIX可移植操作系统接口</p>
-<hr>
-<h1 id="64位体系结构"><a href="#64位体系结构" class="headerlink" title="64位体系结构"></a>64位体系结构</h1><p>每个进程内部可以由此时用更长的编址长度（即64位指针），从而可以寻址很大的内存空间</p>
-<p>64位Unix模型称为LP64（L长整数，P指针）占用64位</p>
-<hr>
-<h1 id="传输层：TCP-UDP-SCTP"><a href="#传输层：TCP-UDP-SCTP" class="headerlink" title="传输层：TCP,UDP,SCTP"></a>传输层：TCP,UDP,SCTP</h1><p>UDP：无连接协议，速度快，不保证数据会到达目的地，缺乏可靠性</p>
-<p>TCP：面向协议，先与服务器建立连接，需要三次握手，可靠</p>
-<p>SCTP：面向消息，提供多宿特性（使单个端点支持多个IP），四次握手</p>
-<h2 id="TCP链接分组交换图"><a href="#TCP链接分组交换图" class="headerlink" title="TCP链接分组交换图"></a>TCP链接分组交换图</h2><p><img src="tcp.jpg" alt></p>
-<h2 id="SCTP分组交换图"><a href="#SCTP分组交换图" class="headerlink" title="SCTP分组交换图"></a>SCTP分组交换图</h2><p><img src="sctp.jpg" alt></p>
-<h2 id="端口号"><a href="#端口号" class="headerlink" title="端口号"></a>端口号</h2><p>16位整数，用于区分TPC,UDP,SCTP的进程</p>
-<p><code>LANA</code>因特网已经分配数值权威机构</p>
-<ul>
-<li><p>0-1023端口由LANA控制</p>
-</li>
-<li><p>1024-49151由LANA登记使用情况，不控制</p>
-</li>
-<li><p>49152-65535动态端口，LANA不管</p>
-</li>
-</ul>
-<h2 id="TCP与并发服务器图"><a href="#TCP与并发服务器图" class="headerlink" title="TCP与并发服务器图"></a>TCP与并发服务器图</h2><p><img src="tcp%E5%B9%B6%E5%8F%91%E6%9C%8D%E5%8A%A1%E5%99%A8.png" alt> </p>
-<h2 id="缓冲器大小以及限制"><a href="#缓冲器大小以及限制" class="headerlink" title="缓冲器大小以及限制"></a>缓冲器大小以及限制</h2><p><code>MTU</code>最大传输单元</p>
-<p><code>特大净荷</code>IPv6特有选项，需要MTU</p>
-<p><code>IPv4</code>最大65535字节，总长度字段16位，最小MTU为64字节,最小重组缓冲区为576字节</p>
-<p><code>IPv6</code>最大65575字节，可以用特大净荷将字段长度拓展到32位，最小MTU为1280字节，最小重组缓冲区为1500字节</p>
-<hr>
-<h1 id="套接字"><a href="#套接字" class="headerlink" title="套接字"></a>套接字</h1><p>大多数套接字函数都需要一个指向套接字地址结构的指针作为参数</p>
-<p>套接字地址结构，以引用传递</p>
-<p><code>#include &lt;netlinet/in.h&gt;</code>网络套接字地址结构，POSIX数据类型</p>
-<p><code>#include &lt;strings.h&gt;</code>字节操作</p>
 <hr>
 
       
@@ -562,14 +466,6 @@
     
 
     <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-		  
-            <a href="/tags/套接字/" rel="tag"><i class="fa fa-tag"></i> 套接字</a>
-			
-          
-        </div>
       
 
       
@@ -648,17 +544,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -697,7 +584,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-count">19</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -759,22 +646,6 @@ document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " 
       </div></section>
 
       
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#配置unp-h头文件"><span class="nav-number">1.</span> <span class="nav-text">配置unp.h头文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用下载的源文件"><span class="nav-number">2.</span> <span class="nav-text">使用下载的源文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#OSI模型"><span class="nav-number">3.</span> <span class="nav-text">OSI模型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#网络细节命令"><span class="nav-number">4.</span> <span class="nav-text">网络细节命令</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#POSIX"><span class="nav-number">5.</span> <span class="nav-text">POSIX</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#64位体系结构"><span class="nav-number">6.</span> <span class="nav-text">64位体系结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#传输层：TCP-UDP-SCTP"><span class="nav-number">7.</span> <span class="nav-text">传输层：TCP,UDP,SCTP</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#TCP链接分组交换图"><span class="nav-number">7.1.</span> <span class="nav-text">TCP链接分组交换图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SCTP分组交换图"><span class="nav-number">7.2.</span> <span class="nav-text">SCTP分组交换图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#端口号"><span class="nav-number">7.3.</span> <span class="nav-text">端口号</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TCP与并发服务器图"><span class="nav-number">7.4.</span> <span class="nav-text">TCP与并发服务器图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#缓冲器大小以及限制"><span class="nav-number">7.5.</span> <span class="nav-text">缓冲器大小以及限制</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#套接字"><span class="nav-number">8.</span> <span class="nav-text">套接字</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
-      
 
       
 
@@ -808,7 +679,7 @@ document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " 
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">59.3k</span>
+    <span title="Site words total count">58k</span>
   
 </div>
 
