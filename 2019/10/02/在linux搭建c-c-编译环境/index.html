@@ -134,7 +134,10 @@
 <meta property="og:image" content="https://1411482317.github.io/2019/10/02/在linux搭建c-c-编译环境/include.png">
 <meta property="og:image" content="https://1411482317.github.io/2019/10/02/在linux搭建c-c-编译环境/include2.png">
 <meta property="og:image" content="https://1411482317.github.io/2019/10/02/在linux搭建c-c-编译环境/c++new.png">
-<meta property="og:updated_time" content="2020-02-22T03:05:25.196Z">
+<meta property="og:image" content="https://1411482317.github.io/2019/10/02/在linux搭建c-c-编译环境/1.png">
+<meta property="og:image" content="https://1411482317.github.io/2019/10/02/在linux搭建c-c-编译环境/2.png">
+<meta property="og:image" content="https://1411482317.github.io/2019/10/02/在linux搭建c-c-编译环境/3.png">
+<meta property="og:updated_time" content="2020-03-22T08:29:23.176Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="在linux搭建c&#x2F;c++编译环境">
 <meta name="twitter:description" content="基于Cent8虚拟机下，搭建gcc/g++，gdb并使用vs code进行c/c++程序的开发">
@@ -457,7 +460,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.2k
+                  1.7k
                 </span>
               
 
@@ -473,7 +476,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  5
+                  7
                 </span>
               
             </div>
@@ -498,6 +501,9 @@
 
 <p>基于<code>Cent8</code>虚拟机下，搭建<code>gcc/g++</code>，<code>gdb</code>并使用<code>vs code</code>进行c/c++程序的开发</p>
 <a id="more"></a>
+
+<details>
+<summary>旧版</summary>
 
 <h1 id="前置"><a href="#前置" class="headerlink" title="前置"></a>前置</h1><ul>
 <li><strong>下载gcc/g++的依赖库（需要按顺序安装）</strong></li>
@@ -648,6 +654,72 @@
 </tr>
 </tbody></table>
 <hr>
+</details>
+
+
+
+
+
+
+
+
+<hr>
+<details>
+<summary>新版</summary>
+
+<p>让新版本与旧版本同时存在。</p>
+<hr>
+<p>安装旧版本的gcc/g++与gdb:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install gcc-c++ gdb -y</span><br></pre></td></tr></table></figure>
+
+<p>去<a href="https://mirrors.tuna.tsinghua.edu.cn/" target="_blank" rel="noopener"><font color="green">清华大学镜像源</font></a>的<code>gnu目录</code>下载<code>gmp</code> <code>mpfp</code> <code>mpc</code> <code>gcc</code> <code>texinfo</code> <code>gdb</code></p>
+<ul>
+<li><strong>安装顺序:</strong><blockquote>
+<p>gmp –&gt; mpfr –&gt; mpc –&gt; gcc</p>
+</blockquote>
+</li>
+</ul>
+<hr>
+<p>创建一个主目录，在里面创建以下一堆目录，并解压下载好嘅包:</p>
+<ul>
+<li><p>主目录: gnu</p>
+<blockquote>
+<p><img src="1.png" alt></p>
+</blockquote>
+</li>
+<li><p>追加多个<code>texinfo</code>目录</p>
+</li>
+</ul>
+<hr>
+<div class="note info"><p><strong>安装gmp</strong></p>
+<p>进入解压后开目录，并执行以下命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 配置安装文件</span><br><span class="line">./configure --prefix=/my_file/gnu/gmp</span><br><span class="line"></span><br><span class="line"># 编译并安装</span><br><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></table></figure></div>
+
+<div class="note info"><p><strong>安装mpfr</strong></p>
+<p>进入解压后开目录，并执行以下命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 配置安装文件，并设置gmp目录</span><br><span class="line">./configure --prefix=/my_file/gnu/mpfr/ --with-gmp=/my_file/gnu/gmp</span><br><span class="line"></span><br><span class="line"># 编译并安装</span><br><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></table></figure></div>
+
+<div class="note info"><p><strong>安装mpc</strong></p>
+<p>进入解压后开目录，并执行以下命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 配置安装文件，并设置gmp与mpfr目录</span><br><span class="line">./configure --prefix=/my_file/gnu/mpc --with-gmp=/my_file/gnu/gmp --with-mpfr=/my_file/gnu/mpfr</span><br><span class="line"></span><br><span class="line"># 编译并安装</span><br><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></table></figure></div>
+
+<div class="note info"><p><strong>安装gcc</strong></p>
+<p>将文件<code>/my_file/gnu/mpfr/lib/libmpfr.so.6</code>拷贝一份到<code>/lib64</code></p>
+<p>进入解压后开目录，并执行以下命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 配置安装文件，并设置gmp，mpfr，mpc目录</span><br><span class="line">./configure --prefix=/my_file/gnu/gcc --with-gmp=/my_file/gnu/gmp --with-mpfr=/my_file/gnu/mpfr --with-mpc=/my_file/gnu/mpc --disable-multilib</span><br><span class="line"></span><br><span class="line"># 编译并安装</span><br><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></table></figure></div>
+
+<div class="note info"><p><strong>安装gdb</strong></p>
+<p>安装gdb前需要安装<code>texinfo</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"># 配置安装文件</span><br><span class="line">./configure --prefix=/my_file/texfino</span><br><span class="line"></span><br><span class="line"># 编译并安装</span><br><span class="line">make &amp;&amp; make install</span><br><span class="line"></span><br><span class="line"># 配置环境变量</span><br><span class="line">vim /etc/profile</span><br><span class="line"># 在最后面添加</span><br><span class="line">export PATH=$PATH:/my_file/gnu/texfino/bin</span><br><span class="line"># 刷新</span><br><span class="line">source /etc/profile</span><br><span class="line"># 将命令添加至开机启动</span><br><span class="line">vim /etc/rc.local</span><br><span class="line"># 写入</span><br><span class="line">source /etc/profile</span><br></pre></td></tr></table></figure>
+
+<p>进入解压后开目录，并执行以下命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 创建目录并进入</span><br><span class="line">mkdir build; cd ./build;</span><br><span class="line"></span><br><span class="line"># 配置安装文件</span><br><span class="line">../configure --prefix=/my_file/gnu/gdb</span><br><span class="line"></span><br><span class="line"># 编译并安装</span><br><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></table></figure></div>
+
+</details>
+
+<h1 id="vs-code库文件配置"><a href="#vs-code库文件配置" class="headerlink" title="vs_code库文件配置"></a>vs_code库文件配置</h1><p><img src="2.png" alt></p>
+<p><img src="3.png" alt></p>
+<hr>
 
       
     </div>
@@ -781,7 +853,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-count">37</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -874,7 +946,7 @@ document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " 
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前置"><span class="nav-number">1.</span> <span class="nav-text">前置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装gcc依赖库"><span class="nav-number">2.</span> <span class="nav-text">安装gcc依赖库</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装gcc与gdb"><span class="nav-number">3.</span> <span class="nav-text">安装gcc与gdb</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装gcc"><span class="nav-number">3.1.</span> <span class="nav-text">安装gcc</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装gdb"><span class="nav-number">3.2.</span> <span class="nav-text">安装gdb</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装并使用vs-code"><span class="nav-number">4.</span> <span class="nav-text">安装并使用vs code</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#include的查找"><span class="nav-number">4.1.</span> <span class="nav-text">#include的查找</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置vs-code默认以最新版本的c"><span class="nav-number">4.2.</span> <span class="nav-text">设置vs code默认以最新版本的c++</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#gcc-g-编译命令"><span class="nav-number">5.</span> <span class="nav-text">gcc/g++编译命令</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前置"><span class="nav-number">1.</span> <span class="nav-text">前置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装gcc依赖库"><span class="nav-number">2.</span> <span class="nav-text">安装gcc依赖库</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装gcc与gdb"><span class="nav-number">3.</span> <span class="nav-text">安装gcc与gdb</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装gcc"><span class="nav-number">3.1.</span> <span class="nav-text">安装gcc</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装gdb"><span class="nav-number">3.2.</span> <span class="nav-text">安装gdb</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装并使用vs-code"><span class="nav-number">4.</span> <span class="nav-text">安装并使用vs code</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#include的查找"><span class="nav-number">4.1.</span> <span class="nav-text">#include的查找</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置vs-code默认以最新版本的c"><span class="nav-number">4.2.</span> <span class="nav-text">设置vs code默认以最新版本的c++</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#gcc-g-编译命令"><span class="nav-number">5.</span> <span class="nav-text">gcc/g++编译命令</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#vs-code库文件配置"><span class="nav-number">6.</span> <span class="nav-text">vs_code库文件配置</span></a></li></ol></div>
             
 
           </div>
@@ -914,7 +986,7 @@ document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " 
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">52.2k</span>
+    <span title="Site words total count">53.9k</span>
   
 </div>
 

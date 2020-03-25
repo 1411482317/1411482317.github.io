@@ -129,7 +129,7 @@
 <meta property="og:description" content="操作系统: CentOs-8 x64 g++版本: 8.3 gdb版本: 8.2">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://1411482317.github.io/2019/11/25/c-笔记/封面.png">
-<meta property="og:updated_time" content="2020-03-15T06:17:03.353Z">
+<meta property="og:updated_time" content="2020-03-18T10:02:39.132Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="c++笔记">
 <meta name="twitter:description" content="操作系统: CentOs-8 x64 g++版本: 8.3 gdb版本: 8.2">
@@ -452,7 +452,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  4.5k
+                  4.9k
                 </span>
               
 
@@ -468,7 +468,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  18
+                  20
                 </span>
               
             </div>
@@ -982,28 +982,71 @@
 <td align="left">不可见</td>
 <td align="left">不可见</td>
 </tr>
-</tbody></table></div>
+</tbody></table>
+<ul>
+<li>友元不能被继承</li>
+</ul></div>
 
 <div class="note info"><ul>
 <li>子类可以隐式转换为父类。当使用隐式转换成父类类型嘅子类对象，将无法使用子类特有嘅功能（只对指针或引用生效）</li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">class fu&#123;</span><br><span class="line">public:</span><br><span class="line">    void func(void)</span><br><span class="line">    &#123; std::cout &lt;&lt; &quot;this is FU&quot; &lt;&lt; std::endl; &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">class zi : public fu&#123;</span><br><span class="line">public:</span><br><span class="line">    // 子类特有功能</span><br><span class="line">    void aaa(void)</span><br><span class="line">    &#123; std::cout &lt;&lt; &quot;te you&quot; &lt;&lt; std::endl; &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">    zi *dx;</span><br><span class="line">    // 使用父类功能与自身嘅特殊功能</span><br><span class="line">    dx-&gt;func();</span><br><span class="line">    dx-&gt;aaa();</span><br><span class="line"></span><br><span class="line">    // 子类隐式转换成父类类型，只能够使用父类嘅功能</span><br><span class="line">    fu *f_dx = dx;</span><br><span class="line">    f_dx-&gt;func();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<div class="note info"><ul>
+<li>创建子类对象时，首先初始化该类嘅父类数据，之后在初始化自己特有嘅数据</li>
+</ul></div>
+
+<div class="note info"><ul>
+<li>在类名后，加上<code>final</code>就可以防止继承</li>
+</ul></div>
+
+<div class="note info"><p>静态类型与动态类型</p>
 <ul>
-<li><p>创建子类对象时，首先初始化该类嘅父类数据，之后在初始化自己特有嘅数据</p>
-<div class="note info"></div></li>
-<li><p>在类名后，加上<code>final</code>就可以防止继承</p>
-<div class="note info"></div>
-<p>静态类型与动态类型</p>
+<li>静态类型喺编译时就知道嘅类型</li>
+<li>动态类型喺运行时先指定嘅类型<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 静态类型fu，动态类型zi</span><br><span class="line">fu *dx = new zi;</span><br></pre></td></tr></table></figure>
+
 </li>
-<li><p>静态类型喺编译时就知道嘅类型</p>
+</ul></div>
+
+<div class="note info"><p><code>虚函数</code>，作用于父类指针与引用。运行时先确认要调用父类版本定喺子类版本嘅函数。</p>
+<ul>
+<li><p>父类有虚函数，子类必须覆盖</p>
 </li>
-<li><p>动态类型喺运行时先指定嘅类型</p>
+<li><p><code>动态绑定</code>: 只有使用指针调用虚函数先置会发生</p>
 </li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 静态类型fu，动态类型zi</span><br><span class="line">fu *dx = new zi;</span><br></pre></td></tr></table></figure>
-<div class="note info"></div>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">class fu&#123;</span><br><span class="line">public:</span><br><span class="line">    virtual void m(void)&#123;</span><br><span class="line">        std::cout &lt;&lt; &quot;fu&quot; &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">class zi : public fu&#123;</span><br><span class="line">public:</span><br><span class="line">    virtual void m(void)&#123;</span><br><span class="line">        std::cout &lt;&lt; &quot;zi&quot; &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">    fu *dx = new zi();</span><br><span class="line">    dx-&gt;m(); // 调用zi嘅m()函数</span><br><span class="line">    dx-&gt;fu::m(); // 强行调用父类版本（回避虚函数机制）</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<div class="note info"><p>虚函数，作用于父类指针与引用</p></div>
+<ul>
+<li><p>显式覆盖虚函数，使用<code>override</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">void m(void) override;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>允许覆盖嘅函数，使用<code>final</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">void m(void) final;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>虚函数有默认参数，子类中定义嘅函数参数列表最好同父类嘅一样</p>
+</li>
+</ul></div>
+
+<div class="note info"><p><code>抽象父类</code>: 只要有一个纯虚函数就喺抽象父类，该类唔可以创建对象。<br><code>纯虚函数</code>: 由父类声明，子类实现</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">class fu&#123; // 抽象父类</span><br><span class="line">public:</span><br><span class="line">    // 纯虚函数</span><br><span class="line">    virtual void m(void) = 0;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">class zi : public fu&#123;</span><br><span class="line">public:</span><br><span class="line">    virtual void m(void) override &#123;</span><br><span class="line">        std::cout &lt;&lt; &quot;zi&quot; &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></div>
+
+<div class="note info"><ul>
+<li>虚析构函数，任何一个父类都必须有</li>
+</ul></div>
+
+<hr>
+<h3 id="时间函数结构体struct-timeval"><a href="#时间函数结构体struct-timeval" class="headerlink" title="时间函数结构体struct timeval"></a>时间函数结构体struct timeval</h3><p>该结构体定义喺<code>time.h</code></p>
+<ul>
+<li><p>epoch: 时间点。喺一个整数，用当前时间和标准时间点相差嘅秒数（即日历时间）来表示。</p>
+</li>
+<li><p>tv_sec，Epoch到创建struct timeval嘅秒数</p>
+</li>
+<li><p>tv_usec，秒后面嘅零头</p>
+</li>
+</ul>
+<p><strong>结构体原型</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">struct timeval</span><br><span class="line">&#123;</span><br><span class="line">  __time_t tv_sec; // 秒</span><br><span class="line">  __suseconds_t tv_usec; // 微秒,1秒等于1,000,000微秒</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
 <hr>
 
@@ -1135,7 +1178,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-count">37</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1228,7 +1271,7 @@ document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " 
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本类型同埋变量"><span class="nav-number">1.</span> <span class="nav-text">基本类型同埋变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符串，向量同埋数组"><span class="nav-number">2.</span> <span class="nav-text">字符串，向量同埋数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类型转换，函数"><span class="nav-number">3.</span> <span class="nav-text">类型转换，函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类"><span class="nav-number">4.</span> <span class="nav-text">类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#I-O"><span class="nav-number">5.</span> <span class="nav-text">I/O</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#顺序容器"><span class="nav-number">6.</span> <span class="nav-text">顺序容器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#泛型算法"><span class="nav-number">7.</span> <span class="nav-text">泛型算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关联容器"><span class="nav-number">8.</span> <span class="nav-text">关联容器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#面向对象"><span class="nav-number">9.</span> <span class="nav-text">面向对象</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本类型同埋变量"><span class="nav-number">1.</span> <span class="nav-text">基本类型同埋变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符串，向量同埋数组"><span class="nav-number">2.</span> <span class="nav-text">字符串，向量同埋数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类型转换，函数"><span class="nav-number">3.</span> <span class="nav-text">类型转换，函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类"><span class="nav-number">4.</span> <span class="nav-text">类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#I-O"><span class="nav-number">5.</span> <span class="nav-text">I/O</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#顺序容器"><span class="nav-number">6.</span> <span class="nav-text">顺序容器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#泛型算法"><span class="nav-number">7.</span> <span class="nav-text">泛型算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关联容器"><span class="nav-number">8.</span> <span class="nav-text">关联容器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#面向对象"><span class="nav-number">9.</span> <span class="nav-text">面向对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#时间函数结构体struct-timeval"><span class="nav-number">10.</span> <span class="nav-text">时间函数结构体struct timeval</span></a></li></ol></div>
             
 
           </div>
@@ -1268,7 +1311,7 @@ document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " 
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">52.2k</span>
+    <span title="Site words total count">53.9k</span>
   
 </div>
 
