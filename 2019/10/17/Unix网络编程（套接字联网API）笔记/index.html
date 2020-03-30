@@ -128,7 +128,8 @@
 <meta property="og:description" content="操作系统: CentOs8 gcc版本: 9.3 gdb版本: 9.1">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://1411482317.github.io/2019/10/17/Unix网络编程（套接字联网API）笔记/封面.gif">
-<meta property="og:updated_time" content="2020-03-24T04:31:16.784Z">
+<meta property="og:image" content="https://1411482317.github.io/2019/10/17/Unix网络编程（套接字联网API）笔记/1.png">
+<meta property="og:updated_time" content="2020-03-26T02:12:29.085Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="套接字笔记">
 <meta name="twitter:description" content="操作系统: CentOs8 gcc版本: 9.3 gdb版本: 9.1">
@@ -429,7 +430,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  167
+                  210
                 </span>
               
 
@@ -486,6 +487,11 @@
 <hr>
 <h3 id="pthread-create传入多个函数参数"><a href="#pthread-create传入多个函数参数" class="headerlink" title="pthread_create传入多个函数参数"></a>pthread_create传入多个函数参数</h3><p>将函数参数封装成结构，使用结构作为参数。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">struct st&#123;</span><br><span class="line">    void *arg1;</span><br><span class="line">    void *arg2;</span><br><span class="line">    void *arg3;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">void* func(void*);</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">    st st_obj = new st;</span><br><span class="line">    st-&gt;arg1 = 初始化;</span><br><span class="line">    st-&gt;arg2 = 初始化;</span><br><span class="line">    st-&gt;arg3 = 初始化;</span><br><span class="line"></span><br><span class="line">    pthread_t thr = 0;</span><br><span class="line">    pthread_create(&amp;thr, NULL, func, (void*)st);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="pthread-create调用类成员出现类型参数唔兼容错误"><a href="#pthread-create调用类成员出现类型参数唔兼容错误" class="headerlink" title="pthread_create调用类成员出现类型参数唔兼容错误"></a>pthread_create调用类成员出现类型参数唔兼容错误</h3><p><img src="1.png" alt></p>
+<p>解决方法: 只需要将该函数定义成静态函数即可解决</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">static void* accept_request(void*);</span><br></pre></td></tr></table></figure>
 
 <hr>
 
@@ -609,7 +615,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">37</span>
+                  <span class="site-state-item-count">39</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -702,7 +708,7 @@ document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " 
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#对数据结构与数组进行清空操作"><span class="nav-number">1.</span> <span class="nav-text">对数据结构与数组进行清空操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pthread-create传入多个函数参数"><span class="nav-number">2.</span> <span class="nav-text">pthread_create传入多个函数参数</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#对数据结构与数组进行清空操作"><span class="nav-number">1.</span> <span class="nav-text">对数据结构与数组进行清空操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pthread-create传入多个函数参数"><span class="nav-number">2.</span> <span class="nav-text">pthread_create传入多个函数参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pthread-create调用类成员出现类型参数唔兼容错误"><span class="nav-number">3.</span> <span class="nav-text">pthread_create调用类成员出现类型参数唔兼容错误</span></a></li></ol></div>
             
 
           </div>
@@ -742,7 +748,7 @@ document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " 
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">53.9k</span>
+    <span title="Site words total count">55.3k</span>
   
 </div>
 

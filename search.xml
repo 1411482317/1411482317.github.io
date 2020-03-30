@@ -1,6 +1,118 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>linux bash shell笔记</title>
+    <url>/2020/03/29/linux-bash-shell%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<img src="/2020/03/29/linux-bash-shell笔记/fm.jpg">
+
+<p>操作系统: CentOs 8 x86_64<br>bash shell版本: 4.4.19</p>
+<a id="more"></a>
+
+<hr>
+<p>shell能直接操作内核。</p>
+<ul>
+<li>文件格式: <code>xxx.sh</code></li>
+<li>使用: <code>sh xxx.sh [参数]</code></li>
+</ul>
+<h3 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var1=11 # 变量</span><br><span class="line"></span><br><span class="line"># 使用变量</span><br><span class="line">var2=$&#123;var1&#125; # 将var1嘅值赋值到var2</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="判断"><a href="#判断" class="headerlink" title="判断"></a>判断</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">if [ 条件 ]; then</span><br><span class="line">    # code</span><br><span class="line">elif [条件]; then # elsif</span><br><span class="line">    # code</span><br><span class="line">else</span><br><span class="line">    # code</span><br><span class="line">fi # 结束if</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">function name()&#123;</span><br><span class="line">    # code</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="debug"><a href="#debug" class="headerlink" title="debug"></a>debug</h3><table>
+<thead>
+<tr>
+<th>选项</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>x</td>
+<td>提供跟踪执行信息，将执行的每一条命令和结果依次打印出来</td>
+</tr>
+</tbody></table>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">bash [-选项] xxx.sh [参数]</span><br></pre></td></tr></table></figure>
+
+<hr>
+]]></content>
+  </entry>
+  <entry>
+    <title>Linux拓展分区</title>
+    <url>/2020/03/27/Linux%E6%8B%93%E5%B1%95%E6%A0%B9%E7%9B%AE%E5%BD%95%E5%88%86%E5%8C%BA/</url>
+    <content><![CDATA[<img src="/2020/03/27/Linux拓展根目录分区/fm.jpg">
+
+<ul>
+<li>操作系统: CentOs8 x86_64</li>
+<li>虚拟机软件: Vmware 15 pro</li>
+</ul>
+<a id="more"></a>
+
+<hr>
+<h3 id="添加新虚拟盘，增加root分区空间"><a href="#添加新虚拟盘，增加root分区空间" class="headerlink" title="添加新虚拟盘，增加root分区空间"></a>添加新虚拟盘，增加root分区空间</h3><p><code>fdisk -l</code>查看新创建嘅虚拟硬盘（或者使用<code>lsblk</code>）<br><img src="1.png" alt></p>
+<ul>
+<li>/dev/sdb为新硬盘</li>
+</ul>
+<hr>
+<p><code>vgdisplay</code>查看当前卷组<br><img src="2.png" alt></p>
+<ul>
+<li><code>VG Name</code>为卷组的名称</li>
+</ul>
+<hr>
+<p>把新嘅硬盘拓展到卷组:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">vgextend CentOs_8 /dev/sdb</span><br></pre></td></tr></table></figure>
+
+<p><img src="3.png" alt></p>
+<hr>
+<p>再次使用<code>vgdisplay</code>就会发现VG Size变大了<br><img src="4.png" alt></p>
+<hr>
+<p>查看当前分区<code>df -Th</code><br><img src="5.png" alt></p>
+<hr>
+<p>拓展root分区:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">lvextend -L +9.9G /dev/mapper/CentOs_8-root</span><br></pre></td></tr></table></figure>
+
+<p><img src="6.png" alt></p>
+<hr>
+<p>动态拓展root目录:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">xfs_growfs /</span><br></pre></td></tr></table></figure>
+
+<p><img src="7.png" alt></p>
+<hr>
+<p>再次使用<code>df -Th</code>就会发现root分区变大了<br><img src="8.png" alt></p>
+<hr>
+<h3 id="拓展现有虚拟盘大小，增加root分区空间"><a href="#拓展现有虚拟盘大小，增加root分区空间" class="headerlink" title="拓展现有虚拟盘大小，增加root分区空间"></a>拓展现有虚拟盘大小，增加root分区空间</h3><p>新建拓展分区:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">fdisk /dev/sda</span><br><span class="line"></span><br><span class="line">输入三个回车</span><br><span class="line"></span><br><span class="line"># 保存</span><br><span class="line">w</span><br></pre></td></tr></table></figure>
+
+<p><img src="9.png" alt></p>
+<hr>
+<p>格式化分区:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mkfs.xfs /dev/sda4</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>创建pv:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">pvcreate /dev/sda4</span><br></pre></td></tr></table></figure>
+
+<p><img src="10.png" alt></p>
+<hr>
+<p>拓展卷组:<br><code>vgdisplay</code>查看当前卷组</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 拓展卷组</span><br><span class="line">vgextend CentOs_8 /dev/sda4</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>拓展root分区:<br><code>df -Th</code>查看root分区</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">lvextend -l +100%free /dev/CentOs_8/</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>动态拓展root分区:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">xfs_growfs /</span><br></pre></td></tr></table></figure>
+
+<p>再次使用<code>df -Th</code>就会发现root分区变大了</p>
+<hr>
+]]></content>
+  </entry>
+  <entry>
     <title>oracle搭建 与 使用</title>
     <url>/2020/03/19/oracle%E6%90%AD%E5%BB%BA/</url>
     <content><![CDATA[<img src="/2020/03/19/oracle搭建/fm.jpg">
@@ -1040,6 +1152,11 @@
 <a id="more"></a>
 
 <hr>
+<p>学习并不是一天两天的事情，状态好就学多点。状态差就把一些简单的知识复习一下。</p>
+<ul>
+<li>注意睡眠时间与质量</li>
+<li>循序渐进</li>
+</ul>
 <h3 id="学习一门新的知识需要做到以下三点"><a href="#学习一门新的知识需要做到以下三点" class="headerlink" title="学习一门新的知识需要做到以下三点"></a>学习一门新的知识需要做到以下三点</h3><ul>
 <li><p>这是什么？</p>
 </li>
@@ -1279,13 +1396,23 @@
   <entry>
     <title>使用vs code连接linux，实现远程开发环境</title>
     <url>/2020/02/11/%E4%BD%BF%E7%94%A8vs-code%E8%BF%9C%E7%A8%8B%E5%BC%80%E5%8F%91%EF%BC%8C%E5%B9%B6%E6%8A%8Avs-code%E9%83%A8%E7%BD%B2%E5%88%B0%E6%9C%8D%E5%8A%A1%E7%AB%AFhttp%E8%AE%BF%E9%97%AE/</url>
-    <content><![CDATA[<p>基于 <code>win10的 vs code</code> 使用ssh连接cent8</p>
+    <content><![CDATA[<ul>
+<li>操作系统: win10</li>
+<li>目的操作系统: CentOs8</li>
+<li>软件: vs code</li>
+<li>插件: Remote Development</li>
+</ul>
 <img src="/2020/02/11/使用vs-code远程开发，并把vs-code部署到服务端http访问/fm.jpg">
 
 <a id="more"></a>
 
-<h3 id="使用vs-code-远程连接linux"><a href="#使用vs-code-远程连接linux" class="headerlink" title="使用vs code 远程连接linux"></a>使用vs code 远程连接linux</h3><p>安装 Remote-SSH 插件</p>
+<h3 id="使用vs-code-远程连接linux"><a href="#使用vs-code-远程连接linux" class="headerlink" title="使用vs code 远程连接linux"></a>使用vs code 远程连接linux</h3><p>安装 Remote Development 插件</p>
 <p><img src="1.png" alt></p>
+<p>设置:<br><img src="15.png" alt></p>
+<p><img src="16.png" alt></p>
+<ul>
+<li>操作前需要关闭linux防火墙</li>
+</ul>
 <div class="tabs" id="x1"><ul class="nav-tabs"><li class="tab active"><a href="#x1-1">添加linux</a></li></ul><div class="tab-content"><div class="tab-pane active" id="x1-1"><blockquote>
 <p>按<code>F1</code>切换到命令面板输入<code>Remote-SSH</code>，然后选择<code>Connect to Host - Configure SSH Hosts</code></p>
 </blockquote>
@@ -1336,7 +1463,93 @@
 <p><img src="7.png" alt></p>
 </div></div></div>
 
-<p><code>注意：连接linux后，可以直接在 VSCode 上使用终端，执行远程 Linux 的命令（右键新建终端即可）</code></p>
+<hr>
+<h3 id="设置登录密匙"><a href="#设置登录密匙" class="headerlink" title="设置登录密匙"></a>设置登录密匙</h3><div class="note info"><p><strong>win操作:</strong></p>
+<p>进入<code>.ssh</code>目录（没有则自行创建）</p>
+<ul>
+<li>14114为我的win用户名</li>
+</ul>
+<p>打开<code>cmd</code>进入目录<code>C:\Users\14114\.ssh</code></p>
+<p>输入: <code>ssh-keygen</code></p>
+<p><img src="10.png" alt></p>
+<p>此时，生成了两个文件<br><img src="11.png" alt></p>
+<ul>
+<li>.pub后缀嘅喺私有密匙</li>
+<li>无后缀嘅喺公有密匙</li>
+</ul>
+<hr>
+<p><strong>linux操作:</strong></p>
+<ul>
+<li><code>~</code>为当前用户目录</li>
+</ul>
+<p>进入<code>~</code>目录，创建<code>.ssh</code>目录。进入.ssh目录创建<code>authorized_keys</code>文件。</p>
+<p>vim打开<code>authorized_keys</code>文件，将win的.ssh目录里的私有密匙（刚刚创建好嘅<code>.pub后缀</code>文件）入面嘅内容复制入去</p></div>
+
+
+
+<div class="note info"><p><strong>使用git操作</strong></p>
+<p>创建密匙与上面一样</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">// 上传密匙</span><br><span class="line">ssh-copy-id -i ~/my_key.pub root@192.168.1.142</span><br></pre></td></tr></table></figure></div>
+
+<p>打开cmd，输入</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ssh -i ~/my_key root@192.168.1.142</span><br></pre></td></tr></table></figure>
+
+<p>连接成功</p>
+<blockquote>
+<p><img src="12.png" alt></p>
+</blockquote>
+<ul>
+<li>退出ssh登录: <code>logout</code></li>
+</ul>
+<hr>
+<h3 id="删除vo-code所有配置"><a href="#删除vo-code所有配置" class="headerlink" title="删除vo_code所有配置"></a>删除vo_code所有配置</h3><ul>
+<li>14114是我的用户名</li>
+</ul>
+<p>需要删除的目录:</p>
+<ul>
+<li><p>用户缓存: <code>C:\Users\14114\AppData\Roaming\Code</code></p>
+</li>
+<li><p>插件:<code>C:\Users\14114\.vscode</code></p>
+</li>
+</ul>
+<hr>
+<h3 id="Remote-ssh初次连接Linux时vscode-server安装失败"><a href="#Remote-ssh初次连接Linux时vscode-server安装失败" class="headerlink" title="Remote-ssh初次连接Linux时vscode-server安装失败"></a>Remote-ssh初次连接Linux时vscode-server安装失败</h3><p><a href="https://update.code.visualstudio.com/commit:c7d83e57cd18f18026a8162d042843bda1bcf21f/server-linux-x64/stable" target="_blank" rel="noopener"><font color="green">在win下载vscode-server</font></a></p>
+<p>或者</p>
+<div class="note info"><p>linux输入</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">curl https://update.code.visualstudio.com/commit:c7d83e57cd18f18026a8162d042843bda1bcf21f/server-linux-x64/stable</span><br></pre></td></tr></table></figure>
+
+
+<p><img src="13.png" alt><br>可下载嘅文件</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">wget Found. Redirecting to https://vscode.cdn.azure.cn/stable/c7d83e57cd18f18026a8162d042843bda1bcf21f/vscode-server-linux-x64.tar.gz</span><br></pre></td></tr></table></figure>
+
+<p><img src="14.png" alt><br>使用wget下载</p>
+<hr>
+<ul>
+<li>下载完后解压到<code>~</code>目录（用哪个用户登录就解压到哪个用户）</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">假如我的remote配置如下</span><br><span class="line">Host my_linux</span><br><span class="line">  HostName 192.168.1.142</span><br><span class="line">  User root // 用root用户登录linux</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">这个文件就要解压到root的hone目录</span><br><span class="line">tar -zxvf vscode-server-linux-x64.tar.gz -C /root</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>解压完后将目录名称改为<code>.vscode-server</code></li>
+</ul>
+<p>然后重新在vs code里连接linux即可</p>
+<p><a href="https://github.com/microsoft/vscode-remote-release/issues/680" target="_blank" rel="noopener"><font color="blue"><strong>参考</strong></font></a></p></div>
+
+<hr>
+<h3 id="建立快速连接"><a href="#建立快速连接" class="headerlink" title="建立快速连接"></a>建立快速连接</h3><p><strong>git操作:</strong></p>
+<p>用以上述创建好嘅密匙文件。</p>
+<p>git输入:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">// 第一步</span><br><span class="line">eval `ssh-agent`</span><br><span class="line"></span><br><span class="line">// 第二步，添加密匙文件</span><br><span class="line">ssh-add -k ./my_key</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>删除密匙文件: <code>ssh-add -d ./my_key</code></li>
+</ul>
+<hr>
+<p>在win的<code>.ssh</code>目录创建<code>config</code>文件，写入以下内容:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Host my_linux # 名称，随便写</span><br><span class="line">  HostName 192.168.1.142 # linux地址</span><br><span class="line">  User root # 需要登录嘅linux用户名</span><br><span class="line">  IdentityFile ~/.ssh/id_rsa # 密匙文件目录</span><br></pre></td></tr></table></figure>
+
+<p>最后，git输入<code>ssh my_linux</code>即可快速登录linux的root用户</p>
+<p><a href="https://stackoverflow.com/questions/48328446/id-rsa-pub-file-ssh-error-invalid-format" target="_blank" rel="noopener"><strong>[<font color="blue">参考</font>]</strong></a></p>
 <hr>
 ]]></content>
       <tags>
@@ -3276,6 +3489,57 @@ function player(src) {
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">struct timeval</span><br><span class="line">&#123;</span><br><span class="line">  __time_t tv_sec; // 秒</span><br><span class="line">  __suseconds_t tv_usec; // 微秒,1秒等于1,000,000微秒</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
 <hr>
+<h3 id="异步与同步"><a href="#异步与同步" class="headerlink" title="异步与同步"></a>异步与同步</h3><ul>
+<li><code>异步</code>: 唔等任务执行完，直接执行下一个任务</li>
+<li><code>同步</code>: 等待任务执行完毕并得到结果，先会执行下一个任务</li>
+</ul>
+<hr>
+<div class="note info"><p><strong>例子:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">函数1</span><br><span class="line">函数2</span><br><span class="line">函数3</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><code>异步</code>运行结果为: 1 -&gt; 3 -&gt; 2（其中，函数2就喺异步执行）</p>
+</li>
+<li><p><code>同步</code>运行结果为: 1 -&gt; 2 -&gt; 3</p>
+</li>
+</ul></div>
+
+<hr>
+<h3 id="struct结构"><a href="#struct结构" class="headerlink" title="struct结构"></a>struct结构</h3><p>使用<code>typedef</code>起别名</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">// 等同于struct st的别名为st</span><br><span class="line">typedef struct st&#123;</span><br><span class="line">    // member</span><br><span class="line">&#125; st;</span><br><span class="line"></span><br><span class="line">st dx; // 等同于struct st dx;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>声明并定义结构体变量名</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">struct st&#123; // 声明结构体</span><br><span class="line">    // member</span><br><span class="line">&#125; st1, st2; // 变量名</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>声明结构并创建结构指针</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">struct st&#123;</span><br><span class="line">    // member</span><br><span class="line">&#125; st, *p = &amp;st;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">struct st&#123;</span><br><span class="line">    //member</span><br><span class="line">&#125; *p_st = new st;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>初始化结构</p>
+<ul>
+<li><p>第一种</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">struct st&#123;</span><br><span class="line">    int i;</span><br><span class="line">    char c[100];</span><br><span class="line">&#125; dx &#123;</span><br><span class="line">    123,</span><br><span class="line">    &quot;abc\n&quot;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>第二种</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">struct st dx;</span><br><span class="line">dx.i = 123;</span><br><span class="line">strcpy(dx.c, &quot;abc\n&quot;);</span><br><span class="line"></span><br><span class="line">// 结构指针</span><br><span class="line">struct st *dx_p;</span><br><span class="line">dx_p-&gt;i = 123;</span><br><span class="line">strcpy(dx-&gt;c, &quot;abc\n&quot;);</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<hr>
+<h3 id="消除set-but-not-used警告"><a href="#消除set-but-not-used警告" class="headerlink" title="消除set but not used警告"></a>消除set but not used警告</h3><p>翻译过来就喺: 定义咗，但喺没用到</p>
+<p>喺变量名前加个<code>(void)</code>即可消除该警告</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">int main(void)&#123;</span><br><span class="line">    int i = 1;</span><br><span class="line">    (void)i;</span><br><span class="line"></span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="c-14特性"><a href="#c-14特性" class="headerlink" title="c++14特性"></a>c++14特性</h3><div class="note info"><p>对比与c++11，lambda嘅函数参数列表可以使用推导类型</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">// c++11</span><br><span class="line">auto lam = [](int i, char c) -&gt;void &#123; //code &#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// c++14</span><br><span class="line">auto lam = [](auto i, auto c) -&gt;void &#123; //code &#125;;</span><br></pre></td></tr></table></figure></div>
+
+<div class="note info"><p>函数嘅返回值类型可以使用auto进行推导</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">auto func(void)&#123;</span><br><span class="line">    return 11;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<hr>
 ]]></content>
       <categories>
         <category>c/c++</category>
@@ -3337,6 +3601,11 @@ function player(src) {
 <hr>
 <h3 id="pthread-create传入多个函数参数"><a href="#pthread-create传入多个函数参数" class="headerlink" title="pthread_create传入多个函数参数"></a>pthread_create传入多个函数参数</h3><p>将函数参数封装成结构，使用结构作为参数。</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">struct st&#123;</span><br><span class="line">    void *arg1;</span><br><span class="line">    void *arg2;</span><br><span class="line">    void *arg3;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">void* func(void*);</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">    st st_obj = new st;</span><br><span class="line">    st-&gt;arg1 = 初始化;</span><br><span class="line">    st-&gt;arg2 = 初始化;</span><br><span class="line">    st-&gt;arg3 = 初始化;</span><br><span class="line"></span><br><span class="line">    pthread_t thr = 0;</span><br><span class="line">    pthread_create(&amp;thr, NULL, func, (void*)st);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="pthread-create调用类成员出现类型参数唔兼容错误"><a href="#pthread-create调用类成员出现类型参数唔兼容错误" class="headerlink" title="pthread_create调用类成员出现类型参数唔兼容错误"></a>pthread_create调用类成员出现类型参数唔兼容错误</h3><p><img src="1.png" alt></p>
+<p>解决方法: 只需要将该函数定义成静态函数即可解决</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">static void* accept_request(void*);</span><br></pre></td></tr></table></figure>
 
 <hr>
 ]]></content>
@@ -4251,6 +4520,10 @@ function player(src) {
 <h1 id="关闭防火墙"><a href="#关闭防火墙" class="headerlink" title="关闭防火墙"></a>关闭防火墙</h1><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#重启后防火墙依然生效</span><br><span class="line">systemctl stop firewalld.service</span><br><span class="line"></span><br><span class="line">#开机禁用防火墙（永久禁用防火墙）</span><br><span class="line">systemctl disable firewalld.service</span><br></pre></td></tr></table></figure>
 
 <hr>
+<h3 id="vim编辑器-1"><a href="#vim编辑器-1" class="headerlink" title="vim编辑器"></a>vim编辑器</h3><ul>
+<li>显示行号: <code>set number</code></li>
+</ul>
+<hr>
 ]]></content>
       <categories>
         <category>Linux</category>
@@ -4416,6 +4689,7 @@ function player(src) {
 
 <p>基于<code>Cent8</code>虚拟机下，搭建<code>gcc/g++</code>，<code>gdb</code>并使用<code>vs code</code>进行c/c++程序的开发</p>
 <a id="more"></a>
+
 
 <details>
 <summary>旧版</summary>
@@ -4619,12 +4893,18 @@ function player(src) {
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 配置安装文件，并设置gmp与mpfr目录</span><br><span class="line">./configure --prefix=/my_file/gnu/mpc --with-gmp=/my_file/gnu/gmp --with-mpfr=/my_file/gnu/mpfr</span><br><span class="line"></span><br><span class="line"># 编译并安装</span><br><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></table></figure></div>
 
 <div class="note info"><p><strong>安装gcc</strong></p>
-<p>将文件<code>/my_file/gnu/mpfr/lib/libmpfr.so.6</code>拷贝一份到<code>/lib64</code></p>
+<p>复制<code>libmpfr.so.6</code>文件:<br>将文件<code>/my_file/gnu/mpfr/lib/libmpfr.so.6</code>拷贝一份到<code>/lib64</code><br>或者:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 在/lib64创建一个libmpfr.so.6文件</span><br><span class="line">touch /lib64/libmpfr.so.6</span><br><span class="line"></span><br><span class="line"># 使用连接连接到mpfr里的libmpfr.so.6甚至更高级的版本</span><br><span class="line">ln -sf /mpfr目录/lib/libmpfr.so.6 /lib64/libmpfr.so.6 </span><br></pre></td></tr></table></figure>
+
+<hr>
 <p>进入解压后开目录，并执行以下命令</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 配置安装文件，并设置gmp，mpfr，mpc目录</span><br><span class="line">./configure --prefix=/my_file/gnu/gcc --with-gmp=/my_file/gnu/gmp --with-mpfr=/my_file/gnu/mpfr --with-mpc=/my_file/gnu/mpc --disable-multilib</span><br><span class="line"></span><br><span class="line"># 编译并安装</span><br><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></table></figure></div>
 
 <div class="note info"><p><strong>安装gdb</strong></p>
-<p>安装gdb前需要安装<code>texinfo</code></p>
+<p>安装gdb前需要安装<code>texinfo</code>（或许还会需要perl）</p>
+<ul>
+<li>perl安装: <code>yum install perl</code></li>
+</ul>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 配置安装文件</span><br><span class="line">./configure --prefix=/my_file/texfino</span><br><span class="line"></span><br><span class="line"># 编译并安装</span><br><span class="line">make &amp;&amp; make install</span><br><span class="line"></span><br><span class="line"># 配置环境变量</span><br><span class="line">vim /etc/profile</span><br><span class="line"># 在最后面添加</span><br><span class="line">export PATH=$PATH:/my_file/gnu/texfino/bin</span><br><span class="line"># 刷新</span><br><span class="line">source /etc/profile</span><br><span class="line"># 将命令添加至开机启动</span><br><span class="line">vim /etc/rc.local</span><br><span class="line"># 写入</span><br><span class="line">source /etc/profile</span><br></pre></td></tr></table></figure>
 
 <p>进入解压后开目录，并执行以下命令</p>
@@ -4634,6 +4914,25 @@ function player(src) {
 
 <h1 id="vs-code库文件配置"><a href="#vs-code库文件配置" class="headerlink" title="vs_code库文件配置"></a>vs_code库文件配置</h1><p><img src="2.png" alt></p>
 <p><img src="3.png" alt></p>
+<hr>
+<h1 id="安装c-c-库"><a href="#安装c-c-库" class="headerlink" title="安装c/c++库"></a>安装c/c++库</h1><ul>
+<li>C库： <code>glibc</code>linux c语言源码</li>
+<li>C++库： <code>libstdc++</code> （gcc自带）</li>
+</ul>
+<hr>
+<ul>
+<li><a href="https://mirrors.tuna.tsinghua.edu.cn/gnu/glibc/?C=M&O=D" target="_blank" rel="noopener"><font color="green">[<strong>glibc下载</strong>]</font></a></li>
+</ul>
+<p>安装:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">// 进入解压文件目录后创建文件并进入</span><br><span class="line">mkdir build; cd build</span><br><span class="line"></span><br><span class="line">// 安装配置</span><br><span class="line">../configure --prefix=/glibc目录/build/</span><br><span class="line"></span><br><span class="line">// 安装</span><br><span class="line">make &amp;&amp; make isntall</span><br></pre></td></tr></table></figure>
+
+<p>出现错误:<br><img src="4.png" alt></p>
+<blockquote>
+<p>python3，bison版本过低 或者 没有安装</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">yum isntall python3 bison -y</span><br><span class="line"></span><br><span class="line"># 或</span><br><span class="line"></span><br><span class="line">yun update python3 bison -y</span><br></pre></td></tr></table></figure>
+
+<p>然后在次执行<code>make install</code>即可</p>
 <hr>
 ]]></content>
       <categories>
@@ -4665,6 +4964,8 @@ function player(src) {
 <h3 id="Linux系统C语言分段错误-Segmentation-fault"><a href="#Linux系统C语言分段错误-Segmentation-fault" class="headerlink" title="Linux系统C语言分段错误(Segmentation fault)"></a>Linux系统C语言分段错误(Segmentation fault)</h3><p><a href="https://blog.csdn.net/cs_polebear/article/details/38904783" target="_blank" rel="noopener"><strong><code>点击转到</code></strong></a></p>
 <hr>
 <h3 id="Nginx上配置CGI"><a href="#Nginx上配置CGI" class="headerlink" title="Nginx上配置CGI"></a>Nginx上配置CGI</h3><p><a href="https://www.godaner.com/blog/19/" target="_blank" rel="noopener"><strong><code>点击转到</code></strong></a></p>
+<hr>
+<h3 id="C-参考手册"><a href="#C-参考手册" class="headerlink" title="C++参考手册"></a>C++参考手册</h3><p><a href="https://zh.cppreference.com/" target="_blank" rel="noopener"><strong><code>点击转到</code></strong></a></p>
 <hr>
 ]]></content>
   </entry>

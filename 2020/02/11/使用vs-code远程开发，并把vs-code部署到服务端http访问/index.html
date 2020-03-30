@@ -120,26 +120,33 @@
 
 
 
-<meta name="description" content="基于 win10的 vs code 使用ssh连接cent8">
+<meta name="description" content="操作系统: win10 目的操作系统: CentOs8 软件: vs code 插件: Remote Development">
 <meta name="keywords" content="vs code">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用vs code连接linux，实现远程开发环境">
 <meta property="og:url" content="https://1411482317.github.io/2020/02/11/使用vs-code远程开发，并把vs-code部署到服务端http访问/index.html">
 <meta property="og:site_name" content="大石砸死蟹">
-<meta property="og:description" content="基于 win10的 vs code 使用ssh连接cent8">
+<meta property="og:description" content="操作系统: win10 目的操作系统: CentOs8 软件: vs code 插件: Remote Development">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://1411482317.github.io/2020/02/11/使用vs-code远程开发，并把vs-code部署到服务端http访问/fm.jpg">
 <meta property="og:image" content="https://1411482317.github.io/2020/02/11/使用vs-code远程开发，并把vs-code部署到服务端http访问/1.png">
+<meta property="og:image" content="https://1411482317.github.io/2020/02/11/使用vs-code远程开发，并把vs-code部署到服务端http访问/15.png">
+<meta property="og:image" content="https://1411482317.github.io/2020/02/11/使用vs-code远程开发，并把vs-code部署到服务端http访问/16.png">
 <meta property="og:image" content="https://1411482317.github.io/2020/02/11/使用vs-code远程开发，并把vs-code部署到服务端http访问/2.png">
 <meta property="og:image" content="https://1411482317.github.io/2020/02/11/使用vs-code远程开发，并把vs-code部署到服务端http访问/3.png">
 <meta property="og:image" content="https://1411482317.github.io/2020/02/11/使用vs-code远程开发，并把vs-code部署到服务端http访问/4.png">
 <meta property="og:image" content="https://1411482317.github.io/2020/02/11/使用vs-code远程开发，并把vs-code部署到服务端http访问/5.png">
 <meta property="og:image" content="https://1411482317.github.io/2020/02/11/使用vs-code远程开发，并把vs-code部署到服务端http访问/6.png">
 <meta property="og:image" content="https://1411482317.github.io/2020/02/11/使用vs-code远程开发，并把vs-code部署到服务端http访问/7.png">
-<meta property="og:updated_time" content="2020-02-12T05:11:23.035Z">
+<meta property="og:image" content="https://1411482317.github.io/2020/02/11/使用vs-code远程开发，并把vs-code部署到服务端http访问/10.png">
+<meta property="og:image" content="https://1411482317.github.io/2020/02/11/使用vs-code远程开发，并把vs-code部署到服务端http访问/11.png">
+<meta property="og:image" content="https://1411482317.github.io/2020/02/11/使用vs-code远程开发，并把vs-code部署到服务端http访问/12.png">
+<meta property="og:image" content="https://1411482317.github.io/2020/02/11/使用vs-code远程开发，并把vs-code部署到服务端http访问/13.png">
+<meta property="og:image" content="https://1411482317.github.io/2020/02/11/使用vs-code远程开发，并把vs-code部署到服务端http访问/14.png">
+<meta property="og:updated_time" content="2020-03-29T05:47:53.218Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用vs code连接linux，实现远程开发环境">
-<meta name="twitter:description" content="基于 win10的 vs code 使用ssh连接cent8">
+<meta name="twitter:description" content="操作系统: win10 目的操作系统: CentOs8 软件: vs code 插件: Remote Development">
 <meta name="twitter:image" content="https://1411482317.github.io/2020/02/11/使用vs-code远程开发，并把vs-code部署到服务端http访问/fm.jpg">
 
 
@@ -437,7 +444,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  150
+                  641
                 </span>
               
 
@@ -453,7 +460,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1
+                  2
                 </span>
               
             </div>
@@ -474,13 +481,23 @@
       
 
       
-        <p>基于 <code>win10的 vs code</code> 使用ssh连接cent8</p>
+        <ul>
+<li>操作系统: win10</li>
+<li>目的操作系统: CentOs8</li>
+<li>软件: vs code</li>
+<li>插件: Remote Development</li>
+</ul>
 <img src="/2020/02/11/使用vs-code远程开发，并把vs-code部署到服务端http访问/fm.jpg">
 
 <a id="more"></a>
 
-<h3 id="使用vs-code-远程连接linux"><a href="#使用vs-code-远程连接linux" class="headerlink" title="使用vs code 远程连接linux"></a>使用vs code 远程连接linux</h3><p>安装 Remote-SSH 插件</p>
+<h3 id="使用vs-code-远程连接linux"><a href="#使用vs-code-远程连接linux" class="headerlink" title="使用vs code 远程连接linux"></a>使用vs code 远程连接linux</h3><p>安装 Remote Development 插件</p>
 <p><img src="1.png" alt></p>
+<p>设置:<br><img src="15.png" alt></p>
+<p><img src="16.png" alt></p>
+<ul>
+<li>操作前需要关闭linux防火墙</li>
+</ul>
 <div class="tabs" id="x1"><ul class="nav-tabs"><li class="tab active"><a href="#x1-1">添加linux</a></li></ul><div class="tab-content"><div class="tab-pane active" id="x1-1"><blockquote>
 <p>按<code>F1</code>切换到命令面板输入<code>Remote-SSH</code>，然后选择<code>Connect to Host - Configure SSH Hosts</code></p>
 </blockquote>
@@ -531,7 +548,93 @@
 <p><img src="7.png" alt></p>
 </div></div></div>
 
-<p><code>注意：连接linux后，可以直接在 VSCode 上使用终端，执行远程 Linux 的命令（右键新建终端即可）</code></p>
+<hr>
+<h3 id="设置登录密匙"><a href="#设置登录密匙" class="headerlink" title="设置登录密匙"></a>设置登录密匙</h3><div class="note info"><p><strong>win操作:</strong></p>
+<p>进入<code>.ssh</code>目录（没有则自行创建）</p>
+<ul>
+<li>14114为我的win用户名</li>
+</ul>
+<p>打开<code>cmd</code>进入目录<code>C:\Users\14114\.ssh</code></p>
+<p>输入: <code>ssh-keygen</code></p>
+<p><img src="10.png" alt></p>
+<p>此时，生成了两个文件<br><img src="11.png" alt></p>
+<ul>
+<li>.pub后缀嘅喺私有密匙</li>
+<li>无后缀嘅喺公有密匙</li>
+</ul>
+<hr>
+<p><strong>linux操作:</strong></p>
+<ul>
+<li><code>~</code>为当前用户目录</li>
+</ul>
+<p>进入<code>~</code>目录，创建<code>.ssh</code>目录。进入.ssh目录创建<code>authorized_keys</code>文件。</p>
+<p>vim打开<code>authorized_keys</code>文件，将win的.ssh目录里的私有密匙（刚刚创建好嘅<code>.pub后缀</code>文件）入面嘅内容复制入去</p></div>
+
+
+
+<div class="note info"><p><strong>使用git操作</strong></p>
+<p>创建密匙与上面一样</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 上传密匙</span><br><span class="line">ssh-copy-id -i ~/my_key.pub root@192.168.1.142</span><br></pre></td></tr></table></figure></div>
+
+<p>打开cmd，输入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -i ~/my_key root@192.168.1.142</span><br></pre></td></tr></table></figure>
+
+<p>连接成功</p>
+<blockquote>
+<p><img src="12.png" alt></p>
+</blockquote>
+<ul>
+<li>退出ssh登录: <code>logout</code></li>
+</ul>
+<hr>
+<h3 id="删除vo-code所有配置"><a href="#删除vo-code所有配置" class="headerlink" title="删除vo_code所有配置"></a>删除vo_code所有配置</h3><ul>
+<li>14114是我的用户名</li>
+</ul>
+<p>需要删除的目录:</p>
+<ul>
+<li><p>用户缓存: <code>C:\Users\14114\AppData\Roaming\Code</code></p>
+</li>
+<li><p>插件:<code>C:\Users\14114\.vscode</code></p>
+</li>
+</ul>
+<hr>
+<h3 id="Remote-ssh初次连接Linux时vscode-server安装失败"><a href="#Remote-ssh初次连接Linux时vscode-server安装失败" class="headerlink" title="Remote-ssh初次连接Linux时vscode-server安装失败"></a>Remote-ssh初次连接Linux时vscode-server安装失败</h3><p><a href="https://update.code.visualstudio.com/commit:c7d83e57cd18f18026a8162d042843bda1bcf21f/server-linux-x64/stable" target="_blank" rel="noopener"><font color="green">在win下载vscode-server</font></a></p>
+<p>或者</p>
+<div class="note info"><p>linux输入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl https://update.code.visualstudio.com/commit:c7d83e57cd18f18026a8162d042843bda1bcf21f/server-linux-x64/stable</span><br></pre></td></tr></table></figure>
+
+
+<p><img src="13.png" alt><br>可下载嘅文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget Found. Redirecting to https://vscode.cdn.azure.cn/stable/c7d83e57cd18f18026a8162d042843bda1bcf21f/vscode-server-linux-x64.tar.gz</span><br></pre></td></tr></table></figure>
+
+<p><img src="14.png" alt><br>使用wget下载</p>
+<hr>
+<ul>
+<li>下载完后解压到<code>~</code>目录（用哪个用户登录就解压到哪个用户）</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">假如我的remote配置如下</span><br><span class="line">Host my_linux</span><br><span class="line">  HostName 192.168.1.142</span><br><span class="line">  User root // 用root用户登录linux</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">这个文件就要解压到root的hone目录</span><br><span class="line">tar -zxvf vscode-server-linux-x64.tar.gz -C /root</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>解压完后将目录名称改为<code>.vscode-server</code></li>
+</ul>
+<p>然后重新在vs code里连接linux即可</p>
+<p><a href="https://github.com/microsoft/vscode-remote-release/issues/680" target="_blank" rel="noopener"><font color="blue"><strong>参考</strong></font></a></p></div>
+
+<hr>
+<h3 id="建立快速连接"><a href="#建立快速连接" class="headerlink" title="建立快速连接"></a>建立快速连接</h3><p><strong>git操作:</strong></p>
+<p>用以上述创建好嘅密匙文件。</p>
+<p>git输入:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// 第一步</span><br><span class="line">eval `ssh-agent`</span><br><span class="line"></span><br><span class="line">// 第二步，添加密匙文件</span><br><span class="line">ssh-add -k ./my_key</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>删除密匙文件: <code>ssh-add -d ./my_key</code></li>
+</ul>
+<hr>
+<p>在win的<code>.ssh</code>目录创建<code>config</code>文件，写入以下内容:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Host my_linux # 名称，随便写</span><br><span class="line">  HostName 192.168.1.142 # linux地址</span><br><span class="line">  User root # 需要登录嘅linux用户名</span><br><span class="line">  IdentityFile ~/.ssh/id_rsa # 密匙文件目录</span><br></pre></td></tr></table></figure>
+
+<p>最后，git输入<code>ssh my_linux</code>即可快速登录linux的root用户</p>
+<p><a href="https://stackoverflow.com/questions/48328446/id-rsa-pub-file-ssh-error-invalid-format" target="_blank" rel="noopener"><strong>[<font color="blue">参考</font>]</strong></a></p>
 <hr>
 
       
@@ -662,7 +765,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">37</span>
+                  <span class="site-state-item-count">39</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -755,7 +858,7 @@ document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " 
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用vs-code-远程连接linux"><span class="nav-number">1.</span> <span class="nav-text">使用vs code 远程连接linux</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用vs-code-远程连接linux"><span class="nav-number">1.</span> <span class="nav-text">使用vs code 远程连接linux</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置登录密匙"><span class="nav-number">2.</span> <span class="nav-text">设置登录密匙</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除vo-code所有配置"><span class="nav-number">3.</span> <span class="nav-text">删除vo_code所有配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Remote-ssh初次连接Linux时vscode-server安装失败"><span class="nav-number">4.</span> <span class="nav-text">Remote-ssh初次连接Linux时vscode-server安装失败</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#建立快速连接"><span class="nav-number">5.</span> <span class="nav-text">建立快速连接</span></a></li></ol></div>
             
 
           </div>
@@ -795,7 +898,7 @@ document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " 
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">53.9k</span>
+    <span title="Site words total count">55.3k</span>
   
 </div>
 
