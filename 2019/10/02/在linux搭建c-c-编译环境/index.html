@@ -138,7 +138,7 @@
 <meta property="og:image" content="https://1411482317.github.io/2019/10/02/在linux搭建c-c-编译环境/2.png">
 <meta property="og:image" content="https://1411482317.github.io/2019/10/02/在linux搭建c-c-编译环境/3.png">
 <meta property="og:image" content="https://1411482317.github.io/2019/10/02/在linux搭建c-c-编译环境/4.png">
-<meta property="og:updated_time" content="2020-03-30T03:29:54.313Z">
+<meta property="og:updated_time" content="2020-04-01T09:28:23.550Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="在linux搭建c&#x2F;c++编译环境">
 <meta name="twitter:description" content="基于Cent8虚拟机下，搭建gcc/g++，gdb并使用vs code进行c/c++程序的开发">
@@ -461,7 +461,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.8k
+                  1.9k
                 </span>
               
 
@@ -714,7 +714,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 配置安装文件，并设置gmp，mpfr，mpc目录</span><br><span class="line">./configure --prefix=/my_file/gnu/gcc --with-gmp=/my_file/gnu/gmp --with-mpfr=/my_file/gnu/mpfr --with-mpc=/my_file/gnu/mpc --disable-multilib</span><br><span class="line"></span><br><span class="line"># 编译并安装</span><br><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></table></figure></div>
 
 <div class="note info"><p><strong>安装gdb</strong></p>
-<p>安装gdb前需要安装<code>texinfo</code>（或许还会需要perl）</p>
+<p>安装gdb前需要安装<code>texinfo</code>（texinfo依赖perl）</p>
 <ul>
 <li>perl安装: <code>yum install perl</code></li>
 </ul>
@@ -746,6 +746,16 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">yum isntall python3 bison -y</span><br><span class="line"></span><br><span class="line"># 或</span><br><span class="line"></span><br><span class="line">yun update python3 bison -y</span><br></pre></td></tr></table></figure>
 
 <p>然后在次执行<code>make install</code>即可</p>
+<hr>
+<h3 id="设置动态库与静态库嘅全局变量"><a href="#设置动态库与静态库嘅全局变量" class="headerlink" title="设置动态库与静态库嘅全局变量"></a>设置动态库与静态库嘅全局变量</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 动态库</span><br><span class="line">export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/gcc目录/lib:/gcc目录/lib64</span><br><span class="line"></span><br><span class="line"># 静态库</span><br><span class="line">export LIBRARY_PATH=$LIBRARY_PATH:/gcc目录/lib:/gcc目录/lib64</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="使用指定glibc"><a href="#使用指定glibc" class="headerlink" title="使用指定glibc"></a>使用指定glibc</h3><ul>
+<li>-Wl,–rpath: 动态库目录</li>
+<li>-Wl,–dynamic-linker: 动态库文件</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc main.c -Wl,--rpath=/glibc目录/lib -Wl,--dynamic-linker=/glibc目录/lib/ld-linux-x86-64.so.2</span><br></pre></td></tr></table></figure>
+
 <hr>
 
       
@@ -973,7 +983,7 @@ document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " 
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前置"><span class="nav-number">1.</span> <span class="nav-text">前置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装gcc依赖库"><span class="nav-number">2.</span> <span class="nav-text">安装gcc依赖库</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装gcc与gdb"><span class="nav-number">3.</span> <span class="nav-text">安装gcc与gdb</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装gcc"><span class="nav-number">3.1.</span> <span class="nav-text">安装gcc</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装gdb"><span class="nav-number">3.2.</span> <span class="nav-text">安装gdb</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装并使用vs-code"><span class="nav-number">4.</span> <span class="nav-text">安装并使用vs code</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#include的查找"><span class="nav-number">4.1.</span> <span class="nav-text">#include的查找</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置vs-code默认以最新版本的c"><span class="nav-number">4.2.</span> <span class="nav-text">设置vs code默认以最新版本的c++</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#gcc-g-编译命令"><span class="nav-number">5.</span> <span class="nav-text">gcc/g++编译命令</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#vs-code库文件配置"><span class="nav-number">6.</span> <span class="nav-text">vs_code库文件配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装c-c-库"><span class="nav-number">7.</span> <span class="nav-text">安装c/c++库</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前置"><span class="nav-number">1.</span> <span class="nav-text">前置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装gcc依赖库"><span class="nav-number">2.</span> <span class="nav-text">安装gcc依赖库</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装gcc与gdb"><span class="nav-number">3.</span> <span class="nav-text">安装gcc与gdb</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装gcc"><span class="nav-number">3.1.</span> <span class="nav-text">安装gcc</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装gdb"><span class="nav-number">3.2.</span> <span class="nav-text">安装gdb</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装并使用vs-code"><span class="nav-number">4.</span> <span class="nav-text">安装并使用vs code</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#include的查找"><span class="nav-number">4.1.</span> <span class="nav-text">#include的查找</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置vs-code默认以最新版本的c"><span class="nav-number">4.2.</span> <span class="nav-text">设置vs code默认以最新版本的c++</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#gcc-g-编译命令"><span class="nav-number">5.</span> <span class="nav-text">gcc/g++编译命令</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#vs-code库文件配置"><span class="nav-number">6.</span> <span class="nav-text">vs_code库文件配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装c-c-库"><span class="nav-number">7.</span> <span class="nav-text">安装c/c++库</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#设置动态库与静态库嘅全局变量"><span class="nav-number">7.0.1.</span> <span class="nav-text">设置动态库与静态库嘅全局变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用指定glibc"><span class="nav-number">7.0.2.</span> <span class="nav-text">使用指定glibc</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -1013,7 +1023,7 @@ document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " 
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">55.3k</span>
+    <span title="Site words total count">55.9k</span>
   
 </div>
 

@@ -129,7 +129,7 @@
 <meta property="og:description" content="操作系统: CentOs-8 x64 g++版本: 8.3 gdb版本: 8.2">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://1411482317.github.io/2019/11/25/c-笔记/封面.png">
-<meta property="og:updated_time" content="2020-03-27T11:25:50.355Z">
+<meta property="og:updated_time" content="2020-03-31T11:06:57.571Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="c++笔记">
 <meta name="twitter:description" content="操作系统: CentOs-8 x64 g++版本: 8.3 gdb版本: 8.2">
@@ -452,7 +452,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  5.3k
+                  5.5k
                 </span>
               
 
@@ -468,7 +468,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  22
+                  23
                 </span>
               
             </div>
@@ -1100,6 +1100,38 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">auto func(void)&#123;</span><br><span class="line">    return 11;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
 
 <hr>
+<h3 id="分离式编译"><a href="#分离式编译" class="headerlink" title="分离式编译"></a>分离式编译</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">// head.h （位于/lib）</span><br><span class="line">#ifndef __HEAD_H__</span><br><span class="line">#define __HEAD_H__</span><br><span class="line"></span><br><span class="line">#include &lt;iostream&gt;</span><br><span class="line"></span><br><span class="line">void my_func(void);</span><br><span class="line"></span><br><span class="line">#endif // __HEAD_H__</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">// head.cpp（位于/lib）</span><br><span class="line">#ifndef __HEAD_CPP__</span><br><span class="line">#define __HEAD_CPP__</span><br><span class="line"></span><br><span class="line">#include &quot;head.h&quot;</span><br><span class="line"></span><br><span class="line">void my_func(void)&#123;</span><br><span class="line">    printf(&quot;hellow\n&quot;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#endif // __HEAD_CPP__</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">main.cpp（位于/bin）</span><br><span class="line">#include &quot;../lib/head.h&quot;</span><br><span class="line"></span><br><span class="line">extern void my_func(void);</span><br><span class="line"></span><br><span class="line">int main(void)&#123;</span><br><span class="line">    my_func();</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 编译</span><br><span class="line">g++ -g main.cpp ../lib/head.cpp -o a.out</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="静态库与动态库"><a href="#静态库与动态库" class="headerlink" title="静态库与动态库"></a>静态库与动态库</h3><p>作用在链接阶段，将库链接到.o汇编文件</p>
+<div class="note info"><p><strong>静态库:</strong></p>
+<p>静态库文件开后缀为<code>.a</code>或<code>.lib</code></p>
+<ul>
+<li>编译时完成函数链接，使程序运行时与函数库任何关联，移植方便</li>
+<li>浪费空间与资源，将所有相关嘅目标文件与函数链接，并合并为一个可执行文件</li>
+</ul>
+<p>编译:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 编译成.o汇编文件</span><br><span class="line">g++ -c test.cpp</span><br><span class="line"></span><br><span class="line"># 通过ar工具将目标打包成.a静态库文件</span><br><span class="line">ar -crv test.a stest.o </span><br></pre></td></tr></table></figure>
+
+<p>使用:</p>
+<ul>
+<li>-l指定静态库文件</li>
+<li>-L指定静态库目录<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">g++ main.cpp -L /lib/test</span><br><span class="line"></span><br><span class="line">或</span><br><span class="line"></span><br><span class="line">g++ main.cpp -ltest</span><br></pre></td></tr></table></figure></li>
+</ul></div>
+
+<div class="note info"><p><strong>动态库:</strong></p>
+<p>动态库文件嘅后缀为<code>.so</code>或<code>.dll</code></p>
+<ul>
+<li></li>
+</ul></div>
+
+<hr>
 
       
     </div>
@@ -1322,7 +1354,7 @@ document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " 
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本类型同埋变量"><span class="nav-number">1.</span> <span class="nav-text">基本类型同埋变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符串，向量同埋数组"><span class="nav-number">2.</span> <span class="nav-text">字符串，向量同埋数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类型转换，函数"><span class="nav-number">3.</span> <span class="nav-text">类型转换，函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类"><span class="nav-number">4.</span> <span class="nav-text">类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#I-O"><span class="nav-number">5.</span> <span class="nav-text">I/O</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#顺序容器"><span class="nav-number">6.</span> <span class="nav-text">顺序容器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#泛型算法"><span class="nav-number">7.</span> <span class="nav-text">泛型算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关联容器"><span class="nav-number">8.</span> <span class="nav-text">关联容器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#面向对象"><span class="nav-number">9.</span> <span class="nav-text">面向对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#时间函数结构体struct-timeval"><span class="nav-number">10.</span> <span class="nav-text">时间函数结构体struct timeval</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#异步与同步"><span class="nav-number">11.</span> <span class="nav-text">异步与同步</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#struct结构"><span class="nav-number">12.</span> <span class="nav-text">struct结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#消除set-but-not-used警告"><span class="nav-number">13.</span> <span class="nav-text">消除set but not used警告</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#c-14特性"><span class="nav-number">14.</span> <span class="nav-text">c++14特性</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本类型同埋变量"><span class="nav-number">1.</span> <span class="nav-text">基本类型同埋变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符串，向量同埋数组"><span class="nav-number">2.</span> <span class="nav-text">字符串，向量同埋数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类型转换，函数"><span class="nav-number">3.</span> <span class="nav-text">类型转换，函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类"><span class="nav-number">4.</span> <span class="nav-text">类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#I-O"><span class="nav-number">5.</span> <span class="nav-text">I/O</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#顺序容器"><span class="nav-number">6.</span> <span class="nav-text">顺序容器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#泛型算法"><span class="nav-number">7.</span> <span class="nav-text">泛型算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关联容器"><span class="nav-number">8.</span> <span class="nav-text">关联容器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#面向对象"><span class="nav-number">9.</span> <span class="nav-text">面向对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#时间函数结构体struct-timeval"><span class="nav-number">10.</span> <span class="nav-text">时间函数结构体struct timeval</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#异步与同步"><span class="nav-number">11.</span> <span class="nav-text">异步与同步</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#struct结构"><span class="nav-number">12.</span> <span class="nav-text">struct结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#消除set-but-not-used警告"><span class="nav-number">13.</span> <span class="nav-text">消除set but not used警告</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#c-14特性"><span class="nav-number">14.</span> <span class="nav-text">c++14特性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分离式编译"><span class="nav-number">15.</span> <span class="nav-text">分离式编译</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#静态库与动态库"><span class="nav-number">16.</span> <span class="nav-text">静态库与动态库</span></a></li></ol></div>
             
 
           </div>
@@ -1362,7 +1394,7 @@ document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " 
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">55.3k</span>
+    <span title="Site words total count">55.9k</span>
   
 </div>
 

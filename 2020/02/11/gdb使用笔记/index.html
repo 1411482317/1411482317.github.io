@@ -129,13 +129,14 @@
 <meta property="og:description" content="基于 cent8 操作系统的gcc 8.3 和 gdb 8.2">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://1411482317.github.io/2020/02/11/gdb使用笔记/fm.gif">
+<meta property="og:image" content="https://1411482317.github.io/2020/02/11/gdb使用笔记/7.png">
 <meta property="og:image" content="https://1411482317.github.io/2020/02/11/gdb使用笔记/1.png">
 <meta property="og:image" content="https://1411482317.github.io/2020/02/11/gdb使用笔记/2.png">
 <meta property="og:image" content="https://1411482317.github.io/2020/02/11/gdb使用笔记/3.png">
 <meta property="og:image" content="https://1411482317.github.io/2020/02/11/gdb使用笔记/4.png">
 <meta property="og:image" content="https://1411482317.github.io/2020/02/11/gdb使用笔记/5.png">
 <meta property="og:image" content="https://1411482317.github.io/2020/02/11/gdb使用笔记/6.png">
-<meta property="og:updated_time" content="2020-03-08T06:15:40.236Z">
+<meta property="og:updated_time" content="2020-03-31T15:08:46.301Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="gdb与gcc使用笔记">
 <meta name="twitter:description" content="基于 cent8 操作系统的gcc 8.3 和 gdb 8.2">
@@ -436,7 +437,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  883
+                  942
                 </span>
               
 
@@ -452,7 +453,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  3
+                  4
                 </span>
               
             </div>
@@ -478,7 +479,12 @@
 
 <a id="more"></a>
 
-
+<hr>
+<h3 id="编译流程"><a href="#编译流程" class="headerlink" title="编译流程"></a>编译流程</h3><p><img src="7.png" alt></p>
+<ul>
+<li>链接阶段: 将库文件链接到.o汇编文件</li>
+</ul>
+<hr>
 <p>若是需要用gdb进行调试，gcc进行编译时必须加上<code>-g</code>选项</p>
 <details>
 <summary>例子</summary>
@@ -540,8 +546,7 @@
 </details>
 
 <hr>
-<p>gdb的常用命令</p>
-<table>
+<h3 id="gdb的常用命令"><a href="#gdb的常用命令" class="headerlink" title="gdb的常用命令"></a>gdb的常用命令</h3><table>
 <thead>
 <tr>
 <th>名称</th>
@@ -621,8 +626,7 @@
 <p>进入gdb后输入<code>ctrl + x</code> 然后在输入一个<code>a</code></p>
 </blockquote>
 <hr>
-<p>gcc 常用命令</p>
-<table>
+<h3 id="gcc-常用命令"><a href="#gcc-常用命令" class="headerlink" title="gcc 常用命令"></a>gcc 常用命令</h3><table>
 <thead>
 <tr>
 <th>写法</th>
@@ -660,6 +664,22 @@
 <tr>
 <td>-MM</td>
 <td>仅与头文件生成依赖</td>
+</tr>
+<tr>
+<td>-l</td>
+<td>指定静态库文件</td>
+</tr>
+<tr>
+<td>-L</td>
+<td>指定静态库路径</td>
+</tr>
+<tr>
+<td>-Wl,–rpath=路径</td>
+<td>指定动态库路径</td>
+</tr>
+<tr>
+<td>-Wl,–dynamic-linker=文件</td>
+<td>指定动态库文件</td>
 </tr>
 </tbody></table>
 <hr>
@@ -993,7 +1013,7 @@ document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " 
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用gdb调试多进程"><span class="nav-number">1.</span> <span class="nav-text">使用gdb调试多进程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用gdb调试多线程"><span class="nav-number">2.</span> <span class="nav-text">使用gdb调试多线程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vs-code调试多进程"><span class="nav-number">3.</span> <span class="nav-text">vs code调试多进程</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#编译流程"><span class="nav-number">1.</span> <span class="nav-text">编译流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#gdb的常用命令"><span class="nav-number">2.</span> <span class="nav-text">gdb的常用命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#gcc-常用命令"><span class="nav-number">3.</span> <span class="nav-text">gcc 常用命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用gdb调试多进程"><span class="nav-number">4.</span> <span class="nav-text">使用gdb调试多进程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用gdb调试多线程"><span class="nav-number">5.</span> <span class="nav-text">使用gdb调试多线程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vs-code调试多进程"><span class="nav-number">6.</span> <span class="nav-text">vs code调试多进程</span></a></li></ol></div>
             
 
           </div>
@@ -1033,7 +1053,7 @@ document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " 
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">55.3k</span>
+    <span title="Site words total count">55.9k</span>
   
 </div>
 

@@ -14,7 +14,7 @@
 <li>文件格式: <code>xxx.sh</code></li>
 <li>使用: <code>sh xxx.sh [参数]</code></li>
 </ul>
-<h3 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var1=11 # 变量</span><br><span class="line"></span><br><span class="line"># 使用变量</span><br><span class="line">var2=$&#123;var1&#125; # 将var1嘅值赋值到var2</span><br></pre></td></tr></table></figure>
+<h3 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var1=11 # 变量</span><br><span class="line">command_var=&quot;sleep 3s&quot; # 存储一个命令的变量</span><br><span class="line"></span><br><span class="line"># 使用变量</span><br><span class="line">var2=$&#123;var1&#125; # 将var1嘅值赋值到var2</span><br></pre></td></tr></table></figure>
 
 <hr>
 <h3 id="判断"><a href="#判断" class="headerlink" title="判断"></a>判断</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">if [ 条件 ]; then</span><br><span class="line">    # code</span><br><span class="line">elif [条件]; then # elsif</span><br><span class="line">    # code</span><br><span class="line">else</span><br><span class="line">    # code</span><br><span class="line">fi # 结束if</span><br></pre></td></tr></table></figure>
@@ -102,7 +102,7 @@
 
 <hr>
 <p>拓展root分区:<br><code>df -Th</code>查看root分区</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">lvextend -l +100%free /dev/CentOs_8/</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">lvextend -L +100%free /dev/CentOs_8/root</span><br></pre></td></tr></table></figure>
 
 <hr>
 <p>动态拓展root分区:</p>
@@ -782,6 +782,9 @@
 
 <div class="note info"><p>包含其他cmake文件</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">include(/目录/xx.cmkae)</span><br></pre></td></tr></table></figure></div>
+
+<div class="note info"><p>设置库文件目录（gcc -L功能）</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">link_directories( # 添加链接库目录（gcc -L功能）</span><br><span class="line">    &quot;/my_file/gnu/gcc/gcc-9.3.0/build/lib&quot; </span><br><span class="line">    &quot;/my_file/gnu/gcc/gcc-9.3.0/build/lib64&quot;</span><br><span class="line">)</span><br></pre></td></tr></table></figure></div>
 
 <hr>
 ]]></content>
@@ -1551,6 +1554,9 @@
 <p>最后，git输入<code>ssh my_linux</code>即可快速登录linux的root用户</p>
 <p><a href="https://stackoverflow.com/questions/48328446/id-rsa-pub-file-ssh-error-invalid-format" target="_blank" rel="noopener"><strong>[<font color="blue">参考</font>]</strong></a></p>
 <hr>
+<h3 id="清除ssh密钥"><a href="#清除ssh密钥" class="headerlink" title="清除ssh密钥"></a>清除ssh密钥</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ssh-keygen -R linux地址</span><br></pre></td></tr></table></figure>
+
+<hr>
 ]]></content>
       <tags>
         <tag>vs code</tag>
@@ -1564,7 +1570,12 @@
 
 <a id="more"></a>
 
-
+<hr>
+<h3 id="编译流程"><a href="#编译流程" class="headerlink" title="编译流程"></a>编译流程</h3><p><img src="7.png" alt></p>
+<ul>
+<li>链接阶段: 将库文件链接到.o汇编文件</li>
+</ul>
+<hr>
 <p>若是需要用gdb进行调试，gcc进行编译时必须加上<code>-g</code>选项</p>
 <details>
 <summary>例子</summary>
@@ -1626,8 +1637,7 @@
 </details>
 
 <hr>
-<p>gdb的常用命令</p>
-<table>
+<h3 id="gdb的常用命令"><a href="#gdb的常用命令" class="headerlink" title="gdb的常用命令"></a>gdb的常用命令</h3><table>
 <thead>
 <tr>
 <th>名称</th>
@@ -1707,8 +1717,7 @@
 <p>进入gdb后输入<code>ctrl + x</code> 然后在输入一个<code>a</code></p>
 </blockquote>
 <hr>
-<p>gcc 常用命令</p>
-<table>
+<h3 id="gcc-常用命令"><a href="#gcc-常用命令" class="headerlink" title="gcc 常用命令"></a>gcc 常用命令</h3><table>
 <thead>
 <tr>
 <th>写法</th>
@@ -1746,6 +1755,22 @@
 <tr>
 <td>-MM</td>
 <td>仅与头文件生成依赖</td>
+</tr>
+<tr>
+<td>-l</td>
+<td>指定静态库文件</td>
+</tr>
+<tr>
+<td>-L</td>
+<td>指定静态库路径</td>
+</tr>
+<tr>
+<td>-Wl,–rpath=路径</td>
+<td>指定动态库路径</td>
+</tr>
+<tr>
+<td>-Wl,–dynamic-linker=文件</td>
+<td>指定动态库文件</td>
 </tr>
 </tbody></table>
 <hr>
@@ -3540,6 +3565,38 @@ function player(src) {
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">auto func(void)&#123;</span><br><span class="line">    return 11;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
 
 <hr>
+<h3 id="分离式编译"><a href="#分离式编译" class="headerlink" title="分离式编译"></a>分离式编译</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">// head.h （位于/lib）</span><br><span class="line">#ifndef __HEAD_H__</span><br><span class="line">#define __HEAD_H__</span><br><span class="line"></span><br><span class="line">#include &lt;iostream&gt;</span><br><span class="line"></span><br><span class="line">void my_func(void);</span><br><span class="line"></span><br><span class="line">#endif // __HEAD_H__</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">// head.cpp（位于/lib）</span><br><span class="line">#ifndef __HEAD_CPP__</span><br><span class="line">#define __HEAD_CPP__</span><br><span class="line"></span><br><span class="line">#include &quot;head.h&quot;</span><br><span class="line"></span><br><span class="line">void my_func(void)&#123;</span><br><span class="line">    printf(&quot;hellow\n&quot;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#endif // __HEAD_CPP__</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">main.cpp（位于/bin）</span><br><span class="line">#include &quot;../lib/head.h&quot;</span><br><span class="line"></span><br><span class="line">extern void my_func(void);</span><br><span class="line"></span><br><span class="line">int main(void)&#123;</span><br><span class="line">    my_func();</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">// 编译</span><br><span class="line">g++ -g main.cpp ../lib/head.cpp -o a.out</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="静态库与动态库"><a href="#静态库与动态库" class="headerlink" title="静态库与动态库"></a>静态库与动态库</h3><p>作用在链接阶段，将库链接到.o汇编文件</p>
+<div class="note info"><p><strong>静态库:</strong></p>
+<p>静态库文件开后缀为<code>.a</code>或<code>.lib</code></p>
+<ul>
+<li>编译时完成函数链接，使程序运行时与函数库任何关联，移植方便</li>
+<li>浪费空间与资源，将所有相关嘅目标文件与函数链接，并合并为一个可执行文件</li>
+</ul>
+<p>编译:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 编译成.o汇编文件</span><br><span class="line">g++ -c test.cpp</span><br><span class="line"></span><br><span class="line"># 通过ar工具将目标打包成.a静态库文件</span><br><span class="line">ar -crv test.a stest.o </span><br></pre></td></tr></table></figure>
+
+<p>使用:</p>
+<ul>
+<li>-l指定静态库文件</li>
+<li>-L指定静态库目录<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">g++ main.cpp -L /lib/test</span><br><span class="line"></span><br><span class="line">或</span><br><span class="line"></span><br><span class="line">g++ main.cpp -ltest</span><br></pre></td></tr></table></figure></li>
+</ul></div>
+
+<div class="note info"><p><strong>动态库:</strong></p>
+<p>动态库文件嘅后缀为<code>.so</code>或<code>.dll</code></p>
+<ul>
+<li></li>
+</ul></div>
+
+<hr>
 ]]></content>
       <categories>
         <category>c/c++</category>
@@ -4126,10 +4183,17 @@ function player(src) {
 <h2 id="锁定与解锁"><a href="#锁定与解锁" class="headerlink" title="锁定与解锁"></a>锁定与解锁</h2><blockquote>
 <p>ctrl+s锁定<br>ctrl+q解锁</p>
 </blockquote>
-<h1 id="数据流重定向"><a href="#数据流重定向" class="headerlink" title="数据流重定向"></a>数据流重定向</h1><p>标准输入流：<code>0</code>或<code>&lt;</code>或<code>&lt;&lt;</code></p>
+<h1 id="数据流重定向"><a href="#数据流重定向" class="headerlink" title="数据流重定向"></a>数据流重定向</h1><blockquote>
+<p><code>&lt;</code>覆盖式输入，<code>&lt;&lt;</code>续写式输入</p>
+</blockquote>
+<p>标准输入流：<code>&lt;</code>或<code>&lt;&lt;</code></p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#追加输入</span><br><span class="line">cat &gt;&gt; file &lt;&lt; 文件/&quot;&quot;</span><br><span class="line">#输入追加内容，按ctrl+d结束输入</span><br></pre></td></tr></table></figure>
 
-<p>标准输出流：<code>1</code>或<code>&gt;</code>或<code>&gt;&gt;</code><br>多个文件同时输出：<code>&amp;&gt;</code>或<code>&amp;&gt;&gt;</code></p>
+<hr>
+<blockquote>
+<p><code>&gt;</code>覆盖式输出，<code>&gt;&gt;</code>续写式输出</p>
+</blockquote>
+<p>标准输出流：<code>&gt;</code>或<code>&gt;&gt;</code><br>多个文件同时输出：<code>&amp;&gt;</code>或<code>&amp;&gt;&gt;</code></p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#将ll输出的内容，输出到file里</span><br><span class="line">ll / &gt;&gt; file</span><br><span class="line"></span><br><span class="line">#多个ll同时输入到file里</span><br><span class="line">ll / /home &gt;&gt; file</span><br><span class="line"></span><br><span class="line">#创建一个文件</span><br><span class="line">cat &gt;&gt; 文件名</span><br><span class="line">#输入内容，按ctrl+d结束输入</span><br></pre></td></tr></table></figure>
 
 <p>标准错误输出流：<code>2</code>或<code>2&gt;</code>或<code>2&gt;&gt;</code></p>
@@ -4524,6 +4588,9 @@ function player(src) {
 <li>显示行号: <code>set number</code></li>
 </ul>
 <hr>
+<h3 id="睡眠命令"><a href="#睡眠命令" class="headerlink" title="睡眠命令"></a>睡眠命令</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sleep 5s #睡眠5秒</span><br></pre></td></tr></table></figure>
+
+<hr>
 ]]></content>
       <categories>
         <category>Linux</category>
@@ -4901,7 +4968,7 @@ function player(src) {
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 配置安装文件，并设置gmp，mpfr，mpc目录</span><br><span class="line">./configure --prefix=/my_file/gnu/gcc --with-gmp=/my_file/gnu/gmp --with-mpfr=/my_file/gnu/mpfr --with-mpc=/my_file/gnu/mpc --disable-multilib</span><br><span class="line"></span><br><span class="line"># 编译并安装</span><br><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></table></figure></div>
 
 <div class="note info"><p><strong>安装gdb</strong></p>
-<p>安装gdb前需要安装<code>texinfo</code>（或许还会需要perl）</p>
+<p>安装gdb前需要安装<code>texinfo</code>（texinfo依赖perl）</p>
 <ul>
 <li>perl安装: <code>yum install perl</code></li>
 </ul>
@@ -4933,6 +5000,16 @@ function player(src) {
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">yum isntall python3 bison -y</span><br><span class="line"></span><br><span class="line"># 或</span><br><span class="line"></span><br><span class="line">yun update python3 bison -y</span><br></pre></td></tr></table></figure>
 
 <p>然后在次执行<code>make install</code>即可</p>
+<hr>
+<h3 id="设置动态库与静态库嘅全局变量"><a href="#设置动态库与静态库嘅全局变量" class="headerlink" title="设置动态库与静态库嘅全局变量"></a>设置动态库与静态库嘅全局变量</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 动态库</span><br><span class="line">export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/gcc目录/lib:/gcc目录/lib64</span><br><span class="line"></span><br><span class="line"># 静态库</span><br><span class="line">export LIBRARY_PATH=$LIBRARY_PATH:/gcc目录/lib:/gcc目录/lib64</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="使用指定glibc"><a href="#使用指定glibc" class="headerlink" title="使用指定glibc"></a>使用指定glibc</h3><ul>
+<li>-Wl,–rpath: 动态库目录</li>
+<li>-Wl,–dynamic-linker: 动态库文件</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">gcc main.c -Wl,--rpath=/glibc目录/lib -Wl,--dynamic-linker=/glibc目录/lib/ld-linux-x86-64.so.2</span><br></pre></td></tr></table></figure>
+
 <hr>
 ]]></content>
       <categories>
@@ -4966,6 +5043,12 @@ function player(src) {
 <h3 id="Nginx上配置CGI"><a href="#Nginx上配置CGI" class="headerlink" title="Nginx上配置CGI"></a>Nginx上配置CGI</h3><p><a href="https://www.godaner.com/blog/19/" target="_blank" rel="noopener"><strong><code>点击转到</code></strong></a></p>
 <hr>
 <h3 id="C-参考手册"><a href="#C-参考手册" class="headerlink" title="C++参考手册"></a>C++参考手册</h3><p><a href="https://zh.cppreference.com/" target="_blank" rel="noopener"><strong><code>点击转到</code></strong></a></p>
+<hr>
+<h3 id="分离式编译"><a href="#分离式编译" class="headerlink" title="分离式编译"></a>分离式编译</h3><p><a href="https://imzlp.me/posts/27118/" target="_blank" rel="noopener"><strong><code>点击转到</code></strong></a></p>
+<hr>
+<h3 id="静-动态库"><a href="#静-动态库" class="headerlink" title="静/动态库"></a>静/动态库</h3><p><a href="https://www.cnblogs.com/codingmengmeng/p/6046481.html" target="_blank" rel="noopener"><strong><code>点击转到</code></strong></a></p>
+<hr>
+<h3 id="Linux下服务器端开发流程及相关工具介绍-C"><a href="#Linux下服务器端开发流程及相关工具介绍-C" class="headerlink" title="Linux下服务器端开发流程及相关工具介绍(C++)"></a>Linux下服务器端开发流程及相关工具介绍(C++)</h3><p><a href="https://www.cnblogs.com/Jack47/p/c-program-develop-under-linux.html" target="_blank" rel="noopener"><strong><code>点击转到</code></strong></a></p>
 <hr>
 ]]></content>
   </entry>
