@@ -128,7 +128,7 @@
 <meta property="og:description" content="基于c/c++服务器开发的学习路线 比较高效的学习方式">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://1411482317.github.io/2019/10/01/学习路线/封面.jpg">
-<meta property="og:updated_time" content="2020-02-18T05:22:40.395Z">
+<meta property="og:updated_time" content="2020-04-04T04:57:51.524Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="学习路线">
 <meta name="twitter:description" content="基于c/c++服务器开发的学习路线 比较高效的学习方式">
@@ -429,7 +429,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  2.5k
+                  2.8k
                 </span>
               
 
@@ -445,7 +445,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  8
+                  9
                 </span>
               
             </div>
@@ -596,6 +596,36 @@
 <p>10、场景题<br>给一个场景，设计一下定时对url进行爬虫，比如对新浪1个小时爬虫n次，然后某些博客可能1个星期爬虫1次。<br>给一个场景，设计服务器实现爬虫的url去重，如何让多个服务器对一个url爬虫指定次数<br>好多小文件，设计一个服务器来实现如何存储<br>设计两地高效传文件<br>11、架构/分布式/中间件相关<br>常用负载均衡策略<br>一致性hash原理<br>缓存容灾中数据一致性问题<br>了解cap理论吗<br>介绍下高可用，高性能，可伸缩基本概念。。<br>了解微服务？docker？k8s?<br>Nginx了解到什么程度，nginx配置更新实现，事件模型<br>推荐书籍：《redis设计与实现》《从0开始学架构》《docker入门到实践》《大型网站技术架构-核心原理与案例分析》</p>
 </details>
 
+
+
+<details>
+<summary>路线3</summary>
+
+<p>轻量级入门教程</p>
+<p>看书技巧：<br>用两天时间，快速把书本浏览一遍，记录大概的知识点，哪些知识点用到了就去看。</p>
+<h3 id="步骤1"><a href="#步骤1" class="headerlink" title="步骤1"></a>步骤1</h3><p>首先需要搭建学习的环境。</p>
+<ul>
+<li>安装Linux操作系统</li>
+<li>安装gcc/g++  （C/C++编译器）</li>
+<li>gdb    ​    ​    ​   （Debug）​</li>
+<li>cmake / ​make（编译工具）<br>​* 一个用得顺手的编辑器</li>
+</ul>
+<hr>
+<h3 id="步骤2"><a href="#步骤2" class="headerlink" title="步骤2"></a>步骤2</h3><p>学习Linux基础的使用方法（毕竟操作系统都不会用，确实会非常不方便）<br><code>注意</code>： 这里并不推荐使用GUI进行学习</p>
+<ul>
+<li>开关机</li>
+<li>文件 / 目录 的增删改查,拷贝（touch, mkdir, rm, mv, ls, cp）</li>
+<li>yum命令的用法</li>
+<li>各种类型的解压包安装方法（如.tar, .xz）</li>
+<li>环境变量</li>
+<li>man命令 与 –help命令</li>
+<li>fdisk与gdisk命令</li>
+</ul>
+<h2 id="书籍推荐《鸟哥的Linux私房菜》"><a href="#书籍推荐《鸟哥的Linux私房菜》" class="headerlink" title="书籍推荐《鸟哥的Linux私房菜》"></a>书籍推荐《鸟哥的Linux私房菜》</h2><h3 id="步骤3"><a href="#步骤3" class="headerlink" title="步骤3"></a>步骤3</h3><p>C语言:<br>    ​&gt;函数，数组，指针，内存管理</p>
+<p>C++：<br>    ​&gt;const,  引用， 推导类型， 友元 / 内敛 / 构造 / 深拷贝与浅拷贝 / 析构 / 虚 / 纯虚 / 重载 /     ​函数, new和delete与malloc和free的区别，类访问限定符，类继承， static，template，STL</p>
+<p>书籍推荐《C Primer Plus》《C++ Primer》《effective c++》《STL源码剖析》</p>
+<hr>
+</details>
       
     </div>
     
@@ -689,8 +719,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -707,7 +746,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">39</span>
+                  <span class="site-state-item-count">40</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -791,6 +830,22 @@ document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " 
       </div></section>
 
       
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#步骤1"><span class="nav-number">1.</span> <span class="nav-text">步骤1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#步骤2"><span class="nav-number">2.</span> <span class="nav-text">步骤2</span></a></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#书籍推荐《鸟哥的Linux私房菜》"><span class="nav-number"></span> <span class="nav-text">书籍推荐《鸟哥的Linux私房菜》</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#步骤3"><span class="nav-number">1.</span> <span class="nav-text">步骤3</span></a></li></ol></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
 
       
 
@@ -824,7 +879,7 @@ document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " 
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">55.9k</span>
+    <span title="Site words total count">50k</span>
   
 </div>
 

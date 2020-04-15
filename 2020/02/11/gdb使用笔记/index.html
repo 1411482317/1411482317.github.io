@@ -120,13 +120,13 @@
 
 
 
-<meta name="description" content="基于 cent8 操作系统的gcc 8.3 和 gdb 8.2">
+<meta name="description" content="操作系统： CentOs_8 x86_64 gdb版本： 9.1 gcc版本： 9.3">
 <meta name="keywords" content="gdb">
 <meta property="og:type" content="article">
 <meta property="og:title" content="gdb与gcc使用笔记">
 <meta property="og:url" content="https://1411482317.github.io/2020/02/11/gdb使用笔记/index.html">
 <meta property="og:site_name" content="大石砸死蟹">
-<meta property="og:description" content="基于 cent8 操作系统的gcc 8.3 和 gdb 8.2">
+<meta property="og:description" content="操作系统： CentOs_8 x86_64 gdb版本： 9.1 gcc版本： 9.3">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://1411482317.github.io/2020/02/11/gdb使用笔记/fm.gif">
 <meta property="og:image" content="https://1411482317.github.io/2020/02/11/gdb使用笔记/7.png">
@@ -136,10 +136,10 @@
 <meta property="og:image" content="https://1411482317.github.io/2020/02/11/gdb使用笔记/4.png">
 <meta property="og:image" content="https://1411482317.github.io/2020/02/11/gdb使用笔记/5.png">
 <meta property="og:image" content="https://1411482317.github.io/2020/02/11/gdb使用笔记/6.png">
-<meta property="og:updated_time" content="2020-03-31T15:08:46.301Z">
+<meta property="og:updated_time" content="2020-04-14T07:54:52.851Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="gdb与gcc使用笔记">
-<meta name="twitter:description" content="基于 cent8 操作系统的gcc 8.3 和 gdb 8.2">
+<meta name="twitter:description" content="操作系统： CentOs_8 x86_64 gdb版本： 9.1 gcc版本： 9.3">
 <meta name="twitter:image" content="https://1411482317.github.io/2020/02/11/gdb使用笔记/fm.gif">
 
 
@@ -437,7 +437,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  942
+                  1.2k
                 </span>
               
 
@@ -453,7 +453,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  4
+                  5
                 </span>
               
             </div>
@@ -474,12 +474,17 @@
       
 
       
-        <p>基于 <code>cent8</code> 操作系统的<code>gcc 8.3</code> 和 <code>gdb 8.2</code> </p>
+        <ul>
+<li>操作系统： CentOs_8 x86_64</li>
+<li>gdb版本： 9.1</li>
+<li>gcc版本： 9.3</li>
+</ul>
 <img src="/2020/02/11/gdb使用笔记/fm.gif">
 
 <a id="more"></a>
 
 <hr>
+<p><a href="https://www.gnu.org/software/gdb/documentation/" target="_blank" rel="noopener"><code>帮助文档</code></a></p>
 <h3 id="编译流程"><a href="#编译流程" class="headerlink" title="编译流程"></a>编译流程</h3><p><img src="7.png" alt></p>
 <ul>
 <li>链接阶段: 将库文件链接到.o汇编文件</li>
@@ -572,7 +577,7 @@
 <tr>
 <td>file ./a.out</td>
 <td>打开文件</td>
-<td>f ./a.out</td>
+<td>无简写</td>
 </tr>
 <tr>
 <td>list</td>
@@ -586,8 +591,8 @@
 </tr>
 <tr>
 <td>start</td>
-<td>单步运行文件</td>
-<td></td>
+<td>main函数处设置断点并run</td>
+<td>无简写</td>
 </tr>
 <tr>
 <td>next</td>
@@ -625,6 +630,10 @@
 <p>gdb命令行形式的gui</p>
 <p>进入gdb后输入<code>ctrl + x</code> 然后在输入一个<code>a</code></p>
 </blockquote>
+<p>需要传入main函数参数，就要喺<code>run</code> 或 <code>start</code>后面添加</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">run version</span><br><span class="line">或</span><br><span class="line">start version</span><br></pre></td></tr></table></figure>
+
+<p>使用<code>show args</code>查看main函数参数</p>
 <hr>
 <h3 id="gcc-常用命令"><a href="#gcc-常用命令" class="headerlink" title="gcc 常用命令"></a>gcc 常用命令</h3><table>
 <thead>
@@ -667,11 +676,11 @@
 </tr>
 <tr>
 <td>-l</td>
-<td>指定静态库文件</td>
+<td>指定头文件目录</td>
 </tr>
 <tr>
 <td>-L</td>
-<td>指定静态库路径</td>
+<td>指定库目录</td>
 </tr>
 <tr>
 <td>-Wl,–rpath=路径</td>
@@ -790,6 +799,26 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;text&quot;: &quot;-gdb-set detach-on-fork off&quot;</span><br></pre></td></tr></table></figure>
 
 <p>单步到进程的时候，在<code>CALL STACK</code>处选择进程进行debug</p>
+<hr>
+<h3 id="设置libstdc-库目录-与-指定gcc版本"><a href="#设置libstdc-库目录-与-指定gcc版本" class="headerlink" title="设置libstdc++库目录 与 指定gcc版本"></a>设置libstdc++库目录 与 指定gcc版本</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/profile</span><br><span class="line"></span><br><span class="line"># gcc path</span><br><span class="line">export CC=/my_file/gnu/gcc/gcc-9.3.0/build/bin/gcc</span><br><span class="line">export CXX=/my_file/gnu/gcc/gcc-9.3.0/build/bin/g++</span><br><span class="line"></span><br><span class="line"># libstdc++</span><br><span class="line">export LD_LIBRARY_PATH=/my_file/gnu/gcc/gcc-9.3.0/build/lib64</span><br><span class="line">export LIBRARY_PATH=/my_file/gnu/gcc/gcc-9.3.0/build/lib</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="Debugging-with-gdb笔记"><a href="#Debugging-with-gdb笔记" class="headerlink" title="Debugging with gdb笔记"></a>Debugging with gdb笔记</h3><details>
+<summary>折叠</summary>
+
+<p><code>gdb -silent</code>： 唔打印gdb开头信息打开gdb</p>
+<p>想喺gdb内使用shell，需要喺shell命令前面加上<code>shell</code>。</p>
+<ul>
+<li>gcc需要使用<code>-g</code>选项启用gdb调试功能</li>
+<li>可以使用<code>cd</code>切换gdb工作目录，<code>pwd</code>查看当前工作目录</li>
+<li>将程序运行结果重新向到文件里<code>run &gt; file</code></li>
+<li>子进程可以使用<code>kill</code>结束</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">shell clear</span><br></pre></td></tr></table></figure>
+
+<h4 id="日志输出"><a href="#日志输出" class="headerlink" title="日志输出"></a>日志输出</h4><p><code>set logging [on | off]</code>： 日志嘅开关<br><code>set logging file new_FileName</code>： 设置日志文件名称（默认为logfile）<br><code>set logging overwrite [on | off]</code>： 追加方式写入日志（默认） 与 覆盖方式写入日志<br><code>set logging redirect [on | off]</code>： gdb输出会打印到终端与logfile（默认）<br><code>show logging</code>： 查看当前日志设置</p>
+<h4 id="调试多线程与多进程"><a href="#调试多线程与多进程" class="headerlink" title="调试多线程与多进程"></a>调试多线程与多进程</h4></details>
+
 <hr>
 
       
@@ -920,7 +949,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">39</span>
+                  <span class="site-state-item-count">40</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1013,7 +1042,7 @@ document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " 
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#编译流程"><span class="nav-number">1.</span> <span class="nav-text">编译流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#gdb的常用命令"><span class="nav-number">2.</span> <span class="nav-text">gdb的常用命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#gcc-常用命令"><span class="nav-number">3.</span> <span class="nav-text">gcc 常用命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用gdb调试多进程"><span class="nav-number">4.</span> <span class="nav-text">使用gdb调试多进程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用gdb调试多线程"><span class="nav-number">5.</span> <span class="nav-text">使用gdb调试多线程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vs-code调试多进程"><span class="nav-number">6.</span> <span class="nav-text">vs code调试多进程</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#编译流程"><span class="nav-number">1.</span> <span class="nav-text">编译流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#gdb的常用命令"><span class="nav-number">2.</span> <span class="nav-text">gdb的常用命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#gcc-常用命令"><span class="nav-number">3.</span> <span class="nav-text">gcc 常用命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用gdb调试多进程"><span class="nav-number">4.</span> <span class="nav-text">使用gdb调试多进程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用gdb调试多线程"><span class="nav-number">5.</span> <span class="nav-text">使用gdb调试多线程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vs-code调试多进程"><span class="nav-number">6.</span> <span class="nav-text">vs code调试多进程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置libstdc-库目录-与-指定gcc版本"><span class="nav-number">7.</span> <span class="nav-text">设置libstdc++库目录 与 指定gcc版本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Debugging-with-gdb笔记"><span class="nav-number">8.</span> <span class="nav-text">Debugging with gdb笔记</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#日志输出"><span class="nav-number">8.1.</span> <span class="nav-text">日志输出</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#调试多线程与多进程"><span class="nav-number">8.2.</span> <span class="nav-text">调试多线程与多进程</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -1053,7 +1082,7 @@ document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " 
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">55.9k</span>
+    <span title="Site words total count">50k</span>
   
 </div>
 
