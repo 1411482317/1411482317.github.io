@@ -1,6 +1,119 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>数据结构与算法笔记</title>
+    <url>/2020/04/16/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<img src="/2020/04/16/数据结构与算法笔记/fm.jpg">
+
+<a id="more"></a>
+
+<hr>
+<p>算法定义：</p>
+<ul>
+<li><p><code>输入输出</code>： 算法具有0个或多个输入，至少有1一个或多个输出。</p>
+</li>
+<li><p><code>有穷性</code>： 执行完有效嘅步骤后，会自动结束。</p>
+</li>
+<li><p><code>确定性</code>： 每个步骤都有具体含义，唔会出现二义性。</p>
+</li>
+<li><p><code>可行性</code>： 每一步都能通过。</p>
+</li>
+</ul>
+<hr>
+<p>算法设计要求：</p>
+<ul>
+<li><p><code>正确性</code>： 能够得到问题嘅正确答案。</p>
+</li>
+<li><p><code>可读性</code>： 方便阅读。</p>
+</li>
+<li><p><code>健壮性</code>： 处理唔合法数据时，可以做出相关处理。</p>
+</li>
+<li><p><code>效率高同埋存储量低</code>： 字面意思。</p>
+</li>
+</ul>
+<hr>
+<p>算法效率嘅度量：</p>
+<ul>
+<li><p><code>事后统计法</code>： 通过设计好嘅程序，用计算机计时器对唔同算法编制程序嘅运行时间进行比较，判断效率（高投入回报几率低）</p>
+</li>
+<li><p><code>事前分析估算法</code>： 程序编制前，用统计法对算法进行估算（投入前进行估算）</p>
+</li>
+</ul>
+<hr>
+<h3 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h3><p><img src="1.png" alt></p>
+<p>常见嘅时间复杂程度排序：</p>
+<blockquote>
+<p>O(1) &lt; O(logn) &lt; O(n) &lt; O(nlogn) &lt; O(n^2) &lt; O(n^3) &lt; O(2^n) &lt; O(n!) &lt; O(n^n)</p>
+</blockquote>
+<h4 id="大O推导法"><a href="#大O推导法" class="headerlink" title="大O推导法"></a>大O推导法</h4><ul>
+<li><p><code>常数</code>： 指规定嘅数量与数字。</p>
+</li>
+<li><p>用常数1取代运行时嘅所有加法常数。</p>
+</li>
+<li><p>喺修改后嘅运行次数函数中，保留最高阶项。</p>
+</li>
+<li><p>假如最高阶项存在并且唔喺1，就去除与尼个项相乘嘅常数，结果就系大O阶</p>
+</li>
+</ul>
+<h4 id="常数阶"><a href="#常数阶" class="headerlink" title="常数阶"></a>常数阶</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">unsigned</span> <span class="keyword">int</span> sum = <span class="number">0</span>, n = <span class="number">100</span>; <span class="comment">// 执行1次</span></span><br><span class="line">sum = (<span class="number">1</span>+n) * n/<span class="number">2</span>;    <span class="comment">// 第1次执行</span></span><br><span class="line">sum = (<span class="number">1</span>+n) * n/<span class="number">2</span>;    <span class="comment">// 第2次执行</span></span><br><span class="line">sum = (<span class="number">1</span>+n) * n/<span class="number">2</span>;    <span class="comment">// 第3次执行</span></span><br><span class="line">sum = (<span class="number">1</span>+n) * n/<span class="number">2</span>;    <span class="comment">// 第4次执行</span></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%d\n"</span>, sum);  <span class="comment">// 执行1次</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>一共执行佐6条语句，但记作常数1</p>
+</blockquote>
+<p>唔理常数喺几多，都记作<code>O(1)</code></p>
+<h4 id="线性阶"><a href="#线性阶" class="headerlink" title="线性阶"></a>线性阶</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">unsigned</span> <span class="keyword">int</span> sum = <span class="number">0</span>; <span class="comment">// 执行1次</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">unsigned</span> <span class="keyword">int</span> i = <span class="number">0</span>; i != <span class="number">100</span>; ++i) <span class="comment">// 执行n+1次</span></span><br><span class="line">    sum += i; <span class="comment">// 执行n次</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>一共执行佐<code>1 + (n+1) + 1 = 2n+3</code>次</p>
+</blockquote>
+<p>单个循环（非嵌套循环），随着n变大，计算时间呈直线增长，时间复杂程度为<code>O(n)</code>。</p>
+<h4 id="平方阶"><a href="#平方阶" class="headerlink" title="平方阶"></a>平方阶</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">unsigned</span> <span class="keyword">int</span> i = <span class="number">0</span>; i != <span class="number">100</span>; ++i)</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">unsigned</span> <span class="keyword">int</span> j = <span class="number">0</span>; j != <span class="number">100</span>; ++j)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"???\n"</span>);</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>执行循环执行100次，内层循环执行100*100次，即喺n嘅平方。</p>
+</blockquote>
+<p>空间复杂性为<code>O(n^2)</code></p>
+<ul>
+<li>假如嵌套循环有3层，空间复杂性为O(n^3)，以此类推</li>
+</ul>
+<h4 id="对数阶"><a href="#对数阶" class="headerlink" title="对数阶"></a>对数阶</h4><ul>
+<li>log： 对数函数。<blockquote>
+<p>例子： a^n = b（a&gt;0,且a≠1）， n叫做以a为底b的对数,记做n=log(a)b,【a喺下标】，空间复杂度为<code>O(logn)</code></p>
+</blockquote>
+</li>
+</ul>
+<h4 id="空间复杂度"><a href="#空间复杂度" class="headerlink" title="空间复杂度"></a>空间复杂度</h4><p>算法可以用执行时间换取空间容量（空间变大但运行慢），用空间容量获取更快嘅执行时间（空间变小但运行快）。</p>
+<hr>
+<h3 id="线性表"><a href="#线性表" class="headerlink" title="线性表"></a>线性表</h3><p>拥有顺序，除咗首元素与尾元素，其他元素都有前进与后退功能。</p>
+<ul>
+<li><p>线性表强调喺有限嘅。</p>
+</li>
+<li><p>每个元素只有一个next与prev</p>
+</li>
+</ul>
+<p><img src="2.png" alt></p>
+<h4 id="抽象数据类型（ADT）"><a href="#抽象数据类型（ADT）" class="headerlink" title="抽象数据类型（ADT）"></a>抽象数据类型（ADT）</h4><ul>
+<li><p>原子性： 最底层类型不可分解，例如整形，浮点型与字符型等。</p>
+</li>
+<li><p>结构类型： 由n种类型组成嘅类型，可分解。例如数组等。</p>
+</li>
+</ul>
+<p>抽象数据类型格式：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ADT name</span><br><span class="line">Data</span><br><span class="line">    数据元素之间逻辑关系嘅定义（成员数据）</span><br><span class="line">Operation</span><br><span class="line">    操作（成员函数）</span><br><span class="line">end ADT</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>并集</code>： A=AUB，把存在喺集合B中，但唔存在喺集合A中 嘅元素插入到集合A中。忽略相同元素，拷贝自己无嘅元素。</li>
+</ul>
+<p><img src="3.png" alt></p>
+<h4 id="连续内存空间"><a href="#连续内存空间" class="headerlink" title="连续内存空间"></a>连续内存空间</h4><p>内存空间嘅地址值喺连续嘅。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">st</span>&#123;</span></span><br><span class="line">    <span class="keyword">typedef</span> T       value_type;</span><br><span class="line">    <span class="keyword">typedef</span> value_type* pointer ;</span><br><span class="line"></span><br><span class="line">    pointer p;  <span class="comment">// 线性连续内存空间</span></span><br><span class="line">    <span class="keyword">size_t</span> len; <span class="comment">// 空间长度</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 插入元素，传入索引位置与需要插入嘅数据</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">install</span><span class="params">(<span class="keyword">size_t</span> index, T value)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(index &lt; <span class="number">0</span> || index &gt;= len)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">        ++len;</span><br><span class="line">        <span class="keyword">if</span>(index != len - <span class="number">1</span>) <span class="comment">// 插入位置唔喺末尾处</span></span><br><span class="line">            <span class="comment">// 从index开始嘅所有元素向后移动一个索引位</span></span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">size_t</span> i = len - <span class="number">1</span>; i != index - <span class="number">1</span>; --i)</span><br><span class="line">                *(p + i) = *(p + i - <span class="number">1</span>);</span><br><span class="line">        </span><br><span class="line">        *(p + index) = value;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;        </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 删除元素，根据索引删除元素</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">remove</span><span class="params">(<span class="keyword">size_t</span> index)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(index &lt; <span class="number">0</span> || index &gt;= len)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        </span><br><span class="line">        --len;</span><br><span class="line">        <span class="keyword">if</span>(index != len - <span class="number">1</span>)&#123; <span class="comment">// 删除位置唔喺末尾处</span></span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">size_t</span> i = index; i != len; ++i)&#123;</span><br><span class="line">                *(p + i) = *(p + i + <span class="number">1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 打印</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        <span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">(<span class="keyword">void</span>)</span> <span class="keyword">const</span></span>&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">size_t</span> i = <span class="number">0</span>; i != len; ++i)&#123;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">"%p: "</span>, p + i);</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">"[%ld]=%d\n"</span>, i, *(p + i));</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"len is %ld\n"</span>, len);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">st</span>&lt;int&gt; *<span class="title">obj</span> = <span class="title">new</span> <span class="title">st</span>&lt;int&gt;;</span></span><br><span class="line">    obj-&gt;len = <span class="number">5</span>;</span><br><span class="line">    <span class="comment">// 申请内存空间</span></span><br><span class="line">    obj-&gt;p = (st&lt;<span class="keyword">int</span>&gt;::pointer)<span class="built_in">malloc</span>(</span><br><span class="line">        <span class="keyword">sizeof</span>(st&lt;<span class="keyword">int</span>&gt;::value_type) * obj-&gt;len</span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 使用空间</span></span><br><span class="line">    *(obj-&gt;p)     = <span class="number">11</span>;</span><br><span class="line">    *(obj-&gt;p + <span class="number">1</span>) = <span class="number">22</span>;</span><br><span class="line">    *(obj-&gt;p + <span class="number">2</span>) = <span class="number">33</span>;</span><br><span class="line">    *(obj-&gt;p + <span class="number">3</span>) = <span class="number">44</span>;</span><br><span class="line">    *(obj-&gt;p + <span class="number">4</span>) = <span class="number">55</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(obj-&gt;install(<span class="number">2</span>, <span class="number">999</span>))</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"instal ok\n"</span>);</span><br><span class="line"></span><br><span class="line">    obj-&gt;print();</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"\n\n"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(obj-&gt;remove(<span class="number">2</span>))</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"remove ok\n"</span>);</span><br><span class="line">    </span><br><span class="line">    obj-&gt;print();</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</span><br><span class="line">    func();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>结果：<br><img src="4.png" alt></p>
+<p><video src="v1.mp4" type="video/mp4" controls="controls" preload="auto" width="100%" height="100%"><br></video></p>
+<hr>
+]]></content>
+  </entry>
+  <entry>
     <title>vs code使用笔记</title>
     <url>/2020/04/11/vs-code%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<img src="/2020/04/11/vs-code使用笔记/fm.jpg">
@@ -2649,6 +2762,9 @@ function player(src) {
 <hr>
 <h3 id="I-O"><a href="#I-O" class="headerlink" title="I/O"></a>I/O</h3><ul>
 <li><p>输入：printf, getchar, fgets</p>
+<blockquote>
+<p>%Lf表示long double， lf表示double</p>
+</blockquote>
 </li>
 <li><p>输出：scanf, putchar,sputs</p>
 </li>
@@ -2989,7 +3105,10 @@ function player(src) {
 <a id="more"></a>
 
 <hr>
+<p>C++由 C语言， 面向对象， 模板， STL组成。</p>
 <p><a href="https://zh.cppreference.com/w/cpp" target="_blank" rel="noopener"><font color="green"><strong>【cpp帮助文档】</strong></font></a></p>
+<hr>
+<h3 id="CV限定"><a href="#CV限定" class="headerlink" title="CV限定"></a>CV限定</h3><p>C++中嘅CV喺指<code>const</code>同埋<code>volatile</code></p>
 <hr>
 <h3 id="赋值与初始化"><a href="#赋值与初始化" class="headerlink" title="赋值与初始化"></a>赋值与初始化</h3><ul>
 <li>初始化： 创建变量嘅同时给予初始值</li>
@@ -3063,6 +3182,11 @@ function player(src) {
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">11</span>;</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">int</span> *<span class="keyword">const</span> p = &amp;i;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <hr>
+<p><code>非成员函数唔可以喺后面加const</code>，米时编译器会报非成员函数CV限定错误。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 错误代码</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">(<span class="keyword">void</span>)</span> <span class="keyword">const</span> </span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>错误：<br><img src="16.png" alt></p>
+<hr>
 <h3 id="constexpr"><a href="#constexpr" class="headerlink" title="constexpr"></a>constexpr</h3><p>常量表达式，一般作用于函数返回值类型，使其变成编译时常量，隐式定义为内敛函数（函数返回值类型不一定喺常量表达式）</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">constexpr</span> <span class="keyword">int</span> <span class="title">func</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123; <span class="keyword">return</span> <span class="number">22</span>; &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</span><br><span class="line">    <span class="keyword">constexpr</span> <span class="keyword">int</span> num = <span class="number">11</span>; <span class="comment">// 编译时常量</span></span><br><span class="line">    <span class="keyword">int</span> i = func(); <span class="comment">// 可能喺编译时常量</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -3090,7 +3214,13 @@ function player(src) {
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">dad</span>&#123;</span></span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">        <span class="keyword">virtual</span> ~dad() = <span class="keyword">default</span>;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">son</span> :</span> <span class="keyword">public</span> dad&#123;</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">        <span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">11</span>;</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">int</span> c = <span class="keyword">static_cast</span>&lt;<span class="keyword">const</span> <span class="keyword">int</span>&gt;(i);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">int</span> *p = &amp;c;</span><br><span class="line">    <span class="keyword">int</span> *n = <span class="keyword">const_cast</span>&lt;<span class="keyword">int</span>*&gt;(p);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> *i_pointer = <span class="literal">nullptr</span>;</span><br><span class="line">    <span class="keyword">char</span> *c_pointer = <span class="keyword">reinterpret_cast</span>&lt;<span class="keyword">char</span>*&gt;(i_pointer);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    dad *obj = <span class="keyword">new</span> dad;</span><br><span class="line">    son *s_obj = <span class="keyword">dynamic_cast</span>&lt;son*&gt;(obj);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <hr>
-<h3 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h3><p>程序一旦异常，就会打印异常消息，并且可能会退出程序。</p>
+<h3 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h3><p>程序一旦异常，就需要对异常进行处理。</p>
+<blockquote>
+<p>处理方式： 结束程序，吞下异常，自定义异常处理。</p>
+</blockquote>
+<blockquote>
+<p>异常安全： 资源不泄漏、数据不丢失、不抛出异常。</p>
+</blockquote>
 <p>异常捕获语句块：</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">        <span class="comment">// 可能会出现异常嘅代码</span></span><br><span class="line">&#125; <span class="keyword">catch</span>(<span class="comment">/* 异常类型 */</span> ...)&#123;</span><br><span class="line">    <span class="comment">// 处理异常嘅代码</span></span><br><span class="line">    <span class="keyword">throw</span>; <span class="comment">// 抛异常</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -3108,7 +3238,7 @@ function player(src) {
 <p>函数入栈：<br><img src="2.png" alt><br>抛异常，将func1与func2弹出<br><img src="3.png" alt><br>运行结果：<br><img src="4.png" alt></p>
 <hr>
 <p><code>noexcept</code>： 用于标识函数唔会抛异常</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 表示该函数唔会抛异常</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">()</span> <span class="keyword">noexcept</span></span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 都表示该函数唔会抛异常</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">()</span> <span class="keyword">noexcept</span></span>&#123;&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">(<span class="keyword">void</span>)</span> <span class="title">throw</span><span class="params">()</span> </span>&#123;&#125;</span><br></pre></td></tr></table></figure>
 
 <hr>
 <h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><blockquote>
@@ -3431,7 +3561,81 @@ function player(src) {
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">typeid</span>(<span class="number">11</span>) == <span class="keyword">typeid</span>(<span class="number">22</span>))</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"ok\n"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <hr>
-<h3 id="改善程序嘅做法"><a href="#改善程序嘅做法" class="headerlink" title="改善程序嘅做法"></a>改善程序嘅做法</h3><hr>
+<h3 id="改善程序嘅做法"><a href="#改善程序嘅做法" class="headerlink" title="改善程序嘅做法"></a>改善程序嘅做法</h3><ul>
+<li><p>class默认生成public访问权限嘅inline无参构造，拷贝构造，析构函数，假如设计嘅类唔需要尼滴函数，请删除。</p>
+</li>
+<li><p>唔可以喺构造同析构过程中调用虚函数，构造期间，虚函数唔喺虚函数。</p>
+</li>
+<li><p>operator=拷贝函数需要判断自赋值。【 if(this == &amp;obj)  】</p>
+</li>
+<li><p>凡喺使用new或malloc申请嘅内存，使用完后都必须释放（推荐使用智能指针）</p>
+</li>
+<li><p>传递参数时，使用常量引用传递代替值传递可以减少资源开销（STL迭代器与函数对象使用值传递嘅开销很小）</p>
+</li>
+<li><p>唔好返回临时对象嘅引用。</p>
+</li>
+<li><p>尽量以non-member，non-friend函数替换类member函数</p>
+</li>
+<li><p>假如类member函数所有参数皆需类型转换，就用non-member函数（对于类类型转换必须用non-member函数）</p>
+</li>
+<li><p>唔好返回一个指向类内成员嘅指针</p>
+</li>
+</ul>
+<div class="note info"><h4 id="尽量使用编译器替换预处理器"><a href="#尽量使用编译器替换预处理器" class="headerlink" title="尽量使用编译器替换预处理器"></a>尽量使用编译器替换预处理器</h4><blockquote>
+<p>因为#define唔被视为语言嘅一部分，对于单纯嘅常量尽量以const与enum替换宏常量，宏函数尽量用inline函数替换。</p>
+</blockquote></div>
+
+<div class="note info"><h4 id="尽量使用csont"><a href="#尽量使用csont" class="headerlink" title="尽量使用csont"></a>尽量使用csont</h4><p>const可以减少系统开销。</p>
+<p>当const与non-const有相同嘅实现时，non-const调用const版本可以避免代码重复。</p>
+<figure class="highlight cxx"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">lei</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    lei(<span class="keyword">const</span> <span class="keyword">int</span> &amp;__i) : </span><br><span class="line">    i(__i) &#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">const</span> <span class="keyword">int</span>&amp; <span class="title">get</span><span class="params">(<span class="keyword">void</span>)</span> <span class="keyword">const</span></span>; <span class="comment">// const</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span>&amp; <span class="title">get</span><span class="params">(<span class="keyword">void</span>)</span></span>; <span class="comment">// non-const</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span>&amp; lei::get(<span class="keyword">void</span>) <span class="keyword">const</span></span><br><span class="line">&#123; <span class="keyword">return</span> <span class="keyword">this</span>-&gt;i; &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span>&amp; lei::get(<span class="keyword">void</span>)&#123;</span><br><span class="line">    <span class="keyword">return</span> </span><br><span class="line">        <span class="keyword">const_cast</span>&lt;<span class="keyword">int</span>&amp;&gt;(</span><br><span class="line">            <span class="keyword">static_cast</span>&lt;<span class="keyword">const</span> lei*&gt;(<span class="keyword">this</span>) <span class="comment">// 将当前对象强转成const</span></span><br><span class="line">            -&gt;get() <span class="comment">// 然后调用const版本函数</span></span><br><span class="line">        ); <span class="comment">// 最后将其返回值类型强转成non-const类型</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> **argv)</span></span>&#123;</span><br><span class="line">    (<span class="keyword">void</span>)argc; (<span class="keyword">void</span>)argv;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> lei *c_obj;</span><br><span class="line">    c_obj-&gt;get(); <span class="comment">// 调用const版本</span></span><br><span class="line"></span><br><span class="line">    lei *obj;</span><br><span class="line">    obj-&gt;get(); <span class="comment">// 调用non-const版本</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+
+<div class="note info"><h4 id="使用对象之前，要确保对象已经初始化"><a href="#使用对象之前，要确保对象已经初始化" class="headerlink" title="使用对象之前，要确保对象已经初始化"></a>使用对象之前，要确保对象已经初始化</h4><p>对需要初始化嘅成员，喺构造函数度使用初始化列表。</p>
+<p>为了确保对象使用前被初始化，使用local static对象替换non-local static</p>
+<figure class="highlight cxx"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">lei</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">size_t</span> number(<span class="keyword">void</span>) <span class="keyword">const</span>;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">size_t</span> lei::number() <span class="keyword">const</span></span><br><span class="line">&#123; <span class="keyword">return</span> <span class="number">11</span>; &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 返回一个local static嘅lei对象</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function">lei&amp; <span class="title">get_lei_obj</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</span><br><span class="line">    <span class="keyword">static</span> lei obj; <span class="comment">// 定义并初始化local static对象</span></span><br><span class="line">    <span class="keyword">return</span> obj;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">aaa</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    aaa()</span><br><span class="line">    &#123; <span class="built_in">printf</span>(<span class="string">"number=%d\n"</span>, get_lei_obj().number()); &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 返回一个local static嘅aaa对象</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function">aaa&amp; <span class="title">get_aaa_obj</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</span><br><span class="line">    <span class="keyword">static</span> aaa obj;</span><br><span class="line">    <span class="keyword">return</span> obj;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> **argv)</span></span>&#123;</span><br><span class="line">    (<span class="keyword">void</span>)argc; (<span class="keyword">void</span>)argv;</span><br><span class="line"></span><br><span class="line">    aaa obj = get_aaa_obj(); <span class="comment">// local static对象</span></span><br><span class="line">    aaa dx; <span class="comment">// non-local static对象</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<div class="note info"><h4 id="为需要使用多态嘅父类声明虚析构函数"><a href="#为需要使用多态嘅父类声明虚析构函数" class="headerlink" title="为需要使用多态嘅父类声明虚析构函数"></a>为需要使用多态嘅父类声明虚析构函数</h4><p>先调用子类析构函数，然后在调用父类析构函数。</p>
+<figure class="highlight cxx"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">fu</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">virtual</span> ~fu()</span><br><span class="line">    &#123; <span class="built_in">printf</span>(<span class="string">"~fu()\n"</span>); <span class="built_in">free</span>(p); &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">int</span> *p;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">zi</span> :</span> <span class="keyword">public</span> fu&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">virtual</span> ~zi()</span><br><span class="line">    &#123; <span class="built_in">printf</span>(<span class="string">"~zi()\n"</span>); <span class="built_in">free</span>(d); &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">double</span> *d;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> **argv)</span></span>&#123;</span><br><span class="line">    (<span class="keyword">void</span>)argc; (<span class="keyword">void</span>)argv;</span><br><span class="line"></span><br><span class="line">    zi *obj = <span class="keyword">new</span> zi;    </span><br><span class="line">    <span class="keyword">delete</span> obj;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<p><img src="13.png" alt></p>
+<p>当父类为non-virtual析构函数，静态类型为父类动态类型为子类时，delete对象只会调用父类析构忽略了子类析构，造成了内存泄漏。</p>
+<figure class="highlight cxx"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">fu</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">     ~fu()</span><br><span class="line">    &#123; <span class="built_in">printf</span>(<span class="string">"~fu()\n"</span>); <span class="built_in">free</span>(p); &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">int</span> *p;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">zi</span> :</span> <span class="keyword">public</span> fu&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">     ~zi()</span><br><span class="line">    &#123; <span class="built_in">printf</span>(<span class="string">"~zi()\n"</span>); <span class="built_in">free</span>(d); &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">double</span> *d;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> **argv)</span></span>&#123;</span><br><span class="line">    (<span class="keyword">void</span>)argc; (<span class="keyword">void</span>)argv;</span><br><span class="line"></span><br><span class="line">    fu *obj = <span class="keyword">new</span> zi;    </span><br><span class="line">    <span class="keyword">delete</span> obj; <span class="comment">// 没有释放子类数据</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>结果：<br><img src="14.png" alt></p></div>
+
+<div class="note info"><h4 id="析构函数绝对唔可以出现异常"><a href="#析构函数绝对唔可以出现异常" class="headerlink" title="析构函数绝对唔可以出现异常"></a>析构函数绝对唔可以出现异常</h4><p>使用一个类来管理另一个类嘅析构。</p>
+<figure class="highlight cxx"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">lei</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// 假设尼个析构函数可能会出异常</span></span><br><span class="line">    ~lei() = <span class="keyword">default</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">close</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function">    </span>&#123; <span class="built_in">printf</span>(<span class="string">"is close\n"</span>); &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">aaa</span>&#123;</span> <span class="comment">// 管理lei类型</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 调用lei嘅close()函数</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">close</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</span><br><span class="line">        obj.close();</span><br><span class="line">        b = <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ~aaa()&#123;</span><br><span class="line">        <span class="keyword">if</span>(!b)&#123; <span class="comment">// b为false时</span></span><br><span class="line">            <span class="keyword">try</span>&#123;</span><br><span class="line">                obj.close();</span><br><span class="line">            &#125; <span class="keyword">catch</span>(...)&#123;</span><br><span class="line">                <span class="built_in">std</span>::<span class="built_in">abort</span>(); <span class="comment">// 制作运转记录</span></span><br><span class="line">                <span class="comment">// 处理异常</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    lei obj;</span><br><span class="line">    <span class="keyword">bool</span> b; <span class="comment">// 记录close()是否成功执行</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> **argv)</span></span>&#123;</span><br><span class="line">    (<span class="keyword">void</span>)argc; (<span class="keyword">void</span>)argv;</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">lei</span> *<span class="title">obj</span> = <span class="title">new</span> <span class="title">lei</span>;</span></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">aaa</span> *<span class="title">o</span> = <span class="title">new</span> <span class="title">aaa</span>;</span></span><br><span class="line"></span><br><span class="line">    o-&gt;close();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+
+<div class="note info"><h4 id="深拷贝"><a href="#深拷贝" class="headerlink" title="深拷贝"></a>深拷贝</h4><p>将类内所有数据都拷贝一份出来。</p>
+<p>子类嘅拷贝函数需要拷贝父类部分。</p>
+<figure class="highlight cxx"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">fu</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// 默认拷贝函数</span></span><br><span class="line">    fu&amp; <span class="keyword">operator</span>=(<span class="keyword">const</span> fu&amp;) = <span class="keyword">default</span>;</span><br><span class="line">    fu(<span class="keyword">int</span> __i, <span class="keyword">double</span> __d) :</span><br><span class="line">    i(__i), d(__d) &#123;&#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    <span class="keyword">double</span> d;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">zi</span> :</span> <span class="keyword">public</span> fu&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    zi(<span class="keyword">const</span> zi&amp;); <span class="comment">// 拷贝构造</span></span><br><span class="line">    zi&amp; <span class="keyword">operator</span>=(<span class="keyword">const</span> zi&amp;);</span><br><span class="line">    zi(<span class="keyword">char</span> __c, <span class="keyword">long</span> __l) :</span><br><span class="line">    fu(<span class="number">0</span>, <span class="number">0.0</span>), c(__c), l(__l) &#123;&#125; <span class="comment">// 同时初始化父类部分</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">char</span> c;</span><br><span class="line">    <span class="keyword">long</span> l;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">zi::zi(<span class="keyword">const</span> zi &amp;obj) : </span><br><span class="line">fu(obj), c(obj.c), l(obj.l) &#123;&#125; <span class="comment">// 同时拷贝父类部分</span></span><br><span class="line"></span><br><span class="line">zi&amp; zi::<span class="keyword">operator</span>=(<span class="keyword">const</span> zi &amp;obj)&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">this</span> == &amp;obj) <span class="comment">// 自赋值</span></span><br><span class="line">        <span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line"></span><br><span class="line">    fu::<span class="keyword">operator</span>=(obj); <span class="comment">// 拷贝父类部分</span></span><br><span class="line">    <span class="comment">// 拷贝子类部分</span></span><br><span class="line">    <span class="keyword">this</span>-&gt;c = obj.c;</span><br><span class="line">    <span class="keyword">this</span>-&gt;l = obj.l;</span><br><span class="line">    <span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> **argv)</span></span>&#123;</span><br><span class="line">    (<span class="keyword">void</span>)argc; (<span class="keyword">void</span>)argv;</span><br><span class="line">    </span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">zi</span> *<span class="title">obj</span> = <span class="title">new</span> <span class="title">zi</span>('<span class="title">a</span>', 1<span class="title">L</span>);</span></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">zi</span> *<span class="title">obj2</span> = <span class="title">obj</span>;</span></span><br><span class="line">    <span class="function">class zi *<span class="title">obj3</span><span class="params">(obj2)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+
+
+<div class="note info"><h4 id="智能指针"><a href="#智能指针" class="headerlink" title="智能指针"></a>智能指针</h4><p>有效的对资源进行管理。</p>
+<ul>
+<li><p>拷贝或转移资源对象权限都可以通过智能指针实现。</p>
+</li>
+<li><p>智能指针可以通过<code>get()</code>函数，转换成普通指针，对原始资源进行管理。（当智能指针被删除时，这个普通指针也会被删除）</p>
+</li>
+<li><p>智能指针嘅初始化最好米掺杂其他嘢。（一旦掺杂其他嘢并且掺杂物出现异常，就会造成内存泄漏）</p>
+</li>
+</ul></div>
+
+<div class="note info"><h4 id="编写自己嘅swap-函数"><a href="#编写自己嘅swap-函数" class="headerlink" title="编写自己嘅swap()函数"></a>编写自己嘅swap()函数</h4><ul>
+<li>条件1： 唔可以抛异常</li>
+<li>条件2： 类嘅拷贝函数必须要喺深拷贝</li>
+</ul>
+<figure class="highlight cxx"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">lei</span>;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">swap</span><span class="params">(lei*, lei*)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">lei</span>&#123;</span></span><br><span class="line">    <span class="function"><span class="keyword">friend</span> <span class="keyword">void</span> <span class="title">swap</span><span class="params">(lei*, lei*)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    lei(<span class="keyword">const</span> <span class="keyword">int</span> &amp;__i) :</span><br><span class="line">    i(__i) &#123;&#125;</span><br><span class="line"></span><br><span class="line">    lei(<span class="keyword">const</span> lei &amp;obj) :</span><br><span class="line">    i(obj.i) &#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">const</span> <span class="keyword">int</span>&amp; <span class="title">get</span><span class="params">(<span class="keyword">void</span>)</span> <span class="keyword">const</span></span></span><br><span class="line"><span class="function">    </span>&#123; <span class="keyword">return</span> <span class="keyword">this</span>-&gt;i; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 注意，参数为值传递</span></span><br><span class="line">    lei&amp; <span class="keyword">operator</span> =(lei obj)&#123; </span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">this</span> == &amp;obj)</span><br><span class="line">            <span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line"></span><br><span class="line">        swap(<span class="keyword">this</span>, &amp;obj);</span><br><span class="line">        <span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">swap</span><span class="params">(lei *o1, lei *o2)</span></span>&#123;</span><br><span class="line">    <span class="keyword">using</span> <span class="built_in">std</span>::swap;</span><br><span class="line">    swap(o1-&gt;i, o2-&gt;i);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> **argv)</span></span>&#123;</span><br><span class="line">    (<span class="keyword">void</span>)argc; (<span class="keyword">void</span>)argv;</span><br><span class="line">    </span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">lei</span> *<span class="title">obj</span> = <span class="title">new</span> <span class="title">lei</span>(11);</span></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">lei</span> *<span class="title">obj2</span> = <span class="title">new</span> <span class="title">lei</span>(22);</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"o1=%d, o2=%d\n"</span>, obj-&gt;get(), obj2-&gt;get());</span><br><span class="line">    swap(obj, obj2);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"o1=%d, o2=%d\n"</span>, obj-&gt;get(), obj2-&gt;get());</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">lei</span> *<span class="title">obj3</span> = <span class="title">obj</span>;</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"o3=%d\n"</span>, obj3-&gt;get());</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>结果：<br><img src="15.png" alt></p></div>
+
+<h3 id="static"><a href="#static" class="headerlink" title="static"></a>static</h3><p>静态，使用该关键字嘅数据都会被存储喺<code>静态区域</code>，并且只有程序结束时先会被释放。</p>
+<ul>
+<li>static member函数唔可以用this指针。</li>
+</ul>
+<hr>
 ]]></content>
       <categories>
         <category>c/c++</category>
@@ -5521,7 +5725,7 @@ function player(src) {
 
 <hr>
 <h1 id="往文章添加视频"><a href="#往文章添加视频" class="headerlink" title="往文章添加视频"></a>往文章添加视频</h1><p><strong>代码块：</strong></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">&lt;video width=&quot;100%&quot; height=&quot;400&quot; src=路径/视频.后缀 controls=&quot;controls&quot;&gt;</span><br><span class="line">&lt;/video&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;video src=&apos;v1.mp4&apos; </span><br><span class="line">       type=&apos;video/mp4&apos; </span><br><span class="line">       controls=&apos;controls&apos;  </span><br><span class="line">       preload=&quot;auto&quot;</span><br><span class="line">       width=&apos;100%&apos; </span><br><span class="line">       height=&apos;100%&apos;&gt;</span><br><span class="line">&lt;/video&gt;</span><br></pre></td></tr></table></figure>
 
 <hr>
 <h1 id="功能设置"><a href="#功能设置" class="headerlink" title="功能设置"></a>功能设置</h1><h3 id="侧栏添加建站时间"><a href="#侧栏添加建站时间" class="headerlink" title="侧栏添加建站时间"></a>侧栏添加建站时间</h3><p>打开<code>blog/themes/next/layout/_custom/sidebar.swig</code>文件</p>
