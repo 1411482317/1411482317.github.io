@@ -128,12 +128,11 @@
 <meta property="og:description" content="这两都是编译配置工具">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://1411482317.github.io/2020/02/27/makefile笔记/fm.jpg">
-<meta property="og:image" content="https://1411482317.github.io/2020/02/27/makefile笔记/1.png">
 <meta property="og:image" content="https://1411482317.github.io/2020/02/27/makefile笔记/2.png">
 <meta property="og:image" content="https://1411482317.github.io/2020/02/27/makefile笔记/4.png">
 <meta property="og:image" content="https://1411482317.github.io/2020/02/27/makefile笔记/3.png">
 <meta property="og:image" content="https://1411482317.github.io/2020/02/27/makefile笔记/5.png">
-<meta property="og:updated_time" content="2020-04-11T09:22:37.754Z">
+<meta property="og:updated_time" content="2020-04-22T07:12:00.531Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CMake 与 Makefile笔记">
 <meta name="twitter:description" content="这两都是编译配置工具">
@@ -434,7 +433,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  2k
+                  1.7k
                 </span>
               
 
@@ -450,7 +449,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  8
+                  7
                 </span>
               
             </div>
@@ -487,54 +486,8 @@
 <details>
 <summary>折叠</summary>
 
-<blockquote>
-<p>makefile的主要部分由<code>显示规则</code> <code>隐式规则</code> <code>变量</code> <code>文件指示</code> <code>注释</code>组成</p>
-</blockquote>
-<blockquote>
-<p><strong>makefile的注释用</strong><code>#</code></p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th>字符</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>%</td>
-<td>匹配零或若干字符</td>
-</tr>
-</tbody></table>
-<h3 id="Makefile规则"><a href="#Makefile规则" class="headerlink" title="Makefile规则"></a>Makefile规则</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">目标文件: 源文件 [可选:依赖文件]</span><br><span class="line">	需要执行命令(shell)</span><br><span class="line"></span><br><span class="line"># 例子1</span><br><span class="line">a.out: hellow.c</span><br><span class="line">	gcc hellow.c -o a.out</span><br><span class="line"></span><br><span class="line"># 例子2，命令同时运行</span><br><span class="line">exec:</span><br><span class="line">	cd /; pwd;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 例子3，命令分开运行</span><br><span class="line">exec:</span><br><span class="line">	cd / </span><br><span class="line">	pwd</span><br></pre></td></tr></table></figure>
-
-<p><img src="1.png" alt></p>
-<hr>
-<h3 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h3><div class="tabs" id="bian_liang"><ul class="nav-tabs"><li class="tab active"><a href="#bian_liang-1">创建变量</a></li><li class="tab"><a href="#bian_liang-2">使用变量</a></li></ul><div class="tab-content"><div class="tab-pane active" id="bian_liang-1"><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">变量名 = 值</span><br><span class="line"></span><br><span class="line"># 例子</span><br><span class="line">SOURCE = hellow.c</span><br><span class="line">TARGET = a.out</span><br></pre></td></tr></table></figure>
-</div><div class="tab-pane" id="bian_liang-2"><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$(变量名)</span><br><span class="line"></span><br><span class="line"># 例子</span><br><span class="line">SOURCE = hellow.c</span><br><span class="line">TARGET = a.out</span><br><span class="line">$(TARGET): $(SOURCE)</span><br><span class="line">    gcc $(SOURCE) -o $(TARGET)</span><br></pre></td></tr></table></figure>
-</div></div></div>
-
-<hr>
-<h3 id="删除目标文件"><a href="#删除目标文件" class="headerlink" title="删除目标文件"></a>删除目标文件</h3><ul>
-<li><p>在<code>rm</code>命令前面加了一个<code>-</code>的意思就是，也许某些文件出现问题，但不要管，程序继续运行</p>
-</li>
-<li><p><code>clean</code>需要放在文件的最后面</p>
-</li>
-<li><p><code>.PHONY</code>伪目标，表示这只是一个标签</p>
-</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.PHONY: clean</span><br><span class="line">clean:</span><br><span class="line">	-rm 文件</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h3 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h3><blockquote>
-<p>可以使用类似于#include的方式把别的Makefile包含进来</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># a.mk为Makefile的头文件</span><br><span class="line">include a.mk</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h3 id="在不同的目录执行make"><a href="#在不同的目录执行make" class="headerlink" title="在不同的目录执行make"></a>在不同的目录执行make</h3><p><code>all</code>执行多个变量</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">all: a.o exec </span><br><span class="line"></span><br><span class="line">a.o: test.c</span><br><span class="line">	gcc -c test.c</span><br><span class="line"></span><br><span class="line">exec:</span><br><span class="line">	cd ./dirent; gcc -c test_2.c</span><br></pre></td></tr></table></figure>
-
-<hr>
+<p><code>目标: 依赖
+    语句</code></p>
 </details>
 
 <hr>
@@ -837,7 +790,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-count">37</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -930,7 +883,7 @@ document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " 
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Makefile"><span class="nav-number">1.</span> <span class="nav-text">Makefile</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Makefile规则"><span class="nav-number">1.1.</span> <span class="nav-text">Makefile规则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#变量"><span class="nav-number">1.2.</span> <span class="nav-text">变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除目标文件"><span class="nav-number">1.3.</span> <span class="nav-text">删除目标文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#引用"><span class="nav-number">1.4.</span> <span class="nav-text">引用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在不同的目录执行make"><span class="nav-number">1.5.</span> <span class="nav-text">在不同的目录执行make</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CMake"><span class="nav-number">2.</span> <span class="nav-text">CMake</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#命令"><span class="nav-number">2.1.</span> <span class="nav-text">命令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#设置最低运行版本"><span class="nav-number">2.1.1.</span> <span class="nav-text">设置最低运行版本</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用指定编译器"><span class="nav-number">2.1.2.</span> <span class="nav-text">使用指定编译器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#设置项目名称"><span class="nav-number">2.1.3.</span> <span class="nav-text">设置项目名称</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#设置编译器参数"><span class="nav-number">2.1.4.</span> <span class="nav-text">设置编译器参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#生成可执行文件"><span class="nav-number">2.1.5.</span> <span class="nav-text">生成可执行文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#生成库文件"><span class="nav-number">2.1.6.</span> <span class="nav-text">生成库文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查找当前目录的所有文件"><span class="nav-number">2.1.7.</span> <span class="nav-text">查找当前目录的所有文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#自定义搜索规则"><span class="nav-number">2.1.8.</span> <span class="nav-text">自定义搜索规则</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#设置变量，操作变量"><span class="nav-number">2.1.9.</span> <span class="nav-text">设置变量，操作变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#设置包含目录"><span class="nav-number">2.1.10.</span> <span class="nav-text">设置包含目录</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#设置链接库搜索目录"><span class="nav-number">2.1.11.</span> <span class="nav-text">设置链接库搜索目录</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#设置链接库"><span class="nav-number">2.1.12.</span> <span class="nav-text">设置链接库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#输出消息"><span class="nav-number">2.1.13.</span> <span class="nav-text">输出消息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#包含其他cmake文件"><span class="nav-number">2.1.14.</span> <span class="nav-text">包含其他cmake文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#设置库文件目录（gcc-L功能）"><span class="nav-number">2.1.15.</span> <span class="nav-text">设置库文件目录（gcc -L功能）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配置头文件"><span class="nav-number">2.1.16.</span> <span class="nav-text">配置头文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#指定C-标准"><span class="nav-number">2.1.17.</span> <span class="nav-text">指定C++标准</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#创建自定义库文件"><span class="nav-number">2.1.18.</span> <span class="nav-text">创建自定义库文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用自定义库文件"><span class="nav-number">2.1.19.</span> <span class="nav-text">使用自定义库文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#安装"><span class="nav-number">2.1.20.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#定义函数进行测试"><span class="nav-number">2.1.21.</span> <span class="nav-text">定义函数进行测试</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#系统自检"><span class="nav-number">2.1.22.</span> <span class="nav-text">系统自检</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#输出消息"><span class="nav-number">2.1.23.</span> <span class="nav-text">输出消息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#添加预定义宏并赋值"><span class="nav-number">2.1.24.</span> <span class="nav-text">添加预定义宏并赋值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#设置最新版本的g-库目录"><span class="nav-number">2.1.25.</span> <span class="nav-text">设置最新版本的g++库目录</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内置变量"><span class="nav-number">2.2.</span> <span class="nav-text">内置变量</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Makefile"><span class="nav-number">1.</span> <span class="nav-text">Makefile</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CMake"><span class="nav-number">2.</span> <span class="nav-text">CMake</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#命令"><span class="nav-number">2.1.</span> <span class="nav-text">命令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#设置最低运行版本"><span class="nav-number">2.1.1.</span> <span class="nav-text">设置最低运行版本</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用指定编译器"><span class="nav-number">2.1.2.</span> <span class="nav-text">使用指定编译器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#设置项目名称"><span class="nav-number">2.1.3.</span> <span class="nav-text">设置项目名称</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#设置编译器参数"><span class="nav-number">2.1.4.</span> <span class="nav-text">设置编译器参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#生成可执行文件"><span class="nav-number">2.1.5.</span> <span class="nav-text">生成可执行文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#生成库文件"><span class="nav-number">2.1.6.</span> <span class="nav-text">生成库文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查找当前目录的所有文件"><span class="nav-number">2.1.7.</span> <span class="nav-text">查找当前目录的所有文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#自定义搜索规则"><span class="nav-number">2.1.8.</span> <span class="nav-text">自定义搜索规则</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#设置变量，操作变量"><span class="nav-number">2.1.9.</span> <span class="nav-text">设置变量，操作变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#设置包含目录"><span class="nav-number">2.1.10.</span> <span class="nav-text">设置包含目录</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#设置链接库搜索目录"><span class="nav-number">2.1.11.</span> <span class="nav-text">设置链接库搜索目录</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#设置链接库"><span class="nav-number">2.1.12.</span> <span class="nav-text">设置链接库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#输出消息"><span class="nav-number">2.1.13.</span> <span class="nav-text">输出消息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#包含其他cmake文件"><span class="nav-number">2.1.14.</span> <span class="nav-text">包含其他cmake文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#设置库文件目录（gcc-L功能）"><span class="nav-number">2.1.15.</span> <span class="nav-text">设置库文件目录（gcc -L功能）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配置头文件"><span class="nav-number">2.1.16.</span> <span class="nav-text">配置头文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#指定C-标准"><span class="nav-number">2.1.17.</span> <span class="nav-text">指定C++标准</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#创建自定义库文件"><span class="nav-number">2.1.18.</span> <span class="nav-text">创建自定义库文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用自定义库文件"><span class="nav-number">2.1.19.</span> <span class="nav-text">使用自定义库文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#安装"><span class="nav-number">2.1.20.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#定义函数进行测试"><span class="nav-number">2.1.21.</span> <span class="nav-text">定义函数进行测试</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#系统自检"><span class="nav-number">2.1.22.</span> <span class="nav-text">系统自检</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#输出消息"><span class="nav-number">2.1.23.</span> <span class="nav-text">输出消息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#添加预定义宏并赋值"><span class="nav-number">2.1.24.</span> <span class="nav-text">添加预定义宏并赋值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#设置最新版本的g-库目录"><span class="nav-number">2.1.25.</span> <span class="nav-text">设置最新版本的g++库目录</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内置变量"><span class="nav-number">2.2.</span> <span class="nav-text">内置变量</span></a></li></ol></li></ol></div>
             
 
           </div>

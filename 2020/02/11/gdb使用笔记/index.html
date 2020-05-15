@@ -136,7 +136,7 @@
 <meta property="og:image" content="https://1411482317.github.io/2020/02/11/gdb使用笔记/4.png">
 <meta property="og:image" content="https://1411482317.github.io/2020/02/11/gdb使用笔记/5.png">
 <meta property="og:image" content="https://1411482317.github.io/2020/02/11/gdb使用笔记/6.png">
-<meta property="og:updated_time" content="2020-04-14T07:54:52.851Z">
+<meta property="og:updated_time" content="2020-04-21T08:52:38.783Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="gdb与gcc使用笔记">
 <meta name="twitter:description" content="操作系统： CentOs_8 x86_64 gdb版本： 9.1 gcc版本： 9.3">
@@ -437,7 +437,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.2k
+                  1.4k
                 </span>
               
 
@@ -453,7 +453,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  5
+                  6
                 </span>
               
             </div>
@@ -672,11 +672,11 @@
 </tr>
 <tr>
 <td>-MM</td>
-<td>仅与头文件生成依赖</td>
+<td>仅与头文件生成依赖，不包括依赖库</td>
 </tr>
 <tr>
 <td>-l</td>
-<td>指定头文件目录</td>
+<td>指定库文件目录</td>
 </tr>
 <tr>
 <td>-L</td>
@@ -689,6 +689,14 @@
 <tr>
 <td>-Wl,–dynamic-linker=文件</td>
 <td>指定动态库文件</td>
+</tr>
+<tr>
+<td>-I</td>
+<td>指定头文件目录</td>
+</tr>
+<tr>
+<td>-Werror</td>
+<td>将所有警告转换成错误</td>
 </tr>
 </tbody></table>
 <hr>
@@ -820,6 +828,15 @@
 <h4 id="调试多线程与多进程"><a href="#调试多线程与多进程" class="headerlink" title="调试多线程与多进程"></a>调试多线程与多进程</h4></details>
 
 <hr>
+<h3 id="gcc生成库文件"><a href="#gcc生成库文件" class="headerlink" title="gcc生成库文件"></a>gcc生成库文件</h3><p>静态库使用<code>ar</code>工具生成</p>
+<h4 id="静态库文件"><a href="#静态库文件" class="headerlink" title="静态库文件"></a>静态库文件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 首先需要将*.cpp文件编译成.o文件</span><br><span class="line">g++ -c xxx1.cpp xxx2.cpp</span><br><span class="line"></span><br><span class="line"># 生成静态库文件</span><br><span class="line">ar -rcs name.a xxx1.o xxx2.o</span><br><span class="line"></span><br><span class="line"># 使用静态库文件</span><br><span class="line">g++ main.cpp -o a.out /目录/name.a</span><br></pre></td></tr></table></figure>
+
+<h4 id="动态库文件"><a href="#动态库文件" class="headerlink" title="动态库文件"></a>动态库文件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 生成-o文件</span><br><span class="line">g++ -fPIC -c xxx1.cpp xxx2.cpp</span><br><span class="line"></span><br><span class="line"># 生成动态库文件</span><br><span class="line">g++ -shared xxx1.o xxx2.o -o name.so</span><br><span class="line"></span><br><span class="line"># 使用</span><br><span class="line">g++ main.cpp -o a.out /目录/name.a</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="查看源文件嘅依赖文件"><a href="#查看源文件嘅依赖文件" class="headerlink" title="查看源文件嘅依赖文件"></a>查看源文件嘅依赖文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 包括库</span><br><span class="line">cc -M xxx.cpp</span><br><span class="line"></span><br><span class="line"># 不包括库</span><br><span class="line">cc -MM xxx.cpp</span><br></pre></td></tr></table></figure>
+
+<hr>
 
       
     </div>
@@ -949,7 +966,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-count">37</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1042,7 +1059,7 @@ document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " 
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#编译流程"><span class="nav-number">1.</span> <span class="nav-text">编译流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#gdb的常用命令"><span class="nav-number">2.</span> <span class="nav-text">gdb的常用命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#gcc-常用命令"><span class="nav-number">3.</span> <span class="nav-text">gcc 常用命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用gdb调试多进程"><span class="nav-number">4.</span> <span class="nav-text">使用gdb调试多进程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用gdb调试多线程"><span class="nav-number">5.</span> <span class="nav-text">使用gdb调试多线程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vs-code调试多进程"><span class="nav-number">6.</span> <span class="nav-text">vs code调试多进程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置libstdc-库目录-与-指定gcc版本"><span class="nav-number">7.</span> <span class="nav-text">设置libstdc++库目录 与 指定gcc版本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Debugging-with-gdb笔记"><span class="nav-number">8.</span> <span class="nav-text">Debugging with gdb笔记</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#日志输出"><span class="nav-number">8.1.</span> <span class="nav-text">日志输出</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#调试多线程与多进程"><span class="nav-number">8.2.</span> <span class="nav-text">调试多线程与多进程</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#编译流程"><span class="nav-number">1.</span> <span class="nav-text">编译流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#gdb的常用命令"><span class="nav-number">2.</span> <span class="nav-text">gdb的常用命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#gcc-常用命令"><span class="nav-number">3.</span> <span class="nav-text">gcc 常用命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用gdb调试多进程"><span class="nav-number">4.</span> <span class="nav-text">使用gdb调试多进程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用gdb调试多线程"><span class="nav-number">5.</span> <span class="nav-text">使用gdb调试多线程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vs-code调试多进程"><span class="nav-number">6.</span> <span class="nav-text">vs code调试多进程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置libstdc-库目录-与-指定gcc版本"><span class="nav-number">7.</span> <span class="nav-text">设置libstdc++库目录 与 指定gcc版本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Debugging-with-gdb笔记"><span class="nav-number">8.</span> <span class="nav-text">Debugging with gdb笔记</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#日志输出"><span class="nav-number">8.1.</span> <span class="nav-text">日志输出</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#调试多线程与多进程"><span class="nav-number">8.2.</span> <span class="nav-text">调试多线程与多进程</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#gcc生成库文件"><span class="nav-number">9.</span> <span class="nav-text">gcc生成库文件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#静态库文件"><span class="nav-number">9.1.</span> <span class="nav-text">静态库文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#动态库文件"><span class="nav-number">9.2.</span> <span class="nav-text">动态库文件</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看源文件嘅依赖文件"><span class="nav-number">10.</span> <span class="nav-text">查看源文件嘅依赖文件</span></a></li></ol></div>
             
 
           </div>
